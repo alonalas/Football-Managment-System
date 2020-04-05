@@ -16,6 +16,7 @@ public class Complaint {
     }
 
     public User getUser() {
+        int i =2;
         return user;
     }
 
