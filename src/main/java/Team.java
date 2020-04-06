@@ -10,9 +10,9 @@ public class Team {
     private List<Game> away;
     private List<Game> home;
     private League league;
-    private System system;
+    private system system;
 
-    public Team(String stadium, Page page, List<Player> playerList, Manager manager, List<Owner> ownerList, List<Game> away, List<Game> home, League league, System system) {
+    public Team(String stadium, Page page, List<Player> playerList, Manager manager, List<Owner> ownerList, List<Game> away, List<Game> home, League league, system system) {
         this.stadium = stadium;
         this.page = page;
         this.playerList = playerList;

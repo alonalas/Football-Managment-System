@@ -3,12 +3,12 @@ import java.util.Date;
 public class Alert {
 
     private User user;
-    private System system;
+    private system system;
     private String description;
     Date date;
     // hour is missing
 
-    public Alert(User user, System system, String description, Date date) {
+    public Alert(User user, system system, String description, Date date) {
         this.user = user;
         this.system = system;
         this.description = description;
@@ -23,11 +23,11 @@ public class Alert {
         this.user = user;
     }
 
-    public System getSystem() {
+    public system getSystem() {
         return system;
     }
 
-    public void setSystem(System system) {
+    public void setSystem(system system) {
         this.system = system;
     }
 

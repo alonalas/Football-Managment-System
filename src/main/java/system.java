@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Map;
 
-public class System {
+public class system {
 
     private List<Guest> guestsList;
     private List<User> userList;

@@ -4,14 +4,14 @@ import java.util.Map;
 
 public class Season {
 
-    private System system;
+    private system system;
     private Date start;
     private Date end;
     private List<Game> gameList;
     private List<League> leagueList;
     private Map<League, Policy> Policies;
 
-    public Season(System system, Date start, Date end, List<Game> gameList, List<League> leagueList, Map<League, Policy> policies) {
+    public Season(system system, Date start, Date end, List<Game> gameList, List<League> leagueList, Map<League, Policy> policies) {
         this.system = system;
         this.start = start;
         this.end = end;
@@ -20,11 +20,11 @@ public class Season {
         Policies = policies;
     }
 
-    public System getSystem() {
+    public system getSystem() {
         return system;
     }
 
-    public void setSystem(System system) {
+    public void setSystem(system system) {
         this.system = system;
     }
 

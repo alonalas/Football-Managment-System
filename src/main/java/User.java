@@ -5,10 +5,10 @@ public class User {
     private String email;
     private String password;
     private String userName;
-    private System system;
+    private system system;
     List<Role> roles;
 
-    public User(String email, String password, String userName, System system, List<Role> roles) {
+    public User(String email, String password, String userName, system system, List<Role> roles) {
         this.email = email;
         this.password = password;
         this.userName = userName;
@@ -40,11 +40,11 @@ public class User {
         this.userName = userName;
     }
 
-    public System getSystem() {
+    public system getSystem() {
         return system;
     }
 
-    public void setSystem(System system) {
+    public void setSystem(system system) {
         this.system = system;
     }
 

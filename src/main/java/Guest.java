@@ -1,12 +1,12 @@
 public class Guest {
 
-    private System system;
+    private system system;
 
-    public Guest(System system) {
+    public Guest(system system) {
         this.system = system;
     }
 
-    public System getSystem() {
+    public system getSystem() {
         return system;
     }
 }
