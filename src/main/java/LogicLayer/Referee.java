@@ -19,6 +19,14 @@ public class Referee extends Role{
         this.line = line;
     }
 
+
+
+    public Referee(User user, String qualification, String name) {
+        super(user);
+        this.qualification = qualification;
+        this.name = name;
+    }
+
     public String getQualification() {
         return qualification;
     }
@@ -57,5 +65,11 @@ public class Referee extends Role{
 
     public void setLine(List<Game> line) {
         this.line = line;
+    }
+
+
+    public void showDetails(){
+        System.out.println("Name of referee: " + getName());
+        System.out.println("Qualification: " + getQualification());
     }
 }
