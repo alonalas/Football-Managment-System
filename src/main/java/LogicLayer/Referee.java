@@ -72,4 +72,21 @@ public class Referee extends Role{
         System.out.println("Name of referee: " + getName());
         System.out.println("Qualification: " + getQualification());
     }
+
+    public void changeDetails(String newName, String newCualif){
+        setName(newName);
+        setQualification(newCualif);
+    }
+
+    public void displayGames(){
+        System.out.println("main games:");
+        for(Game game : main){
+            System.out.println(game.toString());
+        }
+        System.out.println("line games: ");
+        for(Game game : line){
+            System.out.println(game.toString());
+        }
+
+    }
 }
