@@ -32,6 +32,6 @@ public class AdministratorTests {
     }
     @Test
     public void check(){
-        assertEquals("Password Length Is Wrong", true, false); // 6 need to be
+        assertEquals("Password Length Is Wrong", .Dtrue, false); // 6 need to be
     }
 }
