@@ -30,4 +30,8 @@ public class AdministratorTests {
     public void testPasswordLength(){
         assertEquals("Password Length Is Wrong", 5, administrator.getPassword().length()); // 6 need to be
     }
+    @Test
+    public void check(){
+        assertEquals("Password Length Is Wrong", true, false); // 6 need to be
+    }
 }
