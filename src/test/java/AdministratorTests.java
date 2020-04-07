@@ -1,7 +1,7 @@
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class AdministratorTests {
     // Tester
@@ -28,6 +28,7 @@ public class AdministratorTests {
 
     @Test
     public void testPasswordLength(){
-        assertEquals("Password Length Is Wrong", 6, administrator.getPassword().length());
+        assertEquals("Password Length Is Wrong", 6, administrator.getPassword().length()); // 6 need to be
     }
+
 }
