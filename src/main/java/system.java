@@ -11,6 +11,10 @@ public class system {
     private List<Season> seasonList;
     private List<Team> teamList;
 
+    public system() {
+
+    }
+
     public List<Guest> getGuestsList() {
         return guestsList;
     }
