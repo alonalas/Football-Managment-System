@@ -1,5 +1,6 @@
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -24,21 +25,26 @@ public class AdministratorTests {
         );
         String propertiesPath = "log4j.properties";
         PropertyConfigurator.configure(propertiesPath);
+        testLogger.info("Start Testing: AdministratorTests");
     }
 
     // Simple Test For Example
     @Test
     public void testPasswordContent(){
-        testLogger.info("Test Run: testPasswordContent");
+        testLogger.info("Run: testPasswordContent");
         assertEquals("Password is incorrect", "123456", administrator.getPassword());
-        testLogger.info("Test Ended: testPasswordContent");
+        testLogger.info("Ended: testPasswordContent");
     }
 
     @Test
     public void testPasswordLength(){
-        testLogger.info("Test Run: testPasswordLength");
+        testLogger.info("Run: testPasswordLength");
         assertEquals("Password Length Is Wrong", 6, administrator.getPassword().length()); // 6 need to be
-        testLogger.info("Test Ended: testPasswordLength");
+        testLogger.info("Ended: testPasswordLength");
     }
 
+    @AfterClass
+    public static void close(){
+        testLogger.info("All Tests Completed");
+    }
 }

@@ -2,3 +2,40 @@
 2020-04-08 02:35:46 INFO  AdministratorTests:41 - Test Ended: testPasswordLength
 2020-04-08 02:35:46 INFO  AdministratorTests:32 - Test Run: testPasswordContent
 2020-04-08 02:35:46 INFO  AdministratorTests:34 - Test Ended: testPasswordContent
+2020-04-08 10:45:36 INFO  AdministratorTests:40 - Test Run: testPasswordLength
+2020-04-08 10:45:36 INFO  AdministratorTests:42 - Test Ended: testPasswordLength
+2020-04-08 10:45:36 INFO  AdministratorTests:33 - Test Run: testPasswordContent
+2020-04-08 10:45:36 INFO  AdministratorTests:35 - Test Ended: testPasswordContent
+2020-04-08 10:45:36 INFO  AdministratorTests:47 - All Tests Completed
+2020-04-08 10:46:55 INFO  AdministratorTests:40 - Test Run: testPasswordLength
+2020-04-08 10:46:55 INFO  AdministratorTests:42 - Test Ended: testPasswordLength
+2020-04-08 10:46:55 INFO  AdministratorTests:33 - Test Run: testPasswordContent
+2020-04-08 10:46:55 INFO  AdministratorTests:35 - Test Ended: testPasswordContent
+2020-04-08 10:46:55 INFO  AdministratorTests:47 - All Tests Completed
+2020-04-08 10:46:58 INFO  AdministratorTests:40 - Test Run: testPasswordLength
+2020-04-08 10:46:58 INFO  AdministratorTests:42 - Test Ended: testPasswordLength
+2020-04-08 10:46:58 INFO  AdministratorTests:33 - Test Run: testPasswordContent
+2020-04-08 10:46:58 INFO  AdministratorTests:35 - Test Ended: testPasswordContent
+2020-04-08 10:46:58 INFO  AdministratorTests:47 - All Tests Completed
+2020-04-08 10:47:01 INFO  AdministratorTests:40 - Test Run: testPasswordLength
+2020-04-08 10:47:01 INFO  AdministratorTests:42 - Test Ended: testPasswordLength
+2020-04-08 10:47:01 INFO  AdministratorTests:33 - Test Run: testPasswordContent
+2020-04-08 10:47:01 INFO  AdministratorTests:35 - Test Ended: testPasswordContent
+2020-04-08 10:47:01 INFO  AdministratorTests:47 - All Tests Completed
+2020-04-08 10:50:59 INFO  AdministratorTests:40 - Test Run: testPasswordLength
+2020-04-08 10:50:59 INFO  AdministratorTests:42 - Test Ended: testPasswordLength
+2020-04-08 10:50:59 INFO  AdministratorTests:33 - Test Run: testPasswordContent
+2020-04-08 10:50:59 INFO  AdministratorTests:35 - Test Ended: testPasswordContent
+2020-04-08 10:50:59 INFO  AdministratorTests:47 - All Tests Completed
+2020-04-08 10:51:14 INFO  AdministratorTests:40 - Test Run: testPasswordLength
+2020-04-08 10:51:14 INFO  AdministratorTests:42 - Test Ended: testPasswordLength
+2020-04-08 10:51:14 INFO  AdministratorTests:33 - Test Run: testPasswordContent
+2020-04-08 10:51:14 INFO  AdministratorTests:35 - Test Ended: testPasswordContent
+2020-04-08 10:51:14 INFO  AdministratorTests:47 - All Tests Completed
+2020-04-08 10:56:24 INFO  - Start Testing AdministratorTests
+2020-04-08 10:56:24 INFO  - Run: testPasswordLength
+2020-04-08 10:56:24 INFO  - Ended: testPasswordLength
+2020-04-08 10:56:24 INFO  - Run: testPasswordContent
+2020-04-08 10:56:24 INFO  - Ended: testPasswordContent
+2020-04-08 10:56:24 INFO  - All Tests Completed
+
