@@ -1,5 +1,7 @@
 package LogicLayer;
 
+import ServiceLayer.IController;
+
 import java.util.List;
 
 public class Team {
@@ -12,9 +14,9 @@ public class Team {
     private List<Game> away;
     private List<Game> home;
     private League league;
-    private system system;
+    private IController system;
 
-    public Team(String stadium, Page page, List<Player> playerList, Manager manager, List<Owner> ownerList, List<Game> away, List<Game> home, League league, system system) {
+    public Team(String stadium, Page page, List<Player> playerList, Manager manager, List<Owner> ownerList, List<Game> away, List<Game> home, League league, IController system) {
         this.stadium = stadium;
         this.page = page;
         this.playerList = playerList;

@@ -1,18 +1,19 @@
 package LogicLayer;
 
 import DataLayer.IDataManager;
+import ServiceLayer.IController;
 
 public class Guest {
 
-    private system system;
+    private IController system;
     private IDataManager data;
 
-    public Guest(system system, IDataManager data) {
+    public Guest(IController system, IDataManager data) {
         this.data = data;
         this.system = system;
     }
 
-    public system getSystem() {
+    public IController getSystem() {
         return system;
     }
 
