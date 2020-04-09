@@ -1,14 +1,16 @@
+package LogicLayer;
+
 import java.util.Date;
 
-public class Alert {
+public class Complaint {
 
     private User user;
     private system system;
     private String description;
     Date date;
-    // hour is missing
+    //Hour is missing
 
-    public Alert(User user, system system, String description, Date date) {
+    public Complaint(User user, system system, String description, Date date) {
         this.user = user;
         this.system = system;
         this.description = description;
@@ -16,6 +18,7 @@ public class Alert {
     }
 
     public User getUser() {
+        int i =2;
         return user;
     }
 

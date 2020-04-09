@@ -1,14 +1,17 @@
+package LogicLayer;
+
 import java.util.List;
+import ServiceLayer.*;
 
 public class User {
 
     private String email;
     private String password;
     private String userName;
-    private system system;
+    private IController system;
     List<Role> roles;
 
-    public User(String email, String password, String userName, system system, List<Role> roles) {
+    public User(String email, String password, String userName, IController system, List<Role> roles) {
         this.email = email;
         this.password = password;
         this.userName = userName;
@@ -40,11 +43,11 @@ public class User {
         this.userName = userName;
     }
 
-    public system getSystem() {
+    public IController getSystem() {
         return system;
     }
 
-    public void setSystem(system system) {
+    public void setSystem(IController system) {
         this.system = system;
     }
 

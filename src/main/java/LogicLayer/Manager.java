@@ -1,3 +1,5 @@
+package LogicLayer;
+
 public class Manager extends RoleHolder{
 
     private String name;

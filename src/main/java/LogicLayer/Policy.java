@@ -1,3 +1,5 @@
+package LogicLayer;
+
 public class Policy {
 
     private League league;

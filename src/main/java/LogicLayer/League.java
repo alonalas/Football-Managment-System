@@ -1,3 +1,7 @@
+package LogicLayer;
+
+import ServiceLayer.IController;
+
 import java.util.List;
 import java.util.Map;
 
@@ -7,13 +11,13 @@ public class League {
         MAJOR_LEAGUE, SECOND_LEAGUE, LEAGUE_A,LEAGUE_B, LEAGUE_C
     }
 
-    private system system;
+    private IController system;
     private LeagueType type;
     private List<Referee> refereeList;
     private List<Season> seasonList;
     private Map<Season,Policy> policyList;
 
-    public League(system system, LeagueType type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
+    public League(IController system, LeagueType type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
         this.system = system;
         this.type = type;
         this.refereeList = refereeList;
@@ -21,11 +25,11 @@ public class League {
         this.policyList = policyList;
     }
 
-    public system getSystem() {
+    public IController getSystem() {
         return system;
     }
 
-    public void setSystem(system system) {
+    public void setSystem(IController system) {
         this.system = system;
     }
 

@@ -1,3 +1,5 @@
+package LogicLayer;
+
 public class Game {
 
     private Season season;

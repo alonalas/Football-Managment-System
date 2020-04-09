@@ -1,3 +1,5 @@
+package LogicLayer;
+
 public class GameEventCalender {
 
     private Game game;

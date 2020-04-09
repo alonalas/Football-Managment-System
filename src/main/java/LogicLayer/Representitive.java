@@ -1,3 +1,5 @@
+package LogicLayer;
+
 public class Representitive extends Role {
 
     private String name;
