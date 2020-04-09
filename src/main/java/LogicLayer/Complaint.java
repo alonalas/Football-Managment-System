@@ -1,14 +1,18 @@
+package LogicLayer;
+
+import ServiceLayer.IController;
+
 import java.util.Date;
 
-public class Alert {
+public class Complaint {
 
     private User user;
-    private system system;
+    private IController system;
     private String description;
     Date date;
-    // hour is missing
+    //Hour is missing
 
-    public Alert(User user, system system, String description, Date date) {
+    public Complaint(User user, IController system, String description, Date date) {
         this.user = user;
         this.system = system;
         this.description = description;
@@ -16,6 +20,7 @@ public class Alert {
     }
 
     public User getUser() {
+        int i =2;
         return user;
     }
 
@@ -23,11 +28,11 @@ public class Alert {
         this.user = user;
     }
 
-    public system getSystem() {
+    public IController getSystem() {
         return system;
     }
 
-    public void setSystem(system system) {
+    public void setSystem(IController system) {
         this.system = system;
     }
 

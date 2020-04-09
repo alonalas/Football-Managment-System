@@ -1,3 +1,5 @@
+package LogicLayer;
+
 public class Coach extends RoleHolder {
 
     private String name;

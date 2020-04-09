@@ -1,3 +1,5 @@
+package LogicLayer;
+
 import java.util.List;
 
 public class Owner extends RoleHolder {

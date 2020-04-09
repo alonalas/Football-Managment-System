@@ -1,3 +1,5 @@
+package LogicLayer;
+
 public abstract class Role  {
 
     private User user;

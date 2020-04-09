@@ -1,3 +1,4 @@
+import LogicLayer.Administrator;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.AfterClass;
@@ -12,10 +13,10 @@ public class AdministratorTests {
     // Logger
     private static final Logger testLogger = Logger.getLogger(AdministratorTests.class);
 
-    // This Function Run Before All Administrator Tests
+    // This Function Run Before All LogicLayer.Administrator Tests
     @BeforeClass
     public static void init(){
-        // Init Administrator Tester
+        // Init LogicLayer.Administrator Tester
         administrator = new Administrator(
                 "test@example.com",
                 "123456",

@@ -1,3 +1,5 @@
+package LogicLayer;
+
 public class Fan extends Role{
 
     private String name;

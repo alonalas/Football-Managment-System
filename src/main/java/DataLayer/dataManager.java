@@ -1,7 +1,9 @@
+package DataLayer;
+import LogicLayer.*;
 import java.util.List;
 import java.util.Map;
 
-public class system {
+public class dataManager implements IDataManager {
 
     private List<Guest> guestsList;
     private List<User> userList;
@@ -10,9 +12,15 @@ public class system {
     private List<League> leagueList;
     private List<Season> seasonList;
     private List<Team> teamList;
+    private List<Page> pageList;
 
-    public system() {
-
+    public User getUser(String userName, String password){
+        for (User user : userList){
+            if (user.getUserName().equals(userName)&&user.getPassword().equals(password)){
+                return user;
+            }
+        }
+        return null;
     }
 
     public List<Guest> getGuestsList() {
@@ -71,3 +79,5 @@ public class system {
         this.teamList = teamList;
     }
 }
+
+
