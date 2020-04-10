@@ -1,5 +1,6 @@
 package ServiceLayer;
 
+import LogicLayer.Game;
 import LogicLayer.Page;
 
 import java.io.IOException;
@@ -19,6 +20,14 @@ public abstract class AUserService implements IUserService{
     }
 
     public void displayGames()throws IOException{
+        throw new IOException("no games");
+    }
+
+    public void addGameEvent(Game game ,String description, String eventType) throws IOException{
+        throw new IOException("no games");
+    }
+
+    public void addGameEventAfterGame(Game game,String description, String eventType) throws IOException {
         throw new IOException("no games");
     }
 }

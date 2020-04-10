@@ -8,8 +8,8 @@ public class Referee extends Role{
     private String qualification;
     private String name;
     private League league;
-    List<Game> main;
-    List<Game> line;
+    private List<Game> main;
+    private  List<Game> line;
 
     public Referee(User user, String qualification, String name, League league, List<Game> main, List<Game> line) {
         super(user);
@@ -91,18 +91,18 @@ public class Referee extends Role{
 //
 //    }
 
-    public boolean getPremission() {
-        System.out.println("Are you sure?");
-        System.out.println("Please enter 'yes' or 'no'");
-        Scanner sc = new Scanner(System.in);
-        String ans = null;
-        ans = sc.next();
-
-        if (ans.equals("yes"))
-            return true;
-        else {
-            return false;
-        }
-
-    }
+//    public boolean getPremission() {
+//        System.out.println("Are you sure?");
+//        System.out.println("Please enter 'yes' or 'no'");
+//        Scanner sc = new Scanner(System.in);
+//        String ans = null;
+//        ans = sc.next();
+//
+//        if (ans.equals("yes"))
+//            return true;
+//        else {
+//            return false;
+//        }
+//
+//    }
 }
