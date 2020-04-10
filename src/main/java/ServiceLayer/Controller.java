@@ -71,4 +71,8 @@ public class Controller implements IController{
                 return null;
         }
     }
+
+    public void addUser(User user) {
+        this.currentUserList.add(user);
+    }
 }

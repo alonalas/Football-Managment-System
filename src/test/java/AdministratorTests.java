@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
+/*
 public class AdministratorTests {
     // Tester
     private static Administrator administrator;
@@ -54,6 +55,5 @@ public class AdministratorTests {
     public static void close(){
         testLogger.info("All Tests Completed");
     }
-
-
-}
+)
+*/

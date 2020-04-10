@@ -12,13 +12,13 @@ public class Owner extends RoleHolder {
 
     private String name;
     private List<Team> teamList;
-    private dataManager dataManager;
+    private dataManager DM;
 
-    public Owner(User user, String name, List<Team> teamList, dataManager dataManager) {
+    public Owner(User user, String name , dataManager dataManager) {
         super(user);
         this.name = name;
-        this.teamList = teamList;
-        this.dataManager = dataManager;
+        this.teamList = new LinkedList<>();
+        this.DM = dataManager;
     }
 
     /**
@@ -93,13 +93,24 @@ public class Owner extends RoleHolder {
     }
 
     /**
+     * fill new stadium's name
+     * @return stadium name
+     */
+    public String fillStadiumName() {
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("Enter Stadium name");
+        String stadiumName = myObj.nextLine();
+        return stadiumName;
+    }
+
+    /**
      * retrieves a team from the owner's team list
      * @return Team
      */
     public Team selectTeam() {
 
         Scanner myObj = new Scanner(System.in);
-        System.out.println("Insert team");
+        System.out.println("Insert team's name: ");
         String teamName = myObj.nextLine();
 
         for (Team team : teamList) {
@@ -115,7 +126,7 @@ public class Owner extends RoleHolder {
      */
     public String InsertAssetType() {
         Scanner myObj = new Scanner(System.in);
-        System.out.println("Insert asset type");
+        System.out.println("Insert asset type: ");
         String assetType = myObj.nextLine();
         return assetType;
     }
@@ -130,11 +141,9 @@ public class Owner extends RoleHolder {
         String userName = myObj.nextLine();
         System.out.println("Select the email of the intended asset");
         String userEmail = myObj.nextLine();
-        List<User> users = dataManager.getUserList();
-        for ( User u : users ) {
-            if (u.getUserName().equals(userName) && u.getEmail().equals(userEmail))
-                return u;
-        }
+        User user = DM.getUser(userName,userEmail);
+        if (user != null)
+            return user;
         return null;
     }
 
@@ -210,17 +219,6 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * fill new stadium's name
-     * @return stadium name
-     */
-    public String fillStadiumName() {
-        Scanner myObj = new Scanner(System.in);
-        System.out.println("Enter Stadium name");
-        String stadiumName = myObj.nextLine();
-        return stadiumName;
-    }
-
-    /**
      * fill new manager name
      * @return manager name
      */
@@ -230,4 +228,12 @@ public class Owner extends RoleHolder {
         String managerName = myObj.nextLine();
         return managerName;
     }
+
+    public void addTeam(Team team) {
+        if (!teamList.contains(team))
+            this.teamList.add(team);
+    }
+
+
+
 }

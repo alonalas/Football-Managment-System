@@ -2,7 +2,6 @@ package ServiceLayer;
 
 import LogicLayer.*;
 import java.io.IOException;
-import java.util.Date;
 
 public class OwnerService extends AUserService{
 
@@ -18,28 +17,29 @@ public class OwnerService extends AUserService{
     @Override
     public void insertNewAssetType(Owner owner) throws IOException {
         Team team = owner.selectTeam();
+        if (team == null)
+            throw new IOException("The chosen team does not exist, please choose a valid team");
         String assetType = owner.InsertAssetType();
+        if (!valid(assetType))
+            throw new IOException("Incorrect asset type, please insert a valid input");
         User user = owner.getAssetUser();
-        if (team != null && valid(assetType) && user!=null) {
-            RoleHolder role = control.getRoleHolder(assetType);
-            if ( assetType.equals("Stadium") ) {
-                control.displayForm(role, true);
-                String stadiumName ="";
-                stadiumName = owner.fillStadiumName();
-                owner.setStadiumToTeam(team,stadiumName);
-            }
-            else {
-                control.displayForm(role, false);
-                RoleHolder roleHolder = owner.insertNewAssetType(team, role, user);
-                if (roleHolder!= null) {
-                    alertOwner(owner.getUser(),control, "new asset was inserted to the team");
-                    System.out.println("Asset" + roleHolder.print() + " was inserted successfully");
-                }
-            }
+        if (user == null)
+            throw new IOException("The chosen user does not exist, please insert valid inputs");
 
+        RoleHolder role = control.getRoleHolder(assetType);
+        if ( assetType.equals("Stadium") ) {
+            control.displayForm(role, true);
+            String stadiumName ="";
+            stadiumName = owner.fillStadiumName();
+            owner.setStadiumToTeam(team,stadiumName);
+            System.out.println("Stadium " + assetType + "was inserted to team " + team + "successfully");
         }
-        else
-            throw new IOException("not valid input, please insert valid inputs");
+        else {
+            control.displayForm(role, false);
+            RoleHolder roleHolder = owner.insertNewAssetType(team, role, user);
+            if (roleHolder!= null)
+                System.out.println("Role holder " + roleHolder.showRoleDetails() + " was inserted successfully");
+        }
     }
 
     /**
@@ -52,18 +52,5 @@ public class OwnerService extends AUserService{
                 return true;
         return false;
     }
-
-    /**
-     * assigns an alert to an owner with a corresponding message
-     * @param user
-     * @param controller
-     * @param message
-     */
-    private void alertOwner(User user, Controller controller, String message) {
-        Date date = new Date();
-        Alert successfullRegistration = new Alert(user,control,
-                message, date );
-    }
-
 }
 

@@ -2,6 +2,7 @@ package LogicLayer;
 
 import ServiceLayer.IController;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Team {
@@ -16,20 +17,18 @@ public class Team {
     private List<Game> home;
     private League league;
     private List<Coach> coachList;
-    private IController system;
+    //private IController system;
 
-    public Team(String stadium, String name, Page page, List<Player> playerList, Manager manager, List<Owner> ownerList,
-                List<Game> away, List<Game> home, League league, List<Coach>coaches) {
+    public Team(String stadium, String name, Page page, Manager manager) {
         this.name = name;
         this.stadium = stadium;
         this.page = page;
-        this.playerList = playerList;
         this.manager = manager;
-        this.ownerList = ownerList;
-        this.away = away;
-        this.home = home;
-        this.league = league;
-        this.coachList = coaches;
+        playerList = new LinkedList<>();
+        ownerList = new LinkedList<>();
+        away = new LinkedList<>();
+        home = new LinkedList<>();
+        coachList = new LinkedList<>();
     }
 
     public String getName() {
@@ -38,6 +37,10 @@ public class Team {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void addOwner(Owner owner) {
+
     }
 
     public String getStadium() {
