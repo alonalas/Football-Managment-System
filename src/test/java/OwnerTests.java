@@ -5,7 +5,7 @@ import ServiceLayer.OwnerService;
 import org.junit.Test;
 import java.io.IOException;
 
-//Alona
+
 public class OwnerTests{
 
     dataManager dataManager = new dataManager();
@@ -18,6 +18,20 @@ public class OwnerTests{
     Manager m = new Manager();
     Team team = new Team("Blumfield", "Hapoel",p, m);
 
+    /**
+     * the 4 following tests assumes owner's account is connected allready
+     * the 4 following tests assumes the following process in the presentation layer:
+     *
+     * the owner push the button "insert new asset to team"
+     * GUI shows 4 following buttons:
+     * -insert new manager
+     * -insert new player
+     * -insert new coach
+     * -insert new stadium
+     * after choosing the desiered option, each of the 4 following tests corresponds to the selected option from above
+     *
+     *
+     */
     @Test
     public void testOwnerAddManager() {
 

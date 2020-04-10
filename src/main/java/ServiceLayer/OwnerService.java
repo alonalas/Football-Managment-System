@@ -10,6 +10,15 @@ public class OwnerService extends AUserService{
         super(control);
     }
 
+    /**
+     * validates that the team is exist and connected to the owner
+     * validates that the email and userName are attached to an existing account
+     * @param owner
+     * @param teamName
+     * @param email
+     * @param userName
+     * @throws IOException
+     */
     public void validateNewAssetType(Owner owner, String teamName,
                                      String email, String userName) throws IOException {
         Team team = owner.getTeam(teamName);
@@ -22,14 +31,41 @@ public class OwnerService extends AUserService{
         }
     }
 
+    /**
+     * owner adds a new manager to a requested team
+     * @param owner
+     * @param teamName
+     * @param managerName
+     * @param userName
+     * @param email
+     */
     public void insertNewManager(Owner owner, String teamName, String managerName, String userName, String email) {
         owner.nominateManager(owner.getTeam(teamName),managerName,userName,email);
     }
 
+    /**
+     * owner adds a new stadium to a requested team
+     * @param owner
+     * @param teamName
+     * @param stadiumName
+     */
     public void insertNewStadium(Owner owner, String teamName, String stadiumName) {
         owner.insertNewStadium(owner.getTeam(teamName),stadiumName);
     }
 
+    /**
+     * owner adds a new player to the selected team with the following parameters
+     * @param owner
+     * @param teamName
+     * @param name
+     * @param position
+     * @param day
+     * @param month
+     * @param year
+     * @param userName
+     * @param email
+     * @throws IOException
+     */
     public void insertNewPlayer(Owner owner, String teamName, String name, String position, int day ,
                                 int month, int year ,String userName, String email) throws IOException {
         validateBirthDate(day,month,year);
@@ -37,6 +73,16 @@ public class OwnerService extends AUserService{
 
     }
 
+    /**
+     * owner adds a new coach to the requested team with the following parameters
+     * @param owner
+     * @param teamName
+     * @param name
+     * @param qualification
+     * @param job
+     * @param userName
+     * @param email
+     */
     public void insertNewCoach(Owner owner, String teamName, String name, String qualification, String job,String userName,
                                String email) {
         owner.insertNewCoach(owner.getTeam(teamName),name,qualification,job,userName,email);

@@ -18,15 +18,33 @@ public class Owner extends RoleHolder {
         this.DM = dataManager;
     }
 
+    /**
+     * creates a new instance of manager without premissions with the following parameters
+     * and connecting it to the requested team
+     * @param team
+     * @param managerName
+     * @param userName
+     * @param email
+     */
     public void nominateManager(Team team, String managerName, String userName ,String email) {
         User user = getAssetUser(userName,email);
         Manager manager = new Manager(user,managerName,team);
-        assignPremissions(manager);
+        assignPremissions(manager, true);
         team.setManager(manager);
         manager.setTeam(team);
         user.setRole(manager);
     }
 
+    /**
+     * creates a new instance of coach without with the following parameters
+     * and connecting it to the requested team
+     * @param team
+     * @param name
+     * @param qualification
+     * @param job
+     * @param userName
+     * @param email
+     */
     public void insertNewCoach(Team team, String name, String qualification, String job, String userName,
                                String email) {
         User user = getAssetUser(userName,email);
@@ -38,14 +56,38 @@ public class Owner extends RoleHolder {
     }
 
     //TODO
-    private void assignPremissions(Manager manager) {
+
+    /**
+     * assigns premissions to a manager
+     * new manager dont have any special premissions
+     * @param manager
+     * @param newManager
+     */
+    private void assignPremissions(Manager manager, boolean newManager) {
 
     }
 
+    /**
+     * uploads the team's stadium
+     * @param team
+     * @param stadium
+     */
     public void insertNewStadium(Team team, String stadium) {
         team.setStadium(stadium);
     }
 
+    /**
+     * creates a new instance of player with the following parameters
+     * and connecting it to the requested team
+     * @param team
+     * @param name
+     * @param position
+     * @param day
+     * @param month
+     * @param year
+     * @param userName
+     * @param email
+     */
     public void insertNewPlayer(Team team, String name, String position, int day ,
                                  int month, int year ,String userName,String email) {
         Date date = new Date(day,month,year); // check why it's not working
@@ -82,6 +124,10 @@ public class Owner extends RoleHolder {
         return null;
     }
 
+    /**
+     * adds a new team to the owne's teamList
+     * @param team
+     */
     public void addTeam(Team team) {
         if (!teamList.contains(team))
             this.teamList.add(team);
