@@ -9,4 +9,10 @@ public class Guest {
     public system getSystem() {
         return system;
     }
+
+    public User signIn(String userName, String password){
+        User user = dataManager.getUser(userName, password);
+        return user;
+    }
+
 }

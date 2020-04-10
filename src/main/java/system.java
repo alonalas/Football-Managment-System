@@ -1,73 +1,37 @@
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 public class system {
 
-    private List<Guest> guestsList;
-    private List<User> userList;
-    private Map<User, List<Alert>> Alerts;
-    private Map<User, List<Complaint>> complaint;
-    private List<League> leagueList;
-    private List<Season> seasonList;
-    private List<Team> teamList;
+    private List<Guest> currentGuestsList;
+    private List<User> currentUserList;
+    private Representitive representitive;
+    private Administrator administrator;
 
-    public system() {
 
+    public system(Representitive representitive, Administrator administrator) {
+        this.representitive = representitive;
+        this.administrator = administrator;
+        currentGuestsList = new ArrayList<Guest>();
+        currentUserList = new ArrayList<User>();
     }
 
     public List<Guest> getGuestsList() {
-        return guestsList;
+        return currentGuestsList;
     }
 
     public void setGuestsList(List<Guest> guestsList) {
-        this.guestsList = guestsList;
+        this.currentGuestsList = guestsList;
     }
 
     public List<User> getUserList() {
-        return userList;
+        return currentUserList;
     }
 
     public void setUserList(List<User> userList) {
-        this.userList = userList;
+        this.currentUserList = userList;
     }
 
-    public Map<User, List<Alert>> getAlerts() {
-        return Alerts;
-    }
 
-    public void setAlerts(Map<User, List<Alert>> alerts) {
-        Alerts = alerts;
-    }
-
-    public Map<User, List<Complaint>> getComplaint() {
-        return complaint;
-    }
-
-    public void setComplaint(Map<User, List<Complaint>> complaint) {
-        this.complaint = complaint;
-    }
-
-    public List<League> getLeagueList() {
-        return leagueList;
-    }
-
-    public void setLeagueList(List<League> leagueList) {
-        this.leagueList = leagueList;
-    }
-
-    public List<Season> getSeasonList() {
-        return seasonList;
-    }
-
-    public void setSeasonList(List<Season> seasonList) {
-        this.seasonList = seasonList;
-    }
-
-    public List<Team> getTeamList() {
-        return teamList;
-    }
-
-    public void setTeamList(List<Team> teamList) {
-        this.teamList = teamList;
-    }
 }
