@@ -17,17 +17,19 @@ public class Guest {
         return system;
     }
 
-    public User signIn(String userName, String password){
-        User user = data.getUser(userName, password);
-        return user;
+    public User signIn(String email, String password){
+        User signedInUser = data.getUser(email, password);
+        return signedInUser;
     }
 
     public boolean checkIfEmailExists(String email) {
         return data.checkIfEmailExists(email);
     }
 
-    public void addNewUser(User newUser) {
-        data.addNewUser(newUser);
+    public void addNewUser(User newUser,boolean isNewUser) {
+        if (isNewUser){
+            data.addNewUser(newUser);
+        }
         system.addUser(newUser);
         system.removeGuest(this);
     }
