@@ -1,6 +1,7 @@
 package LogicLayer;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Referee extends Role{
 
@@ -68,24 +69,39 @@ public class Referee extends Role{
     }
 
 
-    public void showDetails(){
-        System.out.println("Name of referee: " + getName());
-        System.out.println("Qualification: " + getQualification());
-    }
+//    public void showDetails(){
+//        System.out.println("Name of referee: " + getName());
+//        System.out.println("Qualification: " + getQualification());
+//    }
 
-    public void changeDetails(String newName, String newCualif){
-        setName(newName);
-        setQualification(newCualif);
-    }
+//    public void changeDetails(String newName, String newCualif){
+//        setName(newName);
+//        setQualification(newCualif);
+//    }
 
-    public void displayGames(){
-        System.out.println("main games:");
-        for(Game game : main){
-            System.out.println(game.toString());
-        }
-        System.out.println("line games: ");
-        for(Game game : line){
-            System.out.println(game.toString());
+//    public void displayGames(){
+//        System.out.println("main games:");
+//        for(Game game : main){
+//            System.out.println(game.toString());
+//        }
+//        System.out.println("line games: ");
+//        for(Game game : line){
+//            System.out.println(game.toString());
+//        }
+//
+//    }
+
+    public boolean getPremission() {
+        System.out.println("Are you sure?");
+        System.out.println("Please enter 'yes' or 'no'");
+        Scanner sc = new Scanner(System.in);
+        String ans = null;
+        ans = sc.next();
+
+        if (ans.equals("yes"))
+            return true;
+        else {
+            return false;
         }
 
     }
