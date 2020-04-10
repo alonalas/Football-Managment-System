@@ -13,6 +13,7 @@ public class dataManager implements IDataManager {
     private List<Season> seasonList;
     private List<Team> teamList;
     private List<Page> pageList;
+    private List<Game> gameList;
 
 
     public boolean checkIfEmailExists(String email) {
@@ -91,6 +92,14 @@ public class dataManager implements IDataManager {
 
     public void setTeamList(List<Team> teamList) {
         this.teamList = teamList;
+    }
+
+    public List<Page> getPageList() {
+        return pageList;
+    }
+
+    public List<Game> getGameList() {
+        return gameList;
     }
 }
 

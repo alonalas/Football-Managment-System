@@ -1,8 +1,8 @@
 package ServiceLayer;
 
-import LogicLayer.Fan;
-import LogicLayer.Guest;
-import LogicLayer.User;
+import LogicLayer.*;
+
+import java.util.List;
 
 public class GuestService implements IGuestService{
     private Guest guest;
@@ -13,6 +13,7 @@ public class GuestService implements IGuestService{
 
     /**
      * Use Case - 2.1
+     * Register to the System
      * @param firstName
      * @param lastName
      * @param email
@@ -37,6 +38,7 @@ public class GuestService implements IGuestService{
 
     /**
      * Use Case - 2.2
+     * User Login
      * @param email
      * @param password
      */
@@ -55,11 +57,47 @@ public class GuestService implements IGuestService{
 
     private boolean Authentication(String password){
         for (char c : password.toCharArray()){
-            if (!((c>='a' && c<='Z')||(c>='0' && c<='9'))){
+            if (!((c>='A' && c<='z')||(c>='0' && c<='9'))){
                 System.out.println("## Password can contain only digits and letters. ##");
                 return false;
             }
         }
+        if(password.length()<8){
+            System.out.println("## Password must has at least 8 characters. ##");
+            return false;
+        }
         return true;
     }
+
+
+    /**
+     * Use Case - 2.3
+     * Show public information
+     * @param interestIn
+     */
+    public void showInformation(Interest interestIn){
+        switch (interestIn) {
+            case Games:
+                List<Game> gamesInfo = guest.retrieveGames();
+                break;
+            case Players:
+                List<Player> playersInfo = guest.retrievePlayers();
+                break;
+            case Leagues:
+                List<League> leaguesInfo = guest.retrieveLeagues();
+                break;
+            case Teams:
+                List<Team> teamsInfo = guest.retrieveTeams();
+                break;
+        }
+    }
+
+    enum Interest {
+        Players,
+        Teams,
+        Leagues,
+        Games
+    }
+
+
 }

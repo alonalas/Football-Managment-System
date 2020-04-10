@@ -3,6 +3,8 @@ package LogicLayer;
 import DataLayer.IDataManager;
 import ServiceLayer.IController;
 
+import java.util.List;
+
 public class Guest {
 
     private IController system;
@@ -32,5 +34,21 @@ public class Guest {
         }
         system.addUser(newUser);
         system.removeGuest(this);
+    }
+
+    public List<Game> retrieveGames() {
+        return data.getGameList();
+    }
+
+    public List<Player> retrievePlayers() {
+        return null;
+    }
+
+    public List<League> retrieveLeagues() {
+        return data.getLeagueList();
+    }
+
+    public List<Team> retrieveTeams() {
+        return data.getTeamList();
     }
 }
