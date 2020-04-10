@@ -7,5 +7,4 @@ public interface IUserService {
 
     void addPage(Page newPage) throws IOException;
 
-    void insertNewAssetType (Owner owner) throws IOException;
 }

@@ -28,11 +28,9 @@ public class Controller implements IController{
     /**
      * displays the team's asset's details to the screen
      * @param roleHolder
-     * @param stadium
      */
-    public void displayForm(RoleHolder roleHolder, boolean stadium) {
-
-        if (stadium)
+    public void displayForm(RoleHolder roleHolder) {
+        if (roleHolder==null)
             System.out.println("Name : String");
         else {
             Field[] declaredFields = roleHolder.getClass().getDeclaredFields();
@@ -41,6 +39,7 @@ public class Controller implements IController{
             }
         }
     }
+
 
     public List<Guest> getGuestsList() {
         return currentGuestsList;
@@ -56,20 +55,6 @@ public class Controller implements IController{
 
     public void setUserList(List<User> userList) {
         this.currentUserList = userList;
-    }
-
-
-    public RoleHolder getRoleHolder(String assetType) {
-        switch (assetType) {
-            case "Player":
-                return new Player();
-            case "Coach":
-                return new Coach();
-            case "Manager":
-                return new Manager();
-            default:
-                return null;
-        }
     }
 
     public void addUser(User user) {

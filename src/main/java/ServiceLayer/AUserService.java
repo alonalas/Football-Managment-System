@@ -17,7 +17,4 @@ public abstract class AUserService implements IUserService{
         throw new IOException("Eitan");
     }
 
-    public void insertNewAssetType(Owner owner) throws IOException {
-        throw new IOException("Team's OWNER functionality");
-    }
 }

@@ -107,12 +107,14 @@ public class Team {
         this.league = league;
     }
 
-    public void setPlayer(Player player){
-        playerList.add(player);
+    public void addPlayer(Player player) {
+        if(!playerList.contains(player))
+            playerList.add(player);
     }
 
     public void setCoach(Coach coach) {
-        coachList.add(coach);
+        if (!coachList.contains(coach))
+            coachList.add(coach);
     }
 
     public List<Coach> getCoachList() {

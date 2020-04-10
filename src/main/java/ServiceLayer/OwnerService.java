@@ -1,6 +1,7 @@
 package ServiceLayer;
 
 import LogicLayer.*;
+
 import java.io.IOException;
 
 public class OwnerService extends AUserService{
@@ -9,48 +10,58 @@ public class OwnerService extends AUserService{
         super(control);
     }
 
-    /**
-     * adds new asset to the owner's team (player/coach/manager/stadium)
-     * @param owner
-     * @throws IOException
-     */
-    @Override
-    public void insertNewAssetType(Owner owner) throws IOException {
-        Team team = owner.selectTeam();
+    public void validateNewAssetType(Owner owner, String teamName,
+                                     String email, String userName) throws IOException {
+        Team team = owner.getTeam(teamName);
         if (team == null)
             throw new IOException("The chosen team does not exist, please choose a valid team");
-        String assetType = owner.InsertAssetType();
-        if (!valid(assetType))
-            throw new IOException("Incorrect asset type, please insert a valid input");
-        User user = owner.getAssetUser();
-        if (user == null)
-            throw new IOException("The chosen user does not exist, please insert valid inputs");
-
-        RoleHolder role = control.getRoleHolder(assetType);
-        if ( assetType.equals("Stadium") ) {
-            control.displayForm(role, true);
-            String stadiumName ="";
-            stadiumName = owner.fillStadiumName();
-            owner.setStadiumToTeam(team,stadiumName);
-            System.out.println("Stadium " + assetType + "was inserted to team " + team + "successfully");
-        }
-        else {
-            control.displayForm(role, false);
-            RoleHolder roleHolder = owner.insertNewAssetType(team, role, user);
-            if (roleHolder!= null)
-                System.out.println("Role holder " + roleHolder.showRoleDetails() + " was inserted successfully");
+        if (!(email.equals("X") && userName.equals("X"))) { // not a stadium
+            User user = owner.getAssetUser(userName, email);
+            if (user == null)
+                throw new IOException("The chosen user does not exist, please insert valid inputs");
         }
     }
 
+    public void insertNewManager(Owner owner, String teamName, String managerName, String userName, String email) {
+        owner.nominateManager(owner.getTeam(teamName),managerName,userName,email);
+    }
+
+    public void insertNewStadium(Owner owner, String teamName, String stadiumName) {
+        owner.insertNewStadium(owner.getTeam(teamName),stadiumName);
+    }
+
+    public void insertNewPlayer(Owner owner, String teamName, String name, String position, int day ,
+                                int month, int year ,String userName, String email) throws IOException {
+        validateBirthDate(day,month,year);
+        owner.insertNewPlayer(owner.getTeam(teamName),name,position,day,month,year,userName,email);
+
+    }
+
+    public void insertNewCoach(Owner owner, String teamName, String name, String qualification, String job,String userName,
+                               String email) {
+        owner.insertNewCoach(owner.getTeam(teamName),name,qualification,job,userName,email);
+    }
+
     /**
-     * check if user's input is a valid option
-     * @param assetType
-     * @return true if assetType is a valid input, else otherwise
+     * validates the ranges of a player's birthday
+     * @param day
+     * @param month
+     * @param year
+     * @throws IOException
      */
-    private boolean valid(String assetType) {
-        if (assetType.equals("Player") || assetType.equals("Manager") || assetType.equals("Stadium")  || assetType.equals("Coach"))
-                return true;
-        return false;
+    private void validateBirthDate(int day, int month, int year) throws IOException {
+
+        if (!(year > 1900 && year < 2020 )) {
+            throw new IOException("Year of birth is illegal, please insert a year between " +
+                    "1900 and 2020");
+        }
+        if (!(month > 0 && month < 13 )) {
+            throw new IOException("Month is illegal, please insert valid month between 1 and 12");
+        }
+        if (!(day > 0 && day < 32 )) {
+            throw new IOException("Day is illegal, please insert valid day between 1 and 31");
+        }
+
     }
 }
 
