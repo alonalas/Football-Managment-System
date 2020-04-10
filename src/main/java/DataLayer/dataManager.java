@@ -14,6 +14,20 @@ public class dataManager implements IDataManager {
     private List<Team> teamList;
     private List<Page> pageList;
 
+
+    public boolean checkIfEmailExists(String email) {
+        for (User user : userList){
+            if (user.getEmail().equals(email)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addNewUser(User newUser) {
+        userList.add(newUser);
+    }
+
     public User getUser(String email, String password){
         for (User user : userList){
             if (user.getEmail().equals(email)&&user.getPassword().equals(password)){

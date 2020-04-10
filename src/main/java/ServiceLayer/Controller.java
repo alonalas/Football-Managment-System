@@ -97,4 +97,19 @@ public class Controller implements IController{
         return administrator;
     }
 
+    public void addGuest(Guest newGuest) {
+        this.currentGuestsList.add(newGuest);
+    }
+
+    public void addUser(User newUser) {
+        this.currentUserList.add(newUser);
+    }
+
+    public void removeGuest(Guest guestToRemove) {
+        this.currentGuestsList.remove(guestToRemove);
+    }
+
+    public void removeUser(User userToRemove) {
+        this.currentUserList.remove(userToRemove);
+    }
 }
