@@ -1,22 +1,28 @@
 package LogicLayer;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import DataLayer.IDataManager;
+import DataLayer.dataManager;
 import ServiceLayer.*;
 
 public class User {
 
     private String email;
     private String password;
-    private String userName;
-    private IController system;
+    private String firstName;
+    private String lastName;
     List<Role> roles;
+    IDataManager dataManager;
 
-    public User(String email, String password, String userName, IController system, List<Role> roles) {
+    public User(String email, String password, String firstName, String lastName) {
+
         this.email = email;
         this.password = password;
-        this.userName = userName;
-        this.system = system;
-        this.roles = roles;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.roles = new ArrayList<Role>();
     }
 
     public String getEmail() {
@@ -27,35 +33,19 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public IController getSystem() {
-        return system;
-    }
-
-    public void setSystem(IController system) {
-        this.system = system;
-    }
-
     public List<Role> getRoles() {
         return roles;
     }
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

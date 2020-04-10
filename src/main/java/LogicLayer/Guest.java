@@ -22,4 +22,13 @@ public class Guest {
         return user;
     }
 
+    public boolean checkIfEmailExists(String email) {
+        return data.checkIfEmailExists(email);
+    }
+
+    public void addNewUser(User newUser) {
+        data.addNewUser(newUser);
+        system.addUser(newUser);
+        system.removeGuest(this);
+    }
 }
