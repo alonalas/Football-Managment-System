@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Team {
 
+    private String name;
     private String stadium;
     private Page page;
     private List<Player> playerList;
@@ -14,9 +15,12 @@ public class Team {
     private List<Game> away;
     private List<Game> home;
     private League league;
+    private List<Coach> coachList;
     private IController system;
 
-    public Team(String stadium, Page page, List<Player> playerList, Manager manager, List<Owner> ownerList, List<Game> away, List<Game> home, League league, IController system) {
+    public Team(String stadium, String name, Page page, List<Player> playerList, Manager manager, List<Owner> ownerList,
+                List<Game> away, List<Game> home, League league, List<Coach>coaches) {
+        this.name = name;
         this.stadium = stadium;
         this.page = page;
         this.playerList = playerList;
@@ -25,7 +29,15 @@ public class Team {
         this.away = away;
         this.home = home;
         this.league = league;
-        this.system = system;
+        this.coachList = coaches;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStadium() {
@@ -91,4 +103,21 @@ public class Team {
     public void setLeague(League league) {
         this.league = league;
     }
+
+    public void setPlayer(Player player){
+        playerList.add(player);
+    }
+
+    public void setCoach(Coach coach) {
+        coachList.add(coach);
+    }
+
+    public List<Coach> getCoachList() {
+        return coachList;
+    }
+
+    public void setCoachList(List<Coach> coachList) {
+        this.coachList = coachList;
+    }
+
 }

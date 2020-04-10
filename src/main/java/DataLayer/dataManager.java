@@ -1,5 +1,6 @@
 package DataLayer;
 import LogicLayer.*;
+
 import java.util.List;
 import java.util.Map;
 
@@ -7,12 +8,15 @@ public class dataManager implements IDataManager {
 
     private List<Guest> guestsList;
     private List<User> userList;
-    private Map<User, List<Alert>> Alerts;
+    private Map<User, List<LogicLayer.Alert>> Alerts;
     private Map<User, List<Complaint>> complaint;
     private List<League> leagueList;
     private List<Season> seasonList;
     private List<Team> teamList;
     private List<Page> pageList;
+
+    public static void validate(List<String> details) {
+    }
 
     public User getUser(String userName, String password){
         for (User user : userList){
@@ -39,7 +43,7 @@ public class dataManager implements IDataManager {
         this.userList = userList;
     }
 
-    public Map<User, List<Alert>> getAlerts() {
+    public Map<User, List<LogicLayer.Alert>> getAlerts() {
         return Alerts;
     }
 

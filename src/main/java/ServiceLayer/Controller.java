@@ -1,10 +1,8 @@
 package ServiceLayer;
 
-import LogicLayer.Administrator;
-import LogicLayer.Guest;
-import LogicLayer.Representitive;
-import LogicLayer.User;
+import LogicLayer.*;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +25,23 @@ public class Controller implements IController{
         currentUserList = new ArrayList<User>();
     }
 
+    /**
+     * displays the team's asset's details to the screen
+     * @param roleHolder
+     * @param stadium
+     */
+    public void displayForm(RoleHolder roleHolder, boolean stadium) {
+
+        if (stadium)
+            System.out.println("Name : String");
+        else {
+            Field[] declaredFields = roleHolder.getClass().getDeclaredFields();
+            for (Field f : declaredFields) {
+                System.out.println(f.getName() + " : " + f.getType().getSimpleName());
+            }
+        }
+    }
+
     public List<Guest> getGuestsList() {
         return currentGuestsList;
     }
@@ -44,4 +59,16 @@ public class Controller implements IController{
     }
 
 
+    public RoleHolder getRoleHolder(String assetType) {
+        switch (assetType) {
+            case "Player":
+                return new Player();
+            case "Coach":
+                return new Coach();
+            case "Manager":
+                return new Manager();
+            default:
+                return null;
+        }
+    }
 }

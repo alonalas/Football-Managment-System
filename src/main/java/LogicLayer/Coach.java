@@ -17,6 +17,8 @@ public class Coach extends RoleHolder {
         this.team = team;
     }
 
+    public Coach() {}
+
     public String getName() {
         return name;
     }

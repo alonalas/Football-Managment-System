@@ -19,6 +19,8 @@ public class Player extends RoleHolder{
         this.page = page;
     }
 
+    public Player() {}
+
     public String getPosition() {
         return position;
     }

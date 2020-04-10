@@ -8,6 +8,8 @@ public abstract class Role  {
         this.user = user;
     }
 
+    public Role() {}
+
     public User getUser() {
         return user;
     }

@@ -6,4 +6,7 @@ public abstract class RoleHolder extends Role {
         super(user);
     }
 
+    public RoleHolder() {
+        super();
+    }
 }
