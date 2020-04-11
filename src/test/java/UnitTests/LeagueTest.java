@@ -33,9 +33,10 @@ public class LeagueTest  {
         league = new League(League.LeagueType.LEAGUE_B);
         assertTrue( league.equals(League.checkIfLeagueExist(League.LeagueType.LEAGUE_B) ) );
         assertTrue(null == League.checkIfLeagueExist(League.LeagueType.LEAGUE_A) );
+        showAllLeagues();
     }
 
-    @Test
+  //  @Test
     public void showAllLeagues() {
         List<League> leagues = League.ShowAllLeagues();
         assertEquals(1 , leagues.size());
