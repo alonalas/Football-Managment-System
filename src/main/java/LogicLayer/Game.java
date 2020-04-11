@@ -123,6 +123,7 @@ public class Game {
 
 
     /**
+     * function number: 1
      * prints the game's details
      */
     public void displayDetails(){
@@ -137,5 +138,22 @@ public class Game {
 
     public void setGameReport(GameReport gameReport) {
         this.gameReport = gameReport;
+    }
+
+
+    /**
+     * function number: 2
+     * compare two games
+     * @param game2 game we wanyt to compare
+     * @return return true if the two games are equal
+     */
+    public boolean equals(Game game2){
+        if(this.getDate().equals(game2.getDate())&& this.getHome().equals(game2.getHome())&&
+        this.getAway().equals(game2.getAway())){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

@@ -1,5 +1,7 @@
 package LogicLayer;
 
+import DataLayer.dataManager;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,14 +13,16 @@ public class Referee extends Role{
     private League league;
     private List<Game> main;
     private  List<Game> line;
+    private dataManager dataManager;
 
-    public Referee(User user, String qualification, String name, League league) {
+    public Referee(User user, String qualification, String name, League league,dataManager dataManager) {
         super(user);
         this.qualification = qualification;
         this.name = name;
         this.league = league;
         this.main = new LinkedList<>();
         this.line = new LinkedList<>();
+        this.dataManager=dataManager;
     }
 
 
@@ -70,10 +74,20 @@ public class Referee extends Role{
     }
 
 
+    /**
+     * function number: 3
+     * adds a game to the main games list
+     * @param game
+     */
     public void addAGameMain(Game game){
         getMain().add(game);
     }
 
+    /**
+     * function number: 4
+     * adds a game to the lain games list
+     * @param game
+     */
     public void addAGameLine(Game game){
         getLine().add(game);
     }

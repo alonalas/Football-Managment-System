@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Team {
 
+    private String name;
     private String stadium;
     private Page page;
     private List<Player> playerList;
@@ -16,7 +17,8 @@ public class Team {
     private League league;
     private IController system;
 
-    public Team(String stadium, Page page, List<Player> playerList, Manager manager, List<Owner> ownerList, List<Game> away, List<Game> home, League league, IController system) {
+    public Team(String name,String stadium, Page page, List<Player> playerList, Manager manager, List<Owner> ownerList, List<Game> away, List<Game> home, League league, IController system) {
+        this.name=name;
         this.stadium = stadium;
         this.page = page;
         this.playerList = playerList;
@@ -26,6 +28,14 @@ public class Team {
         this.home = home;
         this.league = league;
         this.system = system;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStadium() {
@@ -90,5 +100,20 @@ public class Team {
 
     public void setLeague(League league) {
         this.league = league;
+    }
+
+
+    /**
+     * function number: 2
+     * compare two teams
+     * @param team the team we want to compare to
+     * @return true if the teams are equal
+     */
+    public boolean equals(Team team){
+        if(this.name.equals(team)&& this.stadium.equals(team.getStadium())){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

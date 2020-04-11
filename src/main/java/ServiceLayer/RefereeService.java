@@ -23,6 +23,7 @@ public class RefereeService extends AUserService {
 
     /**
      * UC 10.1
+     * function number: 1
      * display the Referee's details
      */
     @Override
@@ -37,6 +38,7 @@ public class RefereeService extends AUserService {
 
     /**
      * UC 10.1
+     * function number: 2
      * change the details of the referee
      * @param newName - the new name we want to save for the referee
      * @param newCualif - the new qualification for the referee
@@ -51,6 +53,7 @@ public class RefereeService extends AUserService {
 
     /**
      * UC 10.2
+     * function number: 3
      * displays the referee's games
      * @throws IOException
      */
@@ -73,6 +76,7 @@ public class RefereeService extends AUserService {
 
     /**
      * UC 10.3
+     * function number: 4
      * adds a new gameEvnet to the system while the game is active
      * @param game - the game we want to add an event for
      * @param description - the description of the event
@@ -99,6 +103,7 @@ public class RefereeService extends AUserService {
 
     /**
      * UC 10.4.1
+     * function number: 5
      * adds a new game event to the system after the game ended by a main referee
      * @param game - the game we want to add an event for
      * @param description - the description of the event
@@ -128,6 +133,7 @@ public class RefereeService extends AUserService {
 
     /**
      * UC 10.4.2
+     * function number: 6
      * creates game report for a specific game by main referee
      * @param game - the game we want to create a report for
      * @param description - description of the report

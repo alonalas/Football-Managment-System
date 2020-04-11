@@ -14,6 +14,7 @@ public class dataManager implements IDataManager {
     private List<Season> seasonList;
     private List<Team> teamList;
     private List<Page> pageList;
+    private List<Game> gamesList;
 
     public User getUser(String userName, String password){
         for (User user : userList){
@@ -79,6 +80,31 @@ public class dataManager implements IDataManager {
     public void setTeamList(List<Team> teamList) {
         this.teamList = teamList;
     }
+
+    public List<Game> getGamesList() {
+        return gamesList;
+    }
+
+    public void setGamesList(List<Game> gamesList) {
+        this.gamesList = gamesList;
+    }
+
+    public void addGame(Game game){
+        boolean inTheList=false;
+        for(Game games: this.getGamesList()){
+            if(game.equals(games)) {
+                gamesList.remove(games);
+                gamesList.add(game);
+                inTheList=true;
+                break;
+            }
+        }
+        if(!inTheList){
+            gamesList.add(game);
+        }
+
+    }
+
 }
 
 

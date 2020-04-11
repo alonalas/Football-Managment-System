@@ -77,8 +77,10 @@ public class GameEventCalender {
     }
 
 
-
-
+    /**
+     * function number: 1
+     * displays the event's details
+     */
     public void displayEvents(){
         System.out.print("Game: " );
         getGame().displayDetails();
