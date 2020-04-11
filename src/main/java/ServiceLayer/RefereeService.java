@@ -71,7 +71,7 @@ public class RefereeService extends AUserService {
     /**
      * adds a new gameEvnet to the system while the game is active
      * @param game
-     * @param description 
+     * @param description
      * @param eventType
      * @throws IOException
      */
