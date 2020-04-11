@@ -37,4 +37,85 @@
 2020-04-08 10:56:24 INFO  - Ended: testPasswordLength
 2020-04-08 10:56:24 INFO  - Run: testPasswordContent
 2020-04-08 10:56:24 INFO  - Ended: testPasswordContent
-2020-04-08 10:56:24 INFO  - All Tests Completed
+2020-04-08 10:56:24 INFO  - All Tests Completed2020-04-11 16:28:42 INFO  - Start Testing: AdministratorTests
+2020-04-11 16:28:42 INFO  - Run: testPasswordLength
+2020-04-11 16:28:42 INFO  - Ended: testPasswordLength
+2020-04-11 16:28:42 INFO  - Run: testPasswordContent
+2020-04-11 16:28:42 INFO  - Ended: testPasswordContent
+2020-04-11 16:28:42 INFO  - All Tests Completed
+2020-04-11 16:35:11 INFO  - Start Testing: AdministratorTests
+2020-04-11 16:35:11 INFO  - Run: testPasswordLength
+2020-04-11 16:35:11 INFO  - Ended: testPasswordLength
+2020-04-11 16:35:11 INFO  - Run: testPasswordContent
+2020-04-11 16:35:11 INFO  - Ended: testPasswordContent
+2020-04-11 16:35:11 INFO  - All Tests Completed
+2020-04-11 23:20:04 INFO  - Start Testing: AdministratorTests
+2020-04-11 23:20:04 INFO  - Run: testPasswordLength
+2020-04-11 23:20:04 INFO  - Ended: testPasswordLength
+2020-04-11 23:20:04 INFO  - Run: testPasswordContent
+2020-04-11 23:20:04 INFO  - Ended: testPasswordContent
+2020-04-11 23:20:04 INFO  - All Tests Completed
+2020-04-12 00:22:59 INFO  - Start Testing: AdministratorTests
+2020-04-12 00:22:59 INFO  - Run: testPasswordLength
+2020-04-12 00:22:59 INFO  - Ended: testPasswordLength
+2020-04-12 00:22:59 INFO  - Run: testPasswordContent
+2020-04-12 00:22:59 INFO  - Ended: testPasswordContent
+2020-04-12 00:22:59 INFO  - All Tests Completed
+2020-04-12 00:22:59 INFO  - league been added , type:LEAGUE_B
+2020-04-12 00:22:59 INFO  - league been added , type:LEAGUE_A
+2020-04-12 00:22:59 INFO  - Season been added , linked to League: , Start date:LogicLayer.Date@11531931 , End date:LogicLayer.Date@5e025e70
+2020-04-12 01:11:51 INFO  - Start Testing: AdministratorTests
+2020-04-12 01:11:51 INFO  - Run: testPasswordLength
+2020-04-12 01:11:51 INFO  - Ended: testPasswordLength
+2020-04-12 01:11:51 INFO  - Run: testPasswordContent
+2020-04-12 01:11:51 INFO  - Ended: testPasswordContent
+2020-04-12 01:11:51 INFO  - All Tests Completed
+2020-04-12 01:11:51 INFO  - league been added , type:LEAGUE_B
+2020-04-12 01:11:51 INFO  - new Referee been added , belong to user : d
+2020-04-12 01:11:51 INFO  - new Referee been removed , belong to user : d
+2020-04-12 01:11:51 INFO  - league been added , type:LEAGUE_A
+2020-04-12 01:11:51 INFO  - Season been added , linked to League: , Start date:LogicLayer.Date@11531931 , End date:LogicLayer.Date@5e025e70
+2020-04-12 01:15:55 INFO  - Start Testing: AdministratorTests
+2020-04-12 01:15:55 INFO  - Run: testPasswordLength
+2020-04-12 01:15:55 INFO  - Ended: testPasswordLength
+2020-04-12 01:15:55 INFO  - Run: testPasswordContent
+2020-04-12 01:15:55 INFO  - Ended: testPasswordContent
+2020-04-12 01:15:55 INFO  - All Tests Completed
+2020-04-12 01:15:55 INFO  - league been added , type:LEAGUE_B
+2020-04-12 01:15:55 INFO  - new Referee been added , belong to user : d
+2020-04-12 01:15:55 INFO  - new Referee been removed , belong to user : d
+2020-04-12 01:15:55 INFO  - league been added , type:LEAGUE_A
+2020-04-12 01:15:55 INFO  - Season been added , linked to League: , Start date:LogicLayer.Date@11531931 , End date:LogicLayer.Date@5e025e70
+2020-04-12 01:18:22 INFO  - Start Testing: AdministratorTests
+2020-04-12 01:18:22 INFO  - Run: testPasswordLength
+2020-04-12 01:18:22 INFO  - Ended: testPasswordLength
+2020-04-12 01:18:22 INFO  - Run: testPasswordContent
+2020-04-12 01:18:22 INFO  - Ended: testPasswordContent
+2020-04-12 01:18:22 INFO  - All Tests Completed
+2020-04-12 01:18:22 INFO  - league been added , type:LEAGUE_B
+2020-04-12 01:18:22 INFO  - new Referee been added , belong to user : d
+2020-04-12 01:18:22 INFO  - new Referee been removed , belong to user : d
+2020-04-12 01:18:22 INFO  - league been added , type:LEAGUE_A
+2020-04-12 01:18:22 INFO  - Season been added , linked to League: , Start date:LogicLayer.Date@11531931 , End date:LogicLayer.Date@5e025e70
+2020-04-12 01:21:23 INFO  - Start Testing: AdministratorTests
+2020-04-12 01:21:23 INFO  - Run: testPasswordLength
+2020-04-12 01:21:23 INFO  - Ended: testPasswordLength
+2020-04-12 01:21:23 INFO  - Run: testPasswordContent
+2020-04-12 01:21:23 INFO  - Ended: testPasswordContent
+2020-04-12 01:21:23 INFO  - All Tests Completed
+2020-04-12 01:21:23 INFO  - league been added , type:LEAGUE_B
+2020-04-12 01:21:23 INFO  - new Referee been added , belong to user : d
+2020-04-12 01:21:23 INFO  - new Referee been removed , belong to user : d
+2020-04-12 01:21:23 INFO  - league been added , type:LEAGUE_A
+2020-04-12 01:21:23 INFO  - Season been added , linked to League: , Start date:LogicLayer.Date@11531931 , End date:LogicLayer.Date@5e025e70
+2020-04-12 01:24:20 INFO  - Start Testing: AdministratorTests
+2020-04-12 01:24:20 INFO  - Run: testPasswordLength
+2020-04-12 01:24:20 INFO  - Ended: testPasswordLength
+2020-04-12 01:24:20 INFO  - Run: testPasswordContent
+2020-04-12 01:24:20 INFO  - Ended: testPasswordContent
+2020-04-12 01:24:20 INFO  - All Tests Completed
+2020-04-12 01:24:20 INFO  - league been added , type:LEAGUE_B
+2020-04-12 01:24:20 INFO  - new Referee been added , belong to user : d
+2020-04-12 01:24:20 INFO  - new Referee been removed , belong to user : d
+2020-04-12 01:24:20 INFO  - league been added , type:LEAGUE_A
+2020-04-12 01:24:20 INFO  - Season been added , linked to League: , Start date:LogicLayer.Date@7e0babb1 , End date:LogicLayer.Date@6debcae2

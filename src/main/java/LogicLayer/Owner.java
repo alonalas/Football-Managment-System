@@ -3,7 +3,6 @@ package LogicLayer;
 import DataLayer.dataManager;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -79,7 +78,7 @@ public class Owner extends RoleHolder {
         User user = this.getAssetUser(userName,email);
         Date date = new Date(day,month,year); // check why it's not working
         Page page = new Page();
-        Player player = new Player(user,position,team,name,date,page);
+        Player player = new Player(user,position,team,name, date ,page);
         team.setPlayer(player);
         player.setTeam(team);
         team.setPlayer(player);
