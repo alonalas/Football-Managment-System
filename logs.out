@@ -157,3 +157,20 @@
 2020-04-11 18:33:33 INFO  - Run: showDetails
 2020-04-11 18:33:33 INFO  - Ended: testPasswordContent
 2020-04-11 18:33:33 INFO  - All Tests Completed
+2020-04-11 18:42:27 INFO  - Start Testing: AdministratorTests
+2020-04-11 18:42:27 INFO  - Added new game event
+2020-04-11 18:42:27 INFO  - Added new game event
+2020-04-11 18:42:27 INFO  - Run: showDetails
+2020-04-11 18:42:27 INFO  - Ended: testPasswordContent
+2020-04-11 18:42:27 INFO  - All Tests Completed
+2020-04-11 18:50:58 INFO  - Start Testing: AdministratorTests
+2020-04-11 18:50:58 INFO  - Added new game event
+2020-04-11 18:50:58 INFO  - Added new game event
+2020-04-11 18:50:58 INFO  - Run: showDetails
+2020-04-11 18:50:58 INFO  - Ended: testPasswordContent
+2020-04-11 18:50:58 INFO  - All Tests Completed
+2020-04-11 20:38:57 INFO  - Start Testing: AdministratorTests
+2020-04-11 20:38:57 INFO  - Added new game event
+2020-04-11 20:38:57 INFO  - Run: showDetails
+2020-04-11 20:38:57 INFO  - Ended: testPasswordContent
+2020-04-11 20:38:57 INFO  - All Tests Completed

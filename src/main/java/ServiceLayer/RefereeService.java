@@ -22,6 +22,7 @@ public class RefereeService extends AUserService {
     }
 
     /**
+     * UC 10.1
      * display the Referee's details
      */
     @Override
@@ -35,9 +36,10 @@ public class RefereeService extends AUserService {
     }
 
     /**
+     * UC 10.1
      * change the details of the referee
-     * @param newName
-     * @param newCualif
+     * @param newName - the new name we want to save for the referee
+     * @param newCualif - the new qualification for the referee
      * @throws IOException
      */
     @Override
@@ -48,6 +50,7 @@ public class RefereeService extends AUserService {
 
 
     /**
+     * UC 10.2
      * displays the referee's games
      * @throws IOException
      */
@@ -69,10 +72,11 @@ public class RefereeService extends AUserService {
 
 
     /**
+     * UC 10.3
      * adds a new gameEvnet to the system while the game is active
-     * @param game
-     * @param description
-     * @param eventType
+     * @param game - the game we want to add an event for
+     * @param description - the description of the event
+     * @param eventType - event type (enum)
      * @throws IOException
      */
     @Override
@@ -94,10 +98,11 @@ public class RefereeService extends AUserService {
 
 
     /**
-     * adds a new game event to the system after the game ended
-     * @param game
-     * @param description
-     * @param eventType
+     * UC 10.4.1
+     * adds a new game event to the system after the game ended by a main referee
+     * @param game - the game we want to add an event for
+     * @param description - the description of the event
+     * @param eventType - event type (enum)
      * @throws IOException
      */
     @Override
@@ -121,7 +126,13 @@ public class RefereeService extends AUserService {
     }
 
 
-
+    /**
+     * UC 10.4.2
+     * creates game report for a specific game by main referee
+     * @param game - the game we want to create a report for
+     * @param description - description of the report
+     * @throws IOException
+     */
     @Override
     public void createGameReport(Game game, String description)throws IOException {
         if(referee.getMain().contains(game)){

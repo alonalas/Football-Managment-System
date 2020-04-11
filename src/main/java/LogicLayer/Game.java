@@ -122,6 +122,9 @@ public class Game {
     }
 
 
+    /**
+     * prints the game's details
+     */
     public void displayDetails(){
         System.out.println("Date: " + getDate());
         System.out.println("Start Time: " + getStartTime());
