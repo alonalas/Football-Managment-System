@@ -52,7 +52,9 @@ public class Guest {
         return data.getTeamList();
     }
 
-    public List<Season> retrieveSeasons(){ return data.getSeasonList();}
+    public List<Season> retrieveSeasons(){
+        return data.getSeasonList();
+    }
 
     public List<Coach> retrieveCoaches() {
         return data.getCoaches();

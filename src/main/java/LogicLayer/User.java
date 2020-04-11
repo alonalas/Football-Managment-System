@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DataLayer.IDataManager;
-import DataLayer.dataManager;
 import ServiceLayer.*;
 
 public class User {
@@ -64,6 +63,7 @@ public class User {
      */
     public void logOut() {
         system.removeUser(this);
+        system.removeUserService( this);
     }
 
 

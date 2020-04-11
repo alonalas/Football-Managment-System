@@ -68,7 +68,6 @@ public class GuestService implements IGuestService{
         return true;
     }
 
-
     /**
      * Use Case - 2.3
      * Show public information
@@ -131,7 +130,7 @@ public class GuestService implements IGuestService{
 
     /**
      * USE CASE - 2.4
-     * Search Information
+     * Search Information By Name
      * @param name
      */
     public void searchInformation(String name){
@@ -145,13 +144,52 @@ public class GuestService implements IGuestService{
 
     /**
      * USE CASE - 2.4
-     * Search Information
+     * Search Information By Category
      * @param interested
      */
     public void searchInformation(Interest interested){
         showInformationByCategory(interested);
     }
 
+    /**
+     * USE CASE - 2.4
+     * Search Information By Keywords
+     * @param query
+     */
+    public void searchInformationByKeyWord(String query){
+        switch (query.toLowerCase()){
+            case "coaches":
+                searchInformation(Interest.Coaches);
+                break;
+            case "games":
+                searchInformation(Interest.Games);
+                break;
+            case "managers":
+                searchInformation(Interest.Managers);
+                break;
+            case "owners":
+                searchInformation(Interest.Owners);
+                break;
+            case "players":
+                searchInformation(Interest.Players);
+                break;
+            case "seasons":
+                searchInformation(Interest.Seasons);
+                break;
+            case "teams":
+                searchInformation(Interest.Teams);
+                break;
+            case "leagues":
+                searchInformation(Interest.Leagues);
+                break;
+            default:
+                searchInformation(query);
+                searchInformation(query);
+                searchInformation(query);
+        }
+
+
+    }
 
 
 

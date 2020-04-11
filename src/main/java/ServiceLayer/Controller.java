@@ -38,8 +38,8 @@ public class Controller implements IController{
         this.administrator = administrator;
         currentGuestsList = new ArrayList<Guest>();
         GuestServices = new HashMap<Guest, IGuestService>();
-        UserServices = new HashMap<User, List<IUserService>>();
         currentUserList = new ArrayList<User>();
+        UserServices = new HashMap<User, List<IUserService>>();
         saveData();
     }
 
@@ -71,6 +71,10 @@ public class Controller implements IController{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void removeUserService(User user) {
+        this.UserServices.remove(user);
     }
 
     public List<Guest> getGuestsList() {

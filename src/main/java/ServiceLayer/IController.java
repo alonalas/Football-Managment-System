@@ -13,4 +13,5 @@ public interface IController {
 
     void removeUser(User userToRemove);
 
+    void removeUserService(User user);
 }

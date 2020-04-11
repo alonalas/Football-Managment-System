@@ -157,7 +157,7 @@ public class dataManager implements IDataManager {
     }
 
     public User searchUserByName(String name) {
-        String[]splitted = name.split(" ");
+        String[] splitted = name.split(" ");
         for (User user: userList){
             if (user.getFirstName().equals(splitted[0]) && user.getLastName().equals(splitted[1])){
                 return user;
