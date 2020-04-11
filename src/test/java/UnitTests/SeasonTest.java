@@ -1,6 +1,7 @@
 package UnitTests;
 
 import DataLayer.IDataManager;
+import DataLayer.dataManager;
 import LogicLayer.DataComp;
 import LogicLayer.Date;
 import LogicLayer.League;
@@ -28,7 +29,7 @@ public class SeasonTest  {
 
     @Before
     public void init(){
-        dm =  DataComp.getInstance();
+        dm =  new dataManager();
         league = new League(League.LeagueType.LEAGUE_B);
         league2 = new League(League.LeagueType.LEAGUE_A);
         season = null ;

@@ -1,6 +1,7 @@
 package UnitTests;
 
 import DataLayer.IDataManager;
+import DataLayer.dataManager;
 import LogicLayer.DataComp;
 import LogicLayer.League;
 import org.junit.After;
@@ -23,7 +24,7 @@ public class LeagueTest  {
 
     @Before
     public void init(){
-        dm =  DataComp.getInstance();
+        dm =  new dataManager();
 
     }
     @Test

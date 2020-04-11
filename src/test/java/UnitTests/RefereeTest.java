@@ -1,6 +1,7 @@
 package UnitTests;
 
 import DataLayer.IDataManager;
+import DataLayer.dataManager;
 import LogicLayer.*;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -20,7 +21,7 @@ public class RefereeTest  {
 
     @Before
     public void init(){
-        dm =  DataComp.getInstance();
+        dm =  new dataManager();
         user = new User("@","d","d");
     }
     @Test
