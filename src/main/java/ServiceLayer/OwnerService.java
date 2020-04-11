@@ -150,5 +150,9 @@ public class OwnerService extends AUserService{
     public void deleteStadium(Owner owner, String teamName, String stadium) {
         owner.deleteStadium(teamName,stadium);
     }
+
+    public void nominateNewOwner(Owner owner,Team team, User user, String name) throws IOException {
+        owner.nominateNewOwner(user,team,name);
+    }
 }
 

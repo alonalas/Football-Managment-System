@@ -16,14 +16,15 @@ public class OwnerTest {
 
     dataManager dataManager = new dataManager();
     Controller controller = new Controller(null,null);
+
     User ownerUser = new User("alonalas@post.bgu.ac.il","123","alona");
     User u1 = new User("a@b@c","1234","alonalas");
+    User u2 = new User("amir@post", "234","amirLasry");
+
     OwnerService os = new OwnerService(controller);
-    Owner own = new Owner(ownerUser,"ssss",dataManager);
+    Owner own = new Owner(ownerUser,"Alona the queen",dataManager);
     Page p = new Page();
-    Manager m = new Manager();
     Team team = new Team("Blumfield", "Hapoel",p, dataManager);
-    RoleHolder roleHolder = new Player(u1,"GoalKeeper",team,"yotam",null,p);
 
     /**
      * the 5 following tests are testing UC 6.1.1
@@ -229,6 +230,13 @@ public class OwnerTest {
      */
     public void testOwnerDeleteStadium() {
 
+        controller.addUser(ownerUser);
+        dataManager.addUser(ownerUser);
+        dataManager.addUser(u1);
+        ownerUser.setRole(own);
+        own.addTeam(team);
+        team.addOwner(own);
+
         String teamName = "Hapoel";
         String stadium = "Blumfield";
 
@@ -240,7 +248,84 @@ public class OwnerTest {
             System.out.println(e.getMessage());
         }
 
+        assertEquals(team.getStadium(),"NO_STADIUM");
+
     }
+
+    /*
+    @Test
+    public void testOwnerUpdateAsset() {
+
+        testOwnerAddPlayer(); // player Exists in the system
+        RoleHolder toUpdate = team.getRoleHolder(own,u1.getUserName(),u1.getEmail());
+
+        String userName = "alonalas";
+        String email = "a@b@c";
+        String teamName = "Hapoel";
+
+        String newUserName = "alonalas";
+        try {
+            os.validateExistingAssetType(own,teamName,email,userName);
+            os.updateRoleHolder(toUpdate);
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        assertTrue(team.getPlayerList().size() == 0);
+        assertNull(team.getRoleHolder(own,userName,email));
+    }
+*/
+
+    ////////////////////////////////////////////////////////////////uc2
+
+    /**
+     * test U.C 6.2
+     * current owner nominates another owner as an addition owner of a requiered team
+     * @throws IOException in the following cases:
+     * -chosen owner is allrady nominated
+     * -chosen user does not exist in the system
+     * -owner does not owe the requeierd team.
+     */
+    @Test
+    public void testOwnerNominateOwner() {
+
+        initializeSystem();
+        String name = "newOnwerCher";
+
+        try {
+            os.nominateNewOwner(own,team,u2,name);
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        assertNotNull(team.getOwner(u2));
+        assertTrue(u2.getRoles().size() == 1);
+        assertTrue(team.getOwnerList().size() == 2);
+
+        try {
+            os.nominateNewOwner(own,team,u2,name);
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+            assertEquals(e.getMessage(),"User is allready nominated as owner in this team");
+        }
+
+    }
+
+    private void initializeSystem() {
+
+        controller.addUser(ownerUser);
+        dataManager.addUser(ownerUser);
+        dataManager.addUser(u1);
+        dataManager.addUser(u2);
+        ownerUser.setRole(own);
+        own.addTeam(team);
+        team.addOwner(own);
+
+    }
+
 
 
 

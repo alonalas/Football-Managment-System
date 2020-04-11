@@ -231,9 +231,8 @@ public class Owner extends RoleHolder {
     public void deleteStadium(String teamName, String stadium) {
         Team team = getTeam(teamName);
         if (team.getStadium().toLowerCase().equals(stadium.toLowerCase()))
-            team.setStadium("NO_STADIUMֹ");
+            team.setStadium("NO_STADIUM");
     }
-
     /**
      * ID: 13
      * adds a new team to the owne's teamList
@@ -242,6 +241,59 @@ public class Owner extends RoleHolder {
     public void addTeam(Team team) {
         if (!teamList.contains(team))
             this.teamList.add(team);
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////// uc2
+    /**
+     * id: 14
+     * nominates a new owner to the team
+     * @param user
+     * @param team
+     * @param name
+     * @throws IOException
+     */
+    public void nominateNewOwner(User user, Team team, String name) throws IOException {
+        if (checkNewOwnerValidity(user,team))
+            assignOwnerPremission(user,team,name);
+    }
+
+    /**
+     * id: 15
+     * checks whether the new owner has a valid account
+     * checks whether the owner owes the chosen team
+     * @param user
+     * @param team
+     * @return
+     * @throws IOException
+     */
+    private boolean checkNewOwnerValidity(User user, Team team) throws IOException {
+        if (DM.getUserList().contains(user)) {
+            if(teamList.contains(team)) {
+                if (team.getOwner(user) != null)
+                    throw new IOException("User is allready nominated as owner in this team");
+                else
+                    return true;
+            }
+            else
+                throw new IOException("Owner doest not owe the selected team");
+        }
+        else {
+            throw new IOException("User does not exist in the data base");
+        }
+    }
+
+    /**
+     * id: 16
+     * add a new owner to the selected team in term he is not an owner allready
+     * @param user
+     * @param team
+     * @param name
+     */
+    private void assignOwnerPremission(User user, Team team, String name) {
+        Owner newOwner = new Owner(user,name,DM);
+        user.setRole(newOwner);
+        newOwner.addTeam(team);
+        team.addOwner(newOwner);
     }
 
     public String getName() {

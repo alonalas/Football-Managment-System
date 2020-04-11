@@ -66,7 +66,8 @@ public class User {
     }
 
     public void setRole(Role role){
-        this.roles.add(role);
+        if (!roles.contains(role))
+            this.roles.add(role);
     }
 
     public void setRoles(List<Role> roles) {

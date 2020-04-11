@@ -73,10 +73,18 @@ public class Team {
         this.playerList = playerList;
     }
 
-    public Manager getManager(Manager manager) {
-        for (Manager manager1 : managerList) {
-            if (manager1.equals(manager))
-                return manager1;
+    public Manager getManager(User user) {
+        for (Manager manager : managerList) {
+            if (manager.getUser().equals(user))
+                return manager;
+        }
+        return null;
+    }
+
+    public Owner getOwner(User user) {
+        for (Owner owner : ownerList) {
+            if (owner.getUser().equals(user))
+                return owner;
         }
         return null;
     }
