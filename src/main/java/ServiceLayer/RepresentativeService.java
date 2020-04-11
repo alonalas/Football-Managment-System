@@ -1,7 +1,9 @@
 package ServiceLayer;
 
 import LogicLayer.League;
+import LogicLayer.Referee;
 import LogicLayer.Season;
+import LogicLayer.User;
 
 import java.io.IOException;
 import java.util.Date;
@@ -57,4 +59,25 @@ public class RepresentativeService extends AUserService {
        return Season.ShowAllSeasons();
     }
 
+    /**
+     * id: RepresentativeService@5
+     * add new referee from exist users
+     * @return true if added successfully, else if already exists
+     */
+    public boolean addNewRefereeFromUsers(User user , String qualification , String name) throws IOException{
+        return Referee.MakeUserReferee( user,  qualification,  name) ;
+    }
+
+    /**
+     * id: RepresentativeService@6
+     * add new referee from exist users
+     * @return true if added successfully, else if already exists
+     */
+    public boolean RemoveNewRefereeFromUsers(User user) throws IOException{
+        Referee referee = user.ifUserRoleIncludeReferee();
+        if(referee == null){
+            return false;
+        }
+        return Referee.RemoveUserReferee(referee) ;
+    }
 }

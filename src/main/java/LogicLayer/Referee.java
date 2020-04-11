@@ -1,5 +1,8 @@
 package LogicLayer;
 
+import DataLayer.IDataManager;
+import DataLayer.dataManager;
+
 import java.util.List;
 
 public class Referee extends Role{
@@ -9,6 +12,7 @@ public class Referee extends Role{
     private League league;
     List<Game> main;
     List<Game> line;
+    private static IDataManager data = new dataManager();
 
     public Referee(User user, String qualification, String name, League league, List<Game> main, List<Game> line) {
         super(user);
@@ -17,6 +21,39 @@ public class Referee extends Role{
         this.league = league;
         this.main = main;
         this.line = line;
+    }
+    public Referee(User user, String qualification, String name) {
+        super(user);
+        this.qualification = qualification;
+        this.name = name;
+    }
+
+    /**
+     * id: Referee@1
+     * make a user a referee
+     * @param user of referee
+     * @param qualification of referee
+     * @param name of referee
+     * @return true if added successfully, else if already exists
+     */
+    public static boolean MakeUserReferee(User user, String qualification, String name){
+           Referee referee = new Referee( user,  qualification,  name);
+           boolean res =  user.addRole(referee);
+           if(res)data.addReferee(referee) ;
+           return true;
+    }
+
+    /**
+     * id: Referee@2
+     * Remove a user a referee
+     * @param
+     * @return true if removed successfully, else if already removed
+     */
+    public static boolean RemoveUserReferee(Referee referee){
+        if(referee.getUser().removeRole(referee)!=null) {
+            return data.removeReferee(referee);
+        }
+        return false;
     }
 
     public String getQualification() {
@@ -57,5 +94,14 @@ public class Referee extends Role{
 
     public void setLine(List<Game> line) {
         this.line = line;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Referee){
+            Referee other = (Referee)obj;
+            return (other.getUser().equals(this.getUser()));
+        }
+        return false;
     }
 }

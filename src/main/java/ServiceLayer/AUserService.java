@@ -3,12 +3,15 @@ package ServiceLayer;
 import LogicLayer.League;
 import LogicLayer.Page;
 import LogicLayer.Season;
+import LogicLayer.User;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 public abstract class AUserService implements IUserService{
+
+
     public void addPage(Page newPage) throws IOException {
         throw new IOException("Eitan");
     }
@@ -22,6 +25,12 @@ public abstract class AUserService implements IUserService{
         throw new IOException("Unsupported method");
     }
     public List<Season> ShowAllSeasons() throws IOException{
+        throw new IOException("Unsupported method");
+    }
+    boolean addNewRefereeFromUsers(User user , String qualification , String name) throws IOException{
+        throw new IOException("Unsupported method");
+    }
+    public boolean RemoveNewRefereeFromUsers(User user) throws IOException{
         throw new IOException("Unsupported method");
     }
 }

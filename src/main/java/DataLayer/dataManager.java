@@ -1,5 +1,6 @@
 package DataLayer;
 import LogicLayer.*;
+//import com.sun.org.apache.xml.internal.security.encryption.ReferenceList;
 import org.apache.log4j.Logger;
 
 import java.util.Date;
@@ -16,6 +17,7 @@ public class dataManager implements IDataManager {
     private List<Season> seasonList;
     private List<Team> teamList;
     private List<Page> pageList;
+    private List<Referee> RefereeList;
     private static final Logger systemLoger = Logger.getLogger(dataManager.class);
 
     public User getUser(String userName, String password){
@@ -96,7 +98,7 @@ public class dataManager implements IDataManager {
      * Search Season by start and end dates
      * @param start date of season
      * @param End date of season
-     * @return
+     * @return Season if found, else null
      */
     public Season SearchSeason( Date start ,Date End) {
         for (Season season:
@@ -122,6 +124,35 @@ public class dataManager implements IDataManager {
             systemLoger.info("Season Linked to existing League:" + " , Start date:" + season.getStart() +
                     " , End date:" + season.getEnd());
         }
+    }
+
+    /**
+     * id: dataManager@
+     * add New Referee To Data
+     * @param referee
+     * @return if added successfully, if not -> already contains the element
+     */
+    public boolean addReferee(Referee referee){
+        if(!RefereeList.contains(referee)){
+            RefereeList.add(referee);
+            systemLoger.info("new Referee been added , belong to user : "+ referee.getUser().getUserName());
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param referee
+     * @return
+     */
+    public boolean removeReferee(Referee referee){
+        if(RefereeList.contains(referee)){
+            RefereeList.remove(referee);
+            systemLoger.info("new Referee been removed , belong to user : "+ referee.getUser().getUserName());
+            return true;
+        }
+        return false;
     }
     public void setLeagueList(List<League> leagueList) {
         this.leagueList = leagueList;

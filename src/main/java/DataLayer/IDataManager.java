@@ -13,4 +13,6 @@ public interface IDataManager {
     Season SearchSeason(Date start , Date End);
     List<League> getLeagueList();
     List<Season> getSeasonList();
+    boolean addReferee(Referee referee) ;
+    boolean removeReferee(Referee referee) ;
 }
