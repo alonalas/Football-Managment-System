@@ -9,6 +9,7 @@ public class Complaint {
     private User user;
     private IController system;
     private String description;
+    private String commentAdmin;
     Date date;
     //Hour is missing
 
@@ -50,5 +51,13 @@ public class Complaint {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void setCommentAdmin(String commentAdmin) {
+        this.commentAdmin = commentAdmin;
+    }
+
+    public String getCommentAdmin() {
+        return commentAdmin;
     }
 }
