@@ -1,5 +1,6 @@
 package LogicLayer;
 
+import DataLayer.dataManager;
 import ServiceLayer.IController;
 
 import java.util.LinkedList;
@@ -7,6 +8,7 @@ import java.util.List;
 
 public class Team {
 
+    private dataManager dataManager;
     private String name;
     private String stadium;
     private Page page;
@@ -19,10 +21,11 @@ public class Team {
     private List<Coach> coachList;
     private List<RoleHolder> roleHolders;
 
-    public Team(String stadium, String name, Page page) {
+    public Team(String stadium, String name, Page page, dataManager dataManager) {
         this.name = name;
         this.stadium = stadium;
         this.page = page;
+        this.dataManager = dataManager;
         managerList = new LinkedList<>();
         playerList = new LinkedList<>();
         ownerList = new LinkedList<>();
@@ -42,7 +45,8 @@ public class Team {
     }
 
     public void addOwner(Owner owner) {
-
+        if (!this.ownerList.contains(owner))
+            ownerList.add(owner);
     }
 
     public String getStadium() {
@@ -86,19 +90,30 @@ public class Team {
             managerList.add(manager);
     }
 
+    /**
+     * ID: 1
+     * returns a RoleHolder that belongs to the requiered team of the given owner
+     * search is made by user name and email
+     * @param owner
+     * @param userName
+     * @param email
+     * @return
+     */
+    public RoleHolder getRoleHolder(Owner owner, String userName,String email) {
 
-    /*
-    public RoleHolder getRoleHolder(Owner owner, Team team, String userName,String email) {
-        User user = owner.getUser();
+        User user = dataManager.getUser(userName,email);
         if (this.ownerList.contains(owner)) {
             for (RoleHolder roleHolder : this.roleHolders) {
-                if (roleHolder.equals(user))
+                if (roleHolder.getUser().equals(user))
                     return roleHolder;
             }
         }
         return null;
     }
-    */
+
+    public List<RoleHolder> getRoleHolders() {
+        return roleHolders;
+    }
 
     public List<Owner> getOwnerList() {
         return ownerList;
@@ -132,7 +147,7 @@ public class Team {
         this.league = league;
     }
 
-    public void addPlayer(Player player) {
+    public void setPlayer(Player player) {
         if(!playerList.contains(player))
             playerList.add(player);
     }

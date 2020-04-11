@@ -20,4 +20,9 @@ public abstract class RoleHolder extends Role {
         }
         return false;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

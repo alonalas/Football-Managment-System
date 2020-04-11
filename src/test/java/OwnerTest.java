@@ -2,14 +2,17 @@ import DataLayer.dataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
 import ServiceLayer.OwnerService;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import static junit.framework.TestCase.assertNull;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 
 
-public class OwnerTests{
+public class OwnerTest {
 
     dataManager dataManager = new dataManager();
     Controller controller = new Controller(null,null);
@@ -19,13 +22,13 @@ public class OwnerTests{
     Owner own = new Owner(ownerUser,"ssss",dataManager);
     Page p = new Page();
     Manager m = new Manager();
-    Team team = new Team("Blumfield", "Hapoel",p);
+    Team team = new Team("Blumfield", "Hapoel",p, dataManager);
     RoleHolder roleHolder = new Player(u1,"GoalKeeper",team,"yotam",null,p);
 
     /**
-     * the 4 following tests are UC 6.1.1
-     * the 4 following tests assumes owner's account is connected allready
-     * the 4 following tests assumes the following process in the presentation layer:
+     * the 5 following tests are testing UC 6.1.1
+     * the 5 following tests assumes owner's account is connected allready
+     * the 5 following tests assumes the following process in the presentation layer:
      *
      * the owner push the button "insert new asset to team"
      * GUI shows 4 following buttons:
@@ -61,8 +64,11 @@ public class OwnerTests{
         catch (IOException e){
             System.out.println(e.getMessage());
         }
-        System.out.println();
+
+        assertTrue(team.getManagerList().size() > 0);
+        assertNotNull(team.getRoleHolder(own,userName,email));
     }
+
 
     @Test
     public void testOwnerAddCoach() {
@@ -72,6 +78,7 @@ public class OwnerTests{
         dataManager.addUser(u1);
         ownerUser.setRole(own);
         own.addTeam(team);
+        team.addOwner(own);
 
         String userName = "alonalas";
         String email = "a@b@c";
@@ -86,6 +93,8 @@ public class OwnerTests{
         catch (IOException e){
             System.out.println(e.getMessage());
         }
+        assertTrue(team.getCoachList().size() > 0);
+        assertNotNull(team.getRoleHolder(own,userName,email));
     }
 
     @Test
@@ -96,6 +105,7 @@ public class OwnerTests{
         dataManager.addUser(u1);
         ownerUser.setRole(own);
         own.addTeam(team);
+        team.addOwner(own);
 
         String userName = "alonalas";
         String email = "a@b@c";
@@ -110,6 +120,10 @@ public class OwnerTests{
         catch (IOException e){
             System.out.println(e.getMessage());
         }
+
+        assertTrue(team.getPlayerList().size() > 0);
+        assertNotNull(team.getRoleHolder(own,userName,email));
+
     }
 
     @Test
@@ -120,6 +134,7 @@ public class OwnerTests{
         dataManager.addUser(u1);
         ownerUser.setRole(own);
         own.addTeam(team);
+        team.addOwner(own);
 
         String stadium = "Sami offer"; // when button "Manager" is chosen
         String teamName = "Hapoel";
@@ -132,11 +147,53 @@ public class OwnerTests{
         catch (IOException e){
             System.out.println(e.getMessage());
         }
+        assertEquals(team.getStadium(),stadium);
+    }
+
+    @Test
+    public void checkExceptionThrown() {
+
+        controller.addUser(ownerUser);
+        dataManager.addUser(ownerUser);
+        dataManager.addUser(u1);
+        ownerUser.setRole(own);
+        own.addTeam(team);
+        team.addOwner(own);
+
+        boolean thrown = false;
+        String message="";
+
+        try {
+            check("Hapoel", "aaa", "bbb", new Manager());
+        }
+        catch (IOException e) {
+            thrown = true;
+            message = e.getMessage();
+        }
+        assertTrue(thrown);
+        assertEquals(message,"The chosen user does not exist, please insert valid inputs");
+
+        try {
+            check("Beitar", "a@b@c", "alonalas", new Manager());
+        }
+        catch (IOException e) {
+            thrown = true;
+            message = e.getMessage();
+        }
+        assertTrue(thrown);
+        assertEquals(message,"The chosen team does not exist, please choose a valid team");
+
+    }
+
+    public void check(String teamName, String email, String userName, RoleHolder roleHolder) throws IOException {
+        os.validateExistingAssetType(own,teamName, email,userName);
+        controller.displayForm(roleHolder);
+        os.insertNewManager(own,teamName, "xxx", userName,email);
     }
 
     @Test
     /**
-     * The following 2 test are U.C 6.1.2
+     * The following 2 test are testing U.C 6.1.2
      * tests asset deletion
      * asset is one of the following options: Player/Coach/Manager
      * assumes that the user have chosen the button "RoleHolder-> chosen role from abocve)
@@ -154,11 +211,14 @@ public class OwnerTests{
 
         try {
             os.validateExistingAssetType(own,teamName,email,userName);
-            os.deleteAsset(own,teamName,userName,email,toDelete);
+            os.deleteRoleHolder(own,teamName,userName,email,toDelete);
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
+
+        assertTrue(team.getPlayerList().size() == 0);
+        assertNull(team.getRoleHolder(own,userName,email));
 
     }
 
@@ -167,7 +227,7 @@ public class OwnerTests{
      * test stadium deletion
      * assumes that the user have chosen the button "stadium"
      */
-    public void testDeleteStadium() {
+    public void testOwnerDeleteStadium() {
 
         String teamName = "Hapoel";
         String stadium = "Blumfield";

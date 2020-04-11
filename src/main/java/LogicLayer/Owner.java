@@ -21,6 +21,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
+     * ID: 1
      * creates a new instance of manager without premissions with the following parameters
      * and connecting it to the requested team
      * @param team
@@ -28,18 +29,18 @@ public class Owner extends RoleHolder {
      * @param userName
      * @param email
      */
-    public void nominateManager(Team team, String managerName, String userName, String email) {
+    public void insertNewManager(Team team, String managerName, String userName, String email) {
 
         User user = this.getAssetUser(userName,email);
         Manager manager = new Manager(user,managerName,team);
-        assignPremissions(manager, true);
         team.setManager(manager);
         manager.setTeam(team);
         user.setRole(manager);
-        //team.roleHolders.add(manager);
+        team.getRoleHolders().add(manager);
     }
 
     /**
+     * ID: 2
      * creates a new instance of coach without with the following parameters
      * and connecting it to the requested team
      * @param team
@@ -57,10 +58,11 @@ public class Owner extends RoleHolder {
         coach.setTeam(team);
         team.setCoach(coach);
         user.setRole(coach);
-        //team.roleHolders.add(coach);
+        team.getRoleHolders().add(coach);
     }
 
     /**
+     * ID: 3
      * creates a new instance of player with the following parameters
      * and connecting it to the requested team
      * @param team
@@ -78,26 +80,15 @@ public class Owner extends RoleHolder {
         Date date = new Date(day,month,year); // check why it's not working
         Page page = new Page();
         Player player = new Player(user,position,team,name,date,page);
-        team.addPlayer(player);
+        team.setPlayer(player);
         player.setTeam(team);
-        team.addPlayer(player);
+        team.setPlayer(player);
         user.setRole(player);
-        //team.roleHolders.add(player);
-    }
-
-    //TODO
-
-    /**
-     * assigns premissions to a manager
-     * new manager dont have any special premissions
-     * @param manager
-     * @param newManager
-     */
-    private void assignPremissions(Manager manager, boolean newManager) {
-
+        team.getRoleHolders().add(player);
     }
 
     /**
+     * ID: 4
      * uploads the team's stadium
      * @param team
      * @param stadium
@@ -107,6 +98,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
+     * ID: 5
      * deletes the player that owns the given user
      * @param teamName
      * @param userName
@@ -119,12 +111,14 @@ public class Owner extends RoleHolder {
             if (role instanceof Player) {
                 Player player = (Player)role;
                 team.getPlayerList().remove(player);
+                team.getRoleHolders().remove(player);
                 deleteRole(user,player);
             }
         }
     }
 
     /**
+     * ID: 6
      * delete coach only if there is at least one coach in the coachList
      * @param teamName
      * @param userName
@@ -140,7 +134,7 @@ public class Owner extends RoleHolder {
             for (Role role : user.getRoles()) {
                 if (role instanceof Coach) {
                     Coach coach = (Coach) role;
-
+                    team.getRoleHolders().remove(coach);
                     team.getCoachList().remove(coach);
                     deleteRole(user, coach);
                 }
@@ -148,6 +142,14 @@ public class Owner extends RoleHolder {
         }
     }
 
+    /**
+     * ID: 7
+     * Deletes a manager from the team's managerList iff there is more than one manager
+     * @param teamName
+     * @param userName
+     * @param email
+     * @throws IOException
+     */
     public void deleteManager(String teamName,String userName,String email) throws IOException {
 
         Team team = getTeam(teamName);
@@ -160,6 +162,7 @@ public class Owner extends RoleHolder {
                 if (role instanceof Manager) {
                     Manager manager = (Manager)role;
                     team.getManagerList().remove(manager);
+                    team.getRoleHolders().remove(manager);
                     deleteRole(user,manager);
                 }
             }
@@ -167,15 +170,21 @@ public class Owner extends RoleHolder {
 
     }
 
+    /**
+     * ID: 8
+     * Deletes a role from the user's roleList
+     * @param user
+     * @param roleHolder
+     */
     private void deleteRole(User user, RoleHolder roleHolder) {
         for ( Role role : user.getRoles()) {
             if (role.equals(roleHolder))
                 user.getRoles().remove(role);
         }
-
     }
 
     /**
+     * ID: 9
      * returns the requiered team
      * @String teamName
      * @return Team
@@ -189,6 +198,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
+     * ID: 10
      * retrieves the user list from the dataManager and returns the requiered user
      * @return user list
      */
@@ -199,6 +209,13 @@ public class Owner extends RoleHolder {
         return null;
     }
 
+    /**
+     * ID: 11
+     * Searches a user in the dataManager
+     * @param userName
+     * @param email
+     * @return true if user exists, else otherwise
+     */
     public boolean findUser(String userName, String email) {
         if (this.getAssetUser(userName,email) != null)
             return true;
@@ -206,6 +223,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
+     * ID: 12
      * deletes the stadium of the chosen team, replace its value with "NO_STADIUM"
      * @param teamName
      * @param stadium
@@ -217,6 +235,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
+     * ID: 13
      * adds a new team to the owne's teamList
      * @param team
      */

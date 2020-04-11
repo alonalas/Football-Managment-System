@@ -11,6 +11,7 @@ public class OwnerService extends AUserService{
     }
 
     /**
+     * ID: 1
      * validates that the team is exist and connected to the owner
      * validates that the email and userName are attached to an existing account
      * @return User if exists
@@ -34,6 +35,7 @@ public class OwnerService extends AUserService{
     }
 
     /**
+     * ID: 2
      * owner adds a new manager to a requested team
      * @param owner
      * @param teamName
@@ -42,20 +44,27 @@ public class OwnerService extends AUserService{
      * @param email
      */
     public void insertNewManager(Owner owner, String teamName, String managerName, String userName, String email) {
-        owner.nominateManager(owner.getTeam(teamName),managerName,userName,email);
+        owner.insertNewManager(owner.getTeam(teamName),managerName,userName,email);
     }
 
     /**
-     * owner adds a new stadium to a requested team
+     * ID: 3
+     * owner adds a new coach to the requested team with the following parameters
      * @param owner
      * @param teamName
-     * @param stadiumName
+     * @param name
+     * @param qualification
+     * @param job
+     * @param userName
+     * @param email
      */
-    public void insertNewStadium(Owner owner, String teamName, String stadiumName) {
-        owner.insertNewStadium(owner.getTeam(teamName),stadiumName);
+    public void insertNewCoach(Owner owner, String teamName, String name, String qualification, String job,String userName,
+                               String email) {
+        owner.insertNewCoach(owner.getTeam(teamName),name,qualification,job,userName,email);
     }
 
     /**
+     * ID: 4
      * owner adds a new player to the selected team with the following parameters
      * @param owner
      * @param teamName
@@ -76,21 +85,18 @@ public class OwnerService extends AUserService{
     }
 
     /**
-     * owner adds a new coach to the requested team with the following parameters
+     * ID: 5
+     * owner adds a new stadium to a requested team
      * @param owner
      * @param teamName
-     * @param name
-     * @param qualification
-     * @param job
-     * @param userName
-     * @param email
+     * @param stadiumName
      */
-    public void insertNewCoach(Owner owner, String teamName, String name, String qualification, String job,String userName,
-                               String email) {
-        owner.insertNewCoach(owner.getTeam(teamName),name,qualification,job,userName,email);
+    public void insertNewStadium(Owner owner, String teamName, String stadiumName) {
+        owner.insertNewStadium(owner.getTeam(teamName),stadiumName);
     }
 
     /**
+     * ID 6
      * validates the ranges of a player's birthday
      * @param day
      * @param month
@@ -114,6 +120,7 @@ public class OwnerService extends AUserService{
 
 
     /**
+     * ID: 7
      * deletes the requested asset (Player/Coach/Manager) from the owne'r team
      * @param own
      * @param teamName
@@ -121,7 +128,7 @@ public class OwnerService extends AUserService{
      * @param email
      * @param toDelete
      */
-    public void deleteAsset(Owner own, String teamName, String userName, String email, RoleHolder toDelete)
+    public void deleteRoleHolder(Owner own, String teamName, String userName, String email, RoleHolder toDelete)
             throws IOException {
         switch (toDelete.getClass().getSimpleName().toLowerCase()) {
             case "player":
@@ -134,6 +141,7 @@ public class OwnerService extends AUserService{
     }
 
     /**
+     * ID: 8
      * deletes the requested stadium from the owner's team
      * @param owner
      * @param teamName
