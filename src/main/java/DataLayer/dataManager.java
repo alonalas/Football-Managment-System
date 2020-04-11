@@ -1,7 +1,11 @@
 package DataLayer;
 import LogicLayer.*;
-import java.util.List;
-import java.util.Map;
+//import com.sun.org.apache.xml.internal.security.encryption.ReferenceList;
+import LogicLayer.Date;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import java.util.*;
 
 public class dataManager implements IDataManager {
 
@@ -13,8 +17,9 @@ public class dataManager implements IDataManager {
     private List<Season> seasonList;
     private List<Team> teamList;
     private List<Page> pageList;
-    private List<Referee> RefereeList;
+    private LinkedList<Referee> RefereeList;
     private static final Logger systemLoger = Logger.getLogger(dataManager.class);
+
 
     public dataManager() {
         this.guestsList =  new LinkedList<>();
@@ -24,7 +29,10 @@ public class dataManager implements IDataManager {
         this.leagueList = new LinkedList<>();
         this.seasonList = new LinkedList<>();
         this.pageList = new LinkedList<>();
+        this.RefereeList = new LinkedList<>();
     }
+
+
 
     public User getUser(String userName, String email){
         for (User user : userList){
@@ -111,7 +119,7 @@ public class dataManager implements IDataManager {
      * @param End date of season
      * @return Season if found, else null
      */
-    public Season SearchSeason( Date start ,Date End) {
+    public Season SearchSeason(Date start , Date End) {
         for (Season season:
                 seasonList) {
             if(season.getEnd().equals(End) && season.getStart().equals(start)  ){
@@ -144,7 +152,7 @@ public class dataManager implements IDataManager {
      * @return if added successfully, if not -> already contains the element
      */
     public boolean addReferee(Referee referee){
-        if(!RefereeList.contains(referee)){
+        if(! RefereeList.contains(referee)){
             RefereeList.add(referee);
             systemLoger.info("new Referee been added , belong to user : "+ referee.getUser().getUserName());
             return true;

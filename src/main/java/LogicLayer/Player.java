@@ -1,7 +1,6 @@
 package LogicLayer;
 
 import java.lang.reflect.Field;
-import java.util.Date;
 
 public class Player extends RoleHolder{
 

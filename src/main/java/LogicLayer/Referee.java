@@ -12,7 +12,7 @@ public class Referee extends Role{
     private League league;
     List<Game> main;
     List<Game> line;
-    private static IDataManager data = new dataManager();
+    private static IDataManager data = DataComp.getInstance();
 
     public Referee(User user, String qualification, String name, League league, List<Game> main, List<Game> line) {
         super(user);
@@ -39,8 +39,8 @@ public class Referee extends Role{
     public static boolean MakeUserReferee(User user, String qualification, String name){
            Referee referee = new Referee( user,  qualification,  name);
            boolean res =  user.addRole(referee);
-           if(res)data.addReferee(referee) ;
-           return true;
+           if(res) res =data.addReferee(referee) ;
+           return res;
     }
 
     /**
@@ -100,7 +100,7 @@ public class Referee extends Role{
     public boolean equals(Object obj) {
         if(obj instanceof Referee){
             Referee other = (Referee)obj;
-            return (other.getUser().equals(this.getUser()));
+            return (((User)(other.getUser())).equals(this.getUser()));
         }
         return false;
     }

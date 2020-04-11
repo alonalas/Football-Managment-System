@@ -5,7 +5,6 @@ import DataLayer.dataManager;
 import ServiceLayer.IController;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,7 @@ public class Season {
     private List<Game> gameList;
     private List<League> leagueList;
     private Map<League, Policy> Policies;
-    private static IDataManager data = new dataManager();
+    private static IDataManager data = DataComp.getInstance();
 
     public Season(IController system, Date start, Date end, List<Game> gameList, List<League> leagueList, Map<League, Policy> policies) {
         this.system = system;

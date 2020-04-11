@@ -27,7 +27,7 @@ public class League {
     private List<Referee> refereeList;
     private List<Season> seasonList;
     private Map<Season,Policy> policyList;
-    private static IDataManager data = new dataManager();
+    private static IDataManager data = DataComp.getInstance();
 
     public League( LeagueType type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
         this.type = type;

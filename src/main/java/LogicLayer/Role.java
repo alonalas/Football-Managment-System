@@ -20,7 +20,7 @@ public abstract class Role  {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
-        return Objects.equals(user, role.user);
+        return user.equals(role.user);
     }
 
     @Override

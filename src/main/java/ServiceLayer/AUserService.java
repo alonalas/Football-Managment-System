@@ -1,6 +1,9 @@
 package ServiceLayer;
 
+import LogicLayer.League;
 import LogicLayer.Page;
+import LogicLayer.Season;
+import LogicLayer.User;
 
 import javax.jws.soap.SOAPBinding;
 import java.io.IOException;

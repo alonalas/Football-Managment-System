@@ -1,7 +1,6 @@
 package DataLayer;
 import LogicLayer.*;
 
-import java.util.Date;
 import java.util.List;
 
 public interface IDataManager {

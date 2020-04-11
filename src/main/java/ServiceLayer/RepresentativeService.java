@@ -1,15 +1,15 @@
 package ServiceLayer;
 
-import LogicLayer.League;
-import LogicLayer.Referee;
-import LogicLayer.Season;
-import LogicLayer.User;
+import LogicLayer.*;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 public class RepresentativeService extends AUserService {
+
+    public RepresentativeService(Controller control) {
+        super(control);
+    }
 
     /**
      * id: RepresentativeService@1
@@ -46,7 +46,7 @@ public class RepresentativeService extends AUserService {
      * @param league to link the season to League
      * @throws IOException if season already exists
      */
-    public void addSeason(Date start , Date end ,League league ) throws IOException{
+    public void addSeason(Date start , Date end , League league ) throws IOException{
         Season.addSeason(start , end ,league);
     }
 
