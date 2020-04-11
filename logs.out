@@ -37,4 +37,15 @@
 2020-04-08 10:56:24 INFO  - Ended: testPasswordLength
 2020-04-08 10:56:24 INFO  - Run: testPasswordContent
 2020-04-08 10:56:24 INFO  - Ended: testPasswordContent
-2020-04-08 10:56:24 INFO  - All Tests Completed
+2020-04-08 10:56:24 INFO  - All Tests Completed2020-04-11 16:28:42 INFO  - Start Testing: AdministratorTests
+2020-04-11 16:28:42 INFO  - Run: testPasswordLength
+2020-04-11 16:28:42 INFO  - Ended: testPasswordLength
+2020-04-11 16:28:42 INFO  - Run: testPasswordContent
+2020-04-11 16:28:42 INFO  - Ended: testPasswordContent
+2020-04-11 16:28:42 INFO  - All Tests Completed
+2020-04-11 16:35:11 INFO  - Start Testing: AdministratorTests
+2020-04-11 16:35:11 INFO  - Run: testPasswordLength
+2020-04-11 16:35:11 INFO  - Ended: testPasswordLength
+2020-04-11 16:35:11 INFO  - Run: testPasswordContent
+2020-04-11 16:35:11 INFO  - Ended: testPasswordContent
+2020-04-11 16:35:11 INFO  - All Tests Completed
