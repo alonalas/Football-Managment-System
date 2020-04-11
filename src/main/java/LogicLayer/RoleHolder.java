@@ -1,9 +1,5 @@
 package LogicLayer;
 
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-
 public abstract class RoleHolder extends Role {
 
     public RoleHolder(User user) {
@@ -14,12 +10,14 @@ public abstract class RoleHolder extends Role {
         super();
     }
 
-    public String showRoleDetails() {
-        String details = "";
-        Field[] declaredFields = getClass().getDeclaredFields();
-        for (Field f : declaredFields) {
-            details = details + f.getName() + " : " + f.toString() + "\n";
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof RoleHolder) {
+            RoleHolder roleHolder = (RoleHolder)obj;
+            if ( this.getUser().equals(roleHolder.getUser())) {
+                return true;
+            }
         }
-        return details;
+        return false;
     }
 }

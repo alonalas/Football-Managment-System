@@ -2,7 +2,10 @@ import DataLayer.dataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
 import ServiceLayer.OwnerService;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import java.io.IOException;
 
 
@@ -16,9 +19,11 @@ public class OwnerTests{
     Owner own = new Owner(ownerUser,"ssss",dataManager);
     Page p = new Page();
     Manager m = new Manager();
-    Team team = new Team("Blumfield", "Hapoel",p, m);
+    Team team = new Team("Blumfield", "Hapoel",p);
+    RoleHolder roleHolder = new Player(u1,"GoalKeeper",team,"yotam",null,p);
 
     /**
+     * the 4 following tests are UC 6.1.1
      * the 4 following tests assumes owner's account is connected allready
      * the 4 following tests assumes the following process in the presentation layer:
      *
@@ -29,6 +34,7 @@ public class OwnerTests{
      * -insert new coach
      * -insert new stadium
      * after choosing the desiered option, each of the 4 following tests corresponds to the selected option from above
+     *
      *
      *
      */
@@ -48,7 +54,7 @@ public class OwnerTests{
         Manager m1 = new Manager(); // when button "Manager" is chosen
 
         try {
-            os.validateNewAssetType(own,teamName, email,userName);
+            os.validateExistingAssetType(own,teamName, email,userName);
             controller.displayForm(m1);
             os.insertNewManager(own,teamName, "Yossi", userName,email);
         }
@@ -73,7 +79,7 @@ public class OwnerTests{
         Coach c = new Coach(); // when button "Manager" is chosen
 
         try {
-            os.validateNewAssetType(own,teamName, email,userName);
+            os.validateExistingAssetType(own,teamName, email,userName);
             controller.displayForm(c);
             os.insertNewCoach(own,teamName,"Dani","university of life","fitting rooms", userName,email);
         }
@@ -97,7 +103,7 @@ public class OwnerTests{
         Player p = new Player(); // when button "Manager" is chosen
 
         try {
-            os.validateNewAssetType(own,teamName, email,userName);
+            os.validateExistingAssetType(own,teamName, email,userName);
             controller.displayForm(p);
             os.insertNewPlayer(own,teamName,"David","GoalKeeper",1,2,1995,userName,email);
         }
@@ -115,11 +121,11 @@ public class OwnerTests{
         ownerUser.setRole(own);
         own.addTeam(team);
 
-        String stadium = "Stadium"; // when button "Manager" is chosen
+        String stadium = "Sami offer"; // when button "Manager" is chosen
         String teamName = "Hapoel";
 
         try {
-            os.validateNewAssetType(own,teamName,"X","X");
+            os.validateExistingAssetType(own,teamName,"X","X");
             controller.displayForm(null);
             os.insertNewStadium(own,teamName,stadium);
         }
@@ -127,6 +133,54 @@ public class OwnerTests{
             System.out.println(e.getMessage());
         }
     }
+
+    @Test
+    /**
+     * tests asset deletion
+     * asset is one of the following options: Player/Coach/Manager
+     * assumes that the user have chosen the button "RoleHolder-> chosen role from abocve)
+     * you need to change the creation of the RoleHolder datatype to which you want to check according to the chosen data type
+     * from above
+     */
+    public void testOwnerDeleteAsset() {
+
+        testOwnerAddPlayer(); // player Exists in the system
+        RoleHolder toDelete = new Player(u1,"GoalKeeper",team,"David",null,p);
+
+        String userName = "alonalas";
+        String email = "a@b@c";
+        String teamName = "Hapoel";
+
+        try {
+            os.validateExistingAssetType(own,teamName,email,userName);
+            os.deleteAsset(own,teamName,userName,email,toDelete);
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    @Test
+    /**
+     * test stadium deletion
+     * assumes that the user have chosen the button "stadium"
+     */
+    public void testDeleteStadium() {
+
+        String teamName = "Hapoel";
+        String stadium = "Blumfield";
+
+        try {
+            os.validateExistingAssetType(own,teamName,"X","X");
+            os.deleteStadium(own,teamName,stadium);
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
 
 
 

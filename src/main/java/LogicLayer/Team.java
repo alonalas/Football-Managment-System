@@ -11,24 +11,26 @@ public class Team {
     private String stadium;
     private Page page;
     private List<Player> playerList;
-    private Manager manager;
+    private List<Manager> managerList;
     private List<Owner> ownerList;
     private List<Game> away;
     private List<Game> home;
     private League league;
     private List<Coach> coachList;
-    //private IController system;
+    private List<RoleHolder> roleHolders;
 
-    public Team(String stadium, String name, Page page, Manager manager) {
+    public Team(String stadium, String name, Page page) {
         this.name = name;
         this.stadium = stadium;
         this.page = page;
-        this.manager = manager;
+        managerList = new LinkedList<>();
         playerList = new LinkedList<>();
         ownerList = new LinkedList<>();
         away = new LinkedList<>();
         home = new LinkedList<>();
         coachList = new LinkedList<>();
+        roleHolders = new LinkedList<>();
+
     }
 
     public String getName() {
@@ -67,13 +69,36 @@ public class Team {
         this.playerList = playerList;
     }
 
-    public Manager getManager() {
-        return manager;
+    public Manager getManager(Manager manager) {
+        for (Manager manager1 : managerList) {
+            if (manager1.equals(manager))
+                return manager1;
+        }
+        return null;
+    }
+
+    public List<Manager> getManagerList() {
+        return managerList;
     }
 
     public void setManager(Manager manager) {
-        this.manager = manager;
+        if (!managerList.contains(manager))
+            managerList.add(manager);
     }
+
+
+    /*
+    public RoleHolder getRoleHolder(Owner owner, Team team, String userName,String email) {
+        User user = owner.getUser();
+        if (this.ownerList.contains(owner)) {
+            for (RoleHolder roleHolder : this.roleHolders) {
+                if (roleHolder.equals(user))
+                    return roleHolder;
+            }
+        }
+        return null;
+    }
+    */
 
     public List<Owner> getOwnerList() {
         return ownerList;

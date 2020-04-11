@@ -1,6 +1,8 @@
 package LogicLayer;
 
 import DataLayer.dataManager;
+
+import java.io.IOException;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,13 +28,15 @@ public class Owner extends RoleHolder {
      * @param userName
      * @param email
      */
-    public void nominateManager(Team team, String managerName, String userName ,String email) {
-        User user = getAssetUser(userName,email);
+    public void nominateManager(Team team, String managerName, String userName, String email) {
+
+        User user = this.getAssetUser(userName,email);
         Manager manager = new Manager(user,managerName,team);
         assignPremissions(manager, true);
         team.setManager(manager);
         manager.setTeam(team);
         user.setRole(manager);
+        //team.roleHolders.add(manager);
     }
 
     /**
@@ -47,12 +51,38 @@ public class Owner extends RoleHolder {
      */
     public void insertNewCoach(Team team, String name, String qualification, String job, String userName,
                                String email) {
-        User user = getAssetUser(userName,email);
+        User user = this.getAssetUser(userName,email);
         Page page = new Page();
         Coach coach = new Coach(user,name,qualification,job,page,team);
         coach.setTeam(team);
         team.setCoach(coach);
         user.setRole(coach);
+        //team.roleHolders.add(coach);
+    }
+
+    /**
+     * creates a new instance of player with the following parameters
+     * and connecting it to the requested team
+     * @param team
+     * @param name
+     * @param position
+     * @param day
+     * @param month
+     * @param year
+     * @param userName
+     * @param email
+     */
+    public void insertNewPlayer(Team team, String name, String position, int day ,
+                                int month, int year , String userName,String email) {
+        User user = this.getAssetUser(userName,email);
+        Date date = new Date(day,month,year); // check why it's not working
+        Page page = new Page();
+        Player player = new Player(user,position,team,name,date,page);
+        team.addPlayer(player);
+        player.setTeam(team);
+        team.addPlayer(player);
+        user.setRole(player);
+        //team.roleHolders.add(player);
     }
 
     //TODO
@@ -77,27 +107,72 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * creates a new instance of player with the following parameters
-     * and connecting it to the requested team
-     * @param team
-     * @param name
-     * @param position
-     * @param day
-     * @param month
-     * @param year
+     * deletes the player that owns the given user
+     * @param teamName
      * @param userName
      * @param email
      */
-    public void insertNewPlayer(Team team, String name, String position, int day ,
-                                 int month, int year ,String userName,String email) {
-        Date date = new Date(day,month,year); // check why it's not working
+    public void deletePlayer(String teamName,String userName,String email) {
         User user = getAssetUser(userName,email);
-        Page page = new Page();
-        Player player = new Player(user,position,team,name,date,page);
-        team.addPlayer(player);
-        player.setTeam(team);
-        team.addPlayer(player);
-        user.setRole(player);
+        Team team = getTeam(teamName);
+        for ( Role role : user.getRoles() ) {
+            if (role instanceof Player) {
+                Player player = (Player)role;
+                team.getPlayerList().remove(player);
+                deleteRole(user,player);
+            }
+        }
+    }
+
+    /**
+     * delete coach only if there is at least one coach in the coachList
+     * @param teamName
+     * @param userName
+     * @param email
+     */
+    public void deleteCoach(String teamName,String userName,String email) throws IOException {
+
+        Team team = getTeam(teamName);
+        if ( team.getCoachList().size() < 2 )
+            throw new IOException("Cannot remove the last coach of the team");
+        else {
+            User user = getAssetUser(userName,email);
+            for (Role role : user.getRoles()) {
+                if (role instanceof Coach) {
+                    Coach coach = (Coach) role;
+
+                    team.getCoachList().remove(coach);
+                    deleteRole(user, coach);
+                }
+            }
+        }
+    }
+
+    public void deleteManager(String teamName,String userName,String email) throws IOException {
+
+        Team team = getTeam(teamName);
+        if (team.getManagerList().size() < 2 ) {
+            throw new IOException("Cannot remove the last manager of the team");
+        }
+        else {
+            User user = getAssetUser(userName,email);
+            for ( Role role : user.getRoles() ) {
+                if (role instanceof Manager) {
+                    Manager manager = (Manager)role;
+                    team.getManagerList().remove(manager);
+                    deleteRole(user,manager);
+                }
+            }
+        }
+
+    }
+
+    private void deleteRole(User user, RoleHolder roleHolder) {
+        for ( Role role : user.getRoles()) {
+            if (role.equals(roleHolder))
+                user.getRoles().remove(role);
+        }
+
     }
 
     /**
@@ -117,11 +192,28 @@ public class Owner extends RoleHolder {
      * retrieves the user list from the dataManager and returns the requiered user
      * @return user list
      */
-    public User getAssetUser(String userName, String userEmail) {
+    private User getAssetUser(String userName, String userEmail) {
         User user = DM.getUser(userName,userEmail);
         if (user != null)
             return user;
         return null;
+    }
+
+    public boolean findUser(String userName, String email) {
+        if (this.getAssetUser(userName,email) != null)
+            return true;
+        return false;
+    }
+
+    /**
+     * deletes the stadium of the chosen team, replace its value with "NO_STADIUM"
+     * @param teamName
+     * @param stadium
+     */
+    public void deleteStadium(String teamName, String stadium) {
+        Team team = getTeam(teamName);
+        if (team.getStadium().toLowerCase().equals(stadium.toLowerCase()))
+            team.setStadium("NO_STADIUMֹ");
     }
 
     /**
@@ -150,4 +242,7 @@ public class Owner extends RoleHolder {
     }
 
 
+
+
 }
+

@@ -13,20 +13,22 @@ public class OwnerService extends AUserService{
     /**
      * validates that the team is exist and connected to the owner
      * validates that the email and userName are attached to an existing account
+     * @return User if exists
      * @param owner
      * @param teamName
      * @param email
      * @param userName
      * @throws IOException
      */
-    public void validateNewAssetType(Owner owner, String teamName,
-                                     String email, String userName) throws IOException {
+    public void validateExistingAssetType(Owner owner, String teamName,
+                                          String email, String userName) throws IOException {
         Team team = owner.getTeam(teamName);
         if (team == null)
             throw new IOException("The chosen team does not exist, please choose a valid team");
+
         if (!(email.equals("X") && userName.equals("X"))) { // not a stadium
-            User user = owner.getAssetUser(userName, email);
-            if (user == null)
+            boolean exists = owner.findUser(userName, email);
+            if (!exists)
                 throw new IOException("The chosen user does not exist, please insert valid inputs");
         }
     }
@@ -67,7 +69,7 @@ public class OwnerService extends AUserService{
      * @throws IOException
      */
     public void insertNewPlayer(Owner owner, String teamName, String name, String position, int day ,
-                                int month, int year ,String userName, String email) throws IOException {
+                                int month, int year , String userName, String email) throws IOException {
         validateBirthDate(day,month,year);
         owner.insertNewPlayer(owner.getTeam(teamName),name,position,day,month,year,userName,email);
 
@@ -108,6 +110,37 @@ public class OwnerService extends AUserService{
             throw new IOException("Day is illegal, please insert valid day between 1 and 31");
         }
 
+    }
+
+
+    /**
+     * deletes the requested asset (Player/Coach/Manager) from the owne'r team
+     * @param own
+     * @param teamName
+     * @param userName
+     * @param email
+     * @param toDelete
+     */
+    public void deleteAsset(Owner own, String teamName, String userName, String email, RoleHolder toDelete)
+            throws IOException {
+        switch (toDelete.getClass().getSimpleName().toLowerCase()) {
+            case "player":
+                own.deletePlayer(teamName,userName,email);
+            case "manager":
+                own.deleteManager(teamName,userName,email);
+            case "coach":
+                own.deleteCoach(teamName,userName,email);
+        }
+    }
+
+    /**
+     * deletes the requested stadium from the owner's team
+     * @param owner
+     * @param teamName
+     * @param stadium
+     */
+    public void deleteStadium(Owner owner, String teamName, String stadium) {
+        owner.deleteStadium(teamName,stadium);
     }
 }
 

@@ -2,6 +2,8 @@ package LogicLayer;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
+
 import ServiceLayer.*;
 
 public class User {
@@ -17,6 +19,22 @@ public class User {
         this.password = password;
         this.userName = userName;
         this.roles = new LinkedList<>();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(userName, user.userName) &&
+                Objects.equals(roles, user.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, password, userName, roles);
     }
 
     public String getEmail() {
