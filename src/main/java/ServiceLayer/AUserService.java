@@ -1,15 +1,20 @@
 package ServiceLayer;
 
-import LogicLayer.League;
 import LogicLayer.Page;
-import LogicLayer.Season;
-import LogicLayer.User;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 public abstract class AUserService implements IUserService{
+
+    Controller control;
+
+    public AUserService(Controller control) {
+        this.control = control;
+    }
+
 
 
     public void addPage(Page newPage) throws IOException {
@@ -34,4 +39,3 @@ public abstract class AUserService implements IUserService{
         throw new IOException("Unsupported method");
     }
 }
-

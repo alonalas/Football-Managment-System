@@ -1,5 +1,6 @@
 package LogicLayer;
 
+import java.lang.reflect.Field;
 import java.util.Date;
 
 public class Player extends RoleHolder{
@@ -18,6 +19,8 @@ public class Player extends RoleHolder{
         this.birthDate = birthDate;
         this.page = page;
     }
+
+    public Player() {}
 
     public String getPosition() {
         return position;

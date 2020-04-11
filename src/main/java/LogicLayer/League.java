@@ -22,20 +22,19 @@ public class League {
         MAJOR_LEAGUE, SECOND_LEAGUE, LEAGUE_A,LEAGUE_B, LEAGUE_C
     }
 
-  //  private IController system;
+    private IController system;
     private LeagueType type;
     private List<Referee> refereeList;
     private List<Season> seasonList;
- //   private Map<Season,Policy> policyList;
+    private Map<Season,Policy> policyList;
     private static IDataManager data = new dataManager();
 
-//    public League(IController system, LeagueType type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
-//        this.system = system;
-//        this.type = type;
-//        this.refereeList = refereeList;
-//        this.seasonList = seasonList;
-//        this.policyList = policyList;
-//    }
+    public League( LeagueType type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
+        this.type = type;
+        this.refereeList = refereeList;
+        this.seasonList = seasonList;
+        this.policyList = policyList;
+    }
 
     public League(LeagueType leagueType){
         this.type = leagueType;
@@ -71,9 +70,9 @@ public class League {
         return type;
     }
 
-//    public void setType(LeagueType type) {
-//        this.type = type;
-//    }
+    public void setType(LeagueType type) {
+        this.type = type;
+    }
 
     public List<Referee> getRefereeList() {
         return refereeList;
@@ -91,11 +90,11 @@ public class League {
         this.seasonList = seasonList;
     }
 
-//    public Map<Season, Policy> getPolicyList() {
-//        return policyList;
-//    }
-//
-//    public void setPolicyList(Map<Season, Policy> policyList) {
-//        this.policyList = policyList;
-//    }
+    public Map<Season, Policy> getPolicyList() {
+        return policyList;
+    }
+
+    public void setPolicyList(Map<Season, Policy> policyList) {
+        this.policyList = policyList;
+    }
 }
