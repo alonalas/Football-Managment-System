@@ -11,26 +11,16 @@ public class League {
         MAJOR_LEAGUE, SECOND_LEAGUE, LEAGUE_A,LEAGUE_B, LEAGUE_C
     }
 
-    private IController system;
     private LeagueType type;
     private List<Referee> refereeList;
     private List<Season> seasonList;
     private Map<Season,Policy> policyList;
 
-    public League(IController system, LeagueType type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
-        this.system = system;
+    public League( LeagueType type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
         this.type = type;
         this.refereeList = refereeList;
         this.seasonList = seasonList;
         this.policyList = policyList;
-    }
-
-    public IController getSystem() {
-        return system;
-    }
-
-    public void setSystem(IController system) {
-        this.system = system;
     }
 
     public LeagueType getType() {

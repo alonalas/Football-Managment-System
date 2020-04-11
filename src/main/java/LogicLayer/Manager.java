@@ -11,6 +11,8 @@ public class Manager extends RoleHolder{
         this.team = team;
     }
 
+    public Manager() { }
+
     public String getName() {
         return name;
     }
