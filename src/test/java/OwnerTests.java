@@ -136,6 +136,7 @@ public class OwnerTests{
 
     @Test
     /**
+     * The following 2 test are U.C 6.1.2
      * tests asset deletion
      * asset is one of the following options: Player/Coach/Manager
      * assumes that the user have chosen the button "RoleHolder-> chosen role from abocve)
