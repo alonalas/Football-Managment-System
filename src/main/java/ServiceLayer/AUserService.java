@@ -15,6 +15,7 @@ public abstract class AUserService implements IUserService{
 
     Controller control;
 
+    public AUserService(){}
     public AUserService(Controller control) {
         this.control = control;
     }

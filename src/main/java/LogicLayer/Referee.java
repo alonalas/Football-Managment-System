@@ -12,8 +12,6 @@ public class Referee extends Role{
     private String qualification;
     private String name;
     private League league;
-    List<Game> main;
-    List<Game> line;
     private static IDataManager data = DataComp.getInstance();
     private List<Game> main;
     private  List<Game> line;
