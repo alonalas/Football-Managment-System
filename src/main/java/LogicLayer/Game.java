@@ -3,6 +3,7 @@ package LogicLayer;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Game {
@@ -16,6 +17,7 @@ public class Game {
     private String date; // format "2019-04-09"
     private String startTime; // format (13:50)
     private String endTime;
+    private GameReport gameReport;
 
 
     public Game(Season season, Team home, Team away, Referee line, Referee main, List<GameEventCalender> gameEventCalender,String date, String start, String end) {
@@ -28,6 +30,19 @@ public class Game {
         this.date=date;
         this.startTime=start;
         this.endTime=end;
+        this.gameReport=new GameReport(this);
+    }
+    public Game(Season season, Team home, Team away, Referee line, Referee main,String date, String start, String end) {
+        this.season = season;
+        this.home = home;
+        this.away = away;
+        this.line = line;
+        this.main = main;
+        this.gameEventCalender = new LinkedList<>();
+        this.date=date;
+        this.startTime=start;
+        this.endTime=end;
+        this.gameReport=new GameReport(this);
     }
 
     public Season getSeason() {
@@ -104,5 +119,20 @@ public class Game {
 
     public void addEventGame(GameEventCalender event){
         gameEventCalender.add(event);
+    }
+
+
+    public void displayDetails(){
+        System.out.println("Date: " + getDate());
+        System.out.println("Start Time: " + getStartTime());
+        System.out.println("End Time: " + getEndTime());
+    }
+
+    public GameReport getGameReport() {
+        return gameReport;
+    }
+
+    public void setGameReport(GameReport gameReport) {
+        this.gameReport = gameReport;
     }
 }

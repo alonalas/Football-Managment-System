@@ -1,5 +1,6 @@
 package LogicLayer;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,13 +12,13 @@ public class Referee extends Role{
     private List<Game> main;
     private  List<Game> line;
 
-    public Referee(User user, String qualification, String name, League league, List<Game> main, List<Game> line) {
+    public Referee(User user, String qualification, String name, League league) {
         super(user);
         this.qualification = qualification;
         this.name = name;
         this.league = league;
-        this.main = main;
-        this.line = line;
+        this.main = new LinkedList<>();
+        this.line = new LinkedList<>();
     }
 
 
@@ -69,40 +70,11 @@ public class Referee extends Role{
     }
 
 
-//    public void showDetails(){
-//        System.out.println("Name of referee: " + getName());
-//        System.out.println("Qualification: " + getQualification());
-//    }
+    public void addAGameMain(Game game){
+        getMain().add(game);
+    }
 
-//    public void changeDetails(String newName, String newCualif){
-//        setName(newName);
-//        setQualification(newCualif);
-//    }
-
-//    public void displayGames(){
-//        System.out.println("main games:");
-//        for(Game game : main){
-//            System.out.println(game.toString());
-//        }
-//        System.out.println("line games: ");
-//        for(Game game : line){
-//            System.out.println(game.toString());
-//        }
-//
-//    }
-
-//    public boolean getPremission() {
-//        System.out.println("Are you sure?");
-//        System.out.println("Please enter 'yes' or 'no'");
-//        Scanner sc = new Scanner(System.in);
-//        String ans = null;
-//        ans = sc.next();
-//
-//        if (ans.equals("yes"))
-//            return true;
-//        else {
-//            return false;
-//        }
-//
-//    }
+    public void addAGameLine(Game game){
+        getLine().add(game);
+    }
 }

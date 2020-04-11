@@ -2,6 +2,7 @@ package ServiceLayer;
 
 import LogicLayer.Game;
 import LogicLayer.GameEventCalender;
+import LogicLayer.GameReport;
 import LogicLayer.Referee;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -20,31 +21,60 @@ public class RefereeService extends AUserService {
         this.referee = referee;
     }
 
+    /**
+     * display the Referee's details
+     */
     @Override
     public void showDetails(){
         System.out.println("Name of referee: " + referee.getName());
         System.out.println("Qualification: " + referee.getQualification());
     }
 
+    public Referee getReferee() {
+        return referee;
+    }
 
+    /**
+     * change the details of the referee
+     * @param newName
+     * @param newCualif
+     * @throws IOException
+     */
     @Override
     public void changeDetails(String newName, String newCualif) throws IOException {
         referee.setName(newName);
         referee.setQualification(newCualif);
     }
 
+
+    /**
+     * displays the referee's games
+     * @throws IOException
+     */
     @Override
     public void displayGames() throws IOException {
         System.out.println("main games:");
+        int i=1;
         for(Game game : referee.getMain()){
+            System.out.println("Game number " + i);
             System.out.println(game.toString());
         }
+        i=1;
         System.out.println("line games: ");
         for(Game game : referee.getLine()){
-            System.out.println(game.toString());
+            System.out.println("Game number " + i);
+            game.displayDetails();
         }
     }
 
+
+    /**
+     * adds a new gameEvnet to the system while the game is active
+     * @param game
+     * @param description 
+     * @param eventType
+     * @throws IOException
+     */
     @Override
     public void addGameEvent(Game game,String description, String eventType) throws IOException {
         LocalDate date=LocalDate.now();
@@ -62,6 +92,14 @@ public class RefereeService extends AUserService {
         }
     }
 
+
+    /**
+     * adds a new game event to the system after the game ended
+     * @param game
+     * @param description
+     * @param eventType
+     * @throws IOException
+     */
     @Override
     public void addGameEventAfterGame(Game game,String description, String eventType) throws IOException {
         LocalDate date=LocalDate.now();
@@ -75,7 +113,23 @@ public class RefereeService extends AUserService {
                     PropertyConfigurator.configure(propertiesPath);
                     testLogger.info("Added new game event");
                 }
+                else{
+                    System.out.println("Its been more then 5 hours, tou cen't edit the gameEvent");
+                }
             }
+        }
+    }
+
+
+
+    @Override
+    public void createGameReport(Game game, String description)throws IOException {
+        if(referee.getMain().contains(game)){
+            GameReport gameReport= new GameReport(game,description);
+            game.setGameReport(gameReport);
+            String propertiesPath = "log4j.properties";
+            PropertyConfigurator.configure(propertiesPath);
+            testLogger.info("Added new game report");
         }
     }
 }

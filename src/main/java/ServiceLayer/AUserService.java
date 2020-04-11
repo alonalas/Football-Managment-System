@@ -30,4 +30,8 @@ public abstract class AUserService implements IUserService{
     public void addGameEventAfterGame(Game game,String description, String eventType) throws IOException {
         throw new IOException("no games");
     }
+
+    public void createGameReport(Game game, String description)throws IOException {
+        throw new IOException("no games");
+    }
 }
