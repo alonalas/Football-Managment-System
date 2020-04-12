@@ -43,4 +43,14 @@ public interface IDataManager {
     List<Page> getPageList();
 
     List<Game> getGameList();
+
+    List<Coach> getCoaches();
+
+    List<Owner> getOwners();
+
+    List<Manager> getManagers();
+
+    List<Player> getPlayers();
+
+    User searchUserByName(String name);
 }

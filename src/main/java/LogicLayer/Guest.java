@@ -41,7 +41,7 @@ public class Guest {
     }
 
     public List<Player> retrievePlayers() {
-        return null;
+        return data.getPlayers();
     }
 
     public List<League> retrieveLeagues() {
@@ -51,4 +51,24 @@ public class Guest {
     public List<Team> retrieveTeams() {
         return data.getTeamList();
     }
+
+    public List<Season> retrieveSeasons(){ return data.getSeasonList();}
+
+    public List<Coach> retrieveCoaches() {
+        return data.getCoaches();
+    }
+
+    public List<Owner> retrieveOwners() {
+        return data.getOwners();
+    }
+
+    public List<Manager> retrieveManagers() {
+        return data.getManagers();
+    }
+
+    public User SearchUserByName(String name) {
+        return data.searchUserByName(name);
+    }
+
+
 }

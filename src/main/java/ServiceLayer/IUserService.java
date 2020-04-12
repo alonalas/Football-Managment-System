@@ -6,4 +6,7 @@ import java.io.IOException;
 public interface IUserService {
 
     void addPage(Page newPage) throws IOException;
+
+    void logOut() throws IOException;
+
 }

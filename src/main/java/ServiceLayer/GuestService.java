@@ -11,8 +11,7 @@ public class GuestService implements IGuestService{
         this.guest = guest;
     }
 
-    /**
-     * Use Case - 2.1
+    /**Use Case - 2.1
      * Register to the System
      * @param firstName
      * @param lastName
@@ -75,29 +74,87 @@ public class GuestService implements IGuestService{
      * Show public information
      * @param interestIn
      */
-    public void showInformation(Interest interestIn){
+    //Need to implement tostrings!
+
+    public void showInformationByCategory(Interest interestIn){
         switch (interestIn) {
             case Games:
                 List<Game> gamesInfo = guest.retrieveGames();
+                for (Game game: gamesInfo){
+                    System.out.println(game.toString());
+                }
                 break;
             case Players:
                 List<Player> playersInfo = guest.retrievePlayers();
+                for (Player player: playersInfo){
+                    System.out.println(player.toString());
+                }
                 break;
             case Leagues:
                 List<League> leaguesInfo = guest.retrieveLeagues();
+                for (League league: leaguesInfo){
+                    System.out.println(league.toString());
+                }
                 break;
             case Teams:
                 List<Team> teamsInfo = guest.retrieveTeams();
+                for (Team team: teamsInfo){
+                    System.out.println(team.toString());
+                }
+                break;
+            case Seasons:
+                List<Season> seasonsInfo = guest.retrieveSeasons();
+                for (Season season: seasonsInfo){
+                    System.out.println(season.toString());
+                }
+                break;
+            case Coaches:
+                List<Coach> coachesInfo = guest.retrieveCoaches();
+                for (Coach coach: coachesInfo){
+                    System.out.println(coach.toString());
+                }
+                break;
+            case Owners:
+                List<Owner> ownersInfo = guest.retrieveOwners();
+                for (Owner owner: ownersInfo){
+                    System.out.println(owner.toString());
+                }
+                break;
+            case Managers:
+                List<Manager> managersInfo = guest.retrieveManagers();
+                for (Manager manager: managersInfo){
+                    System.out.println(manager.toString());
+                }
                 break;
         }
     }
 
-    enum Interest {
-        Players,
-        Teams,
-        Leagues,
-        Games
+    /**
+     * USE CASE - 2.4
+     * Search Information
+     * @param name
+     */
+    public void searchInformation(String name){
+        User retrievedUser =  guest.SearchUserByName(name);
+        if(retrievedUser == null){
+            System.out.println("## There is no person with this name ##");
+            return;
+        }
+        System.out.println(retrievedUser.toString());
     }
+
+    /**
+     * USE CASE - 2.4
+     * Search Information
+     * @param interested
+     */
+    public void searchInformation(Interest interested){
+        showInformationByCategory(interested);
+    }
+
+
+
+
 
 
 }

@@ -1,5 +1,7 @@
 package DataLayer;
 import LogicLayer.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -100,6 +102,68 @@ public class dataManager implements IDataManager {
 
     public List<Game> getGameList() {
         return gameList;
+    }
+
+    public List<Coach> getCoaches() {
+        List<Coach>coaches = new ArrayList<Coach>();
+        for (User user: userList){
+            List<Role>userRoles = user.getRoles();
+            for (Role role: userRoles){
+                if (role instanceof Coach){
+                    coaches.add((Coach)role);
+                }
+            }
+        }
+        return coaches;
+    }
+
+    public List<Owner> getOwners() {
+        List<Owner>owners = new ArrayList<Owner>();
+        for (User user: userList){
+            List<Role>userRoles = user.getRoles();
+            for (Role role: userRoles){
+                if (role instanceof Coach){
+                    owners.add((Owner) role);
+                }
+            }
+        }
+        return owners;
+    }
+
+    public List<Manager> getManagers() {
+        List<Manager>managers = new ArrayList<Manager>();
+        for (User user: userList){
+            List<Role>userRoles = user.getRoles();
+            for (Role role: userRoles){
+                if (role instanceof Coach){
+                    managers.add((Manager) role);
+                }
+            }
+        }
+        return managers;
+    }
+
+    public List<Player> getPlayers() {
+        List<Player>players = new ArrayList<Player>();
+        for (User user: userList){
+            List<Role>userRoles = user.getRoles();
+            for (Role role: userRoles){
+                if (role instanceof Coach){
+                    players.add((Player) role);
+                }
+            }
+        }
+        return players;
+    }
+
+    public User searchUserByName(String name) {
+        String[]splitted = name.split(" ");
+        for (User user: userList){
+            if (user.getFirstName().equals(splitted[0]) && user.getLastName().equals(splitted[1])){
+                return user;
+            }
+        }
+        return null;
     }
 }
 

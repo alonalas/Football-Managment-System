@@ -16,4 +16,7 @@ public class Fan extends Role{
     public void setName(String name) {
         this.name = name;
     }
+
+
+
 }
