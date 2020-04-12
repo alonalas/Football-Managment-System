@@ -34,8 +34,8 @@ public class SeasonTest  {
     @Test
     public void addSeason() {
 
-        Date start = new Date(2000, 2 , 24) ;
-        Date end = new Date(2000, 2 , 25) ;
+        String start = "2020-02-01" ;
+        String end = "2020-02-03" ;
         boolean success = false ;
 
         try {
