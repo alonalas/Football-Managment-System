@@ -53,4 +53,8 @@ public interface IDataManager {
     List<Player> getPlayers();
 
     User searchUserByName(String name);
+
+    League searchLeagueByName(String league);
+
+    Team searchTeamByName(String team);
 }

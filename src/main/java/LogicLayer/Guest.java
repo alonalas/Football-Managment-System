@@ -72,5 +72,11 @@ public class Guest {
         return data.searchUserByName(name);
     }
 
+    public League SearchLeagueByName(String league) {
+        return data.searchLeagueByName(league);
+    }
 
+    public Team SearchTeamByName(String team) {
+        return  data.searchTeamByName(team);
+    }
 }
