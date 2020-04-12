@@ -27,20 +27,20 @@ public class LeagueTest  {
         dm =  new dataManager();
 
     }
-    @Test
-    public void checkIfLeagueExist() {
-        assertNull( League.checkIfLeagueExist(League.LeagueType.LEAGUE_B)  );
-        league = new League(League.LeagueType.LEAGUE_B);
-        assertTrue( league.equals(League.checkIfLeagueExist(League.LeagueType.LEAGUE_B) ) );
-        assertTrue(null == League.checkIfLeagueExist(League.LeagueType.LEAGUE_A) );
-        showAllLeagues();
-    }
-
-  //  @Test
-    public void showAllLeagues() {
-        List<League> leagues = League.ShowAllLeagues();
-        assertEquals(1 , leagues.size());
-        assertEquals(League.LeagueType.LEAGUE_B , leagues.get(0).getType());
-    }
+//    @Test
+//    public void checkIfLeagueExist() {
+//        assertNull( League.checkIfLeagueExist(League.LeagueType.LEAGUE_B)  );
+//        league = new League(League.LeagueType.LEAGUE_B);
+//        assertTrue( league.equals(League.checkIfLeagueExist(League.LeagueType.LEAGUE_B) ) );
+//        assertTrue(null == League.checkIfLeagueExist(League.LeagueType.LEAGUE_A) );
+//        showAllLeagues();
+//    }
+//
+//  //  @Test
+//    public void showAllLeagues() {
+//        List<League> leagues = League.ShowAllLeagues();
+//        assertEquals(1 , leagues.size());
+//        assertEquals(League.LeagueType.LEAGUE_B , leagues.get(0).getType());
+//    }
 
 }
