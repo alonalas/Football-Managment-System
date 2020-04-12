@@ -20,7 +20,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * ID: 1
+     * id: Owner@1
      * creates a new instance of manager without premissions with the following parameters
      * and connecting it to the requested team
      * @param team
@@ -39,7 +39,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * ID: 2
+     * id: Owner@2
      * creates a new instance of coach without with the following parameters
      * and connecting it to the requested team
      * @param team
@@ -61,7 +61,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * ID: 3
+     * id: Owner@3
      * creates a new instance of player with the following parameters
      * and connecting it to the requested team
      * @param team
@@ -87,7 +87,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * ID: 4
+     * id: Owner@4
      * uploads the team's stadium
      * @param team
      * @param stadium
@@ -97,7 +97,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * ID: 5
+     * id: Owner@5
      * deletes the player that owns the given user
      * @param teamName
      * @param userName
@@ -117,7 +117,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * ID: 6
+     * id: Owner@6
      * delete coach only if there is at least one coach in the coachList
      * @param teamName
      * @param userName
@@ -142,7 +142,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * ID: 7
+     * id: 0wner@7
      * Deletes a manager from the team's managerList iff there is more than one manager
      * @param teamName
      * @param userName
@@ -170,7 +170,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * ID: 8
+     * id: Owner@8
      * Deletes a role from the user's roleList
      * @param user
      * @param roleHolder
@@ -183,7 +183,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * ID: 9
+     * id: Owner@9
      * returns the requiered team
      * @String teamName
      * @return Team
@@ -197,7 +197,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * ID: 10
+     * id: Owner@10
      * retrieves the user list from the dataManager and returns the requiered user
      * @return user list
      */
@@ -209,7 +209,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * ID: 11
+     * id: Owner@11
      * Searches a user in the dataManager
      * @param userName
      * @param email
@@ -222,7 +222,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * ID: 12
+     * id: Owner@12
      * deletes the stadium of the chosen team, replace its value with "NO_STADIUM"
      * @param teamName
      * @param stadium
@@ -233,7 +233,7 @@ public class Owner extends RoleHolder {
             team.setStadium("NO_STADIUM");
     }
     /**
-     * ID: 13
+     * id: Owner@13
      * adds a new team to the owne's teamList
      * @param team
      */
@@ -244,7 +244,7 @@ public class Owner extends RoleHolder {
 
     /////////////////////////////////////////////////////////////////////////////////// uc2
     /**
-     * id: 14
+     * id: Owner@14
      * nominates a new owner to the team
      * @param user
      * @param team
@@ -257,7 +257,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * id: 15
+     * id: Owner@15
      * checks whether the new owner has a valid account
      * checks whether the owner owes the chosen team
      * @param user
@@ -282,7 +282,7 @@ public class Owner extends RoleHolder {
     }
 
     /**
-     * id: 16
+     * id: Owner@16
      * add a new owner to the selected team in term he is not an owner allready
      * @param user
      * @param team

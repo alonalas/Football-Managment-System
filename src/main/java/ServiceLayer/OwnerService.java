@@ -11,7 +11,7 @@ public class OwnerService extends AUserService{
     }
 
     /**
-     * ID: 1
+     * id: OwnerService@1
      * validates that the team is exist and connected to the owner
      * validates that the email and userName are attached to an existing account
      * @return User if exists
@@ -35,7 +35,7 @@ public class OwnerService extends AUserService{
     }
 
     /**
-     * ID: 2
+     * id: OwnerService@2
      * owner adds a new manager to a requested team
      * @param owner
      * @param teamName
@@ -48,7 +48,7 @@ public class OwnerService extends AUserService{
     }
 
     /**
-     * ID: 3
+     * id: OwnerService@3
      * owner adds a new coach to the requested team with the following parameters
      * @param owner
      * @param teamName
@@ -64,7 +64,7 @@ public class OwnerService extends AUserService{
     }
 
     /**
-     * ID: 4
+     * id: OwnerService@4
      * owner adds a new player to the selected team with the following parameters
      * @param owner
      * @param teamName
@@ -85,7 +85,7 @@ public class OwnerService extends AUserService{
     }
 
     /**
-     * ID: 5
+     * id: OwnerService@5
      * owner adds a new stadium to a requested team
      * @param owner
      * @param teamName
@@ -96,7 +96,7 @@ public class OwnerService extends AUserService{
     }
 
     /**
-     * ID 6
+     * id: OwnerService@6
      * validates the ranges of a player's birthday
      * @param day
      * @param month
@@ -120,7 +120,7 @@ public class OwnerService extends AUserService{
 
 
     /**
-     * ID: 7
+     * id: OwnerService@7
      * deletes the requested asset (Player/Coach/Manager) from the owne'r team
      * @param own
      * @param teamName
@@ -141,7 +141,7 @@ public class OwnerService extends AUserService{
     }
 
     /**
-     * ID: 8
+     * id: OwnerService@8
      * deletes the requested stadium from the owner's team
      * @param owner
      * @param teamName
@@ -151,6 +151,16 @@ public class OwnerService extends AUserService{
         owner.deleteStadium(teamName,stadium);
     }
 
+    /**
+     * id: OwnerService@9
+     * nominates an existing user to an additional owner of the provided team of the provided owner, iff he does not
+     * owes this team allready
+     * @param owner
+     * @param team
+     * @param user
+     * @param name
+     * @throws IOException
+     */
     public void nominateNewOwner(Owner owner,Team team, User user, String name) throws IOException {
         owner.nominateNewOwner(user,team,name);
     }
