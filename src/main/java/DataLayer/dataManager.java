@@ -2,11 +2,13 @@ package DataLayer;
 import LogicLayer.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class dataManager implements IDataManager {
 
+    private HashMap<Fan,List<String>>fanSearchHistory;
     private List<Guest> guestsList;
     private List<User> userList;
     private Map<User, List<Alert>> Alerts;
@@ -164,6 +166,12 @@ public class dataManager implements IDataManager {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<String> getHistory(Fan fan) {
+        List<String>searchHistory = fanSearchHistory.get(fan);
+        return searchHistory;
     }
 }
 

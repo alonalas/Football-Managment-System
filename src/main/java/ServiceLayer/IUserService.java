@@ -2,11 +2,18 @@ package ServiceLayer;
 import LogicLayer.Page;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface IUserService {
 
-    void addPage(Page newPage) throws IOException;
+    void addPages(List<Page> newPages) throws IOException;
 
     void logOut() throws IOException;
+
+    List<String> showPersonalInformation() throws IOException;
+
+    void editPersonalInformation(String firstName, String lastName, String email) throws IOException;
+
+    List<String> retrieveHistory() throws IOException;
 
 }

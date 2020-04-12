@@ -53,4 +53,6 @@ public interface IDataManager {
     List<Player> getPlayers();
 
     User searchUserByName(String name);
+
+    List<String> getHistory(Fan fan);
 }

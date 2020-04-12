@@ -66,6 +66,25 @@ public class User {
         system.removeUserService( this);
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
+    public void updatePersonalInformation(String firstName, String lastName, String email){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    public List<String> getPersonalDetails() {
+        List<String> personalDetails = new ArrayList<>();
+        personalDetails.add(firstName);
+        personalDetails.add(firstName);
+        personalDetails.add(firstName);
+        return personalDetails;
+    }
 }

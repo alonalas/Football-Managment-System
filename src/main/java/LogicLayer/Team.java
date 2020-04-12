@@ -16,7 +16,7 @@ public class Team {
     private League league;
     private IController system;
 
-    public Team(String stadium, Page page, List<Player> playerList, Manager manager, List<Owner> ownerList, List<Game> away, List<Game> home, League league, IController system) {
+    public Team(String stadium, Page page, List<Player> playerList,Manager manager, List<Owner> ownerList, List<Game> away, List<Game> home, League league, IController system) {
         this.stadium = stadium;
         this.page = page;
         this.playerList = playerList;
