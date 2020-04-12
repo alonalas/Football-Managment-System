@@ -3,6 +3,8 @@ package ServiceLayer;
 import LogicLayer.*;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 public class OwnerService extends AUserService{
 
@@ -156,13 +158,29 @@ public class OwnerService extends AUserService{
      * nominates an existing user to an additional owner of the provided team of the provided owner, iff he does not
      * owes this team allready
      * @param owner
-     * @param team
+     * @param teamName
      * @param user
      * @param name
      * @throws IOException
      */
-    public void nominateNewOwner(Owner owner,Team team, User user, String name) throws IOException {
-        owner.nominateNewOwner(user,team,name);
+    public void nominateNewOwner(Owner owner,String teamName, User user, String name) throws IOException {
+        owner.nominateNewOwner(user,teamName,name);
+    }
+
+    ////////////////////////////////////////////////////// 6.1.3
+
+    /**
+     * id: OwnerService@10
+     * updates a set of attributes that the owner chose for a team member of his
+     * @param owner
+     * @param teamName
+     * @param roleHolder
+     * @param attributes
+     * @throws IOException
+     */
+    public void updateRoleHolder(Owner owner,String teamName, RoleHolder roleHolder,
+                                 Map<String,String> attributes) throws IOException {
+        owner.updateAssetAttributes(teamName,roleHolder,attributes);
     }
 }
 

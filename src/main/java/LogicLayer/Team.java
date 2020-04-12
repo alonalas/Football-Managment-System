@@ -81,6 +81,22 @@ public class Team {
         return null;
     }
 
+    public Player getPlayer(User user) {
+        for (Player player : playerList) {
+            if (player.getUser().equals(user))
+                return player;
+        }
+        return null;
+    }
+
+    public Coach getCoach(User user) {
+        for (Coach coach : coachList) {
+            if (coach.getUser().equals(user))
+                return coach;
+        }
+        return null;
+    }
+
     public Owner getOwner(User user) {
         for (Owner owner : ownerList) {
             if (owner.getUser().equals(user))

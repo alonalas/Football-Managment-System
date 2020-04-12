@@ -2,9 +2,11 @@ package LogicLayer;
 
 import DataLayer.dataManager;
 
+import java.awt.image.VolatileImage;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Owner extends RoleHolder {
 
@@ -76,7 +78,7 @@ public class Owner extends RoleHolder {
     public void insertNewPlayer(Team team, String name, String position, int day ,
                                 int month, int year , String userName,String email) {
         User user = this.getAssetUser(userName,email);
-        String date = day+"-"+month+"-"+year; // check why it's not working
+        String date = day+"-"+month+"-"+year;
         Page page = new Page();
         Player player = new Player(user,position,team,name, date ,page);
         team.setPlayer(player);
@@ -247,13 +249,13 @@ public class Owner extends RoleHolder {
      * id: Owner@14
      * nominates a new owner to the team
      * @param user
-     * @param team
+     * @param teamName
      * @param name
      * @throws IOException
      */
-    public void nominateNewOwner(User user, Team team, String name) throws IOException {
-        if (checkNewOwnerValidity(user,team))
-            assignOwnerPremission(user,team,name);
+    public void nominateNewOwner(User user, String teamName, String name) throws IOException {
+        if (checkNewOwnerValidity(user,teamName))
+            assignOwnerPremission(user,getTeam(teamName),name);
     }
 
     /**
@@ -261,13 +263,14 @@ public class Owner extends RoleHolder {
      * checks whether the new owner has a valid account
      * checks whether the owner owes the chosen team
      * @param user
-     * @param team
+     * @param teamName
      * @return
      * @throws IOException
      */
-    private boolean checkNewOwnerValidity(User user, Team team) throws IOException {
+    private boolean checkNewOwnerValidity(User user, String teamName) throws IOException {
         if (DM.getUserList().contains(user)) {
-            if(teamList.contains(team)) {
+            Team team = getTeam(teamName);
+            if(team != null) {
                 if (team.getOwner(user) != null)
                     throw new IOException("User is allready nominated as owner in this team");
                 else
@@ -311,8 +314,82 @@ public class Owner extends RoleHolder {
         this.teamList = teamList;
     }
 
+    ////////////////////////////////////// 6.1.3 uc
 
+    /**
+     * id: Owner@17
+     * checks whether the new owner has a valid account
+     * checks whether the owner owes the chosen team
+     * @param user
+     * @param teamName
+     * @return
+     * @throws IOException
+     */
+    private boolean checkMembership(User user, String teamName) throws IOException {
+        if (DM.getUserList().contains(user)) {
+            Team team = getTeam(teamName);
+            if( team != null ) {
+                RoleHolder roleHolder = team.getRoleHolder(this,user.getUserName(),user.getEmail());
+                if (roleHolder != null ) {
+                    return true;
+                }
+                else
+                    throw new IOException("Selected user is not a team member in the selected team");
+            }
+            else
+                throw new IOException("Owner doest not owe the selected team");
+        }
+        else {
+            throw new IOException("User does not exist in the data base");
+        }
+    }
 
+    /**
+     * id: Owner@18
+     * update a set of attributes which selected by the owner, in term that the selected team member
+     * is an existing and valid member of the owner's selected team
+     * @param teamName
+     * @param roleHolder
+     * @param attributes
+     * @throws IOException in the cases that were checked in Owner@17
+     */
+    public void updateAssetAttributes(String teamName, RoleHolder roleHolder,
+                                      Map<String, String> attributes) throws IOException {
+
+        if (checkMembership(roleHolder.getUser(),teamName)) {
+            for ( String attribute : attributes.keySet() ) {
+                switch (roleHolder.getClass().getSimpleName().toLowerCase()) {
+                    case "player":
+                        Player player = (Player)roleHolder;
+                        switch (attribute.toLowerCase()) {
+                            case "birthdate":
+                                player.setBirthDate(attributes.get(attribute));
+                                break;
+                            case "position":
+                                player.setPosition(attributes.get(attribute));
+                                break;
+                            default:
+                                throw new IOException("Invalid attribute selected: " + attribute);
+                        }
+                        break;
+                    case "coach":
+                        Coach coach = (Coach)roleHolder;
+                        switch (attribute.toLowerCase()) {
+                            case "qualification":
+                                coach.setQualification(attributes.get(attribute));
+                                break;
+                            case "job":
+                                coach.setJob(attributes.get(attribute));
+                                break;
+                            default: throw new IOException("Invalid attribute selected: " + attribute);
+                        }
+                        break;
+                    case "manager":
+                        throw new IOException("Owner can not update a manager details");
+                }
+            }
+        }
+    }
 
 }
 

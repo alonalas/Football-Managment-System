@@ -12,6 +12,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 
 public class OwnerTest {
@@ -47,12 +51,7 @@ public class OwnerTest {
     @Test
     public void testOwnerAddManager() {
 
-        controller.addUser(ownerUser);
-        dataManager.addUser(ownerUser);
-        dataManager.addUser(u1);
-        ownerUser.setRole(own);
-        own.addTeam(team);
-        team.addOwner(own);
+        initializeSystem();
 
         String userName = "alonalas";
         String email = "a@b@c";
@@ -76,17 +75,13 @@ public class OwnerTest {
     @Test
     public void testOwnerAddCoach() {
 
-        controller.addUser(ownerUser);
-        dataManager.addUser(ownerUser);
-        dataManager.addUser(u1);
-        ownerUser.setRole(own);
-        own.addTeam(team);
-        team.addOwner(own);
+        initializeSystem();
 
-        String userName = "alonalas";
-        String email = "a@b@c";
+        //"amir@post", "234","amirLasry"
+        String userName = "amirLasry";
+        String email = "amir@post";
         String teamName = "Hapoel";
-        Coach c = new Coach(); // when button "Manager" is chosen
+        Coach c = new Coach(); // when button "Coach" is chosen
 
         try {
             os.validateExistingAssetType(own,teamName, email,userName);
@@ -103,17 +98,12 @@ public class OwnerTest {
     @Test
     public void testOwnerAddPlayer() {
 
-        controller.addUser(ownerUser);
-        dataManager.addUser(ownerUser);
-        dataManager.addUser(u1);
-        ownerUser.setRole(own);
-        own.addTeam(team);
-        team.addOwner(own);
+        initializeSystem();
 
         String userName = "alonalas";
         String email = "a@b@c";
         String teamName = "Hapoel";
-        Player p = new Player(); // when button "Manager" is chosen
+        Player p = new Player(); // when button "Player" is chosen
 
         try {
             os.validateExistingAssetType(own,teamName, email,userName);
@@ -132,12 +122,7 @@ public class OwnerTest {
     @Test
     public void testOwnerAddStadium() {
 
-        controller.addUser(ownerUser);
-        dataManager.addUser(ownerUser);
-        dataManager.addUser(u1);
-        ownerUser.setRole(own);
-        own.addTeam(team);
-        team.addOwner(own);
+        initializeSystem();
 
         String stadium = "Sami offer"; // when button "Manager" is chosen
         String teamName = "Hapoel";
@@ -156,12 +141,7 @@ public class OwnerTest {
     @Test
     public void checkExceptionThrown() {
 
-        controller.addUser(ownerUser);
-        dataManager.addUser(ownerUser);
-        dataManager.addUser(u1);
-        ownerUser.setRole(own);
-        own.addTeam(team);
-        team.addOwner(own);
+        initializeSystem();
 
         boolean thrown = false;
         String message="";
@@ -232,12 +212,7 @@ public class OwnerTest {
      */
     public void testOwnerDeleteStadium() {
 
-        controller.addUser(ownerUser);
-        dataManager.addUser(ownerUser);
-        dataManager.addUser(u1);
-        ownerUser.setRole(own);
-        own.addTeam(team);
-        team.addOwner(own);
+        initializeSystem();
 
         String teamName = "Hapoel";
         String stadium = "Blumfield";
@@ -254,30 +229,66 @@ public class OwnerTest {
 
     }
 
-    /*
+
     @Test
+    /**
+     * The following test is for UC 6.1.3
+     * Assumes that the user selected an existing entity to change, selected its attributes to be changed
+     * and inserted an alternative attribute
+     * @throws IOException in the following cases:
+     * -team does not exist in the owner's teamList
+     * -selected user does not exist in the team's roleHolder list
+     * -one of the selected attribute does not exist in the selected entity
+     */
     public void testOwnerUpdateAsset() {
 
         testOwnerAddPlayer(); // player Exists in the system
+        // u1 = ("a@b@c","1234","alonalas");
         RoleHolder toUpdate = team.getRoleHolder(own,u1.getUserName(),u1.getEmail());
 
-        String userName = "alonalas";
-        String email = "a@b@c";
         String teamName = "Hapoel";
 
-        String newUserName = "alonalas";
+        Map<String, String> attributes = new HashMap<>();
+        String newAttributeName = "Ballerina";
+        String attributeName = "position";
+        attributes.put(attributeName,newAttributeName);
+
         try {
-            os.validateExistingAssetType(own,teamName,email,userName);
-            os.updateRoleHolder(toUpdate);
+            os.updateRoleHolder(own,teamName, toUpdate, attributes);
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
-        assertTrue(team.getPlayerList().size() == 0);
-        assertNull(team.getRoleHolder(own,userName,email));
+        assertEquals(team.getPlayer(u1).getPosition(), newAttributeName);
+
+        attributes.clear();
+        attributes.put("harta","barta");
+
+        try {
+            os.updateRoleHolder(own,teamName, toUpdate, attributes);
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+            assertEquals(e.getMessage(),"Invalid attribute selected: harta");
+        }
+
+        testOwnerAddCoach();
+        toUpdate = team.getRoleHolder(own,u2.getUserName(),u2.getEmail());
+        attributes.clear();
+        attributes.put("Qualification","Harry Potter expert");
+
+        try {
+            os.updateRoleHolder(own,teamName, toUpdate, attributes);
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        assertEquals(team.getCoach(u2).getQualification(), "Harry Potter expert");
+
     }
-*/
+
 
     ////////////////////////////////////////////////////////////////uc2
 
@@ -293,10 +304,10 @@ public class OwnerTest {
     public void testOwnerNominateOwner() {
 
         initializeSystem();
-        String name = "newOnwerCher";
+        String name = "newOnwerChen";
 
         try {
-            os.nominateNewOwner(own,team,u2,name);
+            os.nominateNewOwner(own,team.getName(),u2,name);
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
@@ -307,7 +318,7 @@ public class OwnerTest {
         assertTrue(team.getOwnerList().size() == 2);
 
         try {
-            os.nominateNewOwner(own,team,u2,name);
+            os.nominateNewOwner(own,team.getName(),u2,name);
         }
         catch (IOException e) {
             System.out.println(e.getMessage());
