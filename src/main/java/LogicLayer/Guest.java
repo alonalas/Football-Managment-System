@@ -18,7 +18,7 @@ public class Guest {
     }
 
     public User signIn(String userName, String password){
-        User user = data.getUser(userName, password);
+        User user = data.getUserByPassword(userName, password);
         return user;
     }
 

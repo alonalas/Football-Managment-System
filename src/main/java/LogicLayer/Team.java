@@ -109,7 +109,7 @@ public class Team {
      */
     public RoleHolder getRoleHolder(Owner owner, String userName,String email) {
 
-        User user = dataManager.getUser(userName,email);
+        User user = dataManager.getUserByMail(userName,email);
         if (this.ownerList.contains(owner)) {
             for (RoleHolder roleHolder : this.roleHolders) {
                 if (roleHolder.getUser().equals(user))

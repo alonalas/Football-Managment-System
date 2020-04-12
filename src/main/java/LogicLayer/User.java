@@ -26,10 +26,10 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(email, user.email) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(userName, user.userName) &&
-                Objects.equals(roles, user.roles);
+        return email.equals(user.email) &&
+                password.equals(user.password) &&
+                userName.equals(user.userName) ;
+
     }
 
     @Override
@@ -37,6 +37,47 @@ public class User {
         return Objects.hash(email, password, userName, roles);
     }
 
+    /**
+     * id: User@2
+     * add new Role
+     * @param role
+     * @return true if added successfully , else if already exists
+     */
+    public boolean addRole(Role role){
+        if(!roles.contains(role)) {
+            roles.add(role);
+            return true;
+        }
+        return false ;
+    }
+
+    /**
+     * id: User@3
+     * remove Role
+     * @param role
+     * @return Object that been removed , null if object removed before
+     */
+    public Object removeRole(Role role){
+        if(roles.contains(role)) {
+            return roles.remove(role);
+        }
+        return null ;
+    }
+
+
+    /**
+     * id: User@
+     * find RefereeRoleIfExist  , else return null
+     * @return
+     */
+    public Referee ifUserRoleIncludeReferee(){
+        for(Role r : roles){
+            if(r instanceof Referee){
+                return (Referee)r ;
+            }
+        }
+        return null;
+    }
     public String getEmail() {
         return email;
     }
