@@ -7,10 +7,10 @@ public class Player extends RoleHolder{
     private String position;
     private Team team;
     private String name;
-    Date birthDate;
+    String birthDate;
     private Page page;
 
-    public Player(User user, String position, Team team, String name, Date birthDate, Page page) {
+    public Player(User user, String position, Team team, String name, String birthDate, Page page) {
         super(user);
         this.position = position;
         this.team = team;
@@ -45,11 +45,11 @@ public class Player extends RoleHolder{
         this.name = name;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

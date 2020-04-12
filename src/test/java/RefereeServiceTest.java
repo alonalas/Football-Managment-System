@@ -37,8 +37,8 @@ import static org.junit.Assert.assertEquals;
                         "rif",null)
         );
         game1 = new Game(new Season(null,dateS,dateE,null,null,null),
-                new Team("stadium1",null,null,null,null,null,null,null,null),
-                new Team("stadium1",null,null,null,null,null,null,null,null),refereeService.getReferee(),null,
+                new Team("stadium1",null,null,null),
+                new Team("stadium1",null,null,null),refereeService.getReferee(),null,
                 "2020-04-11","15:30","20:00");
         String propertiesPath = "log4j.properties";
         PropertyConfigurator.configure(propertiesPath);

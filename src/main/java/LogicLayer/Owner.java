@@ -76,7 +76,7 @@ public class Owner extends RoleHolder {
     public void insertNewPlayer(Team team, String name, String position, int day ,
                                 int month, int year , String userName,String email) {
         User user = this.getAssetUser(userName,email);
-        Date date = new Date(day,month,year); // check why it's not working
+        String date = day+"-"+month+"-"+year; // check why it's not working
         Page page = new Page();
         Player player = new Player(user,position,team,name, date ,page);
         team.setPlayer(player);

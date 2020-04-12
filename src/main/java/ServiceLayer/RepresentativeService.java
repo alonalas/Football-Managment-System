@@ -46,7 +46,7 @@ public class RepresentativeService extends AUserService {
      * @param league to link the season to League
      * @throws IOException if season already exists
      */
-    public void addSeason(Date start , Date end , League league ) throws IOException{
+    public void addSeason(String start , String end , League league ) throws IOException{
         Season.addSeason(start , end ,league);
     }
 

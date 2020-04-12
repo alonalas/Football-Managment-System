@@ -12,14 +12,14 @@ import java.util.Map;
 public class Season {
 
     private IController system;
-    private Date start;
-    private Date end;
+    private String start;
+    private String end;
     private List<Game> gameList;
     private List<League> leagueList;
     private Map<League, Policy> Policies;
     private static IDataManager data = DataComp.getInstance();
 
-    public Season(IController system, Date start, Date end, List<Game> gameList, List<League> leagueList, Map<League, Policy> policies) {
+    public Season(IController system, String start, String end, List<Game> gameList, List<League> leagueList, Map<League, Policy> policies) {
         this.system = system;
         this.start = start;
         this.end = end;
@@ -28,7 +28,7 @@ public class Season {
         Policies = policies;
     }
 
-    public Season(Date start, Date end, League league){
+    public Season(String start, String end, League league){
         this.setStart(start);
         this.setEnd(end);
         leagueList = new LinkedList<League>();
@@ -42,7 +42,7 @@ public class Season {
      * @return new created Season
      * @throws IOException if season already exists
      */
-    public static Season addSeason(Date start ,Date end,League league) throws IOException {
+    public static Season addSeason(String start ,String end,League league) throws IOException {
         Season season =  data.SearchSeason(start,end);
         if(season == null){
             season = new Season(start,end,league);
@@ -72,19 +72,19 @@ public class Season {
         this.system = system;
     }
 
-    public Date getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public Date getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 

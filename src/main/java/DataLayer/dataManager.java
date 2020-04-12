@@ -1,14 +1,11 @@
 package DataLayer;
 import LogicLayer.*;
 //import com.sun.org.apache.xml.internal.security.encryption.ReferenceList;
-import LogicLayer.Date;
 import org.apache.log4j.Logger;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+
 import java.util.*;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public class dataManager implements IDataManager {
 
@@ -37,7 +34,16 @@ public class dataManager implements IDataManager {
 
 
 
-    public User getUser(String userName, String email){
+    public User getUserByPassword(String userName, String password){
+        for (User user : userList){
+            if (user.getUserName().equals(userName)&&user.getPassword().equals(password)){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public User getUserByName(String userName, String email){
         for (User user : userList){
             if (user.getUserName().equals(userName)&&user.getEmail().equals(email)){
                 return user;
@@ -122,7 +128,7 @@ public class dataManager implements IDataManager {
      * @param End date of season
      * @return Season if found, else null
      */
-    public Season SearchSeason(Date start , Date End) {
+    public Season SearchSeason(String start , String End) {
         for (Season season:
                 seasonList) {
             if(season.getEnd().equals(End) && season.getStart().equals(start)  ){

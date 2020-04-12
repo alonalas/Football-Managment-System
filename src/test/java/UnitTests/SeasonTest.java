@@ -2,8 +2,6 @@ package UnitTests;
 
 import DataLayer.IDataManager;
 import DataLayer.dataManager;
-import LogicLayer.DataComp;
-import LogicLayer.Date;
 import LogicLayer.League;
 import LogicLayer.Season;
 import org.junit.Before;
@@ -12,7 +10,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 import java.util.List;
 
