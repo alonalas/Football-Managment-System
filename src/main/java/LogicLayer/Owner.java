@@ -202,7 +202,7 @@ public class Owner extends RoleHolder {
      * @return user list
      */
     private User getAssetUser(String userName, String userEmail) {
-        User user = DM.getUser(userName,userEmail);
+        User user = DM.getUserByMail(userName,userEmail);
         if (user != null)
             return user;
         return null;

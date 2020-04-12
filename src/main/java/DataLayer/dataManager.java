@@ -43,7 +43,7 @@ public class dataManager implements IDataManager {
         return null;
     }
 
-    public User getUserByName(String userName, String email){
+    public User getUserByMail(String userName, String email){
         for (User user : userList){
             if (user.getUserName().equals(userName)&&user.getEmail().equals(email)){
                 return user;

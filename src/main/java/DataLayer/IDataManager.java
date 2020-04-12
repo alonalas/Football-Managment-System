@@ -7,7 +7,7 @@ public interface IDataManager {
 
 
     User getUserByPassword(String userName, String password);
-    User getUserByName(String userName, String password);
+    User getUserByMail(String userName, String password);
     League SearchLeagueByType(League.LeagueType leagueType);
     void addLeague(League league) ;
     void addSeason(Season season) ;
