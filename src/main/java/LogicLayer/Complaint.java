@@ -10,20 +10,20 @@ public class Complaint {
     private IController system;
     private String description;
     private String commentAdmin;
-    Date date;
+    private String date; // format: "2010-12-12"
     //Hour is missing
 
-    public Complaint(User user, IController system, String description, Date date) {
+    public Complaint(User user, IController system, String description, String date) {
         this.user = user;
         this.system = system;
         this.description = description;
         this.date = date;
     }
 
-    public User getUser() {
-        int i =2;
-        return user;
-    }
+//    public User getUser() {
+//        int i =2;
+//        return user;
+//    }
 
     public void setUser(User user) {
         this.user = user;
@@ -45,11 +45,11 @@ public class Complaint {
         this.description = description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

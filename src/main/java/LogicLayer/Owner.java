@@ -11,12 +11,14 @@ public class Owner extends RoleHolder {
     private String name;
     private List<Team> teamList;
     private dataManager DM;
+    private List<Alert> alerts;
 
     public Owner(User user, String name , dataManager dataManager) {
         super(user);
         this.name = name;
         this.teamList = new LinkedList<>();
         this.DM = dataManager;
+        alerts =new LinkedList<>();
     }
 
     /**
@@ -259,6 +261,22 @@ public class Owner extends RoleHolder {
         this.teamList = teamList;
     }
 
+    public List<Alert> getAlerts() {
+        return alerts;
+    }
+
+    public void setAlerts(List<Alert> alerts) {
+        this.alerts = alerts;
+    }
+
+    /**
+     * ID: Owner@20
+     * adds a new alert to the alerts list
+     * @param alert the new alert we want to add
+     */
+    public void addAlert(Alert alert){
+        getAlerts().add(alert);
+    }
 
 
 

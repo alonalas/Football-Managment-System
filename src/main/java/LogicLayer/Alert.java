@@ -6,24 +6,30 @@ import java.util.Date;
 
 public class Alert {
 
-    private User user;
+    private Role user;
     private IController system;
     private String description;
-    Date date;
+    private String date;
     // hour is missing
 
-    public Alert(User user, IController system, String description, Date date) {
+    public Alert(Role user, IController system, String description, String date) {
         this.user = user;
         this.system = system;
         this.description = description;
         this.date = date;
     }
 
-    public User getUser() {
+    public Alert(Role user, String description, String date) {
+        this.user = user;
+        this.description = description;
+        this.date = date;
+    }
+
+    public Role getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Role user) {
         this.user = user;
     }
 
@@ -43,11 +49,11 @@ public class Alert {
         this.description = description;
     }
 
-    public Date getDate() {
-        return date;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public String getDate() {
+        return date;
     }
 }

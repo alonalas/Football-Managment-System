@@ -20,6 +20,7 @@ public class Team {
     private League league;
     private List<Coach> coachList;
     private List<RoleHolder> roleHolders;
+    private boolean finalClose; // true if the admin closed (cant be changed after true)
 
     public Team(String name,String stadium, Page page, dataManager dataManager) {
         this.name=name;
@@ -33,6 +34,7 @@ public class Team {
         home = new LinkedList<>();
         coachList = new LinkedList<>();
         roleHolders = new LinkedList<>();
+        finalClose=false;
 
     }
 
@@ -151,7 +153,7 @@ public class Team {
 
 
     /**
-     * function number: 2
+     * ID: Team@2
      * compare two teams
      * @param team the team we want to compare to
      * @return true if the teams are equal
@@ -182,4 +184,11 @@ public class Team {
         this.coachList = coachList;
     }
 
+    public boolean isFinalClose() {
+        return finalClose;
+    }
+
+    public void finalCloseTeam(){
+        finalClose=true;
+    }
 }

@@ -21,7 +21,6 @@ public class AdministratorTest {
                 "test@example.com",
                 "123456",
                 "admin",
-                null,
                 null
         );
         String propertiesPath = "log4j.properties";
