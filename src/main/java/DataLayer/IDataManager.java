@@ -59,4 +59,8 @@ public interface IDataManager {
     void addSearchHistory(Fan fan, String query);
 
     void addComplaint(User user, Complaint newComplaint);
+
+    League searchLeagueByName(String league);
+
+    Team searchTeamByName(String team);
 }

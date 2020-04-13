@@ -184,14 +184,32 @@ public class GuestService implements IGuestService{
                 searchInformation(Interest.Leagues);
                 break;
             default:
+                // Users (players, coaches, etc.)
                 searchInformation(query);
-                searchInformation(query);
-                searchInformation(query);
+                // Teams
+                searchTeams(query);
+                // Leagues
+                searchLeagues(query);
         }
     }
 
+    private void searchLeagues(String league) {
+        League retrievedLeague =  guest.SearchLeagueByName(league);
+        if(retrievedLeague == null){
+            System.out.println("## There is no person with this name ##");
+            return;
+        }
+        System.out.println(retrievedLeague.toString());
+    }
 
-
+    private void searchTeams(String team) {
+        Team retrievedTeam =  guest.SearchTeamByName(team);
+        if(retrievedTeam == null){
+            System.out.println("## There is no person with this name ##");
+            return;
+        }
+        System.out.println(retrievedTeam.toString());
+    }
 
 
 }

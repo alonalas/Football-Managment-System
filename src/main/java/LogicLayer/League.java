@@ -8,7 +8,7 @@ import java.util.Map;
 public class League {
 
     enum LeagueType{
-        MAJOR_LEAGUE, SECOND_LEAGUE, LEAGUE_A,LEAGUE_B, LEAGUE_C
+        MAJOR_LEAGUE, SECOND_LEAGUE, LEAGUE_A, LEAGUE_B, LEAGUE_C
     }
 
     private IController system;
@@ -16,13 +16,19 @@ public class League {
     private List<Referee> refereeList;
     private List<Season> seasonList;
     private Map<Season,Policy> policyList;
+    private String name;
 
-    public League(IController system, LeagueType type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
+    public League(String name, IController system, LeagueType type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
         this.system = system;
         this.type = type;
         this.refereeList = refereeList;
         this.seasonList = seasonList;
         this.policyList = policyList;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public IController getSystem() {
