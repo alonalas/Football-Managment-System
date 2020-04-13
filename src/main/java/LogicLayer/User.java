@@ -21,6 +21,13 @@ public class User implements Serializable {
         User.data = data;
     }
 
+    public User(User other) {
+        this.email = other.password;
+        this.password = other.password;
+        this.userName = other.userName;
+        this.roles = other.getRoles();
+    }
+
     public User(String email, String password, String userName) {
         this.email = email;
         this.password = password;
@@ -40,7 +47,7 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, password, userName, roles);
+        return Objects.hash(email, password, userName);
     }
 
     /**
