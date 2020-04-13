@@ -196,3 +196,33 @@
 2020-04-12 03:09:04 INFO  - new Referee been removed , belong to user : d
 2020-04-12 03:09:04 INFO  - league been added , type:LEAGUE_A
 2020-04-12 03:09:04 INFO  - Season been added , linked to League: , Start date:LogicLayer.Date@7e0babb1 , End date:LogicLayer.Date@6debcae2
+2020-04-13 12:08:50 INFO  - Start Testing: AdministratorTests
+2020-04-13 12:08:50 INFO  - All Tests Completed
+2020-04-13 12:09:30 INFO  - Start Testing: AdministratorTests
+2020-04-13 12:09:30 INFO  - All Tests Completed
+2020-04-13 13:27:02 INFO  - Added new game event
+2020-04-13 13:27:02 INFO  - Added new game event
+2020-04-13 13:28:02 INFO  - Added new game event
+2020-04-13 13:28:29 INFO  - Added new game event
+2020-04-13 13:28:46 INFO  - Added new game event
+2020-04-13 13:29:03 INFO  - Added new game event
+2020-04-13 13:29:54 INFO  - Added new game event
+2020-04-13 13:34:14 INFO  - Added new game event
+2020-04-13 13:34:46 INFO  - Added new game event
+2020-04-13 13:34:46 INFO  - Added new game event
+2020-04-13 13:35:02 INFO  - Added new game event
+2020-04-13 13:35:27 INFO  - Added new game event
+2020-04-13 13:35:51 INFO  - Added new game event
+2020-04-13 13:36:33 INFO  - Added new game event
+2020-04-13 13:39:29 INFO  - Start Testing: AdministratorTests
+2020-04-13 13:39:29 INFO  - All Tests Completed
+2020-04-13 13:39:38 INFO  - Added new game event
+2020-04-13 13:41:02 INFO  - Added new game event
+2020-04-13 13:46:17 INFO  - Added new game event
+2020-04-13 13:51:55 INFO  - Added new game event
+2020-04-13 13:52:12 INFO  - Added new game event
+2020-04-13 13:53:36 INFO  - Added new game event
+2020-04-13 13:53:51 INFO  - Added new game event
+2020-04-13 13:54:05 INFO  - Added new game event
+2020-04-13 13:55:17 INFO  - Added new game event
+2020-04-13 15:45:25 INFO  - Added new game report

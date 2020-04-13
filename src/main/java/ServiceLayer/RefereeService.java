@@ -22,14 +22,17 @@ public class RefereeService extends AUserService {
     }
 
     /**
+     * ID: Referee@1
      * UC 10.1
-     * function number: 1
+     * ID: @RefereeService1
      * display the Referee's details
      */
     @Override
-    public void showDetails(){
+    public String showDetails(){
         System.out.println("Name of referee: " + referee.getName());
         System.out.println("Qualification: " + referee.getQualification());
+        // for gui
+        return ("Name of referee: " + referee.getName() + "\n Qualification: " + referee.getQualification());
     }
 
     public Referee getReferee() {
@@ -37,8 +40,9 @@ public class RefereeService extends AUserService {
     }
 
     /**
+     * ID: Referee@2
      * UC 10.1
-     * function number: 2
+     * ID: @RefereeService2
      * change the details of the referee
      * @param newName - the new name we want to save for the referee
      * @param newCualif - the new qualification for the referee
@@ -52,31 +56,21 @@ public class RefereeService extends AUserService {
 
 
     /**
+     * ID: Referee@3
      * UC 10.2
-     * function number: 3
+     * ID: @RefereeService3
      * displays the referee's games
      * @throws IOException
      */
     @Override
-    public void displayGames() throws IOException {
-        System.out.println("main games:");
-        int i=1;
-        for(Game game : referee.getMain()){
-            System.out.println("Game number " + i);
-            System.out.println(game.toString());
-        }
-        i=1;
-        System.out.println("line games: ");
-        for(Game game : referee.getLine()){
-            System.out.println("Game number " + i);
-            game.displayDetails();
-        }
+    public String[] displayGames() throws IOException {
+        return referee.displayGames();
     }
 
 
     /**
      * UC 10.3
-     * function number: 4
+     * ID: RefereeService@4
      * adds a new gameEvnet to the system while the game is active
      * @param game - the game we want to add an event for
      * @param description - the description of the event
@@ -85,25 +79,13 @@ public class RefereeService extends AUserService {
      */
     @Override
     public void addGameEvent(Game game,String description, String eventType) throws IOException {
-        LocalDate date=LocalDate.now();
-        LocalTime now=LocalTime.now();
-        if(game.getLine().equals(referee) || game.getMain().equals(referee)){
-            if(date.compareTo(LocalDate.parse(game.getDate()))==0){
-                if(now.isBefore(LocalTime.parse(game.getEndTime()))&& now.isAfter(LocalTime.parse(game.getStartTime()))){
-                    GameEventCalender event = new GameEventCalender(game,now.toString(),date.toString(),eventType,description,now.getMinute());
-                    game.addEventGame(event);
-                    String propertiesPath = "log4j.properties";
-                    PropertyConfigurator.configure(propertiesPath);
-                    testLogger.info("Added new game event");
-                }
-            }
-        }
+        referee.addGameEvent(game,description,eventType);
     }
 
 
     /**
      * UC 10.4.1
-     * function number: 5
+     * ID: RefereeService@5
      * adds a new game event to the system after the game ended by a main referee
      * @param game - the game we want to add an event for
      * @param description - the description of the event
@@ -112,28 +94,13 @@ public class RefereeService extends AUserService {
      */
     @Override
     public void addGameEventAfterGame(Game game,String description, String eventType) throws IOException {
-        LocalDate date=LocalDate.now();
-        LocalTime now=LocalTime.now();
-        if(game.getMain().equals(referee)){
-            if(date.compareTo(LocalDate.parse(game.getDate()))==0){
-                if(now.minusHours(5).isBefore(LocalTime.parse(game.getEndTime()))){
-                    GameEventCalender event = new GameEventCalender(game,now.toString(),date.toString(),eventType,description,now.getMinute());
-                    game.addEventGame(event);
-                    String propertiesPath = "log4j.properties";
-                    PropertyConfigurator.configure(propertiesPath);
-                    testLogger.info("Added new game event");
-                }
-                else{
-                    System.out.println("Its been more then 5 hours, tou cen't edit the gameEvent");
-                }
-            }
-        }
+        referee.addEventAfterGame(game,description,eventType);
     }
 
 
     /**
      * UC 10.4.2
-     * function number: 6
+     * ID: RefereeService@6
      * creates game report for a specific game by main referee
      * @param game - the game we want to create a report for
      * @param description - description of the report
@@ -141,12 +108,6 @@ public class RefereeService extends AUserService {
      */
     @Override
     public void createGameReport(Game game, String description)throws IOException {
-        if(referee.getMain().contains(game)){
-            GameReport gameReport= new GameReport(game,description);
-            game.setGameReport(gameReport);
-            String propertiesPath = "log4j.properties";
-            PropertyConfigurator.configure(propertiesPath);
-            testLogger.info("Added new game report");
-        }
+      referee.createGameReport(game,description);
     }
 }

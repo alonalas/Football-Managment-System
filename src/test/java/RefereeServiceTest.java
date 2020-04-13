@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-/*public class RefereeServiceTest {
+public class RefereeServiceTest {
     // Tester
     private static RefereeService refereeService;
     private static Game game1;
@@ -33,12 +33,12 @@ import static org.junit.Assert.assertEquals;
             Date dateE= simpleDateFormat.parse(date2);
 
             refereeService = new RefereeService(
-                new Referee(new User("enmail@","123","test"),"stam",
+                new Referee(new User("enmail@","123","test"),
                         "rif",null)
         );
-        game1 = new Game(new Season(null,dateS,dateE,null,null,null),
-                new Team("stadium1",null,null,null),
-                new Team("stadium1",null,null,null),refereeService.getReferee(),null,
+        game1 = new Game(new Season(null,"11","22",null,null,null),
+                new Team("team1","stadium1",null,null),
+                new Team("team2","stadium2",null,null),refereeService.getReferee(),null,
                 "2020-04-11","15:30","20:00");
         String propertiesPath = "log4j.properties";
         PropertyConfigurator.configure(propertiesPath);
@@ -121,8 +121,16 @@ import static org.junit.Assert.assertEquals;
      }
 
 
+
+     @Test
+     public void test(){
+         GameEventCalender g= new GameEventCalender(game1,"1","1","football","Ff",3);
+        for(GameEventCalender ga: game1.getGameEventCalender()){
+            System.out.println(ga.getDescription());
+        }
+     }
     @AfterClass
     public static void close(){
         testLogger.info("All Tests Completed");
     }
-}*/
+}

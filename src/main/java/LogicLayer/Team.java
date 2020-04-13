@@ -1,11 +1,14 @@
 package LogicLayer;
 
+import DataLayer.dataManager;
 import ServiceLayer.IController;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Team {
 
+    private final DataLayer.dataManager dataManager;
     private String name;
     private String stadium;
     private Page page;
@@ -18,7 +21,7 @@ public class Team {
     private List<Coach> coachList;
     private List<RoleHolder> roleHolders;
 
-    public Team(String name,String stadium, Page page, List<Player> playerList, Manager manager, List<Owner> ownerList, List<Game> away, List<Game> home, League league, IController system) {
+    public Team(String name,String stadium, Page page, dataManager dataManager) {
         this.name=name;
         this.stadium = stadium;
         this.page = page;
@@ -33,18 +36,12 @@ public class Team {
 
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public void addOwner(Owner owner) {
         if (!this.ownerList.contains(owner))
             ownerList.add(owner);
     }
+
 
     public String getName() {
         return name;

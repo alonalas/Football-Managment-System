@@ -15,7 +15,7 @@ public class Game {
     private Referee main;
     private List<GameEventCalender> gameEventCalender;
     private String date; // format "2019-04-09"
-    private String startTime; // format (13:50)
+    private String startTime; // format "13:50"
     private String endTime;
     private GameReport gameReport;
 
@@ -142,7 +142,7 @@ public class Game {
 
 
     /**
-     * function number: 2
+     * function number: @Game2
      * compare two games
      * @param game2 game we wanyt to compare
      * @return return true if the two games are equal

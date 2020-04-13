@@ -23,11 +23,11 @@ public abstract class AUserService implements IUserService{
 
 
     public void addPage(Page newPage) throws IOException {
-        throw new IOException("Eitan");
+        throw new IOException("not possible");
     }
 
 
-    public void showDetails() throws IOException {
+    public String showDetails() throws IOException {
         throw new IOException("No details to be shown");
     }
 
@@ -35,7 +35,7 @@ public abstract class AUserService implements IUserService{
         throw new IOException("No details to be changed");
     }
 
-    public void displayGames()throws IOException{
+    public String [] displayGames()throws IOException{
         throw new IOException("no games");
     }
 
