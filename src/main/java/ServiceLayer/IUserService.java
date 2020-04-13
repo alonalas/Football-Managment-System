@@ -16,4 +16,12 @@ public interface IUserService {
 
     List<String> retrieveHistory() throws IOException;
 
+    void searchInformation(String name) throws IOException;
+
+    void searchInformation(Interest interested) throws IOException;
+
+    void searchInformationByKeyWord(String query) throws IOException;
+
+    void report(String description) throws IOException;
+
 }

@@ -29,4 +29,24 @@ public abstract class AUserService implements IUserService{
     public List<String> retrieveHistory() throws IOException {
         throw new IOException("not possible");
     }
+
+    @Override
+    public void searchInformation(String name) throws IOException {
+        throw new IOException("not possible");
+    }
+
+    @Override
+    public void searchInformation(Interest interested) throws IOException {
+        throw new IOException("not possible");
+    }
+
+    @Override
+    public void searchInformationByKeyWord(String query) throws IOException {
+        throw new IOException("not possible");
+    }
+
+    @Override
+    public void report(String description) throws IOException {
+        throw new IOException("not possible");
+    }
 }

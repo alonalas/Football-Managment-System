@@ -135,8 +135,8 @@ public class GuestService implements IGuestService{
      * @param name
      */
     public void searchInformation(String name){
-        User retrievedUser =  guest.SearchUserByName(name);
-        if(retrievedUser == null){
+        List<User> retrievedUser =  guest.SearchUserByName(name);
+        if(retrievedUser.size() == 0){
             System.out.println("## There is no person with this name ##");
             return;
         }
@@ -188,8 +188,6 @@ public class GuestService implements IGuestService{
                 searchInformation(query);
                 searchInformation(query);
         }
-
-
     }
 
 

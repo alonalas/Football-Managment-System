@@ -1,7 +1,5 @@
 package ServiceLayer;
-
 import LogicLayer.User;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -41,6 +39,7 @@ public class UserService extends AUserService {
     public void editPersonalInformation(String firstName, String lastName, String email) throws IOException {
         user.updatePersonalInformation(firstName,lastName,email);
     }
+
 
 
 

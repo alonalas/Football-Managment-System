@@ -87,4 +87,8 @@ public class User {
         personalDetails.add(firstName);
         return personalDetails;
     }
+
+    public IController getSystem() {
+        return system;
+    }
 }

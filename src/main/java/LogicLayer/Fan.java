@@ -19,6 +19,14 @@ public class Fan extends Role{
         pages = new ArrayList<>();
     }
 
+    public IController getSystem() {
+        return system;
+    }
+
+    public IDataManager getDataManager() {
+        return dataManager;
+    }
+
     public String getName() {
         return name;
     }
@@ -33,8 +41,15 @@ public class Fan extends Role{
         }
     }
 
-
     public List<String> getHistory() {
         return dataManager.getHistory(this);
+    }
+
+    public void addSearchHistory(Fan fan, String query) {
+        dataManager.addSearchHistory(this, query);
+    }
+
+    public void addComplaintToDataManager(Complaint newComplaint) {
+        dataManager.addComplaint(super.getUser(),newComplaint);
     }
 }

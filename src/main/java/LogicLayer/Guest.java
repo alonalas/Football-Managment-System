@@ -68,7 +68,7 @@ public class Guest {
         return data.getManagers();
     }
 
-    public User SearchUserByName(String name) {
+    public List<User> SearchUserByName(String name) {
         return data.searchUserByName(name);
     }
 

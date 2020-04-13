@@ -158,20 +158,31 @@ public class dataManager implements IDataManager {
         return players;
     }
 
-    public User searchUserByName(String name) {
+    public List<User> searchUserByName(String name) {
+        List<User>retrievedUsers = new ArrayList<>();
         String[] splitted = name.split(" ");
         for (User user: userList){
             if (user.getFirstName().equals(splitted[0]) && user.getLastName().equals(splitted[1])){
-                return user;
+                retrievedUsers.add(user);
             }
         }
-        return null;
+        return retrievedUsers;
     }
 
     @Override
     public List<String> getHistory(Fan fan) {
         List<String>searchHistory = fanSearchHistory.get(fan);
         return searchHistory;
+    }
+
+    @Override
+    public void addSearchHistory(Fan fan, String query) {
+        fanSearchHistory.get(fan).add(query);
+    }
+
+    @Override
+    public void addComplaint(User user, Complaint newComplaint) {
+        complaint.get(user).add(newComplaint);
     }
 }
 

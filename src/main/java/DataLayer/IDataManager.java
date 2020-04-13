@@ -52,7 +52,11 @@ public interface IDataManager {
 
     List<Player> getPlayers();
 
-    User searchUserByName(String name);
+    List<User> searchUserByName(String name);
 
     List<String> getHistory(Fan fan);
+
+    void addSearchHistory(Fan fan, String query);
+
+    void addComplaint(User user, Complaint newComplaint);
 }
