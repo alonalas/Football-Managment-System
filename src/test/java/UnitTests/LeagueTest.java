@@ -18,13 +18,12 @@ import static org.junit.Assert.*;
 public class LeagueTest  {
 
 
-    private IDataManager dm;
     private League league ;
 
 
     @Before
     public void init(){
-        dm =  new dataManager();
+        DataComp.getInstance().TestReset();
         league = new League(League.LeagueType.LEAGUE_B);
     }
 
@@ -47,5 +46,16 @@ public class LeagueTest  {
         assertEquals(1 , leagues.size());
         assertEquals(League.LeagueType.LEAGUE_B , leagues.get(0).getType());
     }
-
+    /**
+     * id : U@
+     */
+    @Test
+    public void addLeagues() {
+        try {
+            List<League> leagues = League.ShowAllLeagues();
+            assertEquals(1, leagues.size());
+            assertTrue(League.addLeague(League.LeagueType.MAJOR_LEAGUE));
+            assertEquals(2, leagues.size());
+        }catch (Exception e){}
+    }
 }
