@@ -172,8 +172,8 @@ public class Team {
     }
 
     public void setPlayer(Player player) {
-        if(!playerList.contains(player))
-            playerList.add(player);
+        if (!playerList.contains(player))
+        playerList.add(player);
     }
 
     public void setCoach(Coach coach) {

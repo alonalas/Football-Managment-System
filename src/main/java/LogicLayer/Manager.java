@@ -1,5 +1,7 @@
 package LogicLayer;
 
+import java.util.Objects;
+
 public class Manager extends RoleHolder{
 
     private String name;
@@ -9,6 +11,21 @@ public class Manager extends RoleHolder{
         super(user);
         this.name = name;
         this.team = team;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Manager manager = (Manager) o;
+        return Objects.equals(name, manager.name) &&
+                Objects.equals(team, manager.team);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), name, team);
     }
 
     public Manager() { }

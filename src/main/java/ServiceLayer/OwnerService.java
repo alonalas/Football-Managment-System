@@ -182,5 +182,17 @@ public class OwnerService extends AUserService{
                                  Map<String,String> attributes) throws IOException {
         owner.updateAssetAttributes(teamName,roleHolder,attributes);
     }
+
+    /**
+     * id: OwnerService@11
+     * activates process of removing owner from all of his nominations in the selected grop
+     * @param own
+     * @param nominatedOwner
+     * @param teamName
+     * @throws IOException
+     */
+    public void removeOwnership(Owner own, Owner nominatedOwner, String teamName) throws IOException {
+        own.removeOwnership(nominatedOwner,teamName);
+    }
 }
 

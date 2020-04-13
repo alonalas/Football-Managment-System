@@ -8,8 +8,7 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -324,6 +323,41 @@ public class OwnerTest {
             System.out.println(e.getMessage());
             assertEquals(e.getMessage(),"User is allready nominated as owner in this team");
         }
+
+    }
+
+    ///////////////////////////////////////////// uc3
+
+    /**
+     *Test UC 6.3
+     */
+    @Test
+    public void testRemoveOwnership() {
+
+        testOwnerNominateOwner(); // the owner "own" nominated the user u2 to be a new owner of Team team
+        int roles = 0;
+        try {
+            os.insertNewPlayer(own,team.getName(),"harry","seeker",1,2,1987,u2.getUserName(),u2.getEmail());
+            roles = u2.getRoles().size();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Owner nominatedOwner=null;
+        for (Role role : u2.getRoles()) {
+            if (role instanceof Owner) {
+                nominatedOwner = (Owner)role;
+            }
+        }
+        try {
+            os.removeOwnership(own,nominatedOwner, team.getName());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        assertEquals(team.getOwnerList().size() , 1);
+        assertNotEquals(roles,u2.getRoles().size());
+
 
     }
 

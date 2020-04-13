@@ -2,23 +2,42 @@ package LogicLayer;
 
 import DataLayer.dataManager;
 
-import java.awt.image.VolatileImage;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Owner extends RoleHolder {
 
     private String name;
     private List<Team> teamList;
     private dataManager DM;
+    private Owner nominatedBy;
 
     public Owner(User user, String name , dataManager dataManager) {
         super(user);
         this.name = name;
         this.teamList = new LinkedList<>();
         this.DM = dataManager;
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Owner owner = (Owner) o;
+        return Objects.equals(name, owner.name) &&
+                Objects.equals(teamList, owner.teamList) &&
+                Objects.equals(DM, owner.DM) &&
+                Objects.equals(nominatedBy, owner.nominatedBy);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), name, teamList, DM, nominatedBy);
     }
 
     /**
@@ -38,6 +57,7 @@ public class Owner extends RoleHolder {
         manager.setTeam(team);
         user.setRole(manager);
         team.getRoleHolders().add(manager);
+
     }
 
     /**
@@ -113,7 +133,7 @@ public class Owner extends RoleHolder {
                 Player player = (Player)role;
                 team.getPlayerList().remove(player);
                 team.getRoleHolders().remove(player);
-                deleteRole(user,player);
+                user.removeRole(player);
             }
         }
     }
@@ -137,7 +157,7 @@ public class Owner extends RoleHolder {
                     Coach coach = (Coach) role;
                     team.getRoleHolders().remove(coach);
                     team.getCoachList().remove(coach);
-                    deleteRole(user, coach);
+                    user.removeRole(coach);
                 }
             }
         }
@@ -164,25 +184,28 @@ public class Owner extends RoleHolder {
                     Manager manager = (Manager)role;
                     team.getManagerList().remove(manager);
                     team.getRoleHolders().remove(manager);
-                    deleteRole(user,manager);
+                    user.removeRole(role);
                 }
             }
         }
 
     }
 
-    /**
+
+    /*
      * id: Owner@8
      * Deletes a role from the user's roleList
      * @param user
      * @param roleHolder
      */
+    /*
     private void deleteRole(User user, RoleHolder roleHolder) {
         for ( Role role : user.getRoles()) {
             if (role.equals(roleHolder))
                 user.getRoles().remove(role);
         }
     }
+    /*
 
     /**
      * id: Owner@9
@@ -296,6 +319,8 @@ public class Owner extends RoleHolder {
         user.setRole(newOwner);
         newOwner.addTeam(team);
         team.addOwner(newOwner);
+        team.getRoleHolders().add(newOwner);
+        newOwner.setNominatedBy(this);
     }
 
     public String getName() {
@@ -391,5 +416,52 @@ public class Owner extends RoleHolder {
         }
     }
 
+    public void setNominatedBy(Owner nominatedBy) {
+        this.nominatedBy = nominatedBy;
+    }
+
+    public Owner getNominatedBy() {
+        return nominatedBy;
+    }
+
+    /**
+     * id: Owner@19
+     * removes the selected owner's ownership and in addition removes his whole roles in the specified team.
+     * the following terms must be true:
+     * -the selected owner has a valid and existing user
+     * -the selected owner was nominated by THIS owner
+     * -the selected team exists in THIS teamList
+     * @param nominatedOwner
+     * @param teamName
+     * @throws IOException if one of the terms does not match
+     */
+    public void removeOwnership(Owner nominatedOwner, String teamName) throws IOException {
+
+        checkMembership(nominatedOwner.getUser(),teamName);
+        Team team = getTeam(teamName);
+        if (team.getOwner(nominatedOwner.getUser()) != null) {
+            if (nominatedOwner.getNominatedBy().equals(this)) {
+                 for ( Role role : nominatedOwner.getUser().getRoles() ) {
+                     if (role instanceof Player)
+                         deletePlayer(teamName,nominatedOwner.getUser().getUserName(),nominatedOwner.getUser().getEmail());
+                     else if (role instanceof Coach)
+                         deleteCoach(teamName,nominatedOwner.getUser().getUserName(),nominatedOwner.getUser().getEmail());
+                     else if (role instanceof Manager) // instance of manager
+                         deleteManager(teamName,nominatedOwner.getUser().getUserName(),nominatedOwner.getUser().getEmail());
+                     else {// OWNER
+                         team.getOwnerList().remove(nominatedOwner);
+                         team.getRoleHolders().remove(nominatedOwner);
+                     }
+                 }
+                nominatedOwner.getUser().removeRole(nominatedOwner);
+            }
+            else
+                throw new IOException("The selected owner can't be removed since he did not nominated by you");
+        }
+        else
+            throw new IOException("The selected owner is not nominated as an owner of this team");
+
+
+    }
 }
 

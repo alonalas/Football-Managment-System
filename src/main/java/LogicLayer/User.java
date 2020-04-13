@@ -29,7 +29,6 @@ public class User {
         return email.equals(user.email) &&
                 password.equals(user.password) &&
                 userName.equals(user.userName) ;
-
     }
 
     @Override
@@ -107,7 +106,7 @@ public class User {
     }
 
     public void setRole(Role role){
-        if (!roles.contains(role))
+        //if (!roles.contains(role))
             this.roles.add(role);
     }
 
