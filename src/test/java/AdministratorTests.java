@@ -1,4 +1,7 @@
 import LogicLayer.Administrator;
+import LogicLayer.Player;
+import LogicLayer.RoleHolder;
+import LogicLayer.User;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.AfterClass;
@@ -6,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class AdministratorTests {
     // Tester

@@ -38,4 +38,9 @@
 2020-04-08 10:56:24 INFO  - Run: testPasswordContent
 2020-04-08 10:56:24 INFO  - Ended: testPasswordContent
 2020-04-08 10:56:24 INFO  - All Tests Completed
-UPDATE
+UPDATE2020-04-13 16:21:03 INFO  - Start Testing: AdministratorTests
+2020-04-13 16:21:03 INFO  - All Tests Completed
+2020-04-13 16:40:29 INFO  - Start Testing: AdministratorTests
+2020-04-13 16:40:29 INFO  - All Tests Completed
+2020-04-13 16:40:49 INFO  - Start Testing: AdministratorTests
+2020-04-13 16:40:49 INFO  - All Tests Completed

@@ -2,13 +2,16 @@ package ServiceLayer;
 
 import LogicLayer.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GuestService implements IGuestService{
     private Guest guest;
+    private List<Object> lastSearchResults;
 
     public GuestService(Guest guest) {
         this.guest = guest;
+        this.lastSearchResults = new ArrayList<>();
     }
 
     /**Use Case - 2.1
@@ -73,55 +76,61 @@ public class GuestService implements IGuestService{
      * Show public information
      * @param interestIn
      */
-    //Need to implement tostrings!
-
     public void showInformationByCategory(Interest interestIn){
         switch (interestIn) {
             case Games:
                 List<Game> gamesInfo = guest.retrieveGames();
                 for (Game game: gamesInfo){
+                    lastSearchResults.add(game);
                     System.out.println(game.toString());
                 }
                 break;
             case Players:
                 List<Player> playersInfo = guest.retrievePlayers();
                 for (Player player: playersInfo){
+                    lastSearchResults.add(player);
                     System.out.println(player.toString());
                 }
                 break;
             case Leagues:
                 List<League> leaguesInfo = guest.retrieveLeagues();
                 for (League league: leaguesInfo){
+                    lastSearchResults.add(league);
                     System.out.println(league.toString());
                 }
                 break;
             case Teams:
                 List<Team> teamsInfo = guest.retrieveTeams();
                 for (Team team: teamsInfo){
+                    lastSearchResults.add(team);
                     System.out.println(team.toString());
                 }
                 break;
             case Seasons:
                 List<Season> seasonsInfo = guest.retrieveSeasons();
                 for (Season season: seasonsInfo){
+                    lastSearchResults.add(season);
                     System.out.println(season.toString());
                 }
                 break;
             case Coaches:
                 List<Coach> coachesInfo = guest.retrieveCoaches();
                 for (Coach coach: coachesInfo){
+                    lastSearchResults.add(coach);
                     System.out.println(coach.toString());
                 }
                 break;
             case Owners:
                 List<Owner> ownersInfo = guest.retrieveOwners();
                 for (Owner owner: ownersInfo){
+                    lastSearchResults.add(owner);
                     System.out.println(owner.toString());
                 }
                 break;
             case Managers:
                 List<Manager> managersInfo = guest.retrieveManagers();
                 for (Manager manager: managersInfo){
+                    lastSearchResults.add(manager);
                     System.out.println(manager.toString());
                 }
                 break;
@@ -131,57 +140,71 @@ public class GuestService implements IGuestService{
 
     /**
      * USE CASE - 2.4
-     * Search Information By Name
-     * @param name
+     * Search Information
+     * @param criteria
+     * @param query
      */
-    public void searchInformation(String name){
+    @Override
+    public void searchInformation(Criteria criteria, String query) {
+        lastSearchResults = new ArrayList<>();
+        switch (criteria) {
+            case Category:
+                searchInformationByCategory(query);
+                break;
+            case KeyWord:
+                searchInformationByKeyWord(query);
+                break;
+            case Name:
+                searchInformation(query);
+                break;
+        }
+    }
+
+    private void searchInformation(String name){
         List<User> retrievedUser =  guest.SearchUserByName(name);
         if(retrievedUser.size() == 0){
             System.out.println("## There is no person with this name ##");
             return;
         }
-        System.out.println(retrievedUser.toString());
+        for(User user : retrievedUser){
+            lastSearchResults.add(user);
+            System.out.println(user.toString());
+        }
     }
 
-    /**
-     * USE CASE - 2.4
-     * Search Information By Category
-     * @param interested
-     */
-    public void searchInformation(Interest interested){
+    private void searchInformationByCategory(Interest interested){
         showInformationByCategory(interested);
     }
 
-    /**
-     * USE CASE - 2.4
-     * Search Information By Keywords
-     * @param query
-     */
-    public void searchInformationByKeyWord(String query){
+    private void searchInformationByCategory(String interested){
+        searchInformationByKeyWord(interested);
+    }
+
+    private void searchInformationByKeyWord(String query){
         switch (query.toLowerCase()){
             case "coaches":
-                searchInformation(Interest.Coaches);
+                searchInformationByCategory(Interest.Coaches);
                 break;
             case "games":
-                searchInformation(Interest.Games);
+                searchInformationByCategory(Interest.Games);
                 break;
             case "managers":
-                searchInformation(Interest.Managers);
+                searchInformationByCategory(Interest.Managers);
                 break;
             case "owners":
-                searchInformation(Interest.Owners);
+                searchInformationByCategory(Interest.Owners);
                 break;
             case "players":
-                searchInformation(Interest.Players);
+                searchInformationByCategory(Interest.Players);
                 break;
             case "seasons":
-                searchInformation(Interest.Seasons);
+                searchInformationByCategory(Interest.Seasons);
                 break;
             case "teams":
-                searchInformation(Interest.Teams);
+                searchInformationByCategory(Interest.Teams);
                 break;
             case "leagues":
-                searchInformation(Interest.Leagues);
+                searchInformationByCategory(Interest.Leagues);
                 break;
             default:
                 // Users (players, coaches, etc.)
@@ -193,23 +216,150 @@ public class GuestService implements IGuestService{
         }
     }
 
-    private void searchLeagues(String league) {
-        League retrievedLeague =  guest.SearchLeagueByName(league);
+    private void searchLeagues(String leagueName) {
+        List<League> retrievedLeague =  guest.SearchLeagueByName(leagueName);
         if(retrievedLeague == null){
             System.out.println("## There is no person with this name ##");
             return;
         }
-        System.out.println(retrievedLeague.toString());
+        for(League league : retrievedLeague){
+            lastSearchResults.add(league);
+            System.out.println(league.toString());
+        }
     }
 
-    private void searchTeams(String team) {
-        Team retrievedTeam =  guest.SearchTeamByName(team);
+    private void searchTeams(String teamName) {
+        List<Team> retrievedTeam =  guest.SearchTeamByName(teamName);
         if(retrievedTeam == null){
             System.out.println("## There is no person with this name ##");
             return;
         }
-        System.out.println(retrievedTeam.toString());
+        for(Team team : retrievedTeam){
+            lastSearchResults.add(team);
+            System.out.println(team.toString());
+        }
     }
 
+    /**
+     * USE CASE - 2.5
+     * Filter Search Results
+     * @param filter
+     * @param query
+     */
+    @Override
+    public void filterResults(Filter filter, String query) {
+        switch (filter) {
+            case Role:
+                filterByRole(query);
+                break;
+            case Team:
+                filterByTeam(query);
+                break;
+            case League:
+                filterByLeague(query);
+                break;
+        }
+    }
 
+    private void filterByLeague(String query) {
+        List<Object> filtered = new ArrayList<>();
+        for (Object obj : lastSearchResults){
+            if(obj instanceof RoleHolder){
+                String league = ((RoleHolder) obj).getTeam().getLeague().getName().toLowerCase();
+                if(league.equals(query.toLowerCase()))
+                    filtered.add(obj);
+            }else if(obj instanceof Team){
+                String league = ((Team) obj).getLeague().getName().toLowerCase();
+                if(league.equals(query.toLowerCase()))
+                    filtered.add(obj);
+            }else if(obj instanceof League){
+                if(((League) obj).getName().equals(query.toLowerCase()))
+                    filtered.add(obj);
+            }
+        }
+        filtered.forEach(obj -> System.out.println(obj.toString()));
+    }
+
+    private void filterByTeam(String query) {
+        List<Object> filtered = new ArrayList<>();
+        for (Object obj : lastSearchResults){
+            if(obj instanceof RoleHolder){
+                if(((RoleHolder) obj).getTeam().getName().toLowerCase().equals(query.toLowerCase()))
+                    filtered.add(obj);
+            }
+        }
+        filtered.forEach(obj -> System.out.println(obj.toString()));
+    }
+
+    private void filterByRole(String query) {
+        List<Object> filtered = new ArrayList<>();
+        switch (query.toLowerCase()) {
+            case "player":
+                for (Object obj : lastSearchResults){
+                    if(obj instanceof Player || obj instanceof User){
+                        if(obj instanceof User){
+                            ((User) obj).getRoles().forEach(r -> {
+                                if(r instanceof Player)
+                                    filtered.add(obj);
+                            });
+                        }
+                        filtered.add(obj);
+                    }
+                }
+                break;
+            case "manager":
+                for (Object obj : lastSearchResults){
+                    if(obj instanceof Manager || obj instanceof User){
+                        if(obj instanceof User){
+                            ((User) obj).getRoles().forEach(r -> {
+                                if(r instanceof Manager)
+                                    filtered.add(obj);
+                            });
+                        }
+                        filtered.add(obj);
+                    }
+                }
+                break;
+            case "owner":
+                for (Object obj : lastSearchResults){
+                    if(obj instanceof Owner || obj instanceof User){
+                        if(obj instanceof User){
+                            ((User) obj).getRoles().forEach(r -> {
+                                if(r instanceof Owner)
+                                    filtered.add(obj);
+                            });
+                        }
+                        filtered.add(obj);
+                    }
+                }
+                break;
+            case "coach":
+                for (Object obj : lastSearchResults){
+                    if(obj instanceof Coach || obj instanceof User){
+                        if(obj instanceof User){
+                            ((User) obj).getRoles().forEach(r -> {
+                                if(r instanceof Coach)
+                                    filtered.add(obj);
+                            });
+                        }
+                        filtered.add(obj);
+                    }
+                }
+                break;
+            case "referee":
+                for (Object obj : lastSearchResults){
+                    if(obj instanceof Referee || obj instanceof User){
+                        if(obj instanceof User){
+                            ((User) obj).getRoles().forEach(r -> {
+                                if(r instanceof Referee)
+                                    filtered.add(obj);
+                            });
+                        }
+                        filtered.add(obj);
+                    }
+                }
+                break;
+        }
+        filtered.forEach(obj -> System.out.println(obj.toString()));
+    }
 }

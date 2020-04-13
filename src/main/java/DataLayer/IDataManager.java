@@ -60,7 +60,7 @@ public interface IDataManager {
 
     void addComplaint(User user, Complaint newComplaint);
 
-    League searchLeagueByName(String league);
+    List<League> searchLeagueByName(String league);
 
-    Team searchTeamByName(String team);
+    List<Team> searchTeamByName(String team);
 }

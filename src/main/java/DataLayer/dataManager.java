@@ -186,23 +186,25 @@ public class dataManager implements IDataManager {
     }
 
     @Override
-    public League searchLeagueByName(String leagueName) {
+    public List<League> searchLeagueByName(String leagueName) {
+        List<League> retrievedLeagues = new ArrayList<>();
         for (League league: leagueList){
             if (league.getName().toLowerCase().equals(leagueName.toLowerCase())){
-                return league;
+                retrievedLeagues.add(league);
             }
         }
-        return null;
+        return retrievedLeagues;
     }
 
     @Override
-    public Team searchTeamByName(String teamName) {
+    public List<Team> searchTeamByName(String teamName) {
+        List<Team> retrievedTeams = new ArrayList<>();
         for (Team team: teamList){
             if (team.getName().toLowerCase().equals(teamName.toLowerCase())){
-                return team;
+                retrievedTeams.add(team);
             }
         }
-        return null;
+        return retrievedTeams;
     }
 }
 

@@ -11,6 +11,7 @@ public class Owner extends RoleHolder {
         super(user);
         this.name = name;
         this.teamList = teamList;
+        this.team = null;
     }
 
     public String getName() {

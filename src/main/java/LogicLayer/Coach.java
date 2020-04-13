@@ -6,7 +6,6 @@ public class Coach extends RoleHolder {
     String qualification;
     private String job;
     private Page page;
-    private Team team;
 
     public Coach(User user, String name, String qualification, String job, Page page, Team team) {
         super(user);

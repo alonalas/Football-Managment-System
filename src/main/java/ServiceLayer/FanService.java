@@ -40,21 +40,21 @@ public class FanService extends AUserService{
     public void searchInformation(Interest interested) throws IOException {
         Guest guest = new Guest(fan.getSystem(), fan.getDataManager());
         GuestService guestService = new GuestService(guest);
-        guestService.searchInformation(interested);
+        guestService.searchInformation(Criteria.Category, interested.toString());
     }
 
     @Override
     public void searchInformation(String name) throws IOException {
         Guest guest = new Guest(fan.getSystem(), fan.getDataManager());
         GuestService guestService = new GuestService(guest);
-        guestService.searchInformation(name);
+        guestService.searchInformation(Criteria.Name, name);
     }
 
     @Override
     public void searchInformationByKeyWord(String query) throws IOException {
         Guest guest = new Guest(fan.getSystem(), fan.getDataManager());
         GuestService guestService = new GuestService(guest);
-        guestService.searchInformationByKeyWord(query);
+        guestService.searchInformation(Criteria.KeyWord, query);
         fan.addSearchHistory(fan,query);
     }
 

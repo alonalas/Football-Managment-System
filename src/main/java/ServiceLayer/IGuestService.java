@@ -6,9 +6,9 @@ public interface IGuestService {
 
     void logIn(String lastName, String password);
 
-    void searchInformation(String name);
+    void showInformationByCategory(Interest interestIn);
 
-    void searchInformation(Interest interested);
+    void searchInformation(Criteria criteria, String query);
 
-    void searchInformationByKeyWord(String query);
+    void filterResults(Filter filter, String query);
 }

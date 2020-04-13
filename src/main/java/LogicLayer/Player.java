@@ -5,7 +5,6 @@ import java.util.Date;
 public class Player extends RoleHolder{
 
     private String position;
-    private Team team;
     private String name;
     Date birthDate;
     private Page page;
