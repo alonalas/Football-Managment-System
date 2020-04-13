@@ -16,4 +16,7 @@ public interface IDataManager {
     List<Season> getSeasonList();
     boolean addReferee(Referee referee) ;
     boolean removeReferee(Referee referee) ;
+    List<User> getUserList();
+    List<Referee> getRefereeList() ;
+    void TestReset() ;
 }

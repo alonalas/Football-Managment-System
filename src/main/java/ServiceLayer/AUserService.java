@@ -20,6 +20,14 @@ public abstract class AUserService implements IUserService{
         this.control = control;
     }
 
+    /**
+     * Id: AUserService@1
+     * @return system users
+     */
+    public List<User> getSystemUsers(){
+        return User.getAllUsers();
+    }
+
 
 
     public void addPage(Page newPage) throws IOException {
@@ -59,10 +67,10 @@ public abstract class AUserService implements IUserService{
     public void addSeason(Date start , Date end , League league ) throws IOException{
         throw new IOException("Unsupported method");
     }
-    public List<Season> ShowAllSeasons() throws IOException{
+    public List<Season> showAllSeasons() throws IOException{
         throw new IOException("Unsupported method");
     }
-    boolean addNewRefereeFromUsers(User user , String qualification , String name) throws IOException{
+    boolean removeRefereeFromUsers(User user , String qualification , String name) throws IOException{
         throw new IOException("Unsupported method");
     }
     public boolean RemoveNewRefereeFromUsers(User user) throws IOException{

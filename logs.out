@@ -196,3 +196,49 @@
 2020-04-12 03:09:04 INFO  - new Referee been removed , belong to user : d
 2020-04-12 03:09:04 INFO  - league been added , type:LEAGUE_A
 2020-04-12 03:09:04 INFO  - Season been added , linked to League: , Start date:LogicLayer.Date@7e0babb1 , End date:LogicLayer.Date@6debcae2
+2020-04-13 19:35:41 INFO  - Start Testing: AdministratorTests
+2020-04-13 19:35:41 INFO  - Run: testPasswordLength
+2020-04-13 19:35:41 INFO  - Ended: testPasswordLength
+2020-04-13 19:35:41 INFO  - Run: testPasswordContent
+2020-04-13 19:35:41 INFO  - Ended: testPasswordContent
+2020-04-13 19:35:41 INFO  - All Tests Completed
+2020-04-13 21:32:54 INFO  - Start Testing: AdministratorTests
+2020-04-13 21:32:54 INFO  - Run: testPasswordLength
+2020-04-13 21:32:54 INFO  - Ended: testPasswordLength
+2020-04-13 21:32:54 INFO  - Run: testPasswordContent
+2020-04-13 21:32:54 INFO  - Ended: testPasswordContent
+2020-04-13 21:32:54 INFO  - All Tests Completed
+2020-04-13 21:32:54 INFO  - league been added , type:LEAGUE_B
+2020-04-13 21:32:54 INFO  - league been added , type:LEAGUE_A
+2020-04-13 21:32:54 INFO  - Season been added , linked to League: , Start date:2020-02-01 , End date:2020-02-03
+2020-04-13 21:32:54 INFO  - new Referee been added , belong to user : d
+2020-04-13 21:32:54 INFO  - new Referee been removed , belong to user : d
+2020-04-13 21:32:54 INFO  - new Referee been added , belong to user : d
+2020-04-14 01:27:15 INFO  - Start Testing: AdministratorTests
+2020-04-14 01:27:15 INFO  - Run: testPasswordLength
+2020-04-14 01:27:15 INFO  - Ended: testPasswordLength
+2020-04-14 01:27:15 INFO  - Run: testPasswordContent
+2020-04-14 01:27:15 INFO  - Ended: testPasswordContent
+2020-04-14 01:27:15 INFO  - All Tests Completed
+2020-04-14 01:27:15 INFO  - league been added , type:LEAGUE_B
+2020-04-14 01:27:15 INFO  - league been added , type:LEAGUE_A
+2020-04-14 01:27:15 INFO  - league been added , type:LEAGUE_B
+2020-04-14 01:27:15 INFO  - Season been added , linked to League: , Start date:2020-02-01 , End date:2020-02-03
+2020-04-14 01:27:15 INFO  - new Referee been added , belong to user : dan
+2020-04-14 01:27:15 INFO  - Referee been removed , belong to user : dan
+2020-04-14 01:27:15 INFO  - league been added , type:LEAGUE_A
+2020-04-14 01:27:15 INFO  - league been added , type:LEAGUE_B
+2020-04-14 01:27:15 INFO  - Season been added , linked to League: , Start date:2020-02-01 , End date:2020-02-03
+2020-04-14 01:27:15 INFO  - new Referee been added , belong to user : dan
+2020-04-14 01:27:15 INFO  - league been added , type:LEAGUE_A
+2020-04-14 01:27:15 INFO  - league been added , type:LEAGUE_B
+2020-04-14 01:27:15 INFO  - Season been added , linked to League: , Start date:2020-02-01 , End date:2020-02-03
+2020-04-14 01:27:15 INFO  - new Referee been added , belong to user : dan
+2020-04-14 01:27:15 INFO  - league been added , type:LEAGUE_A
+2020-04-14 01:27:15 INFO  - league been added , type:LEAGUE_B
+2020-04-14 01:27:15 INFO  - Season been added , linked to League: , Start date:2020-02-01 , End date:2020-02-03
+2020-04-14 01:27:15 INFO  - new Referee been added , belong to user : dan
+2020-04-14 01:27:15 INFO  - league been added , type:LEAGUE_A
+2020-04-14 01:27:15 INFO  - league been added , type:LEAGUE_B
+2020-04-14 01:27:15 INFO  - Season been added , linked to League: , Start date:2020-02-01 , End date:2020-02-03
+2020-04-14 01:27:15 INFO  - new Referee been added , belong to user : dan

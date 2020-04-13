@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+import DataLayer.IDataManager;
 import ServiceLayer.*;
 
 public class User {
@@ -13,6 +14,7 @@ public class User {
     private String userName;
     //private IController system;
     private List<Role> roles;
+    private static IDataManager data = DataComp.getInstance();
 
     public User(String email, String password, String userName) {
         this.email = email;
@@ -66,7 +68,7 @@ public class User {
 
 
     /**
-     * id: User@
+     * id: User@4
      * find RefereeRoleIfExist  , else return null
      * @return
      */
@@ -77,6 +79,10 @@ public class User {
             }
         }
         return null;
+    }
+
+    public static List<User> getAllUsers(){
+        return data.getUserList();
     }
     public String getEmail() {
         return email;

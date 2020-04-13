@@ -4,6 +4,7 @@ import DataLayer.IDataManager;
 import DataLayer.dataManager;
 import ServiceLayer.IController;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -58,13 +59,25 @@ public class League {
     public static List<League> ShowAllLeagues(){
         return data.getLeagueList();
     }
-//    public IController getSystem() {
-//        return system;
-//    }
-//
-//    public void setSystem(IController system) {
-//        this.system = system;
-//    }
+
+    /**
+     * id: League@3
+     * add new league
+     * @param leagueType
+     * @return if success/unsuccessful operation
+     * @throws Exception if league type illegal
+     */
+    public static boolean addLeague(League.LeagueType leagueType) throws IOException{
+        if(leagueType==null){
+            throw new IOException("illegal league type");
+        }
+        League league= League.checkIfLeagueExist(leagueType);
+        if(league != null){
+            return false ;
+        }
+        data.addLeague(new League(leagueType));
+        return true;
+    }
 
     public LeagueType getType() {
         return type;

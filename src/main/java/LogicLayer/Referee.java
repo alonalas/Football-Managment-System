@@ -2,6 +2,7 @@ package LogicLayer;
 
 import DataLayer.IDataManager;
 import DataLayer.dataManager;
+import javafx.util.Pair;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +16,8 @@ public class Referee extends Role{
     private static IDataManager data = DataComp.getInstance();
     private List<Game> main;
     private  List<Game> line;
+    private List<Pair<League , Season>> judgmentApproval ;
+
 
     public Referee(User user, String qualification, String name, League league) {
         super(user);
@@ -23,6 +26,7 @@ public class Referee extends Role{
         this.league = league;
         this.main = new LinkedList<>();
         this.line = new LinkedList<>();
+        judgmentApproval = new LinkedList<>();
     }
 
 
@@ -31,6 +35,7 @@ public class Referee extends Role{
         super(user);
         this.qualification = qualification;
         this.name = name;
+        judgmentApproval = new LinkedList<>();
     }
 
     /**
@@ -61,6 +66,15 @@ public class Referee extends Role{
         return false;
     }
 
+    /**
+     * id: Referee@9
+     * get all referees
+     * @param
+     * @return all Referees in system
+     */
+    public static List<Referee> getReferees(){
+        return data.getRefereeList() ;
+    }
     public String getQualification() {
         return qualification;
     }
@@ -110,6 +124,36 @@ public class Referee extends Role{
         return false;
     }
 
+    /**
+     * id: Referee@10
+     * add Approval to judge in specific Season of League
+     * @param approval
+     * @return false if already contains this approval , true if added.
+     */
+    public boolean addJudgmentApproval(Pair<League,Season> approval){
+        if(judgmentApproval.contains(approval)) return false ;
+        judgmentApproval.add(approval);
+        return true ;
+    }
+    /**
+     * id: Referee@11
+     * remove Approval to judge in specific Season of League
+     * @param approval
+     * @return if been removed successfully.
+     */
+    public boolean removeJudgmentApproval(Pair<League,Season> approval){
+        if( ! judgmentApproval.contains(approval)) return false;
+        judgmentApproval.remove(approval);
+        return true ;
+    }
+    /**
+     * id: Referee@12
+     * return all Judgment Approvals to judge in specific Season of League
+     * @return all approvals for league-season judgment
+     */
+    public List<Pair<League,Season>> getJudgmentApproval(){
+        return judgmentApproval ;
+    }
 
     public void addAGameMain(Game game){
         getMain().add(game);

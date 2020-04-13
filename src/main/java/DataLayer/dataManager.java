@@ -20,7 +20,16 @@ public class dataManager implements IDataManager {
     private LinkedList<Referee> RefereeList;
     private static final Logger systemLoger = Logger.getLogger(dataManager.class);
 
-
+    public void TestReset (){
+        this.guestsList =  new LinkedList<>();
+        this.userList = new LinkedList<>();
+        this.Alerts = new HashMap<>();
+        this.complaints = new HashMap<>();
+        this.leagueList = new LinkedList<>();
+        this.seasonList = new LinkedList<>();
+        this.pageList = new LinkedList<>();
+        this.RefereeList = new LinkedList<>();
+    }
     public dataManager() {
         this.guestsList =  new LinkedList<>();
         this.userList = new LinkedList<>();
@@ -51,6 +60,7 @@ public class dataManager implements IDataManager {
         }
         return null;
     }
+
 
     public void addUser(User user) {
         if(!userList.contains(user))
@@ -155,7 +165,7 @@ public class dataManager implements IDataManager {
     }
 
     /**
-     * id: dataManager@
+     * id: dataManager@6
      * add New Referee To Data
      * @param referee
      * @return if added successfully, if not -> already contains the element
@@ -170,18 +180,21 @@ public class dataManager implements IDataManager {
     }
 
     /**
-     *
+      id: dataManager@7
+     * remove referee from data
      * @param referee
      * @return
      */
     public boolean removeReferee(Referee referee){
         if(RefereeList.contains(referee)){
             RefereeList.remove(referee);
-            systemLoger.info("new Referee been removed , belong to user : "+ referee.getUser().getUserName());
+            systemLoger.info("Referee been removed , belong to user : "+ referee.getUser().getUserName());
             return true;
         }
         return false;
     }
+
+
     public void setLeagueList(List<League> leagueList) {
         this.leagueList = leagueList;
     }
@@ -200,6 +213,10 @@ public class dataManager implements IDataManager {
 
     public void setTeamList(List<Team> teamList) {
         this.teamList = teamList;
+    }
+
+    public List<Referee> getRefereeList() {
+        return RefereeList;
     }
 }
 

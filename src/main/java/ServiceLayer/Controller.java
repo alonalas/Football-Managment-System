@@ -17,6 +17,8 @@ public class Controller implements IController{
     private Representitive representitive;
     private Administrator administrator;
 
+    public static Controller controllerSingleTone ;
+
     public Controller(Representitive representitive, Administrator administrator) {
         this.representitive = representitive;
         this.administrator = administrator;
@@ -60,4 +62,13 @@ public class Controller implements IController{
     public void addUser(User user) {
         this.currentUserList.add(user);
     }
+
+    public Map<User, List<IUserService>> getUserServices() {
+        return UserServices;
+    }
+
+    public void setUserServices(Map<User, List<IUserService>> userServices) {
+        UserServices = userServices;
+    }
+
 }
