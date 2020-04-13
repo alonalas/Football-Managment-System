@@ -22,7 +22,7 @@ public class RefereeService extends AUserService {
     }
 
     /**
-     * ID: Referee@1
+     * ID: RefereeService@1
      * UC 10.1
      * ID: @RefereeService1
      * display the Referee's details
@@ -32,7 +32,7 @@ public class RefereeService extends AUserService {
         System.out.println("Name of referee: " + referee.getName());
         System.out.println("Qualification: " + referee.getQualification());
         // for gui
-        return ("Name of referee: " + referee.getName() + "\n Qualification: " + referee.getQualification());
+        return ("Name of referee: " + referee.getName() + "\nQualification: " + referee.getQualification());
     }
 
     public Referee getReferee() {
@@ -40,7 +40,7 @@ public class RefereeService extends AUserService {
     }
 
     /**
-     * ID: Referee@2
+     * ID: RefereeService@2
      * UC 10.1
      * ID: @RefereeService2
      * change the details of the referee
@@ -56,7 +56,7 @@ public class RefereeService extends AUserService {
 
 
     /**
-     * ID: Referee@3
+     * ID: RefereeService@3
      * UC 10.2
      * ID: @RefereeService3
      * displays the referee's games

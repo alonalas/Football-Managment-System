@@ -174,6 +174,7 @@ public class Referee extends Role{
             System.out.println("Game number " + i);
             game.displayDetails();
             display[index]="Game number: " + i;
+            i++;
         }
         return display;
     }
@@ -257,7 +258,7 @@ public class Referee extends Role{
         if(getMain().contains(game)){
             LocalDate date=LocalDate.now();
             LocalTime now=LocalTime.now();
-            if(date.isAfter(LocalDate.parse(game.getDate()))&& now.isAfter(LocalTime.parse(game.getEndTime()))) {
+            if((date.isAfter(LocalDate.parse(game.getDate()))|| date.isEqual(LocalDate.parse(game.getDate())))&& now.isAfter(LocalTime.parse(game.getEndTime()))) {
                 GameReport gameReport = new GameReport(game, description);
                 game.setGameReport(gameReport);
                 String propertiesPath = "log4j.properties";
