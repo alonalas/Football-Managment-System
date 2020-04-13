@@ -10,24 +10,40 @@ public class Team {
     private String stadium;
     private Page page;
     private List<Player> playerList;
-    private Manager manager;
+    private List<Manager> managerList;
     private List<Owner> ownerList;
     private List<Game> away;
     private List<Game> home;
     private League league;
-    private IController system;
+    private List<Coach> coachList;
+    private List<RoleHolder> roleHolders;
 
     public Team(String name,String stadium, Page page, List<Player> playerList, Manager manager, List<Owner> ownerList, List<Game> away, List<Game> home, League league, IController system) {
         this.name=name;
         this.stadium = stadium;
         this.page = page;
-        this.playerList = playerList;
-        this.manager = manager;
-        this.ownerList = ownerList;
-        this.away = away;
-        this.home = home;
-        this.league = league;
-        this.system = system;
+        this.dataManager = dataManager;
+        managerList = new LinkedList<>();
+        playerList = new LinkedList<>();
+        ownerList = new LinkedList<>();
+        away = new LinkedList<>();
+        home = new LinkedList<>();
+        coachList = new LinkedList<>();
+        roleHolders = new LinkedList<>();
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void addOwner(Owner owner) {
+        if (!this.ownerList.contains(owner))
+            ownerList.add(owner);
     }
 
     public String getName() {
@@ -62,12 +78,46 @@ public class Team {
         this.playerList = playerList;
     }
 
-    public Manager getManager() {
-        return manager;
+    public Manager getManager(Manager manager) {
+        for (Manager manager1 : managerList) {
+            if (manager1.equals(manager))
+                return manager1;
+        }
+        return null;
+    }
+
+    public List<Manager> getManagerList() {
+        return managerList;
     }
 
     public void setManager(Manager manager) {
-        this.manager = manager;
+        if (!managerList.contains(manager))
+            managerList.add(manager);
+    }
+
+    /**
+     * ID: 1
+     * returns a RoleHolder that belongs to the requiered team of the given owner
+     * search is made by user name and email
+     * @param owner
+     * @param userName
+     * @param email
+     * @return
+     */
+    public RoleHolder getRoleHolder(Owner owner, String userName,String email) {
+
+        User user = dataManager.getUserByMail(userName,email);
+        if (this.ownerList.contains(owner)) {
+            for (RoleHolder roleHolder : this.roleHolders) {
+                if (roleHolder.getUser().equals(user))
+                    return roleHolder;
+            }
+        }
+        return null;
+    }
+
+    public List<RoleHolder> getRoleHolders() {
+        return roleHolders;
     }
 
     public List<Owner> getOwnerList() {
@@ -116,4 +166,23 @@ public class Team {
             return false;
         }
     }
+
+    public void setPlayer(Player player) {
+        if(!playerList.contains(player))
+            playerList.add(player);
+    }
+
+    public void setCoach(Coach coach) {
+        if (!coachList.contains(coach))
+            coachList.add(coach);
+    }
+
+    public List<Coach> getCoachList() {
+        return coachList;
+    }
+
+    public void setCoachList(List<Coach> coachList) {
+        this.coachList = coachList;
+    }
+
 }

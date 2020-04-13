@@ -7,11 +7,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class AdministratorTests {
+public class AdministratorTest {
     // Tester
     private static Administrator administrator;
     // Logger
-    private static final Logger testLogger = Logger.getLogger(AdministratorTests.class);
+    private static final Logger testLogger = Logger.getLogger(AdministratorTest.class);
 
     // This Function Run Before All LogicLayer.Administrator Tests
     @BeforeClass
