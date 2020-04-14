@@ -65,25 +65,25 @@ public class RefereeTest {
      */
     @Test
     public void addJudgmentApproval() {
-        assertTrue(referee.addJudgmentApproval(new Pair<>(league,season)));
-        assertFalse(referee.addJudgmentApproval(new Pair<>(league,season)));
+        assertTrue(referee.addJudgmentApproval(new JudgmentApproval(league,season)));
+        assertFalse(referee.addJudgmentApproval(new JudgmentApproval(league,season)));
     }
     /**
      * id: U@16
      */
     @Test
     public void removeJudgmentApproval() {
-        assertTrue(referee.addJudgmentApproval(new Pair<>(league,season)));
-        assertTrue(referee.removeJudgmentApproval(new Pair<>(league,season)));
-        assertFalse(referee.removeJudgmentApproval(new Pair<>(league,season)));
+        assertTrue(referee.addJudgmentApproval(new JudgmentApproval(league,season)));
+        assertTrue(referee.removeJudgmentApproval(new JudgmentApproval(league,season)));
+        assertFalse(referee.removeJudgmentApproval(new JudgmentApproval(league,season)));
     }
     /**
      * id: U@17
      */
     @Test
     public void getJudgmentApproval() {
-        referee.addJudgmentApproval(new Pair<>(league2,season));
-        referee.addJudgmentApproval(new Pair<>(league,season));
+        referee.addJudgmentApproval(new JudgmentApproval(league2,season));
+        referee.addJudgmentApproval(new JudgmentApproval(league,season));
         assertTrue(user.ifUserRoleIncludeReferee().getJudgmentApproval().size()==2);
     }
 }

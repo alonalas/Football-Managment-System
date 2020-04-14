@@ -1,13 +1,10 @@
 package LogicLayer;
 
 import DataLayer.IDataManager;
-import DataLayer.dataManager;
-import javafx.util.Pair;
 
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Referee extends Role{
 
@@ -17,7 +14,7 @@ public class Referee extends Role{
     private static IDataManager data = DataComp.getInstance();
     private List<Game> main;
     private  List<Game> line;
-    private List<Pair<League , Season>> judgmentApproval ;
+    private List<JudgmentApproval> judgmentApproval ;
 
 
     public Referee(User user, String qualification, String name, League league) {
@@ -131,7 +128,7 @@ public class Referee extends Role{
      * @param approval
      * @return false if already contains this approval , true if added.
      */
-    public boolean addJudgmentApproval(Pair<League,Season> approval){
+    public boolean addJudgmentApproval(JudgmentApproval approval){
         if(judgmentApproval.contains(approval)) return false ;
         judgmentApproval.add(approval);
         return true ;
@@ -142,7 +139,7 @@ public class Referee extends Role{
      * @param approval
      * @return if been removed successfully.
      */
-    public boolean removeJudgmentApproval(Pair<League,Season> approval){
+    public boolean removeJudgmentApproval(JudgmentApproval approval){
         if( ! judgmentApproval.contains(approval)) return false;
         judgmentApproval.remove(approval);
         return true ;
@@ -152,7 +149,7 @@ public class Referee extends Role{
      * return all Judgment Approvals to judge in specific Season of League
      * @return all approvals for league-season judgment
      */
-    public List<Pair<League,Season>> getJudgmentApproval(){
+    public List<JudgmentApproval> getJudgmentApproval(){
         return judgmentApproval ;
     }
 
