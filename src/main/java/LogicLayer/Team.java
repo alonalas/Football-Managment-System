@@ -44,6 +44,12 @@ public class Team {
             ownerList.add(owner);
     }
 
+    public void addManager(Manager manager){
+        if(!this.managerList.contains(manager)){
+            managerList.add(manager);
+        }
+    }
+
 
     public String getName() {
         return name;
@@ -159,7 +165,7 @@ public class Team {
      * @return true if the teams are equal
      */
     public boolean equals(Team team){
-        if(this.name.equals(team)&& this.stadium.equals(team.getStadium())){
+        if(this.name.equals(team.getName())&& this.stadium.equals(team.getStadium())){
             return true;
         }else{
             return false;

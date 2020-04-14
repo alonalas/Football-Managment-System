@@ -1,5 +1,6 @@
 package LogicLayer;
 
+import DataLayer.dataManager;
 import ServiceLayer.IController;
 
 import java.util.Date;
@@ -7,17 +8,19 @@ import java.util.Date;
 public class Complaint {
 
     private User user;
-    private IController system;
+    private dataManager system;
     private String description;
     private String commentAdmin;
     private String date; // format: "2010-12-12"
+    private boolean answered;
     //Hour is missing
 
-    public Complaint(User user, IController system, String description, String date) {
+    public Complaint(User user, dataManager system, String description, String date) {
         this.user = user;
         this.system = system;
         this.description = description;
         this.date = date;
+        this.answered=false;
     }
 
 //    public User getUser() {
@@ -25,17 +28,15 @@ public class Complaint {
 //        return user;
 //    }
 
+
+    public User getUser() {
+        return user;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
 
-    public IController getSystem() {
-        return system;
-    }
-
-    public void setSystem(IController system) {
-        this.system = system;
-    }
 
     public String getDescription() {
         return description;
@@ -53,11 +54,44 @@ public class Complaint {
         this.date = date;
     }
 
-    public void setCommentAdmin(String commentAdmin) {
+    public void setCommentAdmin(String commentAdmin)
+    {
         this.commentAdmin = commentAdmin;
+        this.answered=true;
     }
 
-    public String getCommentAdmin() {
+    public String getCommentAdmin()
+    {
+        if(commentAdmin==null){
+            return "no comments";
+        }
         return commentAdmin;
+    }
+
+    /**
+     * ID: Complaint@1
+     * @return the full complaint details
+     */
+    public String getFullComplaint(){
+        String com = "user: " + getUser().getUserName() + "\ndescription: " + getDescription()
+                + "\ndate: " + getDate() + "\ncomments: " + getCommentAdmin();
+        return com;
+    }
+
+
+    /**
+     * ID: Complaint@2
+     * @param complaint the complaint we want to compare
+     * @return true if the two complaint are equal
+     */
+    public boolean equals(Complaint complaint){
+        if(this.getUser().equals(complaint.getUser())&&
+        this.getDescription().equals(complaint.getDescription())&&
+        this.getDate().equals(complaint.getDate())){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

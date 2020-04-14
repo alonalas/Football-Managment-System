@@ -1,10 +1,6 @@
 package ServiceLayer;
 
-import LogicLayer.League;
-import LogicLayer.Game;
-import LogicLayer.Page;
-import LogicLayer.Season;
-import LogicLayer.User;
+import LogicLayer.*;
 
 import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
@@ -67,5 +63,19 @@ public abstract class AUserService implements IUserService{
     }
     public boolean RemoveNewRefereeFromUsers(User user) throws IOException{
         throw new IOException("Unsupported method");
+    }
+
+    public void closeTeam(Team team) throws IOException{
+        throw new IOException("Unsupported method");
+    }
+
+    public void showComplaints()throws IOException{
+        throw new IOException("Unsupported method");
+
+    }
+
+    public void commentComplaint(Complaint complaint,String comment)throws IOException{
+        throw new IOException("Unsupported method");
+
     }
 }

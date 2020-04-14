@@ -11,7 +11,7 @@ public class dataManager implements IDataManager {
 
     private List<Guest> guestsList;
     private List<User> userList;
-    private Map<User, List<LogicLayer.Alert>> Alerts;
+    private Map<User, List<LogicLayer.Alert>> alerts;
     private Map<User, List<Complaint>> complaints;
     private List<League> leagueList;
     private List<Season> seasonList;
@@ -19,17 +19,20 @@ public class dataManager implements IDataManager {
     private List<Page> pageList;
     private LinkedList<Referee> RefereeList;
     private static final Logger systemLoger = Logger.getLogger(dataManager.class);
+    private List<Administrator> administrators;
 
 
     public dataManager() {
         this.guestsList =  new LinkedList<>();
         this.userList = new LinkedList<>();
-        this.Alerts = new HashMap<>();
+        this.alerts = new HashMap<>();
         this.complaints = new HashMap<>();
         this.leagueList = new LinkedList<>();
         this.seasonList = new LinkedList<>();
         this.pageList = new LinkedList<>();
         this.RefereeList = new LinkedList<>();
+        this.teamList = new LinkedList<>();
+        this.administrators = new LinkedList<>();
     }
 
 
@@ -74,11 +77,11 @@ public class dataManager implements IDataManager {
     }
 
     public Map<User, List<LogicLayer.Alert>> getAlerts() {
-        return Alerts;
+        return alerts;
     }
 
     public void setAlerts(Map<User, List<Alert>> alerts) {
-        Alerts = alerts;
+        alerts = alerts;
     }
 
     public Map<User, List<Complaint>> getComplaint() {
@@ -155,7 +158,7 @@ public class dataManager implements IDataManager {
     }
 
     /**
-     * id: dataManager@
+     * id: dataManager@6
      * add New Referee To Data
      * @param referee
      * @return if added successfully, if not -> already contains the element
@@ -200,6 +203,53 @@ public class dataManager implements IDataManager {
 
     public void setTeamList(List<Team> teamList) {
         this.teamList = teamList;
+    }
+
+
+    /**
+     * ID: dataManager@8
+     * adds a new Team to the teams list
+     * @param team the new team we want to add
+     */
+    public void addTeam(Team team){
+        if(!getTeamList().contains(team)){
+            teamList.add(team);
+        }
+    }
+
+
+    /**
+     * ID: dataManager@9
+     * adds a new complaint to the complaints map
+     * @param complaint the new complaint we want to add
+     * @param user the user we add the complaint to
+     */
+    public void addComplaint(Complaint complaint,User user){
+        if(!complaints.containsValue(complaint)){
+            List<Complaint> list = complaints.get(user);
+            if(list==null){
+                list = new LinkedList<>();
+            }
+            list.add(complaint);
+            complaints.put(user,list);
+        }
+    }
+
+    /**
+     * ID: dataManager@10
+     * adds new alert to the alerts map
+     * @param alert the new alert we want to add
+     * @param user the user we add the alert to
+     */
+    public void addAlert(Alert alert,User user){
+        if(!complaints.containsValue(alert)){
+            List<Alert> list = getAlerts().get(user);
+            if(list==null){
+                list = new LinkedList<>();
+            }
+            list.add(alert);
+            alerts.put(user,list);
+        }
     }
 }
 

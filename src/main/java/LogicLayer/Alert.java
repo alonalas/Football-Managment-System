@@ -6,30 +6,30 @@ import java.util.Date;
 
 public class Alert {
 
-    private Role user;
+    private User user;
     private IController system;
     private String description;
     private String date;
     // hour is missing
 
-    public Alert(Role user, IController system, String description, String date) {
+    public Alert(User user, IController system, String description, String date) {
         this.user = user;
         this.system = system;
         this.description = description;
         this.date = date;
     }
 
-    public Alert(Role user, String description, String date) {
+    public Alert(User user, String description, String date) {
         this.user = user;
         this.description = description;
         this.date = date;
     }
 
-    public Role getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Role user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

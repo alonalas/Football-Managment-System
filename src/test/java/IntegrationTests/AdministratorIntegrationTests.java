@@ -1,16 +1,17 @@
-package UnitTests;
+package IntegrationTests;
+
 
 import DataLayer.dataManager;
 import LogicLayer.*;
+import ServiceLayer.AdministratorService;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-
-public class AdministratorTest {
-    private dataManager dataManager;
+public class AdministratorIntegrationTests {
+    private DataLayer.dataManager dataManager;
     private Administrator administrator;
     private Team team1;
     private Team team2;
@@ -21,7 +22,7 @@ public class AdministratorTest {
     private User user1;
     private User user2;
     private User user3;
-
+    private AdministratorService adminService;
 
     @Before
     public void init(){
@@ -50,31 +51,12 @@ public class AdministratorTest {
 
         administrator= new Administrator("aa","scv","jdjdj",dataManager);
 
-
+        adminService= new AdministratorService(administrator);
     }
 
     @Test
     public void closeTeam(){
-        for(Team team: dataManager.getTeamList()){
-            System.out.println(team.getName()+ " " + team.isFinalClose());
-        }
-        for(Alert alert: manager2.getAlerts()){
-            System.out.println(alert.getDescription());
-        }
-        for(Alert alert: owner2.getAlerts()){
-            System.out.println(alert.getDescription());
-        }
-        administrator.closeTeam(team2);
-        for(Team team: dataManager.getTeamList()){
-            System.out.println(team.getName()+ " " + team.isFinalClose()); // macabi is true
-        }
-
-        for(Alert alert: manager2.getAlerts()){
-            System.out.println(alert.getDescription());
-        }
-        for(Alert alert: owner2.getAlerts()){
-            System.out.println(alert.getDescription());
-        }
+        adminService.closeTeam(team1);
     }
 
     @Test
@@ -83,24 +65,27 @@ public class AdministratorTest {
         Complaint complaint2 = new Complaint(user2,dataManager,"good","2018-12-13");
         dataManager.addComplaint(complaint1,user1);
         dataManager.addComplaint(complaint2,user2);
-
-        administrator.showComplaints();
-
+        adminService.showComplaints();
     }
 
+
     @Test
-    public void CommentComplaint(){
+    public void commentComplaint(){
         Complaint complaint1 = new Complaint(user1,dataManager,"bad","2012-12-12");
         Complaint complaint2 = new Complaint(user2,dataManager,"good","2018-12-13");
         dataManager.addComplaint(complaint1,user1);
         dataManager.addComplaint(complaint2,user2);
 
-        administrator.showComplaints();
-
+        adminService.showComplaints();
         System.out.println();
-        administrator.commentComplaint(complaint1,"very good complaint");
-        administrator.showComplaints();
+        adminService.commentComplaint(complaint2,"boringgggg");
+        adminService.showComplaints();
+
 
     }
+
+
+
+
 
 }

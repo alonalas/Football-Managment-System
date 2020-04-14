@@ -13,12 +13,14 @@ public class User {
     private String userName;
     //private IController system;
     private List<Role> roles;
+    private List<Alert> alerts;
 
     public User(String email, String password, String userName) {
         this.email = email;
         this.password = password;
         this.userName = userName;
         this.roles = new LinkedList<>();
+        this.alerts = new LinkedList<>();
     }
 
     @Override
@@ -112,5 +114,15 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+
+    /**
+     * ID: User@5
+     * adds a new Alert to the alerts list
+     * @param alert the new alwert we want to add
+     */
+    public void addAlerts(Alert alert){
+        this.alerts.add(alert);
     }
 }
