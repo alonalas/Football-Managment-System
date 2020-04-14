@@ -19,6 +19,10 @@ public class Season {
     private Map<League, Policy> Policies;
     private static IDataManager data = DataComp.getInstance();
 
+    public static void setData(IDataManager data) {
+        Season.data = data;
+    }
+
     public Season(IController system, String start, String end, List<Game> gameList, List<League> leagueList, Map<League, Policy> policies) {
         this.system = system;
         this.start = start;

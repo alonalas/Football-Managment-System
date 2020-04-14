@@ -3,7 +3,6 @@ package UnitTests;
 import DataLayer.IDataManager;
 import DataLayer.dataManager;
 import LogicLayer.*;
-import javafx.util.Pair;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

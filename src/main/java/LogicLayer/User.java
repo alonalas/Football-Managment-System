@@ -16,6 +16,10 @@ public class User {
     private List<Role> roles;
     private static IDataManager data = DataComp.getInstance();
 
+    public static void setData(IDataManager data) {
+        User.data = data;
+    }
+
     public User(String email, String password, String userName) {
         this.email = email;
         this.password = password;

@@ -11,6 +11,10 @@ import java.util.Map;
 
 public class League {
 
+    public static void setData(IDataManager data) {
+        League.data = data;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof League){
