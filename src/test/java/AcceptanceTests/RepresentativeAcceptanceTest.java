@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import javax.xml.crypto.dsig.keyinfo.KeyValue;
+import java.security.KeyPair;
 import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
