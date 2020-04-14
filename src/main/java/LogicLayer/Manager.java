@@ -1,6 +1,8 @@
 package LogicLayer;
 
-public class Manager extends RoleHolder{
+import java.io.Serializable;
+
+public class Manager extends RoleHolder implements Serializable {
 
     private String name;
     private Team team;

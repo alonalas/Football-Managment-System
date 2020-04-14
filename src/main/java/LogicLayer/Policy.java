@@ -1,6 +1,8 @@
 package LogicLayer;
 
-public class Policy {
+import java.io.Serializable;
+
+public class Policy implements Serializable {
 
     private League league;
     private Season season;

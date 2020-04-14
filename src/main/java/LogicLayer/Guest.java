@@ -3,7 +3,9 @@ package LogicLayer;
 import DataLayer.IDataManager;
 import ServiceLayer.IController;
 
-public class Guest {
+import java.io.Serializable;
+
+public class Guest implements Serializable {
 
     private IController system;
     private IDataManager data;

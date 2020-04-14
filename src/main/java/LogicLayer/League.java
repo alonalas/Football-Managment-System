@@ -5,11 +5,12 @@ import DataLayer.dataManager;
 import ServiceLayer.IController;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class League {
+public class League implements Serializable {
 
     public static void setData(IDataManager data) {
         League.data = data;

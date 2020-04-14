@@ -1,4 +1,6 @@
 package LogicLayer;
 
-public class Page {
+import java.io.Serializable;
+
+public class Page implements Serializable {
 }

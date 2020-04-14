@@ -3,10 +3,11 @@ package LogicLayer;
 import DataLayer.dataManager;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Owner extends RoleHolder {
+public class Owner extends RoleHolder implements Serializable {
 
     private String name;
     private List<Team> teamList;

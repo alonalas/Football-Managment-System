@@ -1,8 +1,9 @@
 package LogicLayer;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 
-public class Player extends RoleHolder{
+public class Player extends RoleHolder implements Serializable {
 
     private String position;
     private Team team;

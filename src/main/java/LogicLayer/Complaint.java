@@ -2,9 +2,10 @@ package LogicLayer;
 
 import ServiceLayer.IController;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Complaint {
+public class Complaint implements Serializable {
 
     private User user;
     private IController system;

@@ -1,12 +1,13 @@
 package LogicLayer;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Game {
+public class Game implements Serializable {
 
     private Season season;
     private Team home;

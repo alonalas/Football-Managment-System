@@ -3,10 +3,11 @@ package LogicLayer;
 import DataLayer.dataManager;
 import ServiceLayer.IController;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Team {
+public class Team implements Serializable {
 
     private dataManager dataManager;
     private String name;

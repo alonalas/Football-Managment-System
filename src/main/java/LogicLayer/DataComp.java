@@ -3,7 +3,9 @@ package LogicLayer;
 import DataLayer.IDataManager;
 import DataLayer.dataManager;
 
-public class DataComp {
+import java.io.Serializable;
+
+public class DataComp implements Serializable {
 
     private static dataManager DManager = new dataManager();
     public static IDataManager  getInstance(){

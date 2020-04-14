@@ -2,9 +2,10 @@ package LogicLayer;
 
 import ServiceLayer.IController;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Administrator extends User{
+public class Administrator extends User implements Serializable {
     public Administrator(String email, String password, String userName, IController system, List<Role> roles) {
         super(email,password,userName);
     }

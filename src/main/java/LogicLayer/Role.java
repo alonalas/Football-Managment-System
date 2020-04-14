@@ -1,8 +1,9 @@
 package LogicLayer;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Role  {
+public abstract class Role  implements Serializable {
 
     private User user;
 

@@ -1,6 +1,8 @@
 package LogicLayer;
 
-public class Fan extends Role{
+import java.io.Serializable;
+
+public class Fan extends Role implements Serializable {
 
     private String name;
 

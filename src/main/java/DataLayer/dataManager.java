@@ -3,11 +3,12 @@ import LogicLayer.*;
 //import com.sun.org.apache.xml.internal.security.encryption.ReferenceList;
 import org.apache.log4j.Logger;
 
+import java.io.*;
 import java.util.*;
 import java.util.List;
 import java.util.Map;
 
-public class dataManager implements IDataManager {
+public class dataManager implements IDataManager , Serializable {
 
     private List<Guest> guestsList;
     private List<User> userList;
@@ -217,6 +218,34 @@ public class dataManager implements IDataManager {
 
     public List<Referee> getRefereeList() {
         return RefereeList;
+    }
+
+    public static void writeData(IDataManager data , File file){
+        try {
+            FileOutputStream f = new FileOutputStream(file);
+            ObjectOutputStream o = new ObjectOutputStream(f);
+
+            // Write objects to file
+            o.writeObject(data);
+
+            o.close();
+            f.close();
+        }catch (Exception e){}
+
+    }
+    public static IDataManager readData(File file){
+        IDataManager Mdata = null;
+        try {
+            FileInputStream fi = new FileInputStream(file);
+            ObjectInputStream oi = new ObjectInputStream(fi);
+
+            // Read objects
+             Mdata = (IDataManager) oi.readObject();
+
+            oi.close();
+            fi.close();
+        }catch (Exception e){}
+        return Mdata;
     }
 }
 

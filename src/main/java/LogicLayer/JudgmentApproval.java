@@ -1,6 +1,8 @@
 package LogicLayer;
 
-public class JudgmentApproval {
+import java.io.Serializable;
+
+public class JudgmentApproval implements Serializable {
     private League league;
     private Season season;
 

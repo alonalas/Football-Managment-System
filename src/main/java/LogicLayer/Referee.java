@@ -3,10 +3,11 @@ package LogicLayer;
 import DataLayer.IDataManager;
 
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Referee extends Role{
+public class Referee extends Role implements Serializable {
 
     private String qualification;
     private String name;
