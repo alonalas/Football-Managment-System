@@ -16,6 +16,10 @@ public class League implements Serializable {
         League.data = data;
     }
 
+    public static void setData(IDataManager data) {
+        League.data = data;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof League){
