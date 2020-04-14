@@ -4,15 +4,22 @@ import java.io.IOException;
 import java.util.List;
 
 public class UserService extends AUserService {
-    User user;
+    private User user;
+    private IController system;
 
-    public UserService(User user) {
+    public UserService(User user, IController system) {
         this.user = user;
+        this.system = system;
     }
 
+    /**
+     * USE CASE - 3.1
+     * logOut from system
+     */
     @Override
     public void logOut() throws IOException {
-        user.logOut();
+        system.removeUser(user);
+        system.removeUserService(user);
     }
 
     /**

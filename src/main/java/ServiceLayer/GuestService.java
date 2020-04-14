@@ -8,9 +8,11 @@ import java.util.List;
 public class GuestService implements IGuestService{
     private Guest guest;
     private List<Object> lastSearchResults;
+    private IController system;
 
-    public GuestService(Guest guest) {
+    public GuestService(Guest guest, IController system) {
         this.guest = guest;
+        this.system = system;
         this.lastSearchResults = new ArrayList<>();
     }
 
@@ -36,6 +38,8 @@ public class GuestService implements IGuestService{
         newUser.getRoles().add(fan);
         guest.addNewUser(newUser,true);
         System.out.println("## Registered to system successfully ##");
+        system.addUser(newUser);
+        system.removeGuest(guest);
     }
 
     /**
@@ -55,6 +59,8 @@ public class GuestService implements IGuestService{
             return;
         }
         guest.addNewUser(userToSignIn,false);
+        system.addUser(userToSignIn);
+        system.removeGuest(guest);
     }
 
     private boolean Authentication(String password){

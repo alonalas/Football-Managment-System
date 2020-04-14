@@ -9,9 +9,11 @@ import java.util.List;
 
 public class FanService extends AUserService{
     Fan fan;
+    private IController system;
 
-    public FanService(Fan fan) {
+    public FanService(Fan fan, IController system) {
         this.fan = fan;
+        this.system = system;
     }
 
     /**
@@ -38,22 +40,22 @@ public class FanService extends AUserService{
 
     @Override
     public void searchInformation(Interest interested) throws IOException {
-        Guest guest = new Guest(fan.getSystem(), fan.getDataManager());
-        GuestService guestService = new GuestService(guest);
+        Guest guest = new Guest(fan.getDataManager());
+        GuestService guestService = new GuestService(guest, system);
         guestService.searchInformation(Criteria.Category, interested.toString());
     }
 
     @Override
     public void searchInformation(String name) throws IOException {
-        Guest guest = new Guest(fan.getSystem(), fan.getDataManager());
-        GuestService guestService = new GuestService(guest);
+        Guest guest = new Guest(fan.getDataManager());
+        GuestService guestService = new GuestService(guest, system);
         guestService.searchInformation(Criteria.Name, name);
     }
 
     @Override
     public void searchInformationByKeyWord(String query) throws IOException {
-        Guest guest = new Guest(fan.getSystem(), fan.getDataManager());
-        GuestService guestService = new GuestService(guest);
+        Guest guest = new Guest(fan.getDataManager());
+        GuestService guestService = new GuestService(guest, system);
         guestService.searchInformation(Criteria.KeyWord, query);
         fan.addSearchHistory(fan,query);
     }
@@ -66,7 +68,7 @@ public class FanService extends AUserService{
      */
     @Override
     public void report(String description) throws IOException {
-        Complaint newComplaint = new Complaint(fan.getUser(),fan.getUser().getSystem(),description,new Date());
+        Complaint newComplaint = new Complaint(fan.getUser(),system,description,new Date());
         fan.addComplaintToDataManager(newComplaint);
     }
 }

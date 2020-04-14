@@ -10,4 +10,5 @@ public abstract class RoleHolder extends Role {
     public Team getTeam() {
         return team;
     }
+
 }

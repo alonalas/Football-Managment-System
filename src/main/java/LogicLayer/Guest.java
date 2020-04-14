@@ -7,16 +7,10 @@ import java.util.List;
 
 public class Guest {
 
-    private IController system;
     private IDataManager data;
 
-    public Guest(IController system, IDataManager data) {
+    public Guest(IDataManager data) {
         this.data = data;
-        this.system = system;
-    }
-
-    public IController getSystem() {
-        return system;
     }
 
     public User signIn(String email, String password){
@@ -32,8 +26,6 @@ public class Guest {
         if (isNewUser){
             data.addNewUser(newUser);
         }
-        system.addUser(newUser);
-        system.removeGuest(this);
     }
 
     public List<Game> retrieveGames() {

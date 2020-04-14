@@ -14,7 +14,6 @@ public class User {
     private String lastName;
     List<Role> roles;
     IDataManager dataManager;
-    private IController system;
 
     public User(String email, String password, String firstName, String lastName) {
 
@@ -57,15 +56,6 @@ public class User {
         return lastName;
     }
 
-    /**
-     * USE CASE - 3.1
-     * logOut from system
-     */
-    public void logOut() {
-        system.removeUser(this);
-        system.removeUserService( this);
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -88,7 +78,4 @@ public class User {
         return personalDetails;
     }
 
-    public IController getSystem() {
-        return system;
-    }
 }
