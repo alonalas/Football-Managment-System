@@ -1,7 +1,4 @@
 import LogicLayer.Administrator;
-import LogicLayer.Player;
-import LogicLayer.RoleHolder;
-import LogicLayer.User;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.AfterClass;
@@ -16,7 +13,6 @@ public class AdministratorTests {
     private static Administrator administrator;
     // Logger
     private static final Logger testLogger = Logger.getLogger(AdministratorTests.class);
-
     // This Function Run Before All LogicLayer.Administrator Tests
     @BeforeClass
     public static void init(){

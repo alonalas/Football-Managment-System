@@ -16,6 +16,8 @@ public class Page {
 
     }
 
-
-
+    public void addUpdate(String update) {
+        if (update.length()>0)
+            updates.add(update);
+    }
 }

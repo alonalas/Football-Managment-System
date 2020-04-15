@@ -24,4 +24,6 @@ public interface IUserService {
 
     void report(String description) throws IOException;
 
+    void addUpdate(String update) throws IOException;
+
 }

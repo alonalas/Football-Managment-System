@@ -49,4 +49,9 @@ public abstract class AUserService implements IUserService{
     public void report(String description) throws IOException {
         throw new IOException("not possible");
     }
+
+    @Override
+    public void addUpdate(String update) throws IOException {
+        throw new IOException("not possible");
+    }
 }

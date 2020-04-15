@@ -2,6 +2,8 @@ package ServiceLayer;
 
 import LogicLayer.Coach;
 
+import java.io.IOException;
+
 public class CoachService extends AUserService {
     private Coach coach;
     private IController system;
@@ -9,5 +11,15 @@ public class CoachService extends AUserService {
     public CoachService(Coach coach, IController system) {
         this.coach = coach;
         this.system = system;
+    }
+
+    /**
+     * USE CASE - 5.2
+     * Add content to page
+     * @param update
+     */
+    @Override
+    public void addUpdate(String update) throws IOException {
+        coach.getPage().addUpdate(update);
     }
 }
