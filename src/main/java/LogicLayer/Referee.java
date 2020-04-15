@@ -1,11 +1,19 @@
 package LogicLayer;
 
 import DataLayer.IDataManager;
+import DataLayer.dataManager;
+import ServiceLayer.RefereeService;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 
 import java.io.Serializable;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
+
 
 public class Referee extends Role implements Serializable {
 
@@ -17,6 +25,7 @@ public class Referee extends Role implements Serializable {
     private  List<Game> line;
     private List<JudgmentApproval> judgmentApproval ;
 
+    private static final Logger testLogger = Logger.getLogger(RefereeService.class);
 
     public Referee(User user, String qualification, String name, League league) {
         super(user);
@@ -34,6 +43,8 @@ public class Referee extends Role implements Serializable {
         super(user);
         this.qualification = qualification;
         this.name = name;
+        this.main = new LinkedList<>();
+        this.line = new LinkedList<>();
         judgmentApproval = new LinkedList<>();
     }
 
@@ -154,11 +165,157 @@ public class Referee extends Role implements Serializable {
         return judgmentApproval ;
     }
 
+    public boolean equals(Referee ref){
+        if(this.getName().equals(ref.getName())&& this.getQualification().equals(ref.getQualification())){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
+    /**
+     * ID: Referee@3
+     * adds a game to the main games list
+     * @param game
+     */
     public void addAGameMain(Game game){
         getMain().add(game);
     }
 
+    /**
+     * ID: Referee@4
+     * adds a game to the lain games list
+     * @param game
+     */
     public void addAGameLine(Game game){
         getLine().add(game);
     }
+
+
+    /**
+     *ID: Referee@5
+     * UC 10.2
+     * displays the referee's games
+     * @return an array of strings that contains all the games of the referee
+     */
+    public String[] displayGames(){
+        String [] display= new String[2+getMain().size()+getLine().size()];
+        System.out.println("main games:");
+        display[0]="main Games";
+        int i=1;
+        for(Game game :getMain()){
+            System.out.println("Game number " + i);
+            game.displayDetails();
+            display[i]="Game number: " +i;
+            i++;
+        }
+        display[i]="side Games:";
+        int index= i+1;
+        i=1;
+        System.out.println("line games: ");
+        for(Game game : getLine()){
+            System.out.println("Game number " + i);
+            game.displayDetails();
+            display[index]="Game number: " + i;
+            i++;
+        }
+        return display;
+    }
+
+
+    /**
+     * ID: Referee@6
+     * UC 10.3
+     * @param game the game we want to add an event to
+     * @param description the description of the event
+     * @param eventType the event type
+     */
+    public void addGameEvent(Game game,String description, String eventType){
+        LocalDate date=LocalDate.now();
+        LocalTime now=LocalTime.now();
+        if(game.getLine().equals(this) || game.getMain().equals(this)){
+            if(date.compareTo(LocalDate.parse(game.getDate()))==0){
+                if(now.isBefore(LocalTime.parse(game.getEndTime()))&& now.isAfter(LocalTime.parse(game.getStartTime()))){
+                    GameEventCalender event = new GameEventCalender(game,now.toString(),date.toString(),eventType,description,now.getMinute());
+                    if(event.getDescription()==null){
+                        System.out.println("no such type of events");
+                    }else {
+                        game.addEventGame(event);
+                        String propertiesPath = "log4j.properties";
+                        PropertyConfigurator.configure(propertiesPath);
+                        testLogger.info("Added new game event");
+                    }
+                }
+                else{
+                    System.out.println("The game is not taking place right now");
+                }
+            }
+        }
+        else{
+            System.out.println("You are not the referee in this game");
+        }
+    }
+
+
+    /**
+     * ID: Referee@7
+     * UC: 10.4
+     * adds an event to the game after he ended (only by a main referee)
+     * @param game the game we want to add an event to
+     * @param description the description of the event
+     * @param eventType the event type
+     */
+    public void addEventAfterGame(Game game, String description, String eventType){
+        LocalDate date=LocalDate.now();
+        LocalTime now=LocalTime.now();
+        if(game.getMain().equals(this)){
+            if(date.compareTo(LocalDate.parse(game.getDate()))==0) {
+                if (now.minusHours(5).isBefore(LocalTime.parse(game.getEndTime())) && now.isAfter(LocalTime.parse(game.getStartTime()))) {
+                    GameEventCalender event = new GameEventCalender(game, now.toString(), date.toString(), eventType, description, now.getMinute());
+                    if (event.getDescription() == null) {
+                        System.out.println("no such type of events");
+                    } else {
+                        game.addEventGame(event);
+                        String propertiesPath = "log4j.properties";
+                        PropertyConfigurator.configure(propertiesPath);
+                        testLogger.info("Added new game event");
+                    }
+                } else {
+                    System.out.println(" The game havent start yet or Its been more then 5 hours, you can't edit the gameEvent");
+                }
+            }
+            }else{
+                System.out.println("you are not the main referee in this game");
+            }
+        }
+
+
+    /**
+     * ID: Referee@8
+     * UC: 10.4.2
+     * creates a game report by a main referee
+     * @param game the game we want to create a report for
+     * @param description the description of the game
+     */
+    public void createGameReport(Game game, String description){
+        if(getMain().contains(game)){
+            LocalDate date=LocalDate.now();
+            LocalTime now=LocalTime.now();
+            if((date.isAfter(LocalDate.parse(game.getDate()))|| date.isEqual(LocalDate.parse(game.getDate())))&& now.isAfter(LocalTime.parse(game.getEndTime()))) {
+                GameReport gameReport = new GameReport(game, description);
+                game.setGameReport(gameReport);
+                String propertiesPath = "log4j.properties";
+                PropertyConfigurator.configure(propertiesPath);
+                testLogger.info("Added new game report");
+            }else{
+                System.out.println("The game hasn't finished yet");
+            }
+        }
+        else{
+            System.out.println("you are not the main referee in this game");
+        }
+    }
+
 }

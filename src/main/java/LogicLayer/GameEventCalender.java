@@ -17,13 +17,14 @@ public class GameEventCalender implements Serializable {
     }
 
     public GameEventCalender(Game game, String hour, String date, String type, String description, int minute) {
-        this.game = game;
-        this.hour = hour;
-        this.date = date;
-        this.type = eventType.valueOf(type);
-        this.description = description;
-        this.minute = minute;
-
+        if(isAType(type)) {
+            this.game = game;
+            this.hour = hour;
+            this.date = date;
+            this.description = description;
+            this.minute = minute;
+            this.type=eventType.valueOf(type);
+        }
     }
 
     public GameEventCalender(Game game) {
@@ -79,13 +80,32 @@ public class GameEventCalender implements Serializable {
     }
 
 
-
-
+    /**
+     * ID: GameEventCalender@1
+     * displays the event's details
+     */
     public void displayEvents(){
         System.out.print("Game: " );
         getGame().displayDetails();
         System.out.println("Minute: " + getMinute());
         System.out.println("Type: " + getType().name());
         System.out.println("Description: " + getDescription());
+    }
+
+
+    /**
+     * ID: GameEventCalender@2
+     * checks if the String is a kind of a event type
+     * @param type String type
+     * @return true if the input is a kind of event
+     */
+    public boolean isAType(String type){
+        try{
+            eventType.valueOf(type);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
     }
 }

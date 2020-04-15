@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Team implements Serializable {
 
-    private dataManager dataManager;
+    private final DataLayer.dataManager dataManager;
     private String name;
     private String stadium;
     private Page page;
@@ -22,8 +22,8 @@ public class Team implements Serializable {
     private List<Coach> coachList;
     private List<RoleHolder> roleHolders;
 
-    public Team(String stadium, String name, Page page, dataManager dataManager) {
-        this.name = name;
+    public Team(String name,String stadium, Page page, dataManager dataManager) {
+        this.name=name;
         this.stadium = stadium;
         this.page = page;
         this.dataManager = dataManager;
@@ -37,17 +37,19 @@ public class Team implements Serializable {
 
     }
 
+
+    public void addOwner(Owner owner) {
+        if (!this.ownerList.contains(owner))
+            ownerList.add(owner);
+    }
+
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void addOwner(Owner owner) {
-        if (!this.ownerList.contains(owner))
-            ownerList.add(owner);
     }
 
     public String getStadium() {
@@ -146,6 +148,21 @@ public class Team implements Serializable {
 
     public void setLeague(League league) {
         this.league = league;
+    }
+
+
+    /**
+     * function number: 2
+     * compare two teams
+     * @param team the team we want to compare to
+     * @return true if the teams are equal
+     */
+    public boolean equals(Team team){
+        if(this.name.equals(team)&& this.stadium.equals(team.getStadium())){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public void setPlayer(Player player) {

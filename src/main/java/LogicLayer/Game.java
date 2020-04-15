@@ -16,7 +16,7 @@ public class Game implements Serializable {
     private Referee main;
     private List<GameEventCalender> gameEventCalender;
     private String date; // format "2019-04-09"
-    private String startTime; // format (13:50)
+    private String startTime; // format "13:50"
     private String endTime;
     private GameReport gameReport;
 
@@ -124,6 +124,7 @@ public class Game implements Serializable {
 
 
     /**
+     * function number: 1
      * prints the game's details
      */
     public void displayDetails(){
@@ -138,5 +139,22 @@ public class Game implements Serializable {
 
     public void setGameReport(GameReport gameReport) {
         this.gameReport = gameReport;
+    }
+
+
+    /**
+     * function number: @Game2
+     * compare two games
+     * @param game2 game we wanyt to compare
+     * @return return true if the two games are equal
+     */
+    public boolean equals(Game game2){
+        if(this.getDate().equals(game2.getDate())&& this.getHome().equals(game2.getHome())&&
+        this.getAway().equals(game2.getAway())){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

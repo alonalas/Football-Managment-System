@@ -32,6 +32,10 @@ public class GameReport implements Serializable {
         this.description = description;
     }
 
+
+    /**
+     * function number: 1
+     */
     public void displayReport(){
         game.displayDetails();
         System.out.println("description: " +getDescription() );
