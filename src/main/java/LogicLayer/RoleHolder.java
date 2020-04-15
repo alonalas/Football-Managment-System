@@ -10,8 +10,7 @@ public abstract class RoleHolder extends Role {
         super();
     }
 
-    @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Role obj) {
         if (obj instanceof RoleHolder) {
             RoleHolder roleHolder = (RoleHolder)obj;
             if ( this.getUser().equals(roleHolder.getUser())) {

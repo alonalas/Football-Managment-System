@@ -3,6 +3,7 @@ package ServiceLayer;
 import LogicLayer.Administrator;
 import LogicLayer.Complaint;
 import LogicLayer.Team;
+import LogicLayer.User;
 import org.apache.log4j.Logger;
 
 public class AdministratorService extends AUserService {
@@ -34,7 +35,7 @@ public class AdministratorService extends AUserService {
 
 
     /**
-     * ID: Administrator@2
+     * ID: AdministratorService@2
      * displays all the complains in the system
      */
     @Override
@@ -43,7 +44,7 @@ public class AdministratorService extends AUserService {
     }
 
     /**
-     * ID: Administrator@3
+     * ID: AdministratorService@3
      * adds a comment to a certain complaint
      * @param complaint the complaint we want to add comment to
      * @param comment the comment we want to add
@@ -51,5 +52,14 @@ public class AdministratorService extends AUserService {
     @Override
     public void commentComplaint(Complaint complaint,String comment){
         administrator.commentComplaint(complaint,comment);
+    }
+
+    /**
+     * ID: AdministratorService@4
+     * deletes a user
+     * @param user the user we want to delete
+     */
+    public void deleteUser(User user){
+        administrator.deleteUser(user);
     }
 }

@@ -84,6 +84,11 @@ public class AdministratorIntegrationTests {
 
     }
 
+    @Test
+    public void deleteUser(){
+        adminService.deleteUser(user2);
+    }
+
 
 
 

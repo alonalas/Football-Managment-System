@@ -7,6 +7,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class AdministratorTest {
@@ -49,6 +52,7 @@ public class AdministratorTest {
         team2.addManager(manager2);
 
         administrator= new Administrator("aa","scv","jdjdj",dataManager);
+
 
 
     }
@@ -102,5 +106,28 @@ public class AdministratorTest {
         administrator.showComplaints();
 
     }
+
+
+    @Test
+    public void deleteUser(){
+        System.out.println(user2.getRoles().size());
+        for(User user : dataManager.getUserList()){
+            System.out.println(user.getUserName());
+        }
+        for(Owner owner: team1.getOwnerList()) {
+            System.out.println(owner.getName());
+        }
+        administrator.deleteUser(user2);
+        for(Owner owner: team1.getOwnerList()) {
+            System.out.println(owner.getName());
+        }
+        for(User user : dataManager.getUserList()){
+            System.out.println(user.getUserName());
+        }
+        for(Manager manager: team2.getManagerList()){
+            System.out.println(manager.getName());
+        }
+    }
+
 
 }

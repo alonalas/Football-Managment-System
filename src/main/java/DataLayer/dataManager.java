@@ -251,6 +251,18 @@ public class dataManager implements IDataManager {
             alerts.put(user,list);
         }
     }
+
+
+    /**
+     * dataManager@11
+     * delets a user from the users list
+     * @param user the user we want to delete
+     */
+    public void deleteUser(User user){
+        if(userList.contains(user)) {
+            userList.remove(user);
+        }
+    }
 }
 
 
