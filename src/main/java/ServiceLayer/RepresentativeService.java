@@ -48,7 +48,7 @@ public class RepresentativeService extends AUserService {
      * @return all system Seasons
      */
     public List<Season> showAllSeasons() throws IOException{
-       return Season.ShowAllSeasons();
+        return Season.ShowAllSeasons();
     }
 
     /**

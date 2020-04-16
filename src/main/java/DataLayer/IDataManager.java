@@ -20,4 +20,5 @@ public interface IDataManager {
     List<User> getUserList();
     List<Referee> getRefereeList() ;
     void TestReset() ;
+    void addAlert(User user,Alert alert) ;
 }
