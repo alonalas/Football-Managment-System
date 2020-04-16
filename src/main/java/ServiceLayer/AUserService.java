@@ -16,7 +16,7 @@ public abstract class AUserService implements IUserService{
     }
 
     @Override
-    public List<String> showPersonalInformation() throws IOException {
+    public void showPersonalInformation() throws IOException {
         throw new IOException("not possible");
     }
 
@@ -26,7 +26,7 @@ public abstract class AUserService implements IUserService{
     }
 
     @Override
-    public List<String> retrieveHistory() throws IOException {
+    public void retrieveHistory() throws IOException {
         throw new IOException("not possible");
     }
 

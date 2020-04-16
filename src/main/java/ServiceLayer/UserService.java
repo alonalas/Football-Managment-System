@@ -28,9 +28,15 @@ public class UserService extends AUserService {
      * @return
      * @throws IOException
      */
-     public List<String> showPersonalInformation() throws IOException {
+     public void showPersonalInformation() throws IOException {
         List<String> personalDetails = user.getPersonalDetails();
-        return personalDetails;
+        String firstName = personalDetails.get(0);
+        String lastName = personalDetails.get(1);
+        String email = personalDetails.get(2);
+         System.out.println("First name: " + firstName);
+         System.out.println("Last name: " + lastName);
+         System.out.println("Email: " + email);
+         System.out.println();
      }
 
 

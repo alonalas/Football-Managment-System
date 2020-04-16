@@ -10,11 +10,11 @@ public interface IUserService {
 
     void logOut() throws IOException;
 
-    List<String> showPersonalInformation() throws IOException;
+    void showPersonalInformation() throws IOException;
 
     void editPersonalInformation(String firstName, String lastName, String email) throws IOException;
 
-    List<String> retrieveHistory() throws IOException;
+    void retrieveHistory() throws IOException;
 
     void searchInformation(String name) throws IOException;
 

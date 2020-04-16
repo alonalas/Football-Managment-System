@@ -73,8 +73,8 @@ public class User {
     public List<String> getPersonalDetails() {
         List<String> personalDetails = new ArrayList<>();
         personalDetails.add(firstName);
-        personalDetails.add(firstName);
-        personalDetails.add(firstName);
+        personalDetails.add(lastName);
+        personalDetails.add(email);
         return personalDetails;
     }
 

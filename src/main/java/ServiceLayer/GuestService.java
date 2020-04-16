@@ -225,7 +225,7 @@ public class GuestService implements IGuestService{
     private void searchLeagues(String leagueName) {
         List<League> retrievedLeague =  guest.SearchLeagueByName(leagueName);
         if(retrievedLeague == null){
-            System.out.println("## There is no person with this name ##");
+            System.out.println("## There is no league with this name ##");
             return;
         }
         for(League league : retrievedLeague){
@@ -237,7 +237,7 @@ public class GuestService implements IGuestService{
     private void searchTeams(String teamName) {
         List<Team> retrievedTeam =  guest.SearchTeamByName(teamName);
         if(retrievedTeam == null){
-            System.out.println("## There is no person with this name ##");
+            System.out.println("## There is no team with this name ##");
             return;
         }
         for(Team team : retrievedTeam){

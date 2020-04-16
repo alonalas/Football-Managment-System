@@ -34,8 +34,11 @@ public class FanService extends AUserService{
      * @throws IOException
      */
     @Override
-    public List<String> retrieveHistory() throws IOException {
-        return fan.getHistory();
+    public void retrieveHistory() throws IOException {
+        List<String>searchHistory =  fan.getHistory();
+        for (int i = 1; i <=searchHistory.size() ; i++) {
+            System.out.println("search " + (i) +": " + searchHistory.get(i-1) );
+        }
     }
 
     @Override
