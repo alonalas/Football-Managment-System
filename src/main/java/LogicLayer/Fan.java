@@ -19,6 +19,10 @@ public class Fan extends Role{
         pages = new ArrayList<>();
     }
 
+    public List<Page> getPages() {
+        return pages;
+    }
+
     public IController getSystem() {
         return system;
     }

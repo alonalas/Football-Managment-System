@@ -6,7 +6,6 @@ import LogicLayer.User;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class GuestTests {
