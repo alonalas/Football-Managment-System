@@ -3,11 +3,17 @@ package LogicLayer;
 import DataLayer.dataManager;
 import ServiceLayer.IController;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Team implements Serializable {
+
+    enum teamStatus{
+        activityClosed, activityOpened, ActivityOpened
+    }
 
     private final DataLayer.dataManager dataManager;
     private String name;
@@ -21,6 +27,15 @@ public class Team implements Serializable {
     private League league;
     private List<Coach> coachList;
     private List<RoleHolder> roleHolders;
+    private teamStatus status;
+
+    public teamStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(teamStatus status) {
+        this.status = status;
+    }
 
     public Team(String name,String stadium, Page page, dataManager dataManager) {
         this.name=name;
@@ -206,4 +221,28 @@ public class Team implements Serializable {
         this.coachList = coachList;
     }
 
+    /**
+     * id: Team@2
+     * changes the status of the team to close if the owner is the real owner of the team
+     * @param owner
+     */
+    public void changeTeamActivity(Owner owner, teamStatus newStatus) throws IOException {
+        if (ownerList.contains(owner)) {
+            String date = LocalDate.now().toString();
+            Alert alert;
+            for(RoleHolder roleHolder: getRoleHolders()){
+                if (roleHolder instanceof Manager || roleHolder instanceof Owner) {
+                    if (newStatus == teamStatus.activityClosed)
+                        alert = new Alert(roleHolder.getUser(), "The team: " + this.getName() + " is closed temporarily",date);
+                    else // Opened
+                        alert = new Alert(roleHolder.getUser(), "The team: " + this.getName() + " is open", date);
+                    dataManager.addAlert(roleHolder.getUser(),alert);
+                }
+            }
+            setStatus(newStatus);
+        }
+        else {
+            throw new IOException("This team can not be closed without official owner premission");
+        }
+    }
 }

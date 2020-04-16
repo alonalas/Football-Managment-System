@@ -28,9 +28,6 @@ public class User implements Serializable {
         this.roles = other.getRoles();
     }
 
-    public static void setData(IDataManager data) {
-        User.data = data;
-    }
 
     public User(String email, String password, String userName) {
         this.email = email;

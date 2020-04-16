@@ -12,13 +12,6 @@ import java.util.Map;
 
 public class League implements Serializable {
 
-    public static void setData(IDataManager data) {
-        League.data = data;
-    }
-
-    public static void setData(IDataManager data) {
-        League.data = data;
-    }
 
     @Override
     public boolean equals(Object obj) {
@@ -45,6 +38,7 @@ public class League implements Serializable {
         this.seasonList = seasonList;
         this.policyList = policyList;
     }
+
 
     public League(LeagueType leagueType){
         this.type = leagueType;

@@ -219,6 +219,21 @@ public class dataManager implements IDataManager , Serializable {
     public List<Referee> getRefereeList() {
         return RefereeList;
     }
+    /**
+     * id: dataManager@6
+     * @param user
+     * @param alert
+     */
+    public void addAlert(User user,Alert alert) {
+        if (!Alerts.containsKey(user)) {
+            List<Alert>alerts = new LinkedList<>();
+            alerts.add(alert);
+            Alerts.put(user,alerts);
+        }
+        else
+            Alerts.get(user).add(alert);
+    }
+
 
     public static void writeData(IDataManager data , File file){
         try {
