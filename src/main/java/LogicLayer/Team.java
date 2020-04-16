@@ -1,7 +1,6 @@
 package LogicLayer;
 
-import DataLayer.dataManager;
-import ServiceLayer.IController;
+import DataLayer.IDataManager;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -12,10 +11,10 @@ import java.util.List;
 public class Team implements Serializable {
 
     enum teamStatus{
-        activityClosed, activityOpened, ActivityOpened
+        activityClosed, activityOpened
     }
 
-    private final DataLayer.dataManager dataManager;
+    private static IDataManager dataManager = DataComp.getInstance();
     private String name;
     private String stadium;
     private Page page;
@@ -37,7 +36,7 @@ public class Team implements Serializable {
         this.status = status;
     }
 
-    public Team(String name,String stadium, Page page, dataManager dataManager) {
+    public Team(String name, String stadium, Page page, IDataManager dataManager) {
         this.name=name;
         this.stadium = stadium;
         this.page = page;

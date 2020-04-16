@@ -3,6 +3,7 @@ import LogicLayer.*;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 public interface IDataManager {
 
@@ -21,4 +22,6 @@ public interface IDataManager {
     List<Referee> getRefereeList() ;
     void TestReset() ;
     void addAlert(User user,Alert alert) ;
+    Map<User, List<Alert>> getAlerts();
+    void addUser(User ownerUser);
 }

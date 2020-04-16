@@ -1,5 +1,6 @@
 package LogicLayer;
 
+import DataLayer.IDataManager;
 import DataLayer.dataManager;
 
 import java.io.IOException;
@@ -18,15 +19,15 @@ public class Manager extends RoleHolder implements Serializable {
     private Team team;
     private Owner nominatedBy;
     private Map<Permission, Boolean> permissionBooleanMap;
-    private dataManager DM;
+    private static IDataManager dataManager = DataComp.getInstance();
 
 
-    public Manager(User user, String name, Team team, dataManager dataManager) {
+    public Manager(User user, String name, Team team, IDataManager dataManager) {
         super(user);
         this.name = name;
         this.team = team;
         this.permissionBooleanMap = new HashMap<>();
-        DM=dataManager;
+        this.dataManager = dataManager;
     }
 
     @Override

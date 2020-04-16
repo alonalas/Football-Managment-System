@@ -1,5 +1,6 @@
 package UnitTests;
 
+import DataLayer.IDataManager;
 import DataLayer.dataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
@@ -16,7 +17,8 @@ import static org.junit.Assert.assertEquals;
 
 public class ManagerTest {
 
-    DataLayer.dataManager dataManager = new dataManager();
+    //DataLayer.dataManager dataManager = new dataManager();
+    private static IDataManager dataManager = DataComp.getInstance();
     Controller controller = new Controller(null,null);
 
     User ownerUser = new User("alonalas@post.bgu.ac.il","123","alona");
@@ -36,6 +38,7 @@ public class ManagerTest {
 
     @Test
     /**
+     * U@33
      * tests uc 6.4 in the in the aspect of manager permissions.
      * testing the exceptions thrown either.
      * assumes that in the GUI the manager selects a player/coach to delete and the Player/Coach are given already
