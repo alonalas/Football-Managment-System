@@ -3,7 +3,6 @@ package AcceptanceTests;
 import LogicLayer.*;
 import ServiceLayer.Controller;
 import ServiceLayer.RepresentativeService;
-import com.sun.tracing.dtrace.FunctionAttributes;
 import org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
