@@ -10,7 +10,6 @@ public class Fan extends Role{
 
     private List<Page> pages;
     private String name;
-    private IController system;
     IDataManager dataManager;
 
     public Fan(User user, String name) {
@@ -21,10 +20,6 @@ public class Fan extends Role{
 
     public List<Page> getPages() {
         return pages;
-    }
-
-    public IController getSystem() {
-        return system;
     }
 
     public IDataManager getDataManager() {

@@ -1,6 +1,6 @@
 package ServiceLayer;
 
-enum Interest {
+public enum Interest {
     Players {
         @Override
         public String toString() {

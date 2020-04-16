@@ -16,6 +16,10 @@ public class GuestService implements IGuestService{
         this.lastSearchResults = new ArrayList<>();
     }
 
+    public List<Object> getLastSearchResults() {
+        return lastSearchResults;
+    }
+
     /**Use Case - 2.1
      * Register to the System
      * @param firstName
@@ -71,13 +75,10 @@ public class GuestService implements IGuestService{
             System.out.println("## Wrong email or password ##");
             return false;
         }
-        guest.addNewUser(userToSignIn,false);
         system.addUser(userToSignIn);
         system.removeGuest(guest);
         return true;
     }
-
-
 
     /**
      * Use Case - 2.3
@@ -85,6 +86,7 @@ public class GuestService implements IGuestService{
      * @param interestIn
      */
     public void showInformationByCategory(Interest interestIn){
+        lastSearchResults = new ArrayList<>();
         switch (interestIn) {
             case Games:
                 List<Game> gamesInfo = guest.retrieveGames();
@@ -143,7 +145,6 @@ public class GuestService implements IGuestService{
                 }
                 break;
         }
-
     }
 
     /**

@@ -1,16 +1,14 @@
 import DataLayer.IDataManager;
 import DataLayer.dataManager;
 import LogicLayer.Guest;
+import LogicLayer.Player;
 import LogicLayer.User;
-import ServiceLayer.Controller;
-import ServiceLayer.GuestService;
-import ServiceLayer.IController;
+import ServiceLayer.*;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class GuestServiceTests {
     private static final Logger testLogger = Logger.getLogger(GuestTests.class);
@@ -87,5 +85,43 @@ public class GuestServiceTests {
         assertTrue(guestService.logIn("Eitan@gmail.com","12345678"));
         testLogger.info("Ended: logInTest");
     }
+
+    /**
+     * checks show information by category func
+     */
+    @Test
+    public void showInfoTest() {
+        GuestStab guest = new GuestStab(data);
+        guestService = new GuestService(guest, system);
+        guestService.showInformationByCategory(Interest.Players);
+        assertEquals(guestService.getLastSearchResults().size(),guest.retrievePlayers().size());
+        assertNotEquals(guestService.getLastSearchResults().size(), 0);
+        assertArrayEquals(guestService.getLastSearchResults().toArray(),guest.retrievePlayers().toArray());
+        guestService.showInformationByCategory(Interest.Games);
+        assertNotEquals(guestService.getLastSearchResults().size(), 3);
+        assertEquals(guestService.getLastSearchResults().size(), 2);
+    }
+
+    /**
+     * checks search information func
+     */
+    @Test
+    public void searchInfo() {
+        GuestStab guest = new GuestStab(data);
+        guestService = new GuestService(guest, system);
+        // Search By Key Word
+        guestService.searchInformation(Criteria.KeyWord, "David");
+        assertEquals(((User)guestService.getLastSearchResults().get(0)).getFirstName(),"David");
+        assertEquals(guestService.getLastSearchResults().size(), 1);
+        // Search By Name
+        guestService.searchInformation(Criteria.Name, "David");
+        assertEquals(((User)guestService.getLastSearchResults().get(0)).getFirstName(),"David");
+        assertEquals(guestService.getLastSearchResults().size(), 1);
+        // Search By Category
+        guestService.searchInformation(Criteria.Category, "plaYErs");
+        assertEquals(((Player)guestService.getLastSearchResults().get(0)).getName(),"David");
+        assertEquals(guestService.getLastSearchResults().size(), 3);
+    }
+
 
 }
