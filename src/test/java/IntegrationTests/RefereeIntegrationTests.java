@@ -38,12 +38,18 @@ public class RefereeIntegrationTests {
         refereeService2=new RefereeService(refereeB);
     }
 
+    /**
+     * ID: I@1
+     */
     @Test
     public void showDetails(){
         System.out.println(refereeService1.showDetails());
         System.out.println(refereeService2.showDetails());
     }
 
+    /**
+     * ID: I@2
+     */
     @Test
     public void changeDetails(){
         try {
@@ -56,6 +62,9 @@ public class RefereeIntegrationTests {
 
     }
 
+    /**
+     * ID: I@3
+     */
     @Test
     public void displayGames(){
         refereeService1.getReferee().addAGameMain(game1);
@@ -68,6 +77,9 @@ public class RefereeIntegrationTests {
     }
 
     // for the next two tests you must change the games time and date for a present game to check it
+    /**
+     * ID: I@4
+     */
     @Test
     public void addGameEvent() throws IOException {
         game1.setMain(refereeService1.getReferee());
@@ -85,6 +97,9 @@ public class RefereeIntegrationTests {
 
 
 
+    /**
+     * ID: I@5
+     */
     @Test
     public void addEvntAfterGame(){
         game1.setMain(refereeService1.getReferee());
@@ -106,6 +121,9 @@ public class RefereeIntegrationTests {
     }
 
 
+    /**
+     * ID: I@6
+     */
     @Test
     public void createGameReport(){
         game1.setMain(refereeService1.getReferee());

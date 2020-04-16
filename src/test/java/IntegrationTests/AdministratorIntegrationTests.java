@@ -54,11 +54,17 @@ public class AdministratorIntegrationTests {
         adminService= new AdministratorService(administrator);
     }
 
+    /**
+     * ID: I@19
+     */
     @Test
     public void closeTeam(){
         adminService.closeTeam(team1);
     }
 
+    /**
+     * ID: I@20
+     */
     @Test
     public void showComplaints(){
         Complaint complaint1 = new Complaint(user1,dataManager,"bad","2012-12-12");
@@ -69,6 +75,9 @@ public class AdministratorIntegrationTests {
     }
 
 
+    /**
+     * ID: I@21
+     */
     @Test
     public void commentComplaint(){
         Complaint complaint1 = new Complaint(user1,dataManager,"bad","2012-12-12");
@@ -84,6 +93,9 @@ public class AdministratorIntegrationTests {
 
     }
 
+    /**
+     * ID: I@22
+     */
     @Test
     public void deleteUser(){
         adminService.deleteUser(user2);

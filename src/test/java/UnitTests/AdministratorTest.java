@@ -57,6 +57,9 @@ public class AdministratorTest {
 
     }
 
+    /**
+     * ID: I@27
+     */
     @Test
     public void closeTeam(){
         for(Team team: dataManager.getTeamList()){
@@ -81,6 +84,9 @@ public class AdministratorTest {
         }
     }
 
+    /**
+     * ID: U@28
+     */
     @Test
     public void showComplaints(){
         Complaint complaint1 = new Complaint(user1,dataManager,"bad","2012-12-12");
@@ -92,6 +98,9 @@ public class AdministratorTest {
 
     }
 
+    /**
+     * ID: U@29
+     */
     @Test
     public void CommentComplaint(){
         Complaint complaint1 = new Complaint(user1,dataManager,"bad","2012-12-12");
@@ -108,6 +117,9 @@ public class AdministratorTest {
     }
 
 
+    /**
+     * ID: U@32
+     */
     @Test
     public void deleteUser(){
         System.out.println(user2.getRoles().size());
