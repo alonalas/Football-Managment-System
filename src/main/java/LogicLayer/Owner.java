@@ -6,22 +6,43 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class Owner extends RoleHolder implements Serializable {
 
     private String name;
     private List<Team> teamList;
     private dataManager DM;
+    private Owner nominatedBy;
 
     public Owner(User user, String name , dataManager dataManager) {
         super(user);
         this.name = name;
         this.teamList = new LinkedList<>();
         this.DM = dataManager;
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Owner owner = (Owner) o;
+        return Objects.equals(name, owner.name) &&
+                Objects.equals(teamList, owner.teamList) &&
+                Objects.equals(DM, owner.DM) &&
+                Objects.equals(nominatedBy, owner.nominatedBy);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), name, teamList, DM, nominatedBy);
     }
 
     /**
-     * ID: 1
+     * id: Owner@1
      * creates a new instance of manager without premissions with the following parameters
      * and connecting it to the requested team
      * @param team
@@ -37,10 +58,11 @@ public class Owner extends RoleHolder implements Serializable {
         manager.setTeam(team);
         user.setRole(manager);
         team.getRoleHolders().add(manager);
+
     }
 
     /**
-     * ID: 2
+     * id: Owner@2
      * creates a new instance of coach without with the following parameters
      * and connecting it to the requested team
      * @param team
@@ -62,7 +84,7 @@ public class Owner extends RoleHolder implements Serializable {
     }
 
     /**
-     * ID: 3
+     * id: Owner@3
      * creates a new instance of player with the following parameters
      * and connecting it to the requested team
      * @param team
@@ -77,7 +99,7 @@ public class Owner extends RoleHolder implements Serializable {
     public void insertNewPlayer(Team team, String name, String position, int day ,
                                 int month, int year , String userName,String email) {
         User user = this.getAssetUser(userName,email);
-        String date = day+"-"+month+"-"+year; // check why it's not working
+        String date = day+"-"+month+"-"+year;
         Page page = new Page();
         Player player = new Player(user,position,team,name, date ,page);
         team.setPlayer(player);
@@ -88,7 +110,7 @@ public class Owner extends RoleHolder implements Serializable {
     }
 
     /**
-     * ID: 4
+     * id: Owner@4
      * uploads the team's stadium
      * @param team
      * @param stadium
@@ -98,7 +120,7 @@ public class Owner extends RoleHolder implements Serializable {
     }
 
     /**
-     * ID: 5
+     * id: Owner@5
      * deletes the player that owns the given user
      * @param teamName
      * @param userName
@@ -112,13 +134,13 @@ public class Owner extends RoleHolder implements Serializable {
                 Player player = (Player)role;
                 team.getPlayerList().remove(player);
                 team.getRoleHolders().remove(player);
-                deleteRole(user,player);
+                user.removeRole(player);
             }
         }
     }
 
     /**
-     * ID: 6
+     * id: Owner@6
      * delete coach only if there is at least one coach in the coachList
      * @param teamName
      * @param userName
@@ -136,14 +158,14 @@ public class Owner extends RoleHolder implements Serializable {
                     Coach coach = (Coach) role;
                     team.getRoleHolders().remove(coach);
                     team.getCoachList().remove(coach);
-                    deleteRole(user, coach);
+                    user.removeRole(coach);
                 }
             }
         }
     }
 
     /**
-     * ID: 7
+     * id: 0wner@7
      * Deletes a manager from the team's managerList iff there is more than one manager
      * @param teamName
      * @param userName
@@ -163,28 +185,31 @@ public class Owner extends RoleHolder implements Serializable {
                     Manager manager = (Manager)role;
                     team.getManagerList().remove(manager);
                     team.getRoleHolders().remove(manager);
-                    deleteRole(user,manager);
+                    user.removeRole(role);
                 }
             }
         }
 
     }
 
-    /**
-     * ID: 8
+
+    /*
+     * id: Owner@8
      * Deletes a role from the user's roleList
      * @param user
      * @param roleHolder
      */
+    /*
     private void deleteRole(User user, RoleHolder roleHolder) {
         for ( Role role : user.getRoles()) {
             if (role.equals(roleHolder))
                 user.getRoles().remove(role);
         }
     }
+    /*
 
     /**
-     * ID: 9
+     * id: Owner@9
      * returns the requiered team
      * @String teamName
      * @return Team
@@ -198,7 +223,7 @@ public class Owner extends RoleHolder implements Serializable {
     }
 
     /**
-     * ID: 10
+     * id: Owner@10
      * retrieves the user list from the dataManager and returns the requiered user
      * @return user list
      */
@@ -210,7 +235,7 @@ public class Owner extends RoleHolder implements Serializable {
     }
 
     /**
-     * ID: 11
+     * id: Owner@11
      * Searches a user in the dataManager
      * @param userName
      * @param email
@@ -223,7 +248,7 @@ public class Owner extends RoleHolder implements Serializable {
     }
 
     /**
-     * ID: 12
+     * id: Owner@12
      * deletes the stadium of the chosen team, replace its value with "NO_STADIUM"
      * @param teamName
      * @param stadium
@@ -231,17 +256,72 @@ public class Owner extends RoleHolder implements Serializable {
     public void deleteStadium(String teamName, String stadium) {
         Team team = getTeam(teamName);
         if (team.getStadium().toLowerCase().equals(stadium.toLowerCase()))
-            team.setStadium("NO_STADIUMֹ");
+            team.setStadium("NO_STADIUM");
     }
-
     /**
-     * ID: 13
+     * id: Owner@13
      * adds a new team to the owne's teamList
      * @param team
      */
     public void addTeam(Team team) {
         if (!teamList.contains(team))
             this.teamList.add(team);
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////// uc2
+    /**
+     * id: Owner@14
+     * nominates a new owner to the team
+     * @param user
+     * @param teamName
+     * @param name
+     * @throws IOException
+     */
+    public void nominateNewOwner(User user, String teamName, String name) throws IOException {
+        if (checkNewOwnerValidity(user,teamName))
+            assignOwnerPremission(user,getTeam(teamName),name);
+    }
+
+    /**
+     * id: Owner@15
+     * checks whether the new owner has a valid account
+     * checks whether the owner owes the chosen team
+     * @param user
+     * @param teamName
+     * @return
+     * @throws IOException
+     */
+    private boolean checkNewOwnerValidity(User user, String teamName) throws IOException {
+        if (DM.getUserList().contains(user)) {
+            Team team = getTeam(teamName);
+            if(team != null) {
+                if (team.getOwner(user) != null)
+                    throw new IOException("User is allready nominated as owner in this team");
+                else
+                    return true;
+            }
+            else
+                throw new IOException("Owner doest not owe the selected team");
+        }
+        else {
+            throw new IOException("User does not exist in the data base");
+        }
+    }
+
+    /**
+     * id: Owner@16
+     * add a new owner to the selected team in term he is not an owner allready
+     * @param user
+     * @param team
+     * @param name
+     */
+    private void assignOwnerPremission(User user, Team team, String name) {
+        Owner newOwner = new Owner(user,name,DM);
+        user.setRole(newOwner);
+        newOwner.addTeam(team);
+        team.addOwner(newOwner);
+        team.getRoleHolders().add(newOwner);
+        newOwner.setNominatedBy(this);
     }
 
     public String getName() {
@@ -260,8 +340,129 @@ public class Owner extends RoleHolder implements Serializable {
         this.teamList = teamList;
     }
 
+    ////////////////////////////////////// 6.1.3 uc
+
+    /**
+     * id: Owner@17
+     * checks whether the new owner has a valid account
+     * checks whether the owner owes the chosen team
+     * @param user
+     * @param teamName
+     * @return
+     * @throws IOException
+     */
+    private boolean checkMembership(User user, String teamName) throws IOException {
+        if (DM.getUserList().contains(user)) {
+            Team team = getTeam(teamName);
+            if( team != null ) {
+                RoleHolder roleHolder = team.getRoleHolder(this,user.getUserName(),user.getEmail());
+                if (roleHolder != null ) {
+                    return true;
+                }
+                else
+                    throw new IOException("Selected user is not a team member in the selected team");
+            }
+            else
+                throw new IOException("Owner doest not owe the selected team");
+        }
+        else {
+            throw new IOException("User does not exist in the data base");
+        }
+    }
+
+    /**
+     * id: Owner@18
+     * update a set of attributes which selected by the owner, in term that the selected team member
+     * is an existing and valid member of the owner's selected team
+     * @param teamName
+     * @param roleHolder
+     * @param attributes
+     * @throws IOException in the cases that were checked in Owner@17
+     */
+    public void updateAssetAttributes(String teamName, RoleHolder roleHolder,
+                                      Map<String, String> attributes) throws IOException {
+
+        if (checkMembership(roleHolder.getUser(),teamName)) {
+            for ( String attribute : attributes.keySet() ) {
+                switch (roleHolder.getClass().getSimpleName().toLowerCase()) {
+                    case "player":
+                        Player player = (Player)roleHolder;
+                        switch (attribute.toLowerCase()) {
+                            case "birthdate":
+                                player.setBirthDate(attributes.get(attribute));
+                                break;
+                            case "position":
+                                player.setPosition(attributes.get(attribute));
+                                break;
+                            default:
+                                throw new IOException("Invalid attribute selected: " + attribute);
+                        }
+                        break;
+                    case "coach":
+                        Coach coach = (Coach)roleHolder;
+                        switch (attribute.toLowerCase()) {
+                            case "qualification":
+                                coach.setQualification(attributes.get(attribute));
+                                break;
+                            case "job":
+                                coach.setJob(attributes.get(attribute));
+                                break;
+                            default: throw new IOException("Invalid attribute selected: " + attribute);
+                        }
+                        break;
+                    case "manager":
+                        throw new IOException("Owner can not update a manager details");
+                }
+            }
+        }
+    }
+
+    public void setNominatedBy(Owner nominatedBy) {
+        this.nominatedBy = nominatedBy;
+    }
+
+    public Owner getNominatedBy() {
+        return nominatedBy;
+    }
+
+    /**
+     * id: Owner@19
+     * removes the selected owner's ownership and in addition removes his whole roles in the specified team.
+     * the following terms must be true:
+     * -the selected owner has a valid and existing user
+     * -the selected owner was nominated by THIS owner
+     * -the selected team exists in THIS teamList
+     * @param nominatedOwner
+     * @param teamName
+     * @throws IOException if one of the terms does not match
+     */
+    public void removeOwnership(Owner nominatedOwner, String teamName) throws IOException {
+
+        checkMembership(nominatedOwner.getUser(),teamName);
+        Team team = getTeam(teamName);
+        if (team.getOwner(nominatedOwner.getUser()) != null) {
+            if (nominatedOwner.getNominatedBy().equals(this)) {
+                 for ( Role role : nominatedOwner.getUser().getRoles() ) {
+                     if (role instanceof Player)
+                         deletePlayer(teamName,nominatedOwner.getUser().getUserName(),nominatedOwner.getUser().getEmail());
+                     else if (role instanceof Coach)
+                         deleteCoach(teamName,nominatedOwner.getUser().getUserName(),nominatedOwner.getUser().getEmail());
+                     else if (role instanceof Manager) // instance of manager
+                         deleteManager(teamName,nominatedOwner.getUser().getUserName(),nominatedOwner.getUser().getEmail());
+                     else {// OWNER
+                         team.getOwnerList().remove(nominatedOwner);
+                         team.getRoleHolders().remove(nominatedOwner);
+                     }
+                 }
+                nominatedOwner.getUser().removeRole(nominatedOwner);
+            }
+            else
+                throw new IOException("The selected owner can't be removed since he did not nominated by you");
+        }
+        else
+            throw new IOException("The selected owner is not nominated as an owner of this team");
 
 
-
+    }
 }
 

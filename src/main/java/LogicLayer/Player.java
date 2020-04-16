@@ -2,6 +2,7 @@ package LogicLayer;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.util.Objects;
 
 public class Player extends RoleHolder implements Serializable {
 
@@ -21,6 +22,24 @@ public class Player extends RoleHolder implements Serializable {
     }
 
     public Player() {}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Player player = (Player) o;
+        return Objects.equals(position, player.position) &&
+                Objects.equals(team, player.team) &&
+                Objects.equals(name, player.name) &&
+                Objects.equals(birthDate, player.birthDate) &&
+                Objects.equals(page, player.page);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), position, team, name, birthDate, page);
+    }
 
     public String getPosition() {
         return position;

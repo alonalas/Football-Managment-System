@@ -19,6 +19,7 @@ public class Controller implements IController{
 
     public static Controller controllerSingleTone ;
 
+    // TEST
     public Controller(Representitive representitive, Administrator administrator) {
         this.representitive = representitive;
         this.administrator = administrator;

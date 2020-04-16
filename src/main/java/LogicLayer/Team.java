@@ -76,10 +76,34 @@ public class Team implements Serializable {
         this.playerList = playerList;
     }
 
-    public Manager getManager(Manager manager) {
-        for (Manager manager1 : managerList) {
-            if (manager1.equals(manager))
-                return manager1;
+    public Manager getManager(User user) {
+        for (Manager manager : managerList) {
+            if (manager.getUser().equals(user))
+                return manager;
+        }
+        return null;
+    }
+
+    public Player getPlayer(User user) {
+        for (Player player : playerList) {
+            if (player.getUser().equals(user))
+                return player;
+        }
+        return null;
+    }
+
+    public Coach getCoach(User user) {
+        for (Coach coach : coachList) {
+            if (coach.getUser().equals(user))
+                return coach;
+        }
+        return null;
+    }
+
+    public Owner getOwner(User user) {
+        for (Owner owner : ownerList) {
+            if (owner.getUser().equals(user))
+                return owner;
         }
         return null;
     }
@@ -94,7 +118,7 @@ public class Team implements Serializable {
     }
 
     /**
-     * ID: 1
+     * id: Team@1
      * returns a RoleHolder that belongs to the requiered team of the given owner
      * search is made by user name and email
      * @param owner
@@ -166,8 +190,8 @@ public class Team implements Serializable {
     }
 
     public void setPlayer(Player player) {
-        if(!playerList.contains(player))
-            playerList.add(player);
+        if (!playerList.contains(player))
+        playerList.add(player);
     }
 
     public void setCoach(Coach coach) {

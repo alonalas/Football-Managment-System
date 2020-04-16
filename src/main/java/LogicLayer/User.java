@@ -36,7 +36,6 @@ public class User implements Serializable {
         return email.equals(user.email) &&
                 password.equals(user.password) &&
                 userName.equals(user.userName) ;
-
     }
 
     @Override
@@ -118,7 +117,8 @@ public class User implements Serializable {
     }
 
     public void setRole(Role role){
-        this.roles.add(role);
+        //if (!roles.contains(role))
+            this.roles.add(role);
     }
 
     public void setRoles(List<Role> roles) {
