@@ -19,6 +19,18 @@ public class dataManager implements IDataManager {
     private List<Page> pageList;
     private List<Game> gameList;
 
+    public dataManager() {
+        fanSearchHistory = new HashMap<>();
+        guestsList = new ArrayList<>();
+        userList = new ArrayList<>();
+        Alerts = new HashMap<>();
+        complaint = new HashMap<>();
+        leagueList = new ArrayList<>();
+        seasonList = new ArrayList<>();
+        teamList = new ArrayList<>();
+        pageList = new ArrayList<>();
+        gameList = new ArrayList<>();
+    }
 
     public boolean checkIfEmailExists(String email) {
         for (User user : userList){

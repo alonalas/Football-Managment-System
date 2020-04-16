@@ -13,15 +13,15 @@ public class User {
     private String firstName;
     private String lastName;
     List<Role> roles;
-    IDataManager dataManager;
+    IDataManager data;
 
-    public User(String email, String password, String firstName, String lastName) {
-
+    public User(String email, String password, String firstName, String lastName, IDataManager data) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.roles = new ArrayList<Role>();
+        this.data = data;
     }
 
     public String getEmail() {
@@ -65,9 +65,11 @@ public class User {
     }
 
     public void updatePersonalInformation(String firstName, String lastName, String email){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+        if (firstName !=null && lastName != null && email != null){
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+        }
     }
 
     public List<String> getPersonalDetails() {

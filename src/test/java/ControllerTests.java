@@ -11,7 +11,7 @@ public class ControllerTests {
     @BeforeClass
     public static void init(){
         Administrator admin = new Administrator("A", "B", "C", "null, null");
-        Representitive rep = new Representitive(new User("A", "B", "C", "null, null"), "TEST");
+        Representitive rep = new Representitive(new User("A", "B", "C", "null, null",null), "TEST");
         testController = new Controller(rep, admin);
     }
 

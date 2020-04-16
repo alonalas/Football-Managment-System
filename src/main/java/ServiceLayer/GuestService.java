@@ -24,7 +24,7 @@ public class GuestService implements IGuestService{
      * @param password
      */
     public void register(String firstName, String lastName, String email, String password){
-        boolean passwordIsOk = Authentication(password);
+        boolean passwordIsOk = guest.Authentication(password);
         if(passwordIsOk == false){
             return;
         }
@@ -33,10 +33,7 @@ public class GuestService implements IGuestService{
             System.out.println("## user with this email exists in system. ##");
             return;
         }
-        User newUser = new User(email, password, firstName, lastName);
-        Fan fan = new Fan(newUser,firstName);
-        newUser.getRoles().add(fan);
-        guest.addNewUser(newUser,true);
+        User newUser = guest.createNewUser(email,password,firstName,lastName);
         System.out.println("## Registered to system successfully ##");
         system.addUser(newUser);
         system.removeGuest(guest);
@@ -49,7 +46,7 @@ public class GuestService implements IGuestService{
      * @param password
      */
     public void logIn(String email, String password){
-        boolean passwordIsOk = Authentication(password);
+        boolean passwordIsOk = guest.Authentication(password);
         if(passwordIsOk == false){
             return;
         }
@@ -63,19 +60,7 @@ public class GuestService implements IGuestService{
         system.removeGuest(guest);
     }
 
-    private boolean Authentication(String password){
-        for (char c : password.toCharArray()){
-            if (!((c>='A' && c<='z')||(c>='0' && c<='9'))){
-                System.out.println("## Password can contain only digits and letters. ##");
-                return false;
-            }
-        }
-        if(password.length()<8){
-            System.out.println("## Password must has at least 8 characters. ##");
-            return false;
-        }
-        return true;
-    }
+
 
     /**
      * Use Case - 2.3

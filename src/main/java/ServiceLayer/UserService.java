@@ -33,10 +33,10 @@ public class UserService extends AUserService {
         String firstName = personalDetails.get(0);
         String lastName = personalDetails.get(1);
         String email = personalDetails.get(2);
-         System.out.println("First name: " + firstName);
-         System.out.println("Last name: " + lastName);
-         System.out.println("Email: " + email);
-         System.out.println();
+        System.out.println("First name: " + firstName);
+        System.out.println("Last name: " + lastName);
+        System.out.println("Email: " + email);
+        System.out.println();
      }
 
 

@@ -13,6 +13,14 @@ public class Guest {
         this.data = data;
     }
 
+    public User createNewUser(String email, String password, String firstName, String lastName){
+        User newUser = new User(email, password, firstName, lastName,data);
+        Fan fan = new Fan(newUser,firstName);
+        newUser.getRoles().add(fan);
+        addNewUser(newUser,true);
+        return newUser;
+    }
+
     public User signIn(String email, String password){
         User signedInUser = data.getUser(email, password);
         return signedInUser;
@@ -23,9 +31,23 @@ public class Guest {
     }
 
     public void addNewUser(User newUser,boolean isNewUser) {
-        if (isNewUser){
+        if (isNewUser && newUser != null){
             data.addNewUser(newUser);
         }
+    }
+
+    public boolean Authentication(String password){
+        for (char c : password.toCharArray()){
+            if (!((c>='A' && c<='z')||(c>='0' && c<='9'))){
+                System.out.println("## Password can contain only digits and letters. ##");
+                return false;
+            }
+        }
+        if(password.length()<8){
+            System.out.println("## Password must has at least 8 characters. ##");
+            return false;
+        }
+        return true;
     }
 
     public List<Game> retrieveGames() {
