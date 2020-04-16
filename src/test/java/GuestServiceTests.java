@@ -71,5 +71,21 @@ public class GuestServiceTests {
         testLogger.info("Ended: registerTest");
     }
 
+    /**
+     * checks log in func
+     */
+    @Test
+    public void logInTest(){
+        testLogger.info("Run: logInTest");
+        //check log in with illegal password
+        User user = new User("Eitan@gmail.com","12345678","Eitan","David",data);
+        data.addNewUser(user);
+        assertFalse(guestService.logIn("Eitan@gmail.com","123456"));
+        //check log in with incorrect email
+        assertFalse(guestService.logIn("Eitab@gmail.com","12345678"));
+        //check legal arguments log in
+        assertTrue(guestService.logIn("Eitan@gmail.com","12345678"));
+        testLogger.info("Ended: logInTest");
+    }
 
 }
