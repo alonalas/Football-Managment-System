@@ -23,21 +23,37 @@ public class GuestService implements IGuestService{
      * @param email
      * @param password
      */
-    public void register(String firstName, String lastName, String email, String password){
-        boolean passwordIsOk = guest.Authentication(password);
+    public boolean register(String firstName, String lastName, String email, String password){
+        boolean passwordIsOk = Authentication(password);
         if(passwordIsOk == false){
-            return;
+            return false;
         }
         boolean isExists = guest.checkIfEmailExists(email);
         if (isExists == true){
             System.out.println("## user with this email exists in system. ##");
-            return;
+            return false;
         }
         User newUser = guest.createNewUser(email,password,firstName,lastName);
         System.out.println("## Registered to system successfully ##");
         system.addUser(newUser);
         system.removeGuest(guest);
+        return true;
     }
+
+    public boolean Authentication(String password){
+        for (char c : password.toCharArray()){
+            if (!((c>='A' && c<='z')||(c>='0' && c<='9'))){
+                System.out.println("## Password can contain only digits and letters. ##");
+                return false;
+            }
+        }
+        if(password.length()<8){
+            System.out.println("## Password must has at least 8 characters. ##");
+            return false;
+        }
+        return true;
+    }
+
 
     /**
      * Use Case - 2.2
@@ -45,19 +61,20 @@ public class GuestService implements IGuestService{
      * @param email
      * @param password
      */
-    public void logIn(String email, String password){
-        boolean passwordIsOk = guest.Authentication(password);
+    public boolean logIn(String email, String password){
+        boolean passwordIsOk = Authentication(password);
         if(passwordIsOk == false){
-            return;
+            return false;
         }
         User userToSignIn = guest.signIn(email, password);
         if (userToSignIn == null){
             System.out.println("## Wrong email or password ##");
-            return;
+            return false;
         }
         guest.addNewUser(userToSignIn,false);
         system.addUser(userToSignIn);
         system.removeGuest(guest);
+        return true;
     }
 
 

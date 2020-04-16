@@ -9,13 +9,12 @@ public class Player extends RoleHolder{
     Date birthDate;
     private Page page;
 
-    public Player(User user, String position, Team team, String name, Date birthDate, Page page) {
+    public Player(User user, String position, Team team, String name, Date birthDate) {
         super(user);
         this.position = position;
         this.team = team;
         this.name = name;
         this.birthDate = birthDate;
-        this.page = page;
     }
 
     public String getPosition() {

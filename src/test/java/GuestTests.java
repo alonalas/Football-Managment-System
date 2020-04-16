@@ -59,25 +59,6 @@ public class GuestTests {
     }
 
     /**
-     * checks Authentication func
-     */
-    @Test
-    public void AuthenticationTest(){
-        testLogger.info("Run: AuthenticationTest");
-        String password = "";
-        //check password contains unSupported letters
-        password = "/-789";
-        assertFalse(guest.Authentication(password));
-        //checks password with size less than 8
-        password = "1234567";
-        assertFalse(guest.Authentication(password));
-        //check legal password
-        password = "12345687";
-        assertTrue(guest.Authentication(password));
-        testLogger.info("Ended: AuthenticationTest");
-    }
-
-    /**
      * checks addNewUser func
      */
     @Test

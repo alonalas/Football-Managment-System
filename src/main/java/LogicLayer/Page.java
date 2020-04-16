@@ -20,4 +20,8 @@ public class Page {
         if (update.length()>0)
             updates.add(update);
     }
+
+    public List<String> getUpdates() {
+        return updates;
+    }
 }

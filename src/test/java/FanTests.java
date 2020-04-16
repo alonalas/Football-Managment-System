@@ -22,13 +22,22 @@ public class FanTests {
         fan = new Fan(user,user.getFirstName());
     }
 
+    /**
+     * checks addPages func
+     */
     @Test
     public void addPagesTest(){
+        testLogger.info("Run: addPagesTest");
+        //checks if page added
         List<Page>pages = new ArrayList<>();
-        Page testPage1 = new Page(new Player(user," ",null," ",new Date(),null));
+        Page testPage1 = new Page(new Player(user," ",null," ",new Date()));
         pages.add(testPage1);
         fan.addPages(pages);
         assertTrue(fan.getPages().size() == 1);
+        //checks if right page added
+        testPage1.addUpdate("Eitan");
+        assertEquals("Eitan",testPage1.getUpdates().get(0));
+        testLogger.info("Ended: addPagesTest");
     }
 
 }

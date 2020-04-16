@@ -36,20 +36,6 @@ public class Guest {
         }
     }
 
-    public boolean Authentication(String password){
-        for (char c : password.toCharArray()){
-            if (!((c>='A' && c<='z')||(c>='0' && c<='9'))){
-                System.out.println("## Password can contain only digits and letters. ##");
-                return false;
-            }
-        }
-        if(password.length()<8){
-            System.out.println("## Password must has at least 8 characters. ##");
-            return false;
-        }
-        return true;
-    }
-
     public List<Game> retrieveGames() {
         return data.getGameList();
     }

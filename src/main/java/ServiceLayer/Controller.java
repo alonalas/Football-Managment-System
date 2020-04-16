@@ -25,6 +25,10 @@ public class Controller implements IController{
 
     public Controller() {
         try{
+            currentGuestsList = new ArrayList<Guest>();
+            GuestServices = new HashMap<Guest, IGuestService>();
+            currentUserList = new ArrayList<User>();
+            UserServices = new HashMap<User, List<IUserService>>();
             FileReader configurationFile = new FileReader(new File(configurationPath));
             initFromFile(configurationFile);
         }catch(IOException IOE){
@@ -32,6 +36,7 @@ public class Controller implements IController{
             IOE.printStackTrace();
         }
     }
+
 
     public Controller(Representitive representitive, Administrator administrator) {
         this.representitive = representitive;
