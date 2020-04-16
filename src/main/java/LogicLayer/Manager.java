@@ -1,8 +1,6 @@
 package LogicLayer;
 
 import java.util.Objects;
-
-public class Manager extends RoleHolder{
 import java.io.Serializable;
 
 public class Manager extends RoleHolder implements Serializable {
