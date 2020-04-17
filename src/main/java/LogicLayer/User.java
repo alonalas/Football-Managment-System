@@ -16,12 +16,12 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String userName;
-    List<Role> roles;
-    private static IDataManager data = DataComp.getInstance();
+    private List<Role> roles;
 
-    public static void setData(IDataManager data) {
-        User.data = data;
+    private static IDataManager data(){
+        return DataComp.getInstance();
     }
+
 
     public User(User other) {
         this.email = other.password;
@@ -95,17 +95,16 @@ public class User implements Serializable {
         return null;
     }
 
-    public User(String email, String password, String firstName, String lastName, IDataManager data) {
+    public User(String email, String password, String firstName, String lastName) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.roles = new ArrayList<Role>();
-        this.data = data;
     }
 
     public static List<User> getAllUsers(){
-        return data.getUserList();
+        return data().getUserList();
     }
     public String getEmail() {
         return email;

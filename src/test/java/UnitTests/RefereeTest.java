@@ -30,7 +30,7 @@ public class RefereeTest  {
 
     @Before
     public void init(){
-        DataComp.getInstance().TestReset();
+        DataComp.setDataManager(new dataManager());
         dm =  new dataManager();
         user = new User("@","d","d");
         game1 = new Game(null,null,null,null,null,"2020-04-13","12:00","20:00");

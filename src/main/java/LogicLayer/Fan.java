@@ -11,11 +11,8 @@ import java.util.List;
 
 public class Fan extends Role implements Serializable {
 
-
-
     private List<Page> pages;
     private String name;
-    IDataManager dataManager;
 
     public Fan(User user, String name) {
         super(user);
@@ -28,7 +25,7 @@ public class Fan extends Role implements Serializable {
     }
 
     public IDataManager getDataManager() {
-        return dataManager;
+        return DataComp.getInstance();
     }
 
     public String getName() {
@@ -48,31 +45,31 @@ public class Fan extends Role implements Serializable {
     public void addSearchHistory(Criteria criteria ,String query) {
         switch (criteria){
             case Name:
-                dataManager.addNameHistory(this,query);
+                getDataManager().addNameHistory(this,query);
                 break;
             case KeyWord:
-                dataManager.addKeyWordHistory(this,query);
+                getDataManager().addKeyWordHistory(this,query);
                 break;
             case Category:
-                dataManager.addCategoryHistory(this,query);
+                getDataManager().addCategoryHistory(this,query);
                 break;
         }
     }
 
     public void addComplaintToDataManager(String description) {
         Complaint complaint = new Complaint(this.getUser(),description,new Date());
-        dataManager.addComplaint(this.getUser(),complaint);
+        getDataManager().addComplaint(this.getUser(),complaint);
     }
 
     public List<String> getCategorySearchHistory() {
-        return dataManager.getCategorySearchHistory(this);
+        return getDataManager().getCategorySearchHistory(this);
     }
 
     public List<String> getKeyWordSearchHistory() {
-        return dataManager.getKeyWordSearchHistory(this);
+        return getDataManager().getKeyWordSearchHistory(this);
     }
 
     public List<String> getNameSearchHistory() {
-        return dataManager.getNameSearchHistory(this);
+        return getDataManager().getNameSearchHistory(this);
     }
 }

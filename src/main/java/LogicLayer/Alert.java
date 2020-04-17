@@ -8,7 +8,6 @@ import java.util.Date;
 public class Alert implements Serializable {
 
     private User user;
-    private IController system;
     private String description;
     String date;
     // hour is missing
@@ -25,14 +24,6 @@ public class Alert implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public IController getSystem() {
-        return system;
-    }
-
-    public void setSystem(IController system) {
-        this.system = system;
     }
 
     public String getDescription() {

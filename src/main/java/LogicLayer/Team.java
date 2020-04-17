@@ -13,7 +13,6 @@ public class Team implements Serializable {
         activityClosed, activityOpened
     }
 
-    private static IDataManager dataManager = DataComp.getInstance();
     private String name;
     private String stadium;
     private Page page;
@@ -27,6 +26,10 @@ public class Team implements Serializable {
     private List<RoleHolder> roleHolders;
     private teamStatus status;
 
+    private IDataManager data(){
+        return DataComp.getInstance();
+    }
+
     public teamStatus getStatus() {
         return status;
     }
@@ -35,11 +38,10 @@ public class Team implements Serializable {
         this.status = status;
     }
 
-    public Team(String name, String stadium, Page page, IDataManager dataManager) {
+    public Team(String name, String stadium, Page page) {
         this.name=name;
         this.stadium = stadium;
         this.page = page;
-        this.dataManager = dataManager;
         managerList = new LinkedList<>();
         playerList = new LinkedList<>();
         ownerList = new LinkedList<>();
@@ -140,7 +142,7 @@ public class Team implements Serializable {
      */
     public RoleHolder getRoleHolder(String userName,String email) {
 
-        User user = dataManager.getUserByMail(userName,email);
+        User user = data().getUserByMail(userName,email);
         if (user!=null) {
             for (RoleHolder roleHolder : this.roleHolders) {
                 if (roleHolder.getUser().equals(user))
@@ -234,7 +236,7 @@ public class Team implements Serializable {
                         alert = new Alert(roleHolder.getUser(), "The team: " + this.getName() + " is closed temporarily",date);
                     else // Opened
                         alert = new Alert(roleHolder.getUser(), "The team: " + this.getName() + " is open", date);
-                    dataManager.addAlert(roleHolder.getUser(),alert);
+                    data().addAlert(roleHolder.getUser(),alert);
                 }
             }
             setStatus(newStatus);

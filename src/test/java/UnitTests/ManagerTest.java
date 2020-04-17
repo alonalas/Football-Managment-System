@@ -26,9 +26,9 @@ public class ManagerTest {
     User u2 = new User("amir@post", "234","amirLasry");
 
     OwnerService os = new OwnerService(controller);
-    Owner own = new Owner(ownerUser,"Alona the queen",dataManager);
+    Owner own = new Owner(ownerUser,"Alona the queen");
     Page p = new Page(null);
-    Team team = new Team("Blumfield", "Hapoel",p, dataManager);
+    Team team = new Team("Blumfield", "Hapoel",p);
     User u3 = new User("abc", "aaa","haermi");
     User u4 = new User("Hogwarts.com","12345678","Albus Dumbeldore");
 

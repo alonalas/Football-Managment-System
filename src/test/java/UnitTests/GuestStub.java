@@ -1,3 +1,5 @@
+package UnitTests;
+
 import DataLayer.IDataManager;
 import LogicLayer.*;
 
@@ -8,8 +10,8 @@ public class GuestStub extends Guest {
     List<Game> listG;
     List<Player> listP;
 
-    public GuestStub(IDataManager data) {
-        super(data);
+    public GuestStub() {
+        super();
         init();
     }
 
@@ -18,8 +20,8 @@ public class GuestStub extends Guest {
         listG.add(new Game());
         listG.add(new Game());
         listP = new ArrayList<>();
-        Team team = new Team("FCB",null,null,null);
-        Team otherTeam = new Team("RMCF",null,null,null);
+        Team team = new Team("FCB",null,null);
+        Team otherTeam = new Team("RMCF",null,null);
         listP.add(new Player(null, null, team, "David", null));
         listP.add(new Player(null, null, team, "Or", null));
         listP.add(new Player(null, null, otherTeam, "Raul", null));
@@ -38,7 +40,7 @@ public class GuestStub extends Guest {
     @Override
     public List<User> SearchUserByName(String name) {
         List<User> list = new ArrayList<>();
-        list.add(new User(null, null, name, name, null));
+        list.add(new User(null, null, name, name));
         return list;
     }
 }

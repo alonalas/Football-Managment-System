@@ -12,25 +12,14 @@ import java.util.Map;
 
 public class League implements Serializable {
 
-
-    @Override
-    public boolean equals(Object obj) {
-        if(obj instanceof League){
-            return this.getType() == ((League) obj).getType() ;
-        }
-        return false;
-    }
-
     public enum LeagueType{
         MAJOR_LEAGUE, SECOND_LEAGUE, LEAGUE_A,LEAGUE_B, LEAGUE_C
     }
 
-    private IController system;
     private LeagueType type;
     private List<Referee> refereeList;
     private List<Season> seasonList;
     private Map<Season,Policy> policyList;
-    private static IDataManager data = DataComp.getInstance();
     private String name;
 
     public League( LeagueType type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
@@ -48,11 +37,23 @@ public class League implements Serializable {
         this.name = name;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof League){
+            return this.getType() == ((League) obj).getType() ;
+        }
+        return false;
+    }
+
+    private static IDataManager data(){
+        return DataComp.getInstance();
+    }
 
     public League(LeagueType leagueType){
         this.type = leagueType;
-        data.addLeague(this);
+        data().addLeague(this);
     }
+
     /**
      * id: League@1
      * check if League already exist
@@ -60,7 +61,7 @@ public class League implements Serializable {
      * @return League if existing , null if not
      */
     public static League checkIfLeagueExist(LeagueType leagueType){
-        return data.SearchLeagueByType(leagueType);
+        return data().SearchLeagueByType(leagueType);
     }
 
     /**
@@ -69,7 +70,7 @@ public class League implements Serializable {
      * @return all system leagues
      */
     public static List<League> ShowAllLeagues(){
-        return data.getLeagueList();
+        return data().getLeagueList();
     }
 
     /**
@@ -87,7 +88,7 @@ public class League implements Serializable {
         if(league != null){
             return false ;
         }
-        data.addLeague(new League(leagueType));
+        data().addLeague(new League(leagueType));
         return true;
     }
 

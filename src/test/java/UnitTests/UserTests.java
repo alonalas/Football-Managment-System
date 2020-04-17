@@ -1,3 +1,5 @@
+package UnitTests;
+
 import DataLayer.IDataManager;
 import DataLayer.dataManager;
 import LogicLayer.User;
@@ -17,7 +19,7 @@ public class UserTests {
     @BeforeClass
     public static void init(){
         data = new dataManager();
-        user = new User("Eitan@gmail.com","1234","Eitan","David",data);
+        user = new User("Eitan@gmail.com","1234","Eitan","David");
     }
 
     /**

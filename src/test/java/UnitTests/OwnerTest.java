@@ -2,6 +2,7 @@ package UnitTests;
 
 import DataLayer.IDataManager;
 
+import DataLayer.dataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
 import ServiceLayer.OwnerService;
@@ -24,7 +25,6 @@ import java.util.Map;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OwnerTest {
 
-    private static IDataManager dataManager = DataComp.getInstance();
     Controller controller = new Controller(null,null);
 
     User ownerUser = new User("alonalas@post.bgu.ac.il","123","alona");
@@ -32,9 +32,9 @@ public class OwnerTest {
     User u2 = new User("amir@post", "234","amirLasry");
 
     OwnerService os = new OwnerService(controller);
-    Owner own = new Owner(ownerUser,"Alona the queen",dataManager);
+    Owner own = new Owner(ownerUser,"Alona the queen");
     Page p = new Page(null);
-    Team team = new Team("Hapoel", "Blumfield",p, dataManager);
+    Team team = new Team("Hapoel", "Blumfield",p);
     User u3 = new User("abc", "aaa","haermi");
     User u4 = new User("Hogwarts.com","12345678","Albus Dumbeldore");
 
@@ -434,9 +434,9 @@ public class OwnerTest {
             //System.out.println(e.getMessage());
         }
 
-        assertEquals(dataManager.getAlerts().get(u2).size(), 1);
-        assertEquals(dataManager.getAlerts().get(u1).size(),1);
-        assertEquals(dataManager.getAlerts().get(u1).get(0).getDescription(), "The team: " + team.getName() + " is closed temporarily");
+        assertEquals(DataComp.getInstance().getAlerts().get(u2).size(), 1);
+        assertEquals(DataComp.getInstance().getAlerts().get(u1).size(),1);
+        assertEquals(DataComp.getInstance().getAlerts().get(u1).get(0).getDescription(), "The team: " + team.getName() + " is closed temporarily");
     }
 
     @Test
@@ -454,29 +454,29 @@ public class OwnerTest {
             //System.out.println(e.getMessage());
         }
 
-        assertEquals(dataManager.getAlerts().get(u2).size(), 2);
-        assertEquals(dataManager.getAlerts().get(u1).size(),2);
-        assertEquals(dataManager.getAlerts().get(u1).get(1).getDescription(), "The team: " + team.getName() + " is open");
+        assertEquals(DataComp.getInstance().getAlerts().get(u2).size(), 2);
+        assertEquals(DataComp.getInstance().getAlerts().get(u1).size(),2);
+        assertEquals(DataComp.getInstance().getAlerts().get(u1).get(1).getDescription(), "The team: " + team.getName() + " is open");
     }
 
     @Before
     public void initializeSystem() {
 
         controller.addUser(ownerUser);
-        dataManager.addUser(ownerUser);
-        dataManager.addUser(u4);
-        dataManager.addUser(u3);
-        dataManager.addUser(u1);
-        dataManager.addUser(u2);
+        DataComp.getInstance().addUser(ownerUser);
+        DataComp.getInstance().addUser(u4);
+        DataComp.getInstance().addUser(u3);
+        DataComp.getInstance().addUser(u1);
+        DataComp.getInstance().addUser(u2);
         ownerUser.setRole(own);
         own.addTeam(team);
         team.addOwner(own);
 
     }
 
-    @After
+    @Before
     public void reset() {
-        dataManager.TestReset();
+        DataComp.setDataManager(new dataManager());;
     }
 
 }

@@ -1,5 +1,6 @@
 package AcceptanceTests;
 
+import DataLayer.dataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
 import ServiceLayer.RepresentativeService;
@@ -18,7 +19,7 @@ public class RepresentativeAcceptanceTest {
 
     @BeforeClass
     public static void SystemInit(){
-        DataComp.getInstance().TestReset();
+        DataComp.setDataManager(new dataManager());
         Representitive representative = new Representitive(new User("l@gmail.com","1234","gabi"),"bingo")  ;
         Controller controller = new Controller(representative,null);
         controller.controllerSingleTone = controller ;
@@ -32,7 +33,7 @@ public class RepresentativeAcceptanceTest {
 
     @Before
     public void init(){
-        DataComp.getInstance().TestReset();
+        DataComp.setDataManager(new dataManager());
         List<User>  users = controller.getUserList();
         representativeService = new RepresentativeService(null) ;
     }

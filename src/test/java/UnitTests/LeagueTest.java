@@ -23,7 +23,7 @@ public class LeagueTest  {
 
     @Before
     public void init(){
-        DataComp.getInstance().TestReset();
+        DataComp.setDataManager(new dataManager());
         league = new League(League.LeagueType.LEAGUE_B);
     }
 

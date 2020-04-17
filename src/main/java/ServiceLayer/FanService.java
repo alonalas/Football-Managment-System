@@ -56,7 +56,7 @@ public class FanService extends AUserService{
     @Override
     public void searchInformation(Criteria criteria, String query) throws IOException {
         if (query!=null && criteria!=null){
-            Guest guest = new Guest(fan.getDataManager());
+            Guest guest = new Guest();
             GuestService guestService = new GuestService(guest,system);
             guestService.searchInformation(criteria,query);
             fan.addSearchHistory(criteria,query);

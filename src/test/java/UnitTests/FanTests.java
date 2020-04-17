@@ -1,3 +1,5 @@
+package UnitTests;
+
 import DataLayer.IDataManager;
 import DataLayer.dataManager;
 import LogicLayer.*;
@@ -6,7 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class FanTests {
@@ -18,7 +19,7 @@ public class FanTests {
     @BeforeClass
     public static void init(){
         data = new dataManager();
-        user = new User("Eitan@gmail.com","1234","Eitan","David",data);
+        user = new User("Eitan@gmail.com","1234","Eitan","David");
         fan = new Fan(user,user.getFirstName());
     }
 

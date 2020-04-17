@@ -1,10 +1,15 @@
+package UnitTests;
+
 import DataLayer.IDataManager;
 import DataLayer.dataManager;
+import LogicLayer.DataComp;
 import LogicLayer.Guest;
 import LogicLayer.Player;
 import LogicLayer.User;
 import ServiceLayer.*;
 import org.apache.log4j.Logger;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -13,16 +18,20 @@ import static org.junit.Assert.*;
 public class GuestServiceTests {
     private static final Logger testLogger = Logger.getLogger(GuestTests.class);
     private static GuestService guestService;
-    private static IDataManager data;
     private static Guest guest;
     private static IController system;
+
+    @Before
+    public void setUp() throws Exception {
+        DataComp.setDataManager(new dataManager());
+    }
+
 
 
     @BeforeClass
     public static void init(){
         system = new Controller();
-        data = new dataManager();
-        guest = new Guest(data);
+        guest = new Guest();
         guestService = new GuestService(guest,system);
     }
 
@@ -52,8 +61,8 @@ public class GuestServiceTests {
     public void registerTest(){
         testLogger.info("Run: registerTest");
         //checks register with user with the same email that exists
-        User user = new User("Eitan@gmail.com","1234","Eitan","David",data);
-        data.addNewUser(user);
+        User user = new User("Eitan@gmail.com","1234","Eitan","David");
+        DataComp.getInstance().addNewUser(user);
         String firstName = "Eitan";
         String lastName = "David";
         String Email = "Eitan@gmail.com";
@@ -76,8 +85,8 @@ public class GuestServiceTests {
     public void logInTest(){
         testLogger.info("Run: logInTest");
         //check log in with illegal password
-        User user = new User("Eitan@gmail.com","12345678","Eitan","David",data);
-        data.addNewUser(user);
+        User user = new User("Eitan@gmail.com","12345678","Eitan","David");
+        DataComp.getInstance().addNewUser(user);
         assertFalse(guestService.logIn("Eitan@gmail.com","123456"));
         //check log in with incorrect email
         assertFalse(guestService.logIn("Eitab@gmail.com","12345678"));
@@ -91,7 +100,7 @@ public class GuestServiceTests {
      */
     @Test
     public void showInfoTest() {
-        GuestStub guest = new GuestStub(data);
+        GuestStub guest = new GuestStub();
         guestService = new GuestService(guest, system);
         guestService.showInformationByCategory(Interest.Players);
         assertEquals(guestService.getLastSearchResults().size(),guest.retrievePlayers().size());
@@ -107,7 +116,7 @@ public class GuestServiceTests {
      */
     @Test
     public void searchInfoTest() {
-        GuestStub guest = new GuestStub(data);
+        GuestStub guest = new GuestStub();
         guestService = new GuestService(guest, system);
         // Search By Key Word
         guestService.searchInformation(Criteria.KeyWord, "David");
@@ -128,7 +137,7 @@ public class GuestServiceTests {
      */
     @Test
     public void filterSearchTest() {
-        GuestStub guest = new GuestStub(data);
+        GuestStub guest = new GuestStub();
         guestService = new GuestService(guest, system);
         // Search By Key Word
         guestService.searchInformation(Criteria.KeyWord, "playERS");

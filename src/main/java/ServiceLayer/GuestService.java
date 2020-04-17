@@ -40,7 +40,7 @@ public class GuestService implements IGuestService{
             return false;
         }
         boolean mailIsOk = mailAuthentication(email);
-        if (mailIsOk == true){
+        if (mailIsOk == false){
             System.out.println("## email isn't in the right format ##");
             return false;
         }

@@ -42,18 +42,6 @@ public class dataManager implements IDataManager, Serializable {
         RefereeList = new LinkedList<>();
     }
 
-    public void TestReset() {
-        this.guestsList = new LinkedList<>();
-        this.userList = new LinkedList<>();
-        this.Alerts = new HashMap<>();
-        this.complaints = new HashMap<>();
-        this.leagueList = new LinkedList<>();
-        this.seasonList = new LinkedList<>();
-        this.pageList = new LinkedList<>();
-        this.RefereeList = new LinkedList<>();
-    }
-
-
     public boolean checkIfEmailExists(String email) {
         for (User user : userList) {
             if (user.getEmail().equals(email)) {

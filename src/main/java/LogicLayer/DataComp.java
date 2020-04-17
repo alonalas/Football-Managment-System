@@ -12,4 +12,7 @@ public class DataComp implements Serializable {
         return DManager;
     }
 
+    public static void setDataManager(dataManager DManager) {
+        DataComp.DManager = DManager;
+    }
 }

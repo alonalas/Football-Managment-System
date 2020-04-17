@@ -1,9 +1,13 @@
+package UnitTests;
+
 import DataLayer.IDataManager;
 import DataLayer.dataManager;
+import LogicLayer.DataComp;
 import LogicLayer.Fan;
 import LogicLayer.Guest;
 import LogicLayer.User;
 import org.apache.log4j.Logger;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -11,12 +15,15 @@ import static org.junit.Assert.*;
 public class GuestTests {
     private static final Logger testLogger = Logger.getLogger(GuestTests.class);
     private static Guest guest;
-    private static IDataManager data;
 
     @BeforeClass
     public static void init(){
-        data = new dataManager();
-        guest = new Guest(data);
+        guest = new Guest();
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        DataComp.setDataManager(new dataManager());
     }
 
     /**
@@ -34,7 +41,7 @@ public class GuestTests {
         //checks if Role is added
         assertTrue(toCheck.getRoles().get(0) instanceof Fan);
         //checks if user added to DB
-        assertTrue(data.getUserList().size() == 1);
+        assertTrue(DataComp.getInstance().getUserList().size() == 1);
         testLogger.info("Ended: checkCreatingNewUser");
     }
 
@@ -46,7 +53,7 @@ public class GuestTests {
         testLogger.info("Run: checkSignIn");
         //checks if right User returned
         User user = guest.createNewUser("Eitan@gmail.com","1234","Eitan","David");
-        data.getUserList().add(user);
+        DataComp.getInstance().getUserList().add(user);
         User userToCheck = guest.signIn("Eitan@gmail.com","1234");
         assertTrue(userToCheck.getEmail().equals(user.getEmail()));
         //checks if wrong email entered
@@ -65,17 +72,16 @@ public class GuestTests {
     public void addUserTest(){
         testLogger.info("Run: addUserTest");
         //init fields for specific test
-        data = new dataManager();
-        guest = new Guest(data);
+        guest = new Guest();
         //check if user is null
         User user = null;
         guest.addNewUser(user,true);
-        assertTrue(data.getUserList().size() == 0);
+        assertTrue(DataComp.getInstance().getUserList().size() == 0);
         //checks if legal user as argument added
-        user = new User("Eitan@gmail.com","1234","Eitan","David",data);
+        user = new User("Eitan@gmail.com","1234","Eitan","David");
         guest.addNewUser(user,true);
-        assertTrue(data.getUserList().size() == 1);
-        assertTrue(data.getUserList().get(0).getPassword().equals("1234"));
+        assertTrue(DataComp.getInstance().getUserList().size() == 1);
+        assertTrue(DataComp.getInstance().getUserList().get(0).getPassword().equals("1234"));
         testLogger.info("Ended: addUserTest");
 
     }

@@ -19,15 +19,17 @@ public class Manager extends RoleHolder implements Serializable {
     private Team team;
     private Owner nominatedBy;
     private Map<Permission, Boolean> permissionBooleanMap;
-    private static IDataManager dataManager = DataComp.getInstance();
+
+    private IDataManager data(){
+        return DataComp.getInstance();
+    }
 
 
-    public Manager(User user, String name, Team team, IDataManager dataManager) {
+    public Manager(User user, String name, Team team) {
         super(user);
         this.name = name;
         this.team = team;
         this.permissionBooleanMap = new HashMap<>();
-        this.dataManager = dataManager;
     }
 
     @Override

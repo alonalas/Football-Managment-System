@@ -22,7 +22,6 @@ public interface IDataManager {
     boolean removeReferee(Referee referee) ;
     List<User> getUserList();
     List<Referee> getRefereeList() ;
-    void TestReset() ;
     void addAlert(User user,Alert alert) ;
     Map<User, List<Alert>> getAlerts();
     void addUser(User ownerUser);
