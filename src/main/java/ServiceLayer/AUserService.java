@@ -26,22 +26,12 @@ public abstract class AUserService implements IUserService{
     }
 
     @Override
-    public void retrieveHistory() throws IOException {
+    public void retrieveHistory(Criteria criteria) throws IOException {
         throw new IOException("not possible");
     }
 
     @Override
-    public void searchInformation(String name) throws IOException {
-        throw new IOException("not possible");
-    }
-
-    @Override
-    public void searchInformation(Interest interested) throws IOException {
-        throw new IOException("not possible");
-    }
-
-    @Override
-    public void searchInformationByKeyWord(String query) throws IOException {
+    public void searchInformation(Criteria criteria, String query) throws IOException {
         throw new IOException("not possible");
     }
 

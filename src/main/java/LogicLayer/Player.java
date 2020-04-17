@@ -56,4 +56,8 @@ public class Player extends RoleHolder{
     public void setPage(Page page) {
         this.page = page;
     }
+
+    public void addUpdateToPage(String update) {
+        page.addUpdate(update);
+    }
 }

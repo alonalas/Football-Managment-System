@@ -56,11 +56,21 @@ public interface IDataManager {
 
     List<String> getHistory(Fan fan);
 
-    void addSearchHistory(Fan fan, String query);
-
     void addComplaint(User user, Complaint newComplaint);
 
     List<League> searchLeagueByName(String league);
 
     List<Team> searchTeamByName(String team);
+
+    void addNameHistory(Fan fan, String query);
+
+    void addKeyWordHistory(Fan fan, String query);
+
+    void addCategoryHistory(Fan fan, String query);
+
+    List<String> getCategorySearchHistory(Fan fan);
+
+    List<String> getKeyWordSearchHistory(Fan fan);
+
+    List<String> getNameSearchHistory(Fan fan);
 }

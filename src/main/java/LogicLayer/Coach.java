@@ -55,4 +55,8 @@ public class Coach extends RoleHolder {
     public void setTeam(Team team) {
         this.team = team;
     }
+
+    public void addUpdateToPage(String update) {
+        page.addUpdate(update);
+    }
 }

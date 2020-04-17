@@ -1,9 +1,11 @@
 package LogicLayer;
 
 import DataLayer.IDataManager;
+import ServiceLayer.Criteria;
 import ServiceLayer.IController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Fan extends Role{
@@ -49,11 +51,34 @@ public class Fan extends Role{
         return dataManager.getHistory(this);
     }
 
-    public void addSearchHistory(Fan fan, String query) {
-        dataManager.addSearchHistory(this, query);
+    public void addSearchHistory(Criteria criteria ,String query) {
+        switch (criteria){
+            case Name:
+                dataManager.addNameHistory(this,query);
+                break;
+            case KeyWord:
+                dataManager.addKeyWordHistory(this,query);
+                break;
+            case Category:
+                dataManager.addCategoryHistory(this,query);
+                break;
+        }
     }
 
-    public void addComplaintToDataManager(Complaint newComplaint) {
-        dataManager.addComplaint(super.getUser(),newComplaint);
+    public void addComplaintToDataManager(String description) {
+        Complaint complaint = new Complaint(this.getUser(),description,new Date());
+        dataManager.addComplaint(this.getUser(),complaint);
+    }
+
+    public List<String> getCategorySearchHistory() {
+        return dataManager.getCategorySearchHistory(this);
+    }
+
+    public List<String> getKeyWordSearchHistory() {
+        return dataManager.getKeyWordSearchHistory(this);
+    }
+
+    public List<String> getNameSearchHistory() {
+        return dataManager.getNameSearchHistory(this);
     }
 }

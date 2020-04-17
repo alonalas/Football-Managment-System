@@ -4,6 +4,7 @@ import LogicLayer.Fan;
 import LogicLayer.Guest;
 import LogicLayer.Page;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,33 +35,33 @@ public class FanService extends AUserService{
      * @throws IOException
      */
     @Override
-    public void retrieveHistory() throws IOException {
-        List<String>searchHistory =  fan.getHistory();
-        for (int i = 1; i <=searchHistory.size() ; i++) {
-            System.out.println("search " + (i) +": " + searchHistory.get(i-1) );
+    public void retrieveHistory(Criteria criteria) throws IOException {
+        List<String>searchHistory = new ArrayList<>();
+        switch (criteria) {
+            case Category:
+                searchHistory = fan.getCategorySearchHistory();
+                break;
+            case KeyWord:
+                searchHistory = fan.getKeyWordSearchHistory();
+                break;
+            case Name:
+                searchHistory = fan.getNameSearchHistory();
+                break;
+        }
+        for (String search: searchHistory){
+            System.out.println(search);
         }
     }
 
     @Override
-    public void searchInformation(Interest interested) throws IOException {
-        Guest guest = new Guest(fan.getDataManager());
-        GuestService guestService = new GuestService(guest, system);
-        guestService.searchInformation(Criteria.Category, interested.toString());
-    }
+    public void searchInformation(Criteria criteria, String query) throws IOException {
+        if (query!=null && criteria!=null){
+            Guest guest = new Guest(fan.getDataManager());
+            GuestService guestService = new GuestService(guest,system);
+            guestService.searchInformation(criteria,query);
+            fan.addSearchHistory(criteria,query);
+        }
 
-    @Override
-    public void searchInformation(String name) throws IOException {
-        Guest guest = new Guest(fan.getDataManager());
-        GuestService guestService = new GuestService(guest, system);
-        guestService.searchInformation(Criteria.Name, name);
-    }
-
-    @Override
-    public void searchInformationByKeyWord(String query) throws IOException {
-        Guest guest = new Guest(fan.getDataManager());
-        GuestService guestService = new GuestService(guest, system);
-        guestService.searchInformation(Criteria.KeyWord, query);
-        fan.addSearchHistory(fan,query);
     }
 
     /**
@@ -71,7 +72,6 @@ public class FanService extends AUserService{
      */
     @Override
     public void report(String description) throws IOException {
-        Complaint newComplaint = new Complaint(fan.getUser(),system,description,new Date());
-        fan.addComplaintToDataManager(newComplaint);
+        fan.addComplaintToDataManager(description);
     }
 }

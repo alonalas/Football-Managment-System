@@ -7,14 +7,12 @@ import java.util.Date;
 public class Complaint {
 
     private User user;
-    private IController system;
     private String description;
     Date date;
     //Hour is missing
 
-    public Complaint(User user, IController system, String description, Date date) {
+    public Complaint(User user,  String description, Date date) {
         this.user = user;
-        this.system = system;
         this.description = description;
         this.date = date;
     }
@@ -26,14 +24,6 @@ public class Complaint {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public IController getSystem() {
-        return system;
-    }
-
-    public void setSystem(IController system) {
-        this.system = system;
     }
 
     public String getDescription() {
