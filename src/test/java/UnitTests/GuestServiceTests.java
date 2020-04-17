@@ -8,6 +8,7 @@ import LogicLayer.Player;
 import LogicLayer.User;
 import ServiceLayer.*;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -33,6 +34,8 @@ public class GuestServiceTests {
         system = new Controller();
         guest = new Guest();
         guestService = new GuestService(guest,system);
+        String propertiesPath = "log4j.properties";
+        PropertyConfigurator.configure(propertiesPath);
     }
 
     /**

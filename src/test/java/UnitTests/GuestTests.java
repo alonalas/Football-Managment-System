@@ -7,6 +7,7 @@ import LogicLayer.Fan;
 import LogicLayer.Guest;
 import LogicLayer.User;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,6 +20,8 @@ public class GuestTests {
     @BeforeClass
     public static void init(){
         guest = new Guest();
+        String propertiesPath = "log4j.properties";
+        PropertyConfigurator.configure(propertiesPath);
     }
 
     @Before

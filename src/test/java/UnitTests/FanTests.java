@@ -4,6 +4,7 @@ import DataLayer.IDataManager;
 import DataLayer.dataManager;
 import LogicLayer.*;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -21,6 +22,8 @@ public class FanTests {
         data = new dataManager();
         user = new User("Eitan@gmail.com","1234","Eitan","David");
         fan = new Fan(user,user.getFirstName());
+        String propertiesPath = "log4j.properties";
+        PropertyConfigurator.configure(propertiesPath);
     }
 
     /**

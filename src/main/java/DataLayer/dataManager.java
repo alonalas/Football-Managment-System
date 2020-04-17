@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 //import com.sun.org.apache.xml.internal.security.encryption.ReferenceList;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import java.io.*;
 import java.util.*;
@@ -27,7 +28,7 @@ public class dataManager implements IDataManager, Serializable {
     private List<Page> pageList;
     private List<Game> gameList;
     private LinkedList<Referee> RefereeList;
-    private static final Logger systemLoger = Logger.getLogger(dataManager.class);
+    private static final Logger systemLogger = Logger.getLogger(dataManager.class);
 
     public dataManager() {
         guestsList = new ArrayList<>();
@@ -40,6 +41,8 @@ public class dataManager implements IDataManager, Serializable {
         pageList = new ArrayList<>();
         gameList = new ArrayList<>();
         RefereeList = new LinkedList<>();
+        String propertiesPath = "log4j.properties";
+        PropertyConfigurator.configure(propertiesPath);
     }
 
     public boolean checkIfEmailExists(String email) {
@@ -151,7 +154,7 @@ public class dataManager implements IDataManager, Serializable {
     public void addLeague(League league) {
         if (SearchLeagueByType(league.getType()) == null) {
             leagueList.add(league);
-            systemLoger.info("league been added , type:" + league.getType());
+            systemLogger.info("league been added , type:" + league.getType());
         }
     }
 
@@ -182,10 +185,10 @@ public class dataManager implements IDataManager, Serializable {
     public void addSeason(Season season) {
         if (SearchSeason(season.getStart(), season.getEnd()) == null) {
             seasonList.add(season);
-            systemLoger.info("Season been added , linked to League:" + " , Start date:" + season.getStart() +
+            systemLogger.info("Season been added , linked to League:" + " , Start date:" + season.getStart() +
                     " , End date:" + season.getEnd());
         } else if (SearchSeason(season.getStart(), season.getEnd()).getLeagueList().contains(season.getLeagueList())) {
-            systemLoger.info("Season Linked to existing League:" + " , Start date:" + season.getStart() +
+            systemLogger.info("Season Linked to existing League:" + " , Start date:" + season.getStart() +
                     " , End date:" + season.getEnd());
         }
     }
@@ -200,7 +203,7 @@ public class dataManager implements IDataManager, Serializable {
     public boolean addReferee(Referee referee) {
         if (!RefereeList.contains(referee)) {
             RefereeList.add(referee);
-            systemLoger.info("new Referee been added , belong to user : " + referee.getUser().getUserName());
+            systemLogger.info("new Referee been added , belong to user : " + referee.getUser().getUserName());
             return true;
         }
         return false;
@@ -216,7 +219,7 @@ public class dataManager implements IDataManager, Serializable {
     public boolean removeReferee(Referee referee) {
         if (RefereeList.contains(referee)) {
             RefereeList.remove(referee);
-            systemLoger.info("Referee been removed , belong to user : " + referee.getUser().getUserName());
+            systemLogger.info("Referee been removed , belong to user : " + referee.getUser().getUserName());
             return true;
         }
         return false;

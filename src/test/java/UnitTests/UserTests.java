@@ -4,6 +4,7 @@ import DataLayer.IDataManager;
 import DataLayer.dataManager;
 import LogicLayer.User;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.List;
@@ -18,6 +19,8 @@ public class UserTests {
 
     @BeforeClass
     public static void init(){
+        String propertiesPath = "log4j.properties";
+        PropertyConfigurator.configure(propertiesPath);
         data = new dataManager();
         user = new User("Eitan@gmail.com","1234","Eitan","David");
     }
