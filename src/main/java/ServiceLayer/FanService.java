@@ -36,18 +36,8 @@ public class FanService extends AUserService{
      */
     @Override
     public void retrieveHistory(Criteria criteria) throws IOException {
-        List<String>searchHistory = new ArrayList<>();
-        switch (criteria) {
-            case Category:
-                searchHistory = fan.getCategorySearchHistory();
-                break;
-            case KeyWord:
-                searchHistory = fan.getKeyWordSearchHistory();
-                break;
-            case Name:
-                searchHistory = fan.getNameSearchHistory();
-                break;
-        }
+        List<String>searchHistory = fan.retrieveSearchHistory(criteria);
+
         for (String search: searchHistory){
             System.out.println(search);
         }
