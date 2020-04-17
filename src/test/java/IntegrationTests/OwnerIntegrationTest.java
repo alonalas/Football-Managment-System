@@ -1,4 +1,4 @@
-package UnitTests;
+package IntegrationTests;
 
 import DataLayer.IDataManager;
 
@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class OwnerTest {
+public class OwnerIntegrationTest {
 
     Controller controller = new Controller(null,null);
 

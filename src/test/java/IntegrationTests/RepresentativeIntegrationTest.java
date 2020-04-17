@@ -1,4 +1,4 @@
-package AcceptanceTests;
+package IntegrationTests;
 
 import DataLayer.dataManager;
 import LogicLayer.*;
@@ -15,7 +15,7 @@ import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 
-public class RepresentativeAcceptanceTest {
+public class RepresentativeIntegrationTest {
 
     @BeforeClass
     public static void SystemInit(){

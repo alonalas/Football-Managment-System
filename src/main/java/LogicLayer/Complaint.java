@@ -10,13 +10,14 @@ public class Complaint implements Serializable {
     private User user;
     private String description;
     private String commentAdmin;
-    Date date;
-    //Hour is missing
+    private String date; // format: "2010-12-12"
+    private boolean answered;
 
-    public Complaint(User user,  String description, Date date) {
+    public Complaint(User user,  String description, String date) {
         this.user = user;
         this.description = description;
         this.date = date;
+        this.answered=false;
     }
 
     public User getUser() {
@@ -36,11 +37,11 @@ public class Complaint implements Serializable {
         this.description = description;
     }
 
-    public Date getDate() {
+    public String  getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -48,7 +49,38 @@ public class Complaint implements Serializable {
         this.commentAdmin = commentAdmin;
     }
 
-    public String getCommentAdmin() {
+    public String getCommentAdmin()
+    {
+        if(commentAdmin==null){
+            return "no comments";
+        }
         return commentAdmin;
+    }
+
+    /**
+     * ID: Complaint@1
+     * @return the full complaint details
+     */
+    public String getFullComplaint(){
+        String com = "user: " + getUser().getUserName() + "\ndescription: " + getDescription()
+                + "\ndate: " + getDate() + "\ncomments: " + getCommentAdmin();
+        return com;
+    }
+
+
+    /**
+     * ID: Complaint@2
+     * @param complaint the complaint we want to compare
+     * @return true if the two complaint are equal
+     */
+    public boolean equals(Complaint complaint){
+        if(this.getUser().equals(complaint.getUser())&&
+                this.getDescription().equals(complaint.getDescription())&&
+                this.getDate().equals(complaint.getDate())){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

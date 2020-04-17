@@ -17,6 +17,7 @@ public class User implements Serializable {
     private String lastName;
     private String userName;
     private List<Role> roles;
+    private List<Alert> alerts;
 
     private static IDataManager data(){
         return DataComp.getInstance();
@@ -28,6 +29,7 @@ public class User implements Serializable {
         this.password = other.password;
         this.userName = other.userName;
         this.roles = other.getRoles();
+        this.alerts = new LinkedList<>();
     }
 
 
@@ -36,6 +38,14 @@ public class User implements Serializable {
         this.password = password;
         this.userName = userName;
         this.roles = new LinkedList<>();
+        this.alerts = new LinkedList<>();
+    }
+    public User(String email, String password, String firstName, String lastName) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.roles = new ArrayList<Role>();
     }
 
     @Override
@@ -94,14 +104,15 @@ public class User implements Serializable {
         }
         return null;
     }
-
-    public User(String email, String password, String firstName, String lastName) {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.roles = new ArrayList<Role>();
+    /**
+     * ID: User@5
+     * adds a new Alert to the alerts list
+     * @param alert the new alwert we want to add
+     */
+    public void addAlerts(Alert alert){
+        this.alerts.add(alert);
     }
+
 
     public static List<User> getAllUsers(){
         return data().getUserList();

@@ -20,7 +20,7 @@ public class dataManager implements IDataManager, Serializable {
     private HashMap<Fan,List<String>>fanSearchKeyWordHistory;
     private List<Guest> guestsList;
     private List<User> userList;
-    private Map<User, List<LogicLayer.Alert>> Alerts;
+    private Map<User, List<LogicLayer.Alert>> alerts;
     private Map<User, List<Complaint>> complaints;
     private List<League> leagueList;
     private List<Season> seasonList;
@@ -28,12 +28,13 @@ public class dataManager implements IDataManager, Serializable {
     private List<Page> pageList;
     private List<Game> gameList;
     private LinkedList<Referee> RefereeList;
+    private List<Administrator> administrators;
     private static final Logger systemLogger = Logger.getLogger(dataManager.class);
 
     public dataManager() {
         guestsList = new ArrayList<>();
         userList = new ArrayList<>();
-        Alerts = new HashMap<>();
+        alerts = new HashMap<>();
         complaints = new HashMap<>();
         leagueList = new ArrayList<>();
         seasonList = new ArrayList<>();
@@ -109,11 +110,11 @@ public class dataManager implements IDataManager, Serializable {
     }
 
     public Map<User, List<Alert>> getAlerts() {
-        return Alerts;
+        return alerts;
     }
 
     public void setAlerts(Map<User, List<Alert>> alerts) {
-        Alerts = alerts;
+        this.alerts = alerts;
     }
 
     public Map<User, List<Complaint>> getComplaint() {
@@ -250,20 +251,20 @@ public class dataManager implements IDataManager, Serializable {
         return RefereeList;
     }
 
-    /**
-     * id: dataManager@10
-     *
-     * @param user
-     * @param alert
-     */
-    public void addAlert(User user, Alert alert) {
-        if (!Alerts.containsKey(user)) {
-            List<Alert> alerts = new LinkedList<>();
-            alerts.add(alert);
-            Alerts.put(user, alerts);
-        } else
-            Alerts.get(user).add(alert);
-    }
+//    /**
+//     * id: dataManager@10
+//     *
+//     * @param user
+//     * @param alert
+//     */
+//    public void addAlert(User user, Alert alert) {
+//        if (!lerts.containsKey(user)) {
+//            List<Alert> alerts = new LinkedList<>();
+//            alerts.add(alert);
+//            Alerts.put(user, alerts);
+//        } else
+//            Alerts.get(user).add(alert);
+//    }
 
 
     public static void writeData(IDataManager data, File file) {
@@ -301,21 +302,32 @@ public class dataManager implements IDataManager, Serializable {
         return pageList;
     }
 
-    public List<Game> getGameList() {
-        return gameList;
+    /**
+     * ID: dataManager@8
+     * adds a new Team to the teams list
+     * @param team the new team we want to add
+     */
+    public void addTeam(Team team){
+        if(!getTeamList().contains(team)){
+            teamList.add(team);
+        }
     }
 
-    public List<Coach> getCoaches() {
-        List<Coach> coaches = new ArrayList<Coach>();
-        for (User user : userList) {
-            List<Role> userRoles = user.getRoles();
-            for (Role role : userRoles) {
-                if (role instanceof Coach) {
-                    coaches.add((Coach) role);
-                }
+    /**
+     * ID: dataManager@9
+     * adds a new complaint to the complaints map
+     * @param complaint the new complaint we want to add
+     * @param user the user we add the complaint to
+     */
+    public void addComplaint(Complaint complaint,User user){
+        if(!complaints.containsValue(complaint)){
+            List<Complaint> list = complaints.get(user);
+            if(list==null){
+                list = new LinkedList<>();
             }
+            list.add(complaint);
+            complaints.put(user,list);
         }
-        return coaches;
     }
 
     public List<Owner> getOwners() {
@@ -424,6 +436,57 @@ public class dataManager implements IDataManager, Serializable {
     public List<String> getNameSearchHistory(Fan fan) {
         return this.fanSearchNameHistory.get(fan);
     }
+
+    public List<Game> getGameList() {
+        return gameList;
+    }
+
+    public List<Coach> getCoaches() {
+        List<Coach> coaches = new ArrayList<Coach>();
+        for (User user : userList) {
+            List<Role> userRoles = user.getRoles();
+            for (Role role : userRoles) {
+                if (role instanceof Coach) {
+                    coaches.add((Coach) role);
+                }
+            }
+        }
+        return coaches;
+    }
+
+
+    /**
+     * ID: dataManager@10
+     * adds new alert to the alerts map
+     * @param alert the new alert we want to add
+     * @param user the user we add the alert to
+     */
+    public void addAlert(Alert alert,User user){
+        if(!complaints.containsValue(alert)){
+            List<Alert> list = getAlerts().get(user);
+            if(list==null){
+                list = new LinkedList<>();
+            }
+            list.add(alert);
+            alerts.put(user,list);
+        }
+    }
+    public void addAlert(User user,Alert alert){
+        addAlert(alert,user);
+    }
+
+    /**
+     * dataManager@11
+     * delets a user from the users list
+     * @param user the user we want to delete
+     */
+    public void deleteUser(User user){
+        if(userList.contains(user)) {
+            userList.remove(user);
+        }
+    }
+
+
 }
 
 

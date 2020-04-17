@@ -10,6 +10,9 @@ import java.util.Map;
 
 public interface IDataManager {
 
+    void addTeam(Team team);
+    void addAlert(Alert alert,User user);
+    void deleteUser(User user);
     User getUserByPassword(String userName, String password);
     User getUserByMail(String userName, String password);
     League SearchLeagueByType(League.LeagueType leagueType);
@@ -54,5 +57,6 @@ public interface IDataManager {
     List<String> getCategorySearchHistory(Fan fan);
     List<String> getKeyWordSearchHistory(Fan fan);
     List<String> getNameSearchHistory(Fan fan);
+    void addComplaint(Complaint complaint,User user) ;
 
 }

@@ -20,9 +20,7 @@ public class AdministratorTest {
         administrator = new Administrator(
                 "test@example.com",
                 "123456",
-                "admin",
-                null,
-                null
+                "admin"
         );
         String propertiesPath = "log4j.properties";
         PropertyConfigurator.configure(propertiesPath);

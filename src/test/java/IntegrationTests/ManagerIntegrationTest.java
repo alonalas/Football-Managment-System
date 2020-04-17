@@ -1,4 +1,4 @@
-package UnitTests;
+package IntegrationTests;
 
 import DataLayer.IDataManager;
 import DataLayer.dataManager;
@@ -15,7 +15,7 @@ import java.util.Map;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-public class ManagerTest {
+public class ManagerIntegrationTest {
 
     Controller controller = new Controller(null,null);
 

@@ -10,7 +10,7 @@ public class ControllerTests {
 
     @BeforeClass
     public static void init(){
-        Administrator admin = new Administrator("A", "B", "C", null, null);
+        Administrator admin = new Administrator("A", "B", "C");
         Representitive rep = new Representitive(new User("A", "B", "C", null), "TEST");
         testController = new Controller(rep, admin);
     }

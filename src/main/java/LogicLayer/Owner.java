@@ -14,11 +14,14 @@ public class Owner extends RoleHolder implements Serializable {
     private String name;
     private List<Team> teamList;
     private Owner nominatedBy;
+    private List<Alert> alerts;
 
     public Owner(User user, String name) {
         super(user);
         this.name = name;
         this.teamList = new LinkedList<>();
+        alerts =new LinkedList<>();
+
     }
 
     @Override
@@ -577,6 +580,22 @@ public class Owner extends RoleHolder implements Serializable {
         if (!(day > 0 && day < 32 )) {
             throw new IOException("Day is illegal, please insert valid day between 1 and 31");
         }
+    }
+    public List<Alert> getAlerts() {
+        return alerts;
+    }
+
+    public void setAlerts(List<Alert> alerts) {
+        this.alerts = alerts;
+    }
+
+    /**
+     * ID: Owner@20
+     * adds a new alert to the alerts list
+     * @param alert the new alert we want to add
+     */
+    public void addAlert(Alert alert){
+        getAlerts().add(alert);
     }
 }
 

@@ -5,6 +5,7 @@ import DataLayer.IDataManager;
 import ServiceLayer.Criteria;
 import ServiceLayer.IController;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -57,7 +58,7 @@ public class Fan extends Role implements Serializable {
     }
 
     public void addComplaintToDataManager(String description) {
-        Complaint complaint = new Complaint(this.getUser(),description,new Date());
+        Complaint complaint = new Complaint(this.getUser(),description, LocalDate.now().toString());
         getDataManager().addComplaint(this.getUser(),complaint);
     }
 

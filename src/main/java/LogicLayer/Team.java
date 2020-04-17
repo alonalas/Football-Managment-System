@@ -25,6 +25,8 @@ public class Team implements Serializable {
     private List<Coach> coachList;
     private List<RoleHolder> roleHolders;
     private teamStatus status;
+    private boolean finalClose; // true if the admin closed (cant be changed after true)
+
 
     private IDataManager data(){
         return DataComp.getInstance();
@@ -49,13 +51,19 @@ public class Team implements Serializable {
         home = new LinkedList<>();
         coachList = new LinkedList<>();
         roleHolders = new LinkedList<>();
-
+        finalClose=false;
     }
 
 
     public void addOwner(Owner owner) {
         if (!this.ownerList.contains(owner))
             ownerList.add(owner);
+    }
+
+    public void addManager(Manager manager){
+        if(!this.managerList.contains(manager)){
+            managerList.add(manager);
+        }
     }
 
 
@@ -151,7 +159,26 @@ public class Team implements Serializable {
         }
         return null;
     }
+    /**
+     * ID: 1
+     * returns a RoleHolder that belongs to the requiered team of the given owner
+     * search is made by user name and email
+     * @param owner
+     * @param userName
+     * @param email
+     * @return
+     */
+    public RoleHolder getRoleHolder(Owner owner, String userName,String email) {
 
+        User user = data().getUserByMail(userName,email);
+        if (this.ownerList.contains(owner)) {
+            for (RoleHolder roleHolder : this.roleHolders) {
+                if (roleHolder.getUser().equals(user))
+                    return roleHolder;
+            }
+        }
+        return null;
+    }
     public List<RoleHolder> getRoleHolders() {
         return roleHolders;
     }
@@ -190,13 +217,13 @@ public class Team implements Serializable {
 
 
     /**
-     * function number: 2
+     * ID: Team@2
      * compare two teams
      * @param team the team we want to compare to
      * @return true if the teams are equal
      */
     public boolean equals(Team team){
-        if(this.name.equals(team)&& this.stadium.equals(team.getStadium())){
+        if(this.name.equals(team.getName())&& this.stadium.equals(team.getStadium())){
             return true;
         }else{
             return false;
@@ -204,8 +231,8 @@ public class Team implements Serializable {
     }
 
     public void setPlayer(Player player) {
-        if (!playerList.contains(player))
-        playerList.add(player);
+        if(!playerList.contains(player))
+            playerList.add(player);
     }
 
     public void setCoach(Coach coach) {
@@ -219,6 +246,13 @@ public class Team implements Serializable {
 
     public void setCoachList(List<Coach> coachList) {
         this.coachList = coachList;
+    }
+    public boolean isFinalClose() {
+        return finalClose;
+    }
+
+    public void finalCloseTeam(){
+        finalClose=true;
     }
 
     /**
