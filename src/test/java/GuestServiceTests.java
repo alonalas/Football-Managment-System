@@ -106,7 +106,7 @@ public class GuestServiceTests {
      * checks search information func
      */
     @Test
-    public void searchInfo() {
+    public void searchInfoTest() {
         GuestStab guest = new GuestStab(data);
         guestService = new GuestService(guest, system);
         // Search By Key Word
@@ -123,5 +123,15 @@ public class GuestServiceTests {
         assertEquals(guestService.getLastSearchResults().size(), 3);
     }
 
-
+    /**
+     * checks filter search results func
+     */
+    @Test
+    public void filterSearchTest() {
+        GuestStab guest = new GuestStab(data);
+        guestService = new GuestService(guest, system);
+        // Search By Key Word
+        guestService.searchInformation(Criteria.KeyWord, "playERS");
+        guestService.filterResults(Filter.Team, "FCB");
+    }
 }

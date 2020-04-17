@@ -1,8 +1,5 @@
 import DataLayer.IDataManager;
-import LogicLayer.Game;
-import LogicLayer.Guest;
-import LogicLayer.Player;
-import LogicLayer.User;
+import LogicLayer.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +18,11 @@ public class GuestStab extends Guest {
         listG.add(new Game(null,null,null, null, null, null));
         listG.add(new Game(null,null,null, null, null, null));
         listP = new ArrayList<>();
-        listP.add(new Player(null, null, null, "David", null));
-        listP.add(new Player(null, null, null, "Or", null));
-        listP.add(new Player(null, null, null, "Raul", null));
+        Team team = new Team("FCB",null,null,null,null,null,null,null,null,null);
+        Team otherTeam = new Team("RMCF",null,null,null,null,null,null,null,null,null);
+        listP.add(new Player(null, null, team, "David", null));
+        listP.add(new Player(null, null, team, "Or", null));
+        listP.add(new Player(null, null, otherTeam, "Raul", null));
     }
 
     @Override
