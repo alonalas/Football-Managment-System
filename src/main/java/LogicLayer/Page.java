@@ -1,10 +1,10 @@
 package LogicLayer;
 
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Page {
+public class Page implements Serializable {
     private List<User> followers;
     private RoleHolder roleHolder;
     private List<String> updates;
@@ -13,11 +13,10 @@ public class Page {
         followers = new ArrayList<>();
         updates = new ArrayList<>();
         this.roleHolder = roleHolder;
-
     }
 
     public void addUpdate(String update) {
-        if (update.length()>0)
+        if (update.length() > 0)
             updates.add(update);
     }
 

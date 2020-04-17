@@ -1,10 +1,13 @@
 package ServiceLayer;
-import LogicLayer.Page;
+import LogicLayer.*;
 
 import java.io.IOException;
 import java.util.List;
 
 public interface IUserService {
+
+    void addPage(Page newPage) throws IOException;
+    List<User> getSystemUsers() ;
 
     void addPages(List<Page> newPages) throws IOException;
 

@@ -3,9 +3,10 @@ package LogicLayer;
 import DataLayer.IDataManager;
 import ServiceLayer.IController;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Guest {
+public class Guest implements Serializable {
 
     private IDataManager data;
 
@@ -56,6 +57,9 @@ public class Guest {
         return data.getSeasonList();
     }
 
+    public User signIn(String userName, String password){
+        User user = data.getUserByPassword(userName, password);
+        return user;
     public List<Coach> retrieveCoaches() {
         return data.getCoaches();
     }

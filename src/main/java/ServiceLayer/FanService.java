@@ -48,6 +48,9 @@ public class FanService extends AUserService{
         guestService.searchInformation(Criteria.Category, interested.toString());
     }
 
+    public FanService(Controller control) {
+        super(control);
+    }
     @Override
     public void searchInformation(String name) throws IOException {
         Guest guest = new Guest(fan.getDataManager());

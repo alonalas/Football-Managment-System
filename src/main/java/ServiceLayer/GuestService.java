@@ -58,6 +58,10 @@ public class GuestService implements IGuestService{
         return true;
     }
 
+    public GuestService(Controller control) {
+        super(control);
+    }
+
 
     /**
      * Use Case - 2.2

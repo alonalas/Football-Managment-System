@@ -1,5 +1,8 @@
 package ServiceLayer;
 
+import LogicLayer.*;
+
+import java.lang.reflect.Field;
 import LogicLayer.Administrator;
 import LogicLayer.Guest;
 import LogicLayer.Representitive;
@@ -37,7 +40,9 @@ public class Controller implements IController{
         }
     }
 
+    public static Controller controllerSingleTone ;
 
+    // TEST
     public Controller(Representitive representitive, Administrator administrator) {
         this.representitive = representitive;
         this.administrator = administrator;
@@ -82,6 +87,23 @@ public class Controller implements IController{
         this.UserServices.remove(user);
     }
 
+    /**
+     * ID: 1
+     * displays the team's asset's details to the screen
+     * @param roleHolder
+     */
+    public void displayForm(RoleHolder roleHolder) {
+        if (roleHolder==null)
+            System.out.println("Name : String");
+        else {
+            Field[] declaredFields = roleHolder.getClass().getDeclaredFields();
+            for (Field f : declaredFields) {
+                System.out.println(f.getName() + " : " + f.getType().getSimpleName());
+            }
+        }
+    }
+
+
     public List<Guest> getGuestsList() {
         return currentGuestsList;
     }
@@ -98,6 +120,17 @@ public class Controller implements IController{
         this.currentUserList = userList;
     }
 
+    public void addUser(User user) {
+        this.currentUserList.add(user);
+    }
+
+    public Map<User, List<IUserService>> getUserServices() {
+        return UserServices;
+    }
+
+    public void setUserServices(Map<User, List<IUserService>> userServices) {
+        UserServices = userServices;
+    }
     public Representitive getRepresentitive() {
         return representitive;
     }
@@ -108,10 +141,6 @@ public class Controller implements IController{
 
     public void addGuest(Guest newGuest) {
         this.currentGuestsList.add(newGuest);
-    }
-
-    public void addUser(User newUser) {
-        this.currentUserList.add(newUser);
     }
 
     public void removeGuest(Guest guestToRemove) {

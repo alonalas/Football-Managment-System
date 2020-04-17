@@ -1,6 +1,8 @@
 package LogicLayer;
 
-public class Coach extends RoleHolder {
+import java.io.Serializable;
+
+public class Coach extends RoleHolder implements Serializable {
 
     private String name;
     String qualification;
@@ -15,6 +17,8 @@ public class Coach extends RoleHolder {
         this.page = page;
         this.team = team;
     }
+
+    public Coach() {}
 
     public String getName() {
         return name;
