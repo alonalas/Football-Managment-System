@@ -17,8 +17,6 @@ import static org.junit.Assert.assertEquals;
 
 public class ManagerTest {
 
-    //DataLayer.dataManager dataManager = new dataManager();
-    private static IDataManager dataManager = DataComp.getInstance();
     Controller controller = new Controller(null,null);
 
     User ownerUser = new User("alonalas@post.bgu.ac.il","123","alona");
@@ -87,13 +85,13 @@ public class ManagerTest {
     }
 
     private void initializeSystem() {
-
+        DataComp.setDataManager(new dataManager());
         controller.addUser(ownerUser);
-        dataManager.addUser(ownerUser);
-        dataManager.addUser(u4);
-        dataManager.addUser(u3);
-        dataManager.addUser(u1);
-        dataManager.addUser(u2);
+        DataComp.getInstance().addUser(ownerUser);
+        DataComp.getInstance().addUser(u4);
+        DataComp.getInstance().addUser(u3);
+        DataComp.getInstance().addUser(u1);
+        DataComp.getInstance().addUser(u2);
         ownerUser.setRole(own);
         own.addTeam(team);
         team.addOwner(own);
