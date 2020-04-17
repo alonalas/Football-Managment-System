@@ -91,7 +91,7 @@ public class GuestServiceTests {
      */
     @Test
     public void showInfoTest() {
-        GuestStab guest = new GuestStab(data);
+        GuestStub guest = new GuestStub(data);
         guestService = new GuestService(guest, system);
         guestService.showInformationByCategory(Interest.Players);
         assertEquals(guestService.getLastSearchResults().size(),guest.retrievePlayers().size());
@@ -107,7 +107,7 @@ public class GuestServiceTests {
      */
     @Test
     public void searchInfoTest() {
-        GuestStab guest = new GuestStab(data);
+        GuestStub guest = new GuestStub(data);
         guestService = new GuestService(guest, system);
         // Search By Key Word
         guestService.searchInformation(Criteria.KeyWord, "David");
@@ -128,7 +128,7 @@ public class GuestServiceTests {
      */
     @Test
     public void filterSearchTest() {
-        GuestStab guest = new GuestStab(data);
+        GuestStub guest = new GuestStub(data);
         guestService = new GuestService(guest, system);
         // Search By Key Word
         guestService.searchInformation(Criteria.KeyWord, "playERS");

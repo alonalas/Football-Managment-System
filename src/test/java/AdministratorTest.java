@@ -8,11 +8,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class AdministratorTests {
+public class AdministratorTest {
     // Tester
     private static Administrator administrator;
     // Logger
-    private static final Logger testLogger = Logger.getLogger(AdministratorTests.class);
+    private static final Logger testLogger = Logger.getLogger(AdministratorTest.class);
     // This Function Run Before All LogicLayer.Administrator Tests
     @BeforeClass
     public static void init(){
@@ -21,8 +21,8 @@ public class AdministratorTests {
                 "test@example.com",
                 "123456",
                 "admin",
-                "null"
-
+                null,
+                null
         );
         String propertiesPath = "log4j.properties";
         PropertyConfigurator.configure(propertiesPath);

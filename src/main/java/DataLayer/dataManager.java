@@ -1,4 +1,5 @@
 package DataLayer;
+
 import LogicLayer.*;
 
 import java.util.ArrayList;
@@ -11,9 +12,9 @@ import java.util.*;
 import java.util.List;
 import java.util.Map;
 
-public class dataManager implements IDataManager , Serializable {
+public class dataManager implements IDataManager, Serializable {
 
-    private HashMap<Fan,List<String>>fanSearchHistory;
+    private HashMap<Fan, List<String>> fanSearchHistory;
     private List<Guest> guestsList;
     private List<User> userList;
     private Map<User, List<LogicLayer.Alert>> Alerts;
@@ -31,7 +32,7 @@ public class dataManager implements IDataManager , Serializable {
         guestsList = new ArrayList<>();
         userList = new ArrayList<>();
         Alerts = new HashMap<>();
-        complaint = new HashMap<>();
+        complaints = new HashMap<>();
         leagueList = new ArrayList<>();
         seasonList = new ArrayList<>();
         teamList = new ArrayList<>();
@@ -40,8 +41,8 @@ public class dataManager implements IDataManager , Serializable {
         RefereeList = new LinkedList<>();
     }
 
-    public void TestReset (){
-        this.guestsList =  new LinkedList<>();
+    public void TestReset() {
+        this.guestsList = new LinkedList<>();
         this.userList = new LinkedList<>();
         this.Alerts = new HashMap<>();
         this.complaints = new HashMap<>();
@@ -53,8 +54,8 @@ public class dataManager implements IDataManager , Serializable {
 
 
     public boolean checkIfEmailExists(String email) {
-        for (User user : userList){
-            if (user.getEmail().equals(email)){
+        for (User user : userList) {
+            if (user.getEmail().equals(email)) {
                 return true;
             }
         }
@@ -65,21 +66,28 @@ public class dataManager implements IDataManager , Serializable {
         userList.add(newUser);
     }
 
-    public User getUser(String email, String password){
-
-
-    public User getUserByPassword(String userName, String password){
-        for (User user : userList){
-            if (user.getUserName().equals(userName)&&user.getPassword().equals(password)){
+    public User getUser(String email, String password) {
+        for (User user : userList) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
                 return user;
             }
         }
         return null;
     }
 
-    public User getUserByMail(String userName, String email){
-        for (User user : userList){
-            if (user.getUserName().equals(userName)&&user.getEmail().equals(email)){
+
+    public User getUserByPassword(String userName, String password) {
+        for (User user : userList) {
+            if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public User getUserByMail(String userName, String email) {
+        for (User user : userList) {
+            if (user.getUserName().equals(userName) && user.getEmail().equals(email)) {
                 return user;
             }
         }
@@ -88,7 +96,7 @@ public class dataManager implements IDataManager , Serializable {
 
 
     public void addUser(User user) {
-        if(!userList.contains(user))
+        if (!userList.contains(user))
             userList.add(user);
     }
 
@@ -117,11 +125,11 @@ public class dataManager implements IDataManager , Serializable {
     }
 
     public Map<User, List<Complaint>> getComplaint() {
-        return complaint;
+        return complaints;
     }
 
-    public void setComplaint(Map<User, List<Complaint>> complaint) {
-        this.complaint = complaint;
+    public void setComplaint(Map<User, List<Complaint>> complaints) {
+        this.complaints = complaints;
     }
 
     public List<League> getLeagueList() {
@@ -131,14 +139,15 @@ public class dataManager implements IDataManager , Serializable {
     /**
      * id: dataManager@1
      * Search League by league type
+     *
      * @param leagueType
      * @return League if existing
      */
     public League SearchLeagueByType(League.LeagueType leagueType) {
-        for (League league:
-             leagueList) {
-            if(league.getType() == leagueType){
-                return  league;
+        for (League league :
+                leagueList) {
+            if (league.getType() == leagueType) {
+                return league;
             }
         }
         return null;
@@ -147,10 +156,11 @@ public class dataManager implements IDataManager , Serializable {
     /**
      * id: dataManager@2
      * add New League To Data
+     *
      * @param league to add
      */
-    public void addLeague(League league){
-        if(SearchLeagueByType(league.getType())==null) {
+    public void addLeague(League league) {
+        if (SearchLeagueByType(league.getType()) == null) {
             leagueList.add(league);
             systemLoger.info("league been added , type:" + league.getType());
         }
@@ -159,31 +169,33 @@ public class dataManager implements IDataManager , Serializable {
     /**
      * id: dataManager@3
      * Search Season by start and end dates
+     *
      * @param start date of season
-     * @param End date of season
+     * @param End   date of season
      * @return Season if found, else null
      */
-    public Season SearchSeason(String start , String End) {
-        for (Season season:
+    public Season SearchSeason(String start, String End) {
+        for (Season season :
                 seasonList) {
-            if(season.getEnd().equals(End) && season.getStart().equals(start)  ){
-                return  season;
+            if (season.getEnd().equals(End) && season.getStart().equals(start)) {
+                return season;
             }
         }
         return null;
     }
 
     /**
-     *id: dataManager@4
+     * id: dataManager@4
      * add new season to data
+     *
      * @param season season to add
      */
-    public void addSeason(Season season){
-        if(SearchSeason(season.getStart() , season.getEnd())==null) {
+    public void addSeason(Season season) {
+        if (SearchSeason(season.getStart(), season.getEnd()) == null) {
             seasonList.add(season);
             systemLoger.info("Season been added , linked to League:" + " , Start date:" + season.getStart() +
                     " , End date:" + season.getEnd());
-        }else if(SearchSeason(season.getStart() , season.getEnd()).getLeagueList().contains(season.getLeagueList())){
+        } else if (SearchSeason(season.getStart(), season.getEnd()).getLeagueList().contains(season.getLeagueList())) {
             systemLoger.info("Season Linked to existing League:" + " , Start date:" + season.getStart() +
                     " , End date:" + season.getEnd());
         }
@@ -192,28 +204,30 @@ public class dataManager implements IDataManager , Serializable {
     /**
      * id: dataManager@6
      * add New Referee To Data
+     *
      * @param referee
      * @return if added successfully, if not -> already contains the element
      */
-    public boolean addReferee(Referee referee){
-        if(! RefereeList.contains(referee)){
+    public boolean addReferee(Referee referee) {
+        if (!RefereeList.contains(referee)) {
             RefereeList.add(referee);
-            systemLoger.info("new Referee been added , belong to user : "+ referee.getUser().getUserName());
+            systemLoger.info("new Referee been added , belong to user : " + referee.getUser().getUserName());
             return true;
         }
         return false;
     }
 
     /**
-      id: dataManager@7
+     * id: dataManager@7
      * remove referee from data
+     *
      * @param referee
      * @return
      */
-    public boolean removeReferee(Referee referee){
-        if(RefereeList.contains(referee)){
+    public boolean removeReferee(Referee referee) {
+        if (RefereeList.contains(referee)) {
             RefereeList.remove(referee);
-            systemLoger.info("Referee been removed , belong to user : "+ referee.getUser().getUserName());
+            systemLoger.info("Referee been removed , belong to user : " + referee.getUser().getUserName());
             return true;
         }
         return false;
@@ -243,23 +257,24 @@ public class dataManager implements IDataManager , Serializable {
     public List<Referee> getRefereeList() {
         return RefereeList;
     }
+
     /**
      * id: dataManager@10
+     *
      * @param user
      * @param alert
      */
-    public void addAlert(User user,Alert alert) {
+    public void addAlert(User user, Alert alert) {
         if (!Alerts.containsKey(user)) {
-            List<Alert>alerts = new LinkedList<>();
+            List<Alert> alerts = new LinkedList<>();
             alerts.add(alert);
-            Alerts.put(user,alerts);
-        }
-        else
+            Alerts.put(user, alerts);
+        } else
             Alerts.get(user).add(alert);
     }
 
 
-    public static void writeData(IDataManager data , File file){
+    public static void writeData(IDataManager data, File file) {
         try {
             FileOutputStream f = new FileOutputStream(file);
             ObjectOutputStream o = new ObjectOutputStream(f);
@@ -269,21 +284,24 @@ public class dataManager implements IDataManager , Serializable {
 
             o.close();
             f.close();
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
 
     }
-    public static IDataManager readData(File file){
+
+    public static IDataManager readData(File file) {
         IDataManager Mdata = null;
         try {
             FileInputStream fi = new FileInputStream(file);
             ObjectInputStream oi = new ObjectInputStream(fi);
 
             // Read objects
-             Mdata = (IDataManager) oi.readObject();
+            Mdata = (IDataManager) oi.readObject();
 
             oi.close();
             fi.close();
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
         return Mdata;
     }
 
@@ -296,12 +314,12 @@ public class dataManager implements IDataManager , Serializable {
     }
 
     public List<Coach> getCoaches() {
-        List<Coach>coaches = new ArrayList<Coach>();
-        for (User user: userList){
-            List<Role>userRoles = user.getRoles();
-            for (Role role: userRoles){
-                if (role instanceof Coach){
-                    coaches.add((Coach)role);
+        List<Coach> coaches = new ArrayList<Coach>();
+        for (User user : userList) {
+            List<Role> userRoles = user.getRoles();
+            for (Role role : userRoles) {
+                if (role instanceof Coach) {
+                    coaches.add((Coach) role);
                 }
             }
         }
@@ -309,11 +327,11 @@ public class dataManager implements IDataManager , Serializable {
     }
 
     public List<Owner> getOwners() {
-        List<Owner>owners = new ArrayList<Owner>();
-        for (User user: userList){
-            List<Role>userRoles = user.getRoles();
-            for (Role role: userRoles){
-                if (role instanceof Coach){
+        List<Owner> owners = new ArrayList<Owner>();
+        for (User user : userList) {
+            List<Role> userRoles = user.getRoles();
+            for (Role role : userRoles) {
+                if (role instanceof Coach) {
                     owners.add((Owner) role);
                 }
             }
@@ -322,11 +340,11 @@ public class dataManager implements IDataManager , Serializable {
     }
 
     public List<Manager> getManagers() {
-        List<Manager>managers = new ArrayList<Manager>();
-        for (User user: userList){
-            List<Role>userRoles = user.getRoles();
-            for (Role role: userRoles){
-                if (role instanceof Coach){
+        List<Manager> managers = new ArrayList<Manager>();
+        for (User user : userList) {
+            List<Role> userRoles = user.getRoles();
+            for (Role role : userRoles) {
+                if (role instanceof Coach) {
                     managers.add((Manager) role);
                 }
             }
@@ -335,11 +353,11 @@ public class dataManager implements IDataManager , Serializable {
     }
 
     public List<Player> getPlayers() {
-        List<Player>players = new ArrayList<Player>();
-        for (User user: userList){
-            List<Role>userRoles = user.getRoles();
-            for (Role role: userRoles){
-                if (role instanceof Coach){
+        List<Player> players = new ArrayList<Player>();
+        for (User user : userList) {
+            List<Role> userRoles = user.getRoles();
+            for (Role role : userRoles) {
+                if (role instanceof Coach) {
                     players.add((Player) role);
                 }
             }
@@ -348,10 +366,10 @@ public class dataManager implements IDataManager , Serializable {
     }
 
     public List<User> searchUserByName(String name) {
-        List<User>retrievedUsers = new ArrayList<>();
+        List<User> retrievedUsers = new ArrayList<>();
         String[] splitted = name.split(" ");
-        for (User user: userList){
-            if (user.getFirstName().equals(splitted[0]) && user.getLastName().equals(splitted[1])){
+        for (User user : userList) {
+            if (user.getFirstName().equals(splitted[0]) && user.getLastName().equals(splitted[1])) {
                 retrievedUsers.add(user);
             }
         }
@@ -360,7 +378,7 @@ public class dataManager implements IDataManager , Serializable {
 
     @Override
     public List<String> getHistory(Fan fan) {
-        List<String>searchHistory = fanSearchHistory.get(fan);
+        List<String> searchHistory = fanSearchHistory.get(fan);
         return searchHistory;
     }
 
@@ -371,14 +389,14 @@ public class dataManager implements IDataManager , Serializable {
 
     @Override
     public void addComplaint(User user, Complaint newComplaint) {
-        complaint.get(user).add(newComplaint);
+        complaints.get(user).add(newComplaint);
     }
 
     @Override
     public List<League> searchLeagueByName(String leagueName) {
         List<League> retrievedLeagues = new ArrayList<>();
-        for (League league: leagueList){
-            if (league.getName().toLowerCase().equals(leagueName.toLowerCase())){
+        for (League league : leagueList) {
+            if (league.getName().toLowerCase().equals(leagueName.toLowerCase())) {
                 retrievedLeagues.add(league);
             }
         }
@@ -388,8 +406,8 @@ public class dataManager implements IDataManager , Serializable {
     @Override
     public List<Team> searchTeamByName(String teamName) {
         List<Team> retrievedTeams = new ArrayList<>();
-        for (Team team: teamList){
-            if (team.getName().toLowerCase().equals(teamName.toLowerCase())){
+        for (Team team : teamList) {
+            if (team.getName().toLowerCase().equals(teamName.toLowerCase())) {
                 retrievedTeams.add(team);
             }
         }

@@ -37,11 +37,8 @@ public interface IDataManager {
 
     void setGuestsList(List<Guest> guestsList);
 
-    List<User> getUserList();
-
     void setUserList(List<User> userList);
 
-    Map<User, List<Alert>> getAlerts();
 
     void setAlerts(Map<User, List<Alert>> alerts);
 
@@ -49,11 +46,8 @@ public interface IDataManager {
 
     void setComplaint(Map<User, List<Complaint>> complaint);
 
-    List<League> getLeagueList();
 
     void setLeagueList(List<League> leagueList);
-
-    List<Season> getSeasonList();
 
     void setSeasonList(List<Season> seasonList);
 

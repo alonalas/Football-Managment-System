@@ -30,7 +30,7 @@ public class FanTests {
         testLogger.info("Run: addPagesTest");
         //checks if page added
         List<Page>pages = new ArrayList<>();
-        Page testPage1 = new Page(new Player(user," ",null," ",new Date()));
+        Page testPage1 = new Page(new Player(user," ",null," ", "2001-01-01"));
         pages.add(testPage1);
         fan.addPages(pages);
         assertTrue(fan.getPages().size() == 1);

@@ -72,8 +72,9 @@ public abstract class AUserService implements IUserService{
     boolean removeRefereeFromUsers(User user , String qualification , String name) throws IOException{
         throw new IOException("Unsupported method");
     }
-    public boolean RemoveNewRefereeFromUsers(User user) throws IOException{
+    public boolean RemoveNewRefereeFromUsers(User user) throws IOException {
         throw new IOException("Unsupported method");
+    }
 
     public void addPages(List<Page> newPages) throws IOException {
         throw new IOException("not possible");

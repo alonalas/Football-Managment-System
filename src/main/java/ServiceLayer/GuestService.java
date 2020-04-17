@@ -59,7 +59,7 @@ public class GuestService implements IGuestService{
     }
 
     public GuestService(Controller control) {
-        super(control);
+        super();
     }
 
 

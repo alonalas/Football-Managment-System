@@ -4,22 +4,22 @@ import LogicLayer.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuestStab extends Guest {
+public class GuestStub extends Guest {
     List<Game> listG;
     List<Player> listP;
 
-    public GuestStab(IDataManager data) {
+    public GuestStub(IDataManager data) {
         super(data);
         init();
     }
 
     private void init() {
         listG = new ArrayList<>();
-        listG.add(new Game(null,null,null, null, null, null));
-        listG.add(new Game(null,null,null, null, null, null));
+        listG.add(new Game());
+        listG.add(new Game());
         listP = new ArrayList<>();
-        Team team = new Team("FCB",null,null,null,null,null,null,null,null,null);
-        Team otherTeam = new Team("RMCF",null,null,null,null,null,null,null,null,null);
+        Team team = new Team("FCB",null,null,null);
+        Team otherTeam = new Team("RMCF",null,null,null);
         listP.add(new Player(null, null, team, "David", null));
         listP.add(new Player(null, null, team, "Or", null));
         listP.add(new Player(null, null, otherTeam, "Raul", null));

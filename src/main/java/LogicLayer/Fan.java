@@ -1,15 +1,15 @@
 package LogicLayer;
 
 import java.io.Serializable;
-
-public class Fan extends Role implements Serializable {
 import DataLayer.IDataManager;
 import ServiceLayer.IController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fan extends Role{
+public class Fan extends Role implements Serializable {
+
+
 
     private List<Page> pages;
     private String name;

@@ -11,7 +11,7 @@ public class Player extends RoleHolder implements Serializable {
     String birthDate;
     private Page page;
 
-    public Player(User user, String position, Team team, String name, Date birthDate, Page page) {
+    public Player(User user, String position, Team team, String name, String birthDate, Page page) {
         super(user);
         this.position = position;
         this.team = team;
@@ -20,7 +20,7 @@ public class Player extends RoleHolder implements Serializable {
         this.page = page;
     }
 
-    public Player(User user, String position, Team team, String name, Date birthDate) {
+    public Player(User user, String position, Team team, String name, String birthDate) {
         super(user);
         this.position = position;
         this.team = team;

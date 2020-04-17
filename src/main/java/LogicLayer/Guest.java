@@ -57,9 +57,6 @@ public class Guest implements Serializable {
         return data.getSeasonList();
     }
 
-    public User signIn(String userName, String password){
-        User user = data.getUserByPassword(userName, password);
-        return user;
     public List<Coach> retrieveCoaches() {
         return data.getCoaches();
     }

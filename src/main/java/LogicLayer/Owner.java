@@ -97,7 +97,7 @@ public class Owner extends RoleHolder implements Serializable {
         if (validateExistingAssetType(teamName,email,userName)) {
             User user = this.getAssetUser(userName, email);
             Team team = getTeam(teamName);
-            Page page = new Page();
+            Page page = new Page(null);
             Coach coach = new Coach(user, name, qualification, job, page, team);
             coach.setTeam(team);
             team.setCoach(coach);
@@ -128,7 +128,7 @@ public class Owner extends RoleHolder implements Serializable {
             Team team = getTeam(teamName);
             User user = this.getAssetUser(userName, email);
             String date = day + "-" + month + "-" + year;
-            Page page = new Page();
+            Page page = new Page(null);
             Player player = new Player(user, position, team, name, date, page);
             team.setPlayer(player);
             player.setTeam(team);
