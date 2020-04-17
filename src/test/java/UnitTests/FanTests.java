@@ -5,6 +5,7 @@ import DataLayer.dataManager;
 import LogicLayer.*;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -15,16 +16,21 @@ public class FanTests {
     private static final Logger testLogger = Logger.getLogger(GuestTests.class);
     private static Fan fan;
     private static User user;
-    private static IDataManager data;
+
 
     @BeforeClass
     public static void init(){
-        data = new dataManager();
         user = new User("Eitan@gmail.com","1234","Eitan","David");
         fan = new Fan(user,user.getFirstName());
         String propertiesPath = "log4j.properties";
         PropertyConfigurator.configure(propertiesPath);
     }
+
+    @Before
+    public void setUp() throws Exception {
+        DataComp.setDataManager(new dataManager());
+    }
+
 
     /**
      * checks addPages func
@@ -43,5 +49,14 @@ public class FanTests {
         assertEquals("Eitan",testPage1.getUpdates().get(0));
         testLogger.info("Ended: addPagesTest");
     }
+
+    /**
+     * checks addSearchHistoryFunc
+     */
+    @Test
+    public void addSearchHistoryTest(){
+
+    }
+
 
 }

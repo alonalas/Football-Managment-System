@@ -44,16 +44,18 @@ public class Fan extends Role implements Serializable {
     }
 
     public void addSearchHistory(Criteria criteria ,String query) {
-        switch (criteria){
-            case Name:
-                getDataManager().addNameHistory(this,query);
-                break;
-            case KeyWord:
-                getDataManager().addKeyWordHistory(this,query);
-                break;
-            case Category:
-                getDataManager().addCategoryHistory(this,query);
-                break;
+        if (query!=null){
+            switch (criteria){
+                case Name:
+                    getDataManager().addNameHistory(this,query);
+                    break;
+                case KeyWord:
+                    getDataManager().addKeyWordHistory(this,query);
+                    break;
+                case Category:
+                    getDataManager().addCategoryHistory(this,query);
+                    break;
+            }
         }
     }
 
@@ -72,5 +74,21 @@ public class Fan extends Role implements Serializable {
 
     public List<String> getNameSearchHistory() {
         return getDataManager().getNameSearchHistory(this);
+    }
+
+    public List<String> retrieveSearchHistory(Criteria criteria) {
+        List<String>searchHistory = new ArrayList<>();
+        switch (criteria) {
+            case Category:
+                searchHistory = getCategorySearchHistory();
+                break;
+            case KeyWord:
+                searchHistory = getKeyWordSearchHistory();
+                break;
+            case Name:
+                searchHistory = getNameSearchHistory();
+                break;
+        }
+        return searchHistory;
     }
 }
