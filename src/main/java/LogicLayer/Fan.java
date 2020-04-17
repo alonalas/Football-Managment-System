@@ -45,10 +45,6 @@ public class Fan extends Role implements Serializable {
         }
     }
 
-    public List<String> getHistory() {
-        return dataManager.getHistory(this);
-    }
-
     public void addSearchHistory(Criteria criteria ,String query) {
         switch (criteria){
             case Name:
