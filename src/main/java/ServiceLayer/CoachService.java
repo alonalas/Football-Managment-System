@@ -20,6 +20,6 @@ public class CoachService extends AUserService {
      */
     @Override
     public void addUpdate(String update) throws IOException {
-        coach.getPage().addUpdate(update);
+        coach.addUpdateToPage(update);
     }
 }

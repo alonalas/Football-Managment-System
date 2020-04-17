@@ -14,7 +14,9 @@ import java.util.Map;
 
 public class dataManager implements IDataManager, Serializable {
 
-    private HashMap<Fan, List<String>> fanSearchHistory;
+    private HashMap<Fan,List<String>>fanSearchNameHistory;
+    private HashMap<Fan,List<String>>fanSearchCategoryHistory;
+    private HashMap<Fan,List<String>>fanSearchKeyWordHistory;
     private List<Guest> guestsList;
     private List<User> userList;
     private Map<User, List<LogicLayer.Alert>> Alerts;
@@ -28,7 +30,6 @@ public class dataManager implements IDataManager, Serializable {
     private static final Logger systemLoger = Logger.getLogger(dataManager.class);
 
     public dataManager() {
-        fanSearchHistory = new HashMap<>();
         guestsList = new ArrayList<>();
         userList = new ArrayList<>();
         Alerts = new HashMap<>();
@@ -377,17 +378,6 @@ public class dataManager implements IDataManager, Serializable {
     }
 
     @Override
-    public List<String> getHistory(Fan fan) {
-        List<String> searchHistory = fanSearchHistory.get(fan);
-        return searchHistory;
-    }
-
-    @Override
-    public void addSearchHistory(Fan fan, String query) {
-        fanSearchHistory.get(fan).add(query);
-    }
-
-    @Override
     public void addComplaint(User user, Complaint newComplaint) {
         complaints.get(user).add(newComplaint);
     }
@@ -412,6 +402,36 @@ public class dataManager implements IDataManager, Serializable {
             }
         }
         return retrievedTeams;
+    }
+
+    @Override
+    public void addNameHistory(Fan fan, String query) {
+        this.fanSearchNameHistory.get(fan).add(query);
+    }
+
+    @Override
+    public void addKeyWordHistory(Fan fan, String query) {
+        this.fanSearchKeyWordHistory.get(fan).add(query);
+    }
+
+    @Override
+    public void addCategoryHistory(Fan fan, String query) {
+        this.fanSearchCategoryHistory.get(fan).add(query);
+    }
+
+    @Override
+    public List<String> getCategorySearchHistory(Fan fan) {
+        return this.fanSearchCategoryHistory.get(fan);
+    }
+
+    @Override
+    public List<String> getKeyWordSearchHistory(Fan fan) {
+        return this.fanSearchKeyWordHistory.get(fan);
+    }
+
+    @Override
+    public List<String> getNameSearchHistory(Fan fan) {
+        return this.fanSearchNameHistory.get(fan);
     }
 }
 

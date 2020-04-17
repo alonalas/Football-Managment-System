@@ -16,7 +16,7 @@ public class Page implements Serializable {
     }
 
     public void addUpdate(String update) {
-        if (update.length() > 0)
+        if (update != null && update.length() > 0)
             updates.add(update);
     }
 

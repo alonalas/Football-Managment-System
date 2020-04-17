@@ -87,4 +87,8 @@ public class Player extends RoleHolder implements Serializable {
     public void setPage(Page page) {
         this.page = page;
     }
+
+    public void addUpdateToPage(String update) {
+        page.addUpdate(update);
+    }
 }

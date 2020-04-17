@@ -20,6 +20,6 @@ public class PlayerService extends AUserService {
      */
     @Override
     public void addUpdate(String update) throws IOException {
-        player.getPage().addUpdate(update);
+        player.addUpdateToPage(update);
     }
 }

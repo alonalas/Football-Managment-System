@@ -84,34 +84,32 @@ public abstract class AUserService implements IUserService{
         throw new IOException("not possible");
     }
 
+    @Override
     public void showPersonalInformation() throws IOException {
         throw new IOException("not possible");
     }
 
+    @Override
     public void editPersonalInformation(String firstName, String lastName, String email) throws IOException {
         throw new IOException("not possible");
     }
 
-    public void retrieveHistory() throws IOException {
+    @Override
+    public void retrieveHistory(Criteria criteria) throws IOException {
         throw new IOException("not possible");
     }
 
-    public void searchInformation(String name) throws IOException {
+    @Override
+    public void searchInformation(Criteria criteria, String query) throws IOException {
         throw new IOException("not possible");
     }
 
-    public void searchInformation(Interest interested) throws IOException {
-        throw new IOException("not possible");
-    }
-
-    public void searchInformationByKeyWord(String query) throws IOException {
-        throw new IOException("not possible");
-    }
-
+    @Override
     public void report(String description) throws IOException {
         throw new IOException("not possible");
     }
 
+    @Override
     public void addUpdate(String update) throws IOException {
         throw new IOException("not possible");
     }

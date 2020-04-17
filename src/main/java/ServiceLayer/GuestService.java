@@ -4,6 +4,8 @@ import LogicLayer.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GuestService implements IGuestService{
     private Guest guest;
@@ -37,6 +39,11 @@ public class GuestService implements IGuestService{
             System.out.println("## user with this email exists in system. ##");
             return false;
         }
+        boolean mailIsOk = mailAuthentication(email);
+        if (mailIsOk == true){
+            System.out.println("## email isn't in the right format ##");
+            return false;
+        }
         User newUser = guest.createNewUser(email,password,firstName,lastName);
         System.out.println("## Registered to system successfully ##");
         system.addUser(newUser);
@@ -62,6 +69,15 @@ public class GuestService implements IGuestService{
         super();
     }
 
+    public boolean mailAuthentication(String email){
+        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+        Matcher mat = pattern.matcher(email);
+        if(mat.matches()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     /**
      * Use Case - 2.2
@@ -83,6 +99,8 @@ public class GuestService implements IGuestService{
         system.removeGuest(guest);
         return true;
     }
+
+
 
     /**
      * Use Case - 2.3

@@ -17,13 +17,9 @@ public interface IUserService {
 
     void editPersonalInformation(String firstName, String lastName, String email) throws IOException;
 
-    void retrieveHistory() throws IOException;
+    void retrieveHistory(Criteria criteria) throws IOException;
 
-    void searchInformation(String name) throws IOException;
-
-    void searchInformation(Interest interested) throws IOException;
-
-    void searchInformationByKeyWord(String query) throws IOException;
+    public void searchInformation(Criteria criteria, String query) throws IOException;
 
     void report(String description) throws IOException;
 
