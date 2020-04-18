@@ -86,7 +86,7 @@ public class Manager extends RoleHolder implements Serializable {
      * @throws IOException if the manager is not permitted to execute this function
      */
     public void insertNewCoach(String teamName, String name, String qualification, String job, String userName,
-                               String email) throws IOException {
+                               String email) throws IOException { //tested
         if ( this.permissionBooleanMap.get(Permission.coachAddition).booleanValue() == true ) {
             this.nominatedBy.insertNewCoach(teamName,name,qualification,job,userName,email);
         }
@@ -109,7 +109,7 @@ public class Manager extends RoleHolder implements Serializable {
      * @throws IOException if the manager is not permitted to execute this function
      */
     public void insertNewPlayer(String teamName, String name, String position, int day ,
-                                int month, int year , String userName,String email) throws IOException {
+                                int month, int year , String userName,String email) throws IOException { //tested
         if ( this.permissionBooleanMap.get(Permission.playerAddition).booleanValue() == true ) {
             this.nominatedBy.insertNewPlayer(teamName,name,position,day,month,year,userName,email);
         }
@@ -126,7 +126,7 @@ public class Manager extends RoleHolder implements Serializable {
      * @param email
      * @throws IOException if the manager is not permitted to execute this function
      */
-    public void deletePlayer(String teamName,String userName,String email) throws IOException {
+    public void deletePlayer(String teamName,String userName,String email) throws IOException { //tested
         if ( this.permissionBooleanMap.get(Permission.playerDeletion).booleanValue() == true ) {
             this.nominatedBy.deletePlayer(teamName,userName,email);
         }
@@ -142,7 +142,7 @@ public class Manager extends RoleHolder implements Serializable {
      * @param email
      * @throws IOException if the manager is not permitted to execute this function
      */
-    public void deleteCoach(String teamName,String userName,String email) throws IOException {
+    public void deleteCoach(String teamName,String userName,String email) throws IOException { //tested
 
         if ( this.permissionBooleanMap.get(Permission.coachDeletion).booleanValue() == true ) {
             this.nominatedBy.deleteCoach(teamName,userName,email);

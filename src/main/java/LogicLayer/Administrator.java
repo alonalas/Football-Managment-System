@@ -2,12 +2,9 @@ package LogicLayer;
 
 import DataLayer.IDataManager;
 import DataLayer.dataManager;
-import ServiceLayer.IController;
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import java.sql.Ref;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Iterator;

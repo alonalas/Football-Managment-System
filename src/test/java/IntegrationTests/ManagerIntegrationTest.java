@@ -1,12 +1,13 @@
 package IntegrationTests;
 
-import DataLayer.IDataManager;
 import DataLayer.dataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
 import ServiceLayer.ManagerService;
 import ServiceLayer.OwnerService;
+import org.junit.Before;
 import org.junit.Test;
+
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -32,11 +33,9 @@ public class ManagerIntegrationTest {
 
     ManagerService ms = new ManagerService(controller);
 
-
-
     @Test
     /**
-     * U@33
+     * I@18
      * tests uc 6.4 in the in the aspect of manager permissions.
      * testing the exceptions thrown either.
      * assumes that in the GUI the manager selects a player/coach to delete and the Player/Coach are given already
@@ -44,6 +43,7 @@ public class ManagerIntegrationTest {
     public void testPermissionsOfManager() {
 
         initializeSystem();
+
         Map<Manager.Permission,Boolean> permissionBooleanMap = new HashMap<>();
         permissionBooleanMap.put(Manager.Permission.playerDeletion,true);
         permissionBooleanMap.put(Manager.Permission.coachDeletion, true);
@@ -84,7 +84,7 @@ public class ManagerIntegrationTest {
 
     }
 
-    private void initializeSystem() {
+    public void initializeSystem() {
         DataComp.setDataManager(new dataManager());
         controller.addUser(ownerUser);
         DataComp.getInstance().addUser(ownerUser);
@@ -97,5 +97,7 @@ public class ManagerIntegrationTest {
         team.addOwner(own);
 
     }
+
+
 
 }

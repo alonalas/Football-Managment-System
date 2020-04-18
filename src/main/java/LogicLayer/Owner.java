@@ -52,7 +52,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @throws IOException if the user or the team are not exist
      */
     public void insertNewManager(String teamName, String managerName, String userName,
-                                 String email, Map<Manager.Permission, Boolean> permissionBooleanMap) throws IOException {
+                                 String email, Map<Manager.Permission, Boolean> permissionBooleanMap) throws IOException { // tested
 
            if (validateExistingAssetType(teamName,email,userName)) {
             User user = this.getAssetUser(userName, email);
@@ -86,7 +86,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @throws IOException if the user or the team are not exist
      */
     public void insertNewCoach(String teamName, String name, String qualification, String job, String userName,
-                               String email) throws IOException {
+                               String email) throws IOException { // tested
         if (validateExistingAssetType(teamName,email,userName)) {
             User user = this.getAssetUser(userName, email);
             Team team = getTeam(teamName);
@@ -114,7 +114,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @throws IOException if the team or the user are not exist
      */
     public void insertNewPlayer(String teamName, String name, String position, int day ,
-                                int month, int year , String userName,String email) throws IOException {
+                                int month, int year , String userName,String email) throws IOException { //tested
 
         if (validateExistingAssetType(teamName,email,userName)) {
             validateBirthDate(day,month,year);
@@ -138,7 +138,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @param stadium
      * @throws IOException if the team is not exist
      */
-    public void insertNewStadium(String teamName, String stadium) throws IOException {
+    public void insertNewStadium(String teamName, String stadium) throws IOException { //tested
         validateExistingAssetType(teamName,"X","X");
         getTeam(teamName).setStadium(stadium);
     }
@@ -149,20 +149,30 @@ public class Owner extends RoleHolder implements Serializable {
      * @param teamName
      * @param userName
      * @param email
-     * @throws IOException if the user or the team are not exist
+     * @throws IOException in the following cases:
+     * the user or the team are not exist
+     * the user does not exist in the database
+     * the player is not a member in the selected team
      */
-    public void deletePlayer(String teamName,String userName,String email) throws IOException {
+    public void deletePlayer(String teamName,String userName,String email) throws IOException { // tested
         if ( validateExistingAssetType(teamName,email,userName)) {
             User user = getAssetUser(userName, email);
             Team team = getTeam(teamName);
-            for (Role role : user.getRoles()) {
-                if (role instanceof Player) {
-                    Player player = (Player) role;
-                    team.getPlayerList().remove(player);
-                    team.getRoleHolders().remove(player);
-                    user.removeRole(player);
-                    break;
+            if (team.getPlayer(user) != null) {
+                for (Role role : user.getRoles()) {
+                    if (role instanceof Player) {
+                        Player player = (Player) role;
+                        if (player.getTeam().equals(team)) {
+                            team.getPlayerList().remove(player);
+                            team.getRoleHolders().remove(player);
+                            user.removeRole(player);
+                            break;
+                        }
+                    }
                 }
+            }
+            else {
+                throw new IOException("The selected user is not a player in the selected team");
             }
         }
     }
@@ -174,23 +184,30 @@ public class Owner extends RoleHolder implements Serializable {
      * @param userName
      * @param email
      */
-    public void deleteCoach(String teamName,String userName,String email) throws IOException {
+    public void deleteCoach(String teamName,String userName,String email) throws IOException { //tested
 
         if (validateExistingAssetType(teamName,email,userName)) {
             Team team = getTeam(teamName);
-            if (team.getCoachList().size() < 2)
-                throw new IOException("Cannot remove the last coach of the team");
-            else {
-                User user = getAssetUser(userName, email);
-                for (Role role : user.getRoles()) {
-                    if (role instanceof Coach) {
-                        Coach coach = (Coach) role;
-                        team.getRoleHolders().remove(coach);
-                        team.getCoachList().remove(coach);
-                        user.removeRole(coach);
-                        break;
+            User user = getAssetUser(userName, email);
+            if (team.getCoach(user)!= null) {
+                if (team.getCoachList().size() < 2)
+                    throw new IOException("Cannot remove the last coach of the team");
+                else {
+                    for (Role role : user.getRoles()) {
+                        if (role instanceof Coach) {
+                            Coach coach = (Coach) role;
+                            if (coach.getTeam().equals(team)) {
+                                team.getRoleHolders().remove(coach);
+                                team.getCoachList().remove(coach);
+                                user.removeRole(coach);
+                                break;
+                            }
+                        }
                     }
                 }
+            }
+            else {
+                throw new IOException("The selected user is not a coach in the selected team");
             }
         }
     }
@@ -207,27 +224,34 @@ public class Owner extends RoleHolder implements Serializable {
      * there is only 1 manager in the team
      * the selected manager was not nominated by THIS owner
      */
-    public void deleteManager(String teamName,String userName,String email) throws IOException {
+    public void deleteManager(String teamName,String userName,String email) throws IOException { //tested
 
         if (validateExistingAssetType(teamName,email,userName)) {
             Team team = getTeam(teamName);
-            if (team.getManagerList().size() < 2) {
-                throw new IOException("Cannot remove the last manager of the team");
-            } else {
-                User user = getAssetUser(userName, email);
-                for (Role role : user.getRoles()) {
-                    if (role instanceof Manager) {
-                        Manager manager = (Manager) role;
-                        if (manager.getNominatedBy().equals(this)) {
-                            team.getManagerList().remove(manager);
-                            team.getRoleHolders().remove(manager);
-                            user.removeRole(role);
-                            break;
+            User user = getAssetUser(userName, email);
+            if (team.getManager(user)!= null) {
+                if (team.getManagerList().size() < 2) {
+                    throw new IOException("Cannot remove the last manager of the team");
+                } else {
+
+                    for (Role role : user.getRoles()) {
+                        if (role instanceof Manager) {
+                            Manager manager = (Manager) role;
+                            if (manager.getTeam().equals(team)) {
+                                if (manager.getNominatedBy().equals(this)) {
+                                    team.getManagerList().remove(manager);
+                                    team.getRoleHolders().remove(manager);
+                                    user.removeRole(role);
+                                    break;
+                                } else
+                                    throw new IOException("The selected manager was not nominated by you");
+                            }
                         }
-                        else
-                            throw new IOException("The selected manager was not nominated by you");
                     }
                 }
+            }
+            else {
+                throw new IOException("The selected user is not a manager in the selected team");
             }
         }
     }
@@ -281,7 +305,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @param teamName
      * @param stadium
      */
-    public void deleteStadium(String teamName, String stadium) throws IOException {
+    public void deleteStadium(String teamName, String stadium) throws IOException { //tested
         if (validateExistingAssetType(teamName,"X","X")) {
             Team team = getTeam(teamName);
             if (team.getStadium().toLowerCase().equals(stadium.toLowerCase()))
@@ -307,7 +331,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @param name
      * @throws IOException
      */
-    public void nominateNewOwner(User user, String teamName, String name) throws IOException {
+    public void nominateNewOwner(User user, String teamName, String name) throws IOException { //tested
         if (checkNewOwnerValidity(user,teamName))
             assignOwnerPremission(user,getTeam(teamName),name);
     }
@@ -410,7 +434,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @throws IOException in the cases that were checked in Owner@17
      */
     public void updateAssetAttributes(String teamName, RoleHolder roleHolder,
-                                      Map<String, String> attributes) throws IOException {
+                                      Map<String, String> attributes) throws IOException { //tested
 
         if (checkMembership(roleHolder.getUser(),teamName)) {
             for ( String attribute : attributes.keySet() ) {
@@ -466,7 +490,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @param teamName
      * @throws IOException if one of the terms does not match
      */
-    public void removeOwnership(Owner nominated, String teamName) throws IOException {
+    public void removeOwnership(Owner nominated, String teamName) throws IOException { //tested
 
         checkMembership(nominated.getUser(),teamName);
         Team team = getTeam(teamName);
@@ -518,7 +542,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @param team
      * @throws IOException
      */
-    public void closeTeamActivity(Team team) throws IOException {
+    public void closeTeamActivity(Team team) throws IOException { //tested
         if (!getTeamList().contains(team))
             throw new IOException("Selected team is not owned by the owner");
         team.changeTeamActivity(this, Team.teamStatus.activityClosed);
@@ -530,7 +554,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @param team
      * @throws IOException
      */
-    public void openTeamActivity(Team team) throws IOException {
+    public void openTeamActivity(Team team) throws IOException {//tested
         if (!getTeamList().contains(team))
             throw new IOException("Selected team is not owned by the owner");
         team.changeTeamActivity(this, Team.teamStatus.activityOpened);
@@ -590,7 +614,7 @@ public class Owner extends RoleHolder implements Serializable {
     }
 
     /**
-     * ID: Owner@20
+     * id: Owner@20
      * adds a new alert to the alerts list
      * @param alert the new alert we want to add
      */

@@ -38,9 +38,23 @@ public class OwnerIntegrationTest {
     User u3 = new User("abc", "aaa","haermi");
     User u4 = new User("Hogwarts.com","12345678","Albus Dumbeldore");
 
+    @Before
+    public void initializeSystem() {
+
+        controller.addUser(ownerUser);
+        DataComp.getInstance().addUser(ownerUser);
+        DataComp.getInstance().addUser(u4);
+        DataComp.getInstance().addUser(u3);
+        DataComp.getInstance().addUser(u1);
+        DataComp.getInstance().addUser(u2);
+        ownerUser.setRole(own);
+        own.addTeam(team);
+        team.addOwner(own);
+
+    }
 
     /**
-     * U@1
+     * I@7
      * the 5 following tests are testing UC 6.1.1
      * the 5 following tests assumes owner's account is connected allready
      * the 5 following tests assumes the following process in the presentation layer:
@@ -90,7 +104,7 @@ public class OwnerIntegrationTest {
 
     @Test
     /**
-     * U@2
+     * I@8
      */
     public void B_testOwnerAddCoach() {
 
@@ -113,7 +127,7 @@ public class OwnerIntegrationTest {
 
     @Test
     /**
-     * U@3
+     * I@9
      */
     public void C_testOwnerAddPlayer() {
 
@@ -138,7 +152,7 @@ public class OwnerIntegrationTest {
 
     @Test
     /**
-     * U@4
+     * I@10
      */
     public void D_testOwnerAddStadium() {
 
@@ -158,7 +172,7 @@ public class OwnerIntegrationTest {
 
     @Test
     /**
-     * U@7
+     * I@11
      */
     public void E_checkExceptionThrown() {
 
@@ -202,7 +216,7 @@ public class OwnerIntegrationTest {
 
     @Test
     /**
-     * U@5
+     * I@12
      * The following 2 test are testing U.C 6.1.2
      * tests asset deletion
      * asset is one of the following options: Player/Coach/Manager
@@ -233,7 +247,7 @@ public class OwnerIntegrationTest {
 
     @Test
     /**
-     * U@6
+     * I@13
      * test stadium deletion
      * assumes that the user have chosen the button "stadium"
      */
@@ -258,7 +272,7 @@ public class OwnerIntegrationTest {
 
     @Test
     /**
-     * U@9
+     * I@14
      * The following test is for UC 6.1.3
      * Assumes that the user selected an existing entity to change, selected its attributes to be changed
      * and inserted an alternative attribute
@@ -320,7 +334,7 @@ public class OwnerIntegrationTest {
     ////////////////////////////////////////////////////////////////uc2
 
     /**
-     * U@8
+     * I@15
      * test U.C 6.2
      * current owner nominates another owner as an addition owner of a requiered team
      * @throws IOException in the following cases:
@@ -358,7 +372,7 @@ public class OwnerIntegrationTest {
     ///////////////////////////////////////////// uc3
 
     /**
-     * U@10
+     * I@16
      *Test UC 6.3
      */
     @Test
@@ -388,7 +402,7 @@ public class OwnerIntegrationTest {
 
     @Test
     /**
-     * U@34
+     * I@17
      * test UC 6.5
      */
     public void K_testRemoveManagerNomination() {
@@ -419,7 +433,7 @@ public class OwnerIntegrationTest {
 
     @Test
     /**
-     * U@30
+     * I@23
      * The 2 following tests are testing UC6.6.1 and 6.6.2
      */
     public void L_closeTeamActivity(){
@@ -442,7 +456,7 @@ public class OwnerIntegrationTest {
 
     @Test
     /**
-     * U@31
+     * I@24
      */
     public void M_renewTeamActivity(){
 
@@ -461,23 +475,8 @@ public class OwnerIntegrationTest {
     }
 
     @Before
-    public void initializeSystem() {
-
-        controller.addUser(ownerUser);
-        DataComp.getInstance().addUser(ownerUser);
-        DataComp.getInstance().addUser(u4);
-        DataComp.getInstance().addUser(u3);
-        DataComp.getInstance().addUser(u1);
-        DataComp.getInstance().addUser(u2);
-        ownerUser.setRole(own);
-        own.addTeam(team);
-        team.addOwner(own);
-
-    }
-
-    @Before
     public void reset() {
-        DataComp.setDataManager(new dataManager());;
+        DataComp.setDataManager(new dataManager());
     }
 
 }
