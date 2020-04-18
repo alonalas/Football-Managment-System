@@ -18,10 +18,9 @@ public class Season implements Serializable {
     private List<Game> gameList;
     private List<League> leagueList;
     private Map<League, Policy> Policies;
-    private static IDataManager data = DataComp.getInstance();
 
-    public static void setData(IDataManager data) {
-        Season.data = data;
+    private static IDataManager data(){
+        return DataComp.getInstance();
     }
 
     public Season(IController system, String start, String end, List<Game> gameList, List<League> leagueList, Map<League, Policy> policies) {
@@ -48,10 +47,10 @@ public class Season implements Serializable {
      * @throws IOException if season already exists
      */
     public static Season addSeason(String start ,String end,League league) throws IOException {
-        Season season =  data.SearchSeason(start,end);
+        Season season =  data().SearchSeason(start,end);
         if(season == null){
             season = new Season(start,end,league);
-            data.addSeason(season);
+            data().addSeason(season);
         }
         else if(season.getLeagueList().contains(league)){
             throw new IOException("Season already exist");
@@ -67,7 +66,7 @@ public class Season implements Serializable {
      * @return all system Seasons
      */
     public static List<Season> ShowAllSeasons(){
-        return data.getSeasonList();
+        return data().getSeasonList();
     }
     public IController getSystem() {
         return system;

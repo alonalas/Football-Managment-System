@@ -4,9 +4,7 @@ import DataLayer.IDataManager;
 import DataLayer.dataManager;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.io.Serializable;
 
 public class Manager extends RoleHolder implements Serializable {
@@ -19,15 +17,19 @@ public class Manager extends RoleHolder implements Serializable {
     private Team team;
     private Owner nominatedBy;
     private Map<Permission, Boolean> permissionBooleanMap;
-    private static IDataManager dataManager = DataComp.getInstance();
+    private List<Alert> alerts;
+
+    private IDataManager data(){
+        return DataComp.getInstance();
+    }
 
 
-    public Manager(User user, String name, Team team, IDataManager dataManager) {
+    public Manager(User user, String name, Team team) {
         super(user);
         this.name = name;
         this.team = team;
         this.permissionBooleanMap = new HashMap<>();
-        this.dataManager = dataManager;
+        this.alerts = new LinkedList<>();
     }
 
     @Override
@@ -38,6 +40,22 @@ public class Manager extends RoleHolder implements Serializable {
         Manager manager = (Manager) o;
         return Objects.equals(name, manager.name) &&
                 Objects.equals(team, manager.team);
+    }
+
+    public List<Alert> getAlerts() {
+        return alerts;
+    }
+
+    public void setAlerts(List<Alert> alerts) {
+        this.alerts = alerts;
+    }
+    /**
+     * ID: Manager@1
+     * add a new alert to thr alert list
+     * @param alert the new alert
+     */
+    public void addAlert(Alert alert){
+        getAlerts().add(alert);
     }
 
     /**

@@ -20,8 +20,10 @@ public class Game implements Serializable {
     private String endTime;
     private GameReport gameReport;
 
+    public Game() {
+    }
 
-    public Game(Season season, Team home, Team away, Referee line, Referee main, List<GameEventCalender> gameEventCalender,String date, String start, String end) {
+    public Game(Season season, Team home, Team away, Referee line, Referee main, List<GameEventCalender> gameEventCalender, String date, String start, String end) {
         this.season = season;
         this.home = home;
         this.away = away;

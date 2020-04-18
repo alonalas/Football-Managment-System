@@ -1,7 +1,6 @@
 package LogicLayer;
 
 import DataLayer.IDataManager;
-import DataLayer.dataManager;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -14,20 +13,15 @@ public class Owner extends RoleHolder implements Serializable {
 
     private String name;
     private List<Team> teamList;
-    //private dataManager DM;
-    private static IDataManager dataManager = DataComp.getInstance();
     private Owner nominatedBy;
+    private List<Alert> alerts;
 
-    public Owner(User user, String name , IDataManager dataManager) {
+    public Owner(User user, String name) {
         super(user);
         this.name = name;
         this.teamList = new LinkedList<>();
-        //this.DM = dataManager;
+        alerts =new LinkedList<>();
 
-    }
-
-    public static IDataManager getDataManager() {
-        return dataManager;
     }
 
     @Override
@@ -38,13 +32,12 @@ public class Owner extends RoleHolder implements Serializable {
         Owner owner = (Owner) o;
         return Objects.equals(name, owner.name) &&
                 Objects.equals(teamList, owner.teamList) &&
-                Objects.equals(dataManager, owner.getDataManager()) &&
                 Objects.equals(nominatedBy, owner.nominatedBy);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, teamList,dataManager, nominatedBy);
+        return Objects.hash(super.hashCode(), name, teamList, nominatedBy);
     }
 
     /**
@@ -66,7 +59,7 @@ public class Owner extends RoleHolder implements Serializable {
             Team team = getTeam(teamName);
             if (team.getManager(user) == null) {
                 if (team.getOwner(user) == null) {
-                    Manager manager = new Manager(user, managerName, team, dataManager);
+                    Manager manager = new Manager(user, managerName, team);
                     manager.setNominatedBy(this);
                     team.setManager(manager);
                     manager.setTeam(team);
@@ -97,7 +90,7 @@ public class Owner extends RoleHolder implements Serializable {
         if (validateExistingAssetType(teamName,email,userName)) {
             User user = this.getAssetUser(userName, email);
             Team team = getTeam(teamName);
-            Page page = new Page();
+            Page page = new Page(null);
             Coach coach = new Coach(user, name, qualification, job, page, team);
             coach.setTeam(team);
             team.setCoach(coach);
@@ -128,7 +121,7 @@ public class Owner extends RoleHolder implements Serializable {
             Team team = getTeam(teamName);
             User user = this.getAssetUser(userName, email);
             String date = day + "-" + month + "-" + year;
-            Page page = new Page();
+            Page page = new Page(null);
             Player player = new Player(user, position, team, name, date, page);
             team.setPlayer(player);
             player.setTeam(team);
@@ -253,13 +246,17 @@ public class Owner extends RoleHolder implements Serializable {
         return null;
     }
 
+    private IDataManager data(){
+        return DataComp.getInstance();
+    }
+
     /**
      * id: Owner@10
      * retrieves the user list from the dataManager and returns the requiered user
      * @return user list
      */
     private User getAssetUser(String userName, String userEmail) {
-        User user = dataManager.getUserByMail(userName,userEmail);
+        User user = data().getUserByMail(userName,userEmail);
         if (user != null)
             return user;
         return null;
@@ -325,7 +322,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @throws IOException
      */
     private boolean checkNewOwnerValidity(User user, String teamName) throws IOException {
-        if (dataManager.getUserList().contains(user)) {
+        if (data().getUserList().contains(user)) {
             Team team = getTeam(teamName);
             if(team != null) {
                 if (team.getOwner(user) != null)
@@ -349,7 +346,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @param name
      */
     private void assignOwnerPremission(User user, Team team, String name) {
-        Owner newOwner = new Owner(user,name,dataManager);
+        Owner newOwner = new Owner(user,name);
         user.setRole(newOwner);
         newOwner.addTeam(team);
         team.addOwner(newOwner);
@@ -385,7 +382,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @throws IOException
      */
     private boolean checkMembership(User user, String teamName) throws IOException {
-        if (dataManager.getUserList().contains(user)) {
+        if (data().getUserList().contains(user)) {
             Team team = getTeam(teamName);
             if( team != null ) {
                 RoleHolder roleHolder = team.getRoleHolder(user.getUserName(),user.getEmail());
@@ -583,6 +580,22 @@ public class Owner extends RoleHolder implements Serializable {
         if (!(day > 0 && day < 32 )) {
             throw new IOException("Day is illegal, please insert valid day between 1 and 31");
         }
+    }
+    public List<Alert> getAlerts() {
+        return alerts;
+    }
+
+    public void setAlerts(List<Alert> alerts) {
+        this.alerts = alerts;
+    }
+
+    /**
+     * ID: Owner@20
+     * adds a new alert to the alerts list
+     * @param alert the new alert we want to add
+     */
+    public void addAlert(Alert alert){
+        getAlerts().add(alert);
     }
 }
 

@@ -20,11 +20,9 @@ public class Referee extends Role implements Serializable {
     private String qualification;
     private String name;
     private League league;
-    private static IDataManager data = DataComp.getInstance();
     private List<Game> main;
     private  List<Game> line;
     private List<JudgmentApproval> judgmentApproval ;
-
     private static final Logger testLogger = Logger.getLogger(RefereeService.class);
 
     public Referee(User user, String qualification, String name, League league) {
@@ -37,7 +35,9 @@ public class Referee extends Role implements Serializable {
         judgmentApproval = new LinkedList<>();
     }
 
-
+    private static IDataManager data(){
+        return DataComp.getInstance();
+    }
 
     public Referee(User user, String qualification, String name) {
         super(user);
@@ -59,7 +59,7 @@ public class Referee extends Role implements Serializable {
     public static boolean MakeUserReferee(User user, String qualification, String name){
            Referee referee = new Referee( user,  qualification,  name);
            boolean res =  user.addRole(referee);
-           if(res) res =data.addReferee(referee) ;
+           if(res) res = data().addReferee(referee) ;
            return res;
     }
 
@@ -71,7 +71,7 @@ public class Referee extends Role implements Serializable {
      */
     public static boolean RemoveUserReferee(Referee referee){
         if(referee.getUser().removeRole(referee)!=null) {
-            return data.removeReferee(referee);
+            return data().removeReferee(referee);
         }
         return false;
     }
@@ -83,8 +83,9 @@ public class Referee extends Role implements Serializable {
      * @return all Referees in system
      */
     public static List<Referee> getReferees(){
-        return data.getRefereeList() ;
+        return data().getRefereeList() ;
     }
+
     public String getQualification() {
         return qualification;
     }

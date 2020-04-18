@@ -1,5 +1,6 @@
 package LogicLayer;
 
+import java.util.ArrayList;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,20 +13,23 @@ public class User implements Serializable {
 
     private String email;
     private String password;
+    private String firstName;
+    private String lastName;
     private String userName;
-    //private IController system;
     private List<Role> roles;
-    private static IDataManager data = DataComp.getInstance();
+    private List<Alert> alerts;
 
-    public static void setData(IDataManager data) {
-        User.data = data;
+    private static IDataManager data(){
+        return DataComp.getInstance();
     }
+
 
     public User(User other) {
         this.email = other.password;
         this.password = other.password;
         this.userName = other.userName;
         this.roles = other.getRoles();
+        this.alerts = new LinkedList<>();
     }
 
 
@@ -34,6 +38,14 @@ public class User implements Serializable {
         this.password = password;
         this.userName = userName;
         this.roles = new LinkedList<>();
+        this.alerts = new LinkedList<>();
+    }
+    public User(String email, String password, String firstName, String lastName) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.roles = new ArrayList<Role>();
     }
 
     @Override
@@ -92,9 +104,18 @@ public class User implements Serializable {
         }
         return null;
     }
+    /**
+     * ID: User@5
+     * adds a new Alert to the alerts list
+     * @param alert the new alwert we want to add
+     */
+    public void addAlerts(Alert alert){
+        this.alerts.add(alert);
+    }
+
 
     public static List<User> getAllUsers(){
-        return data.getUserList();
+        return data().getUserList();
     }
     public String getEmail() {
         return email;
@@ -132,4 +153,37 @@ public class User implements Serializable {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void updatePersonalInformation(String firstName, String lastName, String email){
+        if (firstName !=null && lastName != null && email != null){
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+        }
+    }
+
+    public List<String> getPersonalDetails() {
+        List<String> personalDetails = new ArrayList<>();
+        personalDetails.add(firstName);
+        personalDetails.add(lastName);
+        personalDetails.add(email);
+        return personalDetails;
+    }
+
 }

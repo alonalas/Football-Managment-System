@@ -7,7 +7,6 @@ import java.util.Objects;
 public class Player extends RoleHolder implements Serializable {
 
     private String position;
-    private Team team;
     private String name;
     String birthDate;
     private Page page;
@@ -19,6 +18,14 @@ public class Player extends RoleHolder implements Serializable {
         this.name = name;
         this.birthDate = birthDate;
         this.page = page;
+    }
+
+    public Player(User user, String position, Team team, String name, String birthDate) {
+        super(user);
+        this.position = position;
+        this.team = team;
+        this.name = name;
+        this.birthDate = birthDate;
     }
 
     public Player() {}
@@ -79,5 +86,9 @@ public class Player extends RoleHolder implements Serializable {
 
     public void setPage(Page page) {
         this.page = page;
+    }
+
+    public void addUpdateToPage(String update) {
+        page.addUpdate(update);
     }
 }
