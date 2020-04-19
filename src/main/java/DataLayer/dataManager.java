@@ -8,6 +8,7 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
@@ -43,6 +44,9 @@ public class dataManager implements IDataManager, Serializable {
         gameList = new ArrayList<>();
         RefereeList = new LinkedList<>();
         String propertiesPath = "log4j.properties";
+        fanSearchNameHistory = new HashMap<>();
+        fanSearchKeyWordHistory = new HashMap<>();
+        fanSearchCategoryHistory = new HashMap<>();
         PropertyConfigurator.configure(propertiesPath);
     }
 
@@ -127,6 +131,18 @@ public class dataManager implements IDataManager, Serializable {
 
     public List<League> getLeagueList() {
         return leagueList;
+    }
+
+    public HashMap<Fan, List<String>> getFanSearchNameHistory() {
+        return fanSearchNameHistory;
+    }
+
+    public HashMap<Fan, List<String>> getFanSearchCategoryHistory() {
+        return fanSearchCategoryHistory;
+    }
+
+    public HashMap<Fan, List<String>> getFanSearchKeyWordHistory() {
+        return fanSearchKeyWordHistory;
     }
 
     /**
@@ -382,7 +398,13 @@ public class dataManager implements IDataManager, Serializable {
 
     @Override
     public void addComplaint(User user, Complaint newComplaint) {
-        complaints.get(user).add(newComplaint);
+        if (complaints.containsKey(user)){
+            complaints.get(user).add(newComplaint);
+        }else{
+            List<Complaint>userComplaints = new ArrayList<>();
+            userComplaints.add(newComplaint);
+            complaints.put(user,userComplaints);
+        }
     }
 
     @Override
@@ -409,17 +431,36 @@ public class dataManager implements IDataManager, Serializable {
 
     @Override
     public void addNameHistory(Fan fan, String query) {
-        this.fanSearchNameHistory.get(fan).add(query);
+        if (fanSearchNameHistory.containsKey(fan)){
+            fanSearchNameHistory.get(fan).add(query);
+        }else{
+            List<String>SearchHistory = new ArrayList<>();
+            SearchHistory.add(query);
+            fanSearchNameHistory.put(fan,SearchHistory);
+        }
+
     }
 
     @Override
     public void addKeyWordHistory(Fan fan, String query) {
-        this.fanSearchKeyWordHistory.get(fan).add(query);
+        if (fanSearchKeyWordHistory.containsKey(fan)){
+            fanSearchKeyWordHistory.get(fan).add(query);
+        }else{
+            List<String>SearchHistory = new ArrayList<>();
+            SearchHistory.add(query);
+            fanSearchKeyWordHistory.put(fan,SearchHistory);
+        }
     }
 
     @Override
     public void addCategoryHistory(Fan fan, String query) {
-        this.fanSearchCategoryHistory.get(fan).add(query);
+        if (fanSearchCategoryHistory.containsKey(fan)){
+            fanSearchCategoryHistory.get(fan).add(query);
+        }else{
+            List<String>SearchHistory = new ArrayList<>();
+            SearchHistory.add(query);
+            fanSearchCategoryHistory.put(fan,SearchHistory);
+        }
     }
 
     @Override

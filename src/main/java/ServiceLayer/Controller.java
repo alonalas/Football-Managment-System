@@ -121,7 +121,13 @@ public class Controller implements IController{
     }
 
     public void addUser(User user) {
-        this.currentUserList.add(user);
+        if (user != null){
+            this.currentUserList.add(user);
+            UserService userService = new UserService(user,this);
+            List<IUserService>services = new ArrayList<>();
+            services.add(userService);
+            this.UserServices.put(user,services);
+        }
     }
 
     public Map<User, List<IUserService>> getUserServices() {
@@ -149,5 +155,38 @@ public class Controller implements IController{
 
     public void removeUser(User userToRemove) {
         this.currentUserList.remove(userToRemove);
+    }
+
+    @Override
+    public void createFanServiceForUser(User user) {
+        if (user != null){
+            FanService fanService = new FanService((Fan)user.getRoles().get(0), this);
+            UserServices.get(user).add(fanService);
+        }
+    }
+
+    @Override
+    public void addServicesToUser(User user) {
+        for (Role r: user.getRoles()){
+            if (r instanceof Fan){
+
+            }else if(r instanceof Player){
+
+            }else if (r instanceof Coach){
+
+            }else if (r instanceof Referee){
+
+            }else if(r instanceof Owner){
+
+            }else if(r instanceof Representitive){
+
+            }else if(r instanceof Manager){
+
+            }else{
+                continue;
+            }
+
+
+        }
     }
 }

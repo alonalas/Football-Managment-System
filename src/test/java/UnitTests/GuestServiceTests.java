@@ -58,44 +58,20 @@ public class GuestServiceTests {
     }
 
     /**
-     * checks register func
+     * checks mailAuthentication func
      */
     @Test
-    public void registerTest(){
-        testLogger.info("Run: registerTest");
-        //checks register with user with the same email that exists
-        User user = new User("Eitan@gmail.com","1234","Eitan","David");
-        DataComp.getInstance().addNewUser(user);
-        String firstName = "Eitan";
-        String lastName = "David";
-        String Email = "Eitan@gmail.com";
-        String password = "12345687";
-        assertFalse(guestService.register(firstName,lastName,Email,password));
-        //checks register func with illegal password
-        password = "1234";
-        Email = "walla@walla.com";
-        assertFalse(guestService.register(firstName,lastName,Email,password));
-        //checks register func with legal arguments
-        password = "13245678";
-        assertTrue(guestService.register(firstName,lastName,Email,password));
-        testLogger.info("Ended: registerTest");
-    }
-
-    /**
-     * checks log in func
-     */
-    @Test
-    public void logInTest(){
-        testLogger.info("Run: logInTest");
-        //check log in with illegal password
-        User user = new User("Eitan@gmail.com","12345678","Eitan","David");
-        DataComp.getInstance().addNewUser(user);
-        assertFalse(guestService.logIn("Eitan@gmail.com","123456"));
-        //check log in with incorrect email
-        assertFalse(guestService.logIn("Eitab@gmail.com","12345678"));
-        //check legal arguments log in
-        assertTrue(guestService.logIn("Eitan@gmail.com","12345678"));
-        testLogger.info("Ended: logInTest");
+    public void mailAuthenticationTest(){
+        String email = "";
+        //checks legal email form as input
+        email = "Eitan@gmail.com";
+        assertTrue(guestService.mailAuthentication(email));
+        //checks illegal email form as input
+        email = "eitangmail.com";
+        assertFalse(guestService.mailAuthentication(email));
+        //checks null as argument
+        email = null;
+        assertFalse(guestService.mailAuthentication(email));
     }
 
     /**

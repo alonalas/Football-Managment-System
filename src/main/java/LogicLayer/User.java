@@ -55,7 +55,7 @@ public class User implements Serializable {
         User user = (User) o;
         return email.equals(user.email) &&
                 password.equals(user.password) &&
-                userName.equals(user.userName) ;
+                firstName.equals(user.firstName) ;
     }
 
     @Override
@@ -70,9 +70,11 @@ public class User implements Serializable {
      * @return true if added successfully , else if already exists
      */
     public boolean addRole(Role role){
-        if(!roles.contains(role)) {
-            roles.add(role);
-            return true;
+        if (role != null){
+            if(!roles.contains(role)) {
+                roles.add(role);
+                return true;
+            }
         }
         return false ;
     }
@@ -83,11 +85,13 @@ public class User implements Serializable {
      * @param role
      * @return Object that been removed , null if object removed before
      */
-    public Object removeRole(Role role){
-        if(roles.contains(role)) {
-            return roles.remove(role);
+    public boolean removeRole(Role role){
+        if (role != null){
+            if(roles.contains(role)) {
+                return roles.remove(role);
+            }
         }
-        return null ;
+        return false ;
     }
 
 
