@@ -5,10 +5,12 @@ import DataLayer.dataManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.FileHandler;
 
 public class Administrator extends User {
 
@@ -146,6 +148,27 @@ public class Administrator extends User {
         }
         if (!cantBeDelete) {
             dataManager().deleteUser(user);
+        }
+
+
+    }
+
+
+    public void displayLog(){
+        String propertiesPath = "log4j.properties";
+        String path = "logs.out";
+        PropertyConfigurator.configure(propertiesPath);
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(path));
+            String line = reader.readLine();
+            while (line != null) {
+                System.out.println(line);
+                line = reader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
 

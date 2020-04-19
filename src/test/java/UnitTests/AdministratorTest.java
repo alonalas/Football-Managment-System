@@ -55,6 +55,9 @@ public class AdministratorTest {
 
     }
 
+    /**
+     * U@27
+     */
     @Test
     public void closeTeam(){
         for(Team team: DataComp.getInstance().getTeamList()){
@@ -79,6 +82,9 @@ public class AdministratorTest {
         }
     }
 
+    /**
+     * U@28
+     */
     @Test
     public void showComplaints(){
         Complaint complaint1 = new Complaint(user1,"bad","2012-12-12");
@@ -90,6 +96,9 @@ public class AdministratorTest {
 
     }
 
+    /**
+     * U@29
+     */
     @Test
     public void CommentComplaint(){
         Complaint complaint1 = new Complaint(user1,"bad","2012-12-12");
@@ -106,6 +115,9 @@ public class AdministratorTest {
     }
 
 
+    /**
+     * U@32
+     */
     @Test
     public void deleteUser(){
         System.out.println(user2.getRoles().size());
@@ -127,5 +139,10 @@ public class AdministratorTest {
         }
     }
 
+
+     @Test
+    public void logger(){
+        administrator.displayLog();
+     }
 
 }

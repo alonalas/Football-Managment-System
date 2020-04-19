@@ -148,17 +148,6 @@ public abstract class AUserService implements IUserService{
 
     }
 
-    public void closeTeam(Team team) throws IOException{
-        throw new IOException("Unsupported method");
-    }
 
-    public void showComplaints()throws IOException{
-        throw new IOException("Unsupported method");
 
-    }
-
-    public void commentComplaint(Complaint complaint,String comment)throws IOException{
-        throw new IOException("Unsupported method");
-
-    }
 }
