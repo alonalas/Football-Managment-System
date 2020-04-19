@@ -37,7 +37,6 @@ public class FanService extends AUserService{
     @Override
     public void retrieveHistory(Criteria criteria) throws IOException {
         List<String>searchHistory = fan.retrieveSearchHistory(criteria);
-
         for (String search: searchHistory){
             System.out.println(search);
         }

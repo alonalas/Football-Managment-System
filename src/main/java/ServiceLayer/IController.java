@@ -1,7 +1,9 @@
 package ServiceLayer;
 
-import LogicLayer.Guest;
-import LogicLayer.User;
+import LogicLayer.*;
+
+import java.util.List;
+import java.util.Map;
 
 public interface IController {
 
@@ -14,4 +16,24 @@ public interface IController {
     void removeUser(User userToRemove);
 
     void removeUserService(User user);
+
+    List<Guest> getGuestsList();
+
+    void setGuestsList(List<Guest> guestsList);
+
+    List<User> getUserList();
+
+    void setUserList(List<User> userList);
+
+    Map<User, List<IUserService>> getUserServices();
+
+    void setUserServices(Map<User, List<IUserService>> userServices);
+
+    Representitive getRepresentitive();
+
+    Administrator getAdministrator();
+
+    void createFanServiceForUser(User user);
+
+    void addServicesToUser(User userToSignIn);
 }

@@ -70,7 +70,7 @@ public class Referee extends Role implements Serializable {
      * @return true if removed successfully, else if already removed
      */
     public static boolean RemoveUserReferee(Referee referee){
-        if(referee.getUser().removeRole(referee)!=null) {
+        if(referee.getUser().removeRole(referee) == true) {
             return data().removeReferee(referee);
         }
         return false;

@@ -2,8 +2,7 @@ package DataLayer;
 import LogicLayer.*;
 
 import java.io.File;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import java.util.List;
 import java.util.Map;
@@ -54,5 +53,8 @@ public interface IDataManager {
     List<String> getCategorySearchHistory(Fan fan);
     List<String> getKeyWordSearchHistory(Fan fan);
     List<String> getNameSearchHistory(Fan fan);
+    HashMap<Fan, List<String>> getFanSearchKeyWordHistory();
+    HashMap<Fan, List<String>> getFanSearchCategoryHistory();
+    HashMap<Fan, List<String>> getFanSearchNameHistory();
 
 }
