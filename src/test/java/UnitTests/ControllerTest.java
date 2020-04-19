@@ -1,7 +1,6 @@
 package UnitTests;
 
-import LogicLayer.Guest;
-import LogicLayer.User;
+import LogicLayer.*;
 import ServiceLayer.Controller;
 import ServiceLayer.IController;
 import org.apache.log4j.Logger;
@@ -44,7 +43,9 @@ public class ControllerTest {
     @Test
     public void addUserTest() {
         assertTrue(systemTester.addUser(validUser));
+        testLogger.info("System Tests : add user - test 1 passed");
         assertFalse(systemTester.addUser(null));
+        testLogger.info("System Tests : add user - test 2 passed");
     }
 
     /**
@@ -54,8 +55,10 @@ public class ControllerTest {
     public void removeUserTest() {
         systemTester.addUser(validUser);
         assertEquals(1, systemTester.getUserList().size());
+        testLogger.info("System Tests : remove user - test 1 passed");
         systemTester.removeUser(validUser);
         assertEquals(0, systemTester.getUserList().size());
+        testLogger.info("System Tests : remove user - test 2 passed");
     }
 
     /**
@@ -65,8 +68,10 @@ public class ControllerTest {
     public void addGuestTest() {
         systemTester.addGuest(validGuest);
         assertEquals(1, systemTester.getGuestsList().size());
+        testLogger.info("System Tests : add guest - test 1 passed");
         systemTester.addGuest(null);
         assertEquals(1, systemTester.getGuestsList().size());
+        testLogger.info("System Tests : add guest - test 2 passed");
     }
 
     /**
@@ -76,8 +81,10 @@ public class ControllerTest {
     public void removeGuestTest() {
         systemTester.addGuest(validGuest);
         assertEquals(1, systemTester.getGuestsList().size());
+        testLogger.info("System Tests : remove guest - test 1 passed");
         systemTester.removeGuest(validGuest);
         assertEquals(0, systemTester.getGuestsList().size());
+        testLogger.info("System Tests : remove guest - test 2 passed");
     }
 
     /**
@@ -87,27 +94,45 @@ public class ControllerTest {
     public void removeUserServiceTest() {
         systemTester.addUser(validUser);
         assertEquals(1, systemTester.getUserServices().getOrDefault(validUser,null).size());
+        testLogger.info("System Tests : remove guest service - test 1 passed");
         systemTester.removeUserService(validUser);
-        assertNull(systemTester.getUserServices().getOrDefault(validUser,null));
+        assertNull(systemTester.getUserServices().getOrDefault(validUser, null));
+        testLogger.info("System Tests : remove guest service - test 2 passed");
+
+
     }
 
     /**
-     *  check create fan service func
+     *  checks create fan service func
      */
     @Test
     public void createFanServiceForUserTest() {
         systemTester.addUser(validUser);
         assertNotEquals(2, systemTester.getUserServices().get(validUser).size());
+        testLogger.info("System Tests : create fan service - test 1 passed");
         assertEquals(1, systemTester.getUserServices().get(validUser).size());
-//        systemTester.createFanServiceForUser(validUser);
+        testLogger.info("System Tests : create fan service - test 2 passed");
+        systemTester.createFanServiceForUser(validUser, new Fan(validUser, validUser.getUserName()));
+        assertNotEquals(1, systemTester.getUserServices().get(validUser).size());
+        testLogger.info("System Tests : create fan service - test 3 passed");
+        assertEquals(2, systemTester.getUserServices().get(validUser).size());
+        testLogger.info("System Tests : create fan service - test 4 passed");
     }
 
     /**
-     *
+     * checks add services func
      */
     @Test
     public void addServicesToUserTest() {
-
+        systemTester.addUser(validUser);
+        validUser.addRole(new Player());
+        validUser.addRole(new Referee(validUser, "qualification", validUser.getUserName()));
+        validUser.addRole(new Owner(validUser, validUser.getUserName()));
+        assertEquals(1, systemTester.getUserServices().getOrDefault(validUser,null).size());
+        testLogger.info("System Tests : add services - test 1 passed");
+        systemTester.addServicesToUser(validUser);
+        assertEquals(4, systemTester.getUserServices().getOrDefault(validUser,null).size());
+        testLogger.info("System Tests : add services - test 2 passed");
     }
 
     /**
