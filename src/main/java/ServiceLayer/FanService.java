@@ -29,6 +29,26 @@ public class FanService extends AUserService{
     }
 
     /**
+     * USE CASE - 3.3
+     * add new complaint due to wrong information
+     * @param description
+     */
+    public void reportD(String description){
+        fan.addComplaintToDataManager(description);
+    }
+
+    /**
+     * USE CASE - 3.4
+     * add new complaint due to wrong information
+     * @param description
+     * @throws IOException
+     */
+    @Override
+    public void report(String description) throws IOException {
+        fan.addComplaintToDataManager(description);
+    }
+
+    /**
      * USE CASE - 3.5
      * returns fan's search history
      * @return
@@ -51,16 +71,5 @@ public class FanService extends AUserService{
             fan.addSearchHistory(criteria,query);
         }
 
-    }
-
-    /**
-     * USE CASE - 3.4
-     * add new complaint due to wrong information
-     * @param description
-     * @throws IOException
-     */
-    @Override
-    public void report(String description) throws IOException {
-        fan.addComplaintToDataManager(description);
     }
 }
