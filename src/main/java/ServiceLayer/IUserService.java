@@ -55,4 +55,7 @@ public interface IUserService {
     void changeDetails(String newName, String newCualif)throws IOException;
 
     String showDetails() throws IOException;
+    void deleteUser(User user) throws IOException;
+
+    void displayLog() throws  IOException;
 }

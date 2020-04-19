@@ -12,95 +12,101 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AdministratorIntegrationTest {
 
-        private Administrator administrator;
-        private Team team1;
-        private Team team2;
-        private Owner owner1;
-        private Owner owner2;
-        private Manager manager1;
-        private Manager manager2;
-        private User user1;
-        private User user2;
-        private User user3;
-        private AdministratorService adminService;
+    private Administrator administrator;
+    private Team team1;
+    private Team team2;
+    private Owner owner1;
+    private Owner owner2;
+    private Manager manager1;
+    private Manager manager2;
+    private User user1;
+    private User user2;
+    private User user3;
+    private AdministratorService adminService;
 
-        @Before
-        public void init(){
-            DataComp.setDataManager(new dataManager());
-            team1=new Team("hapoel","blumfield",null);
-            team2=new Team("macabi","stadium",null);
-            DataComp.getInstance().addTeam(team1);
-            DataComp.getInstance().addTeam(team2);
+    @Before
+    public void init() {
+        DataComp.setDataManager(new dataManager());
+        team1 = new Team("hapoel", "blumfield", null);
+        team2 = new Team("macabi", "stadium", null);
+        DataComp.getInstance().addTeam(team1);
+        DataComp.getInstance().addTeam(team2);
 
-            user1 = new User("email","aaa","theQueen");
-            user2 = new User("aa","ss","dd");
-            user3 = new User("ww","ee","rr");
-            owner1 = new Owner(user1,"haim");
-            owner1.addTeam(team1);
-            owner2 = new Owner(user2,"moshe");
-            owner2.addTeam(team2);
-            manager1 = new Manager(user1,"haim",team1);
-            manager2 = new Manager(user3,"yossi",team2);
-            DataComp.getInstance().addUser(user1);
-            DataComp.getInstance().addUser(user2);
+        user1 = new User("email", "aaa", "theQueen");
+        user2 = new User("aa", "ss", "dd");
+        user3 = new User("ww", "ee", "rr");
+        owner1 = new Owner(user1, "haim");
+        owner1.addTeam(team1);
+        owner2 = new Owner(user2, "moshe");
+        owner2.addTeam(team2);
+        manager1 = new Manager(user1, "haim", team1);
+        manager2 = new Manager(user3, "yossi", team2);
+        DataComp.getInstance().addUser(user1);
+        DataComp.getInstance().addUser(user2);
 
-            team1.addOwner(owner1);
-            team2.addOwner(owner2);
-            team1.addManager(manager1);
-            team2.addManager(manager2);
+        team1.addOwner(owner1);
+        team2.addOwner(owner2);
+        team1.addManager(manager1);
+        team2.addManager(manager2);
 
-            administrator= new Administrator("aa","scv","jdjdj");
+        administrator = new Administrator("aa", "scv", "jdjdj");
 
-            adminService= new AdministratorService(administrator);
-        }
+        adminService = new AdministratorService(administrator);
+    }
 
     /**
      * I@19
      */
     @Test
-        public void closeTeam(){
-            adminService.closeTeam(team1);
-        }
+    public void closeTeam() {
+        adminService.closeTeam(team1);
+    }
 
     /**
      * I@20
      */
-        @Test
-        public void showComplaints(){
-            Complaint complaint1 = new Complaint(user1,"bad","2012-12-12");
-            Complaint complaint2 = new Complaint(user2,"good","2018-12-13");
-            DataComp.getInstance().addComplaint(complaint1,user1);
-            DataComp.getInstance().addComplaint(complaint2,user2);
-            adminService.showComplaints();
-        }
+    @Test
+    public void showComplaints() {
+        Complaint complaint1 = new Complaint(user1, "bad", "2012-12-12");
+        Complaint complaint2 = new Complaint(user2, "good", "2018-12-13");
+        DataComp.getInstance().addComplaint(complaint1, user1);
+        DataComp.getInstance().addComplaint(complaint2, user2);
+        adminService.showComplaints();
+    }
 
 
     /**
      * I@21
      */
-        @Test
-        public void commentComplaint(){
-            Complaint complaint1 = new Complaint(user1,"bad","2012-12-12");
-            Complaint complaint2 = new Complaint(user2,"good","2018-12-13");
-            DataComp.getInstance().addComplaint(complaint1,user1);
-            DataComp.getInstance().addComplaint(complaint2,user2);
+    @Test
+    public void commentComplaint() {
+        Complaint complaint1 = new Complaint(user1, "bad", "2012-12-12");
+        Complaint complaint2 = new Complaint(user2, "good", "2018-12-13");
+        DataComp.getInstance().addComplaint(complaint1, user1);
+        DataComp.getInstance().addComplaint(complaint2, user2);
 
-            adminService.showComplaints();
-            System.out.println();
-            adminService.commentComplaint(complaint2,"boringgggg");
-            adminService.showComplaints();
+        adminService.showComplaints();
+        System.out.println();
+        adminService.commentComplaint(complaint2, "boringgggg");
+        adminService.showComplaints();
 
 
-        }
+    }
 
     /**
      * I@22
      */
-        @Test
-        public void deleteUser(){
-            adminService.deleteUser(user2);
-        }
+    @Test
+    public void deleteUser() {
+        adminService.deleteUser(user2);
+    }
 
-
+    /**
+     * I@25
+     */
+    @Test
+    public void displayLog() {
+        administrator.displayLog();
+    }
 }
 

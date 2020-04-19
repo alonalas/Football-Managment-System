@@ -140,8 +140,11 @@ public class AdministratorTest {
     }
 
 
+    /**
+     * ID: U@38
+     */
      @Test
-    public void logger(){
+    public void displayLog(){
         administrator.displayLog();
      }
 

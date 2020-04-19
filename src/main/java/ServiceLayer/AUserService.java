@@ -148,6 +148,14 @@ public abstract class AUserService implements IUserService{
 
     }
 
+    @Override
+    public void deleteUser(User user) throws IOException{
+        throw new IOException("Unsupported method");
+    }
 
+    @Override
+    public void displayLog() throws IOException{
+        throw new IOException("Unsupported method");
+    }
 
 }

@@ -59,7 +59,21 @@ public class AdministratorService extends AUserService {
      * deletes a user
      * @param user the user we want to delete
      */
+    @Override
     public void deleteUser(User user){
         administrator.deleteUser(user);
     }
+
+    /**
+     * ID: AdministratorService@5
+     * display the system activity that was written to te log
+     */
+    @Override
+    public void displayLog() {
+        administrator.displayLog();
+    }
+
+
 }
+
+

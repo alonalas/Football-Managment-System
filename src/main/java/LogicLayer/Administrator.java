@@ -154,12 +154,17 @@ public class Administrator extends User {
     }
 
 
+    /**
+     * ID: Administrator@5
+     * displays the log
+     * UC: 8.4
+     */
     public void displayLog(){
         String propertiesPath = "log4j.properties";
         String path = "logs.out";
         PropertyConfigurator.configure(propertiesPath);
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(path));
+            BufferedReader reader = new BufferedReader(new FileReader("logs.out"));
             String line = reader.readLine();
             while (line != null) {
                 System.out.println(line);
