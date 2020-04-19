@@ -36,6 +36,7 @@ public class User implements Serializable {
         this.password = password;
         this.userName = userName;
         this.roles = new LinkedList<>();
+
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface IController {
 
-    void addUser(User newUser);
+    boolean addUser(User newUser);
 
     void addGuest(Guest newGuest);
 

@@ -24,6 +24,7 @@ public class Controller implements IController{
     private Map<User,List<IUserService>> UserServices;
     private Representitive representitive;
     private Administrator administrator;
+    public static Controller controllerSingleTone ;
     private static String configurationPath = "configurations.json";
 
     public Controller() {
@@ -39,8 +40,6 @@ public class Controller implements IController{
             IOE.printStackTrace();
         }
     }
-
-    public static Controller controllerSingleTone ;
 
     // TEST
     public Controller(Representitive representitive, Administrator administrator) {
@@ -85,6 +84,7 @@ public class Controller implements IController{
 
     public void removeUserService(User user) {
         this.UserServices.remove(user);
+
     }
 
     /**
@@ -120,14 +120,16 @@ public class Controller implements IController{
         this.currentUserList = userList;
     }
 
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         if (user != null){
             this.currentUserList.add(user);
             UserService userService = new UserService(user,this);
             List<IUserService>services = new ArrayList<>();
             services.add(userService);
             this.UserServices.put(user,services);
+            return true;
         }
+        return false;
     }
 
     public Map<User, List<IUserService>> getUserServices() {
@@ -137,6 +139,7 @@ public class Controller implements IController{
     public void setUserServices(Map<User, List<IUserService>> userServices) {
         UserServices = userServices;
     }
+
     public Representitive getRepresentitive() {
         return representitive;
     }
@@ -146,6 +149,7 @@ public class Controller implements IController{
     }
 
     public void addGuest(Guest newGuest) {
+        if(newGuest == null) return;
         this.currentGuestsList.add(newGuest);
     }
 
@@ -154,6 +158,7 @@ public class Controller implements IController{
     }
 
     public void removeUser(User userToRemove) {
+        removeUserService(userToRemove);
         this.currentUserList.remove(userToRemove);
     }
 
