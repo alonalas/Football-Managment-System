@@ -163,35 +163,77 @@ public class Controller implements IController{
     }
 
     @Override
-    public void createFanServiceForUser(User user) {
-        if (user != null){
-            FanService fanService = new FanService((Fan)user.getRoles().get(0), this);
-            UserServices.get(user).add(fanService);
+    public void addServicesToUser(User user) {
+        for (Role r: user.getRoles()){
+            if (r instanceof Fan){
+               createFanServiceForUser(user,(Fan)r);
+            }else if(r instanceof Player){
+                createPlayerServiceForUser(user,(Player)r);
+            }else if (r instanceof Coach){
+                createCoachServiceForUser(user,(Coach)r);
+            }else if (r instanceof Referee){
+                createRefereeServiceForUser(user,(Referee)r);
+            }else if(r instanceof Owner){
+                createOwnerServiceForUser(user,(Owner)r);
+            }else if(r instanceof Representitive){
+                createRepresentitiveServiceForUser(user,(Representitive)r);
+            }else if(r instanceof Manager){
+                createManagerServiceForUser(user,(Manager)r);
+            }else{
+                continue;
+            }
         }
     }
 
     @Override
-    public void addServicesToUser(User user) {
-        for (Role r: user.getRoles()){
-            if (r instanceof Fan){
+    public void createFanServiceForUser(User user, Fan fan) {
+        if (user != null && fan != null){
+            FanService fanService = new FanService(fan, this);
+            UserServices.get(user).add(fanService);
+        }
+    }
 
-            }else if(r instanceof Player){
-
-            }else if (r instanceof Coach){
-
-            }else if (r instanceof Referee){
-
-            }else if(r instanceof Owner){
-
-            }else if(r instanceof Representitive){
-
-            }else if(r instanceof Manager){
-
-            }else{
-                continue;
-            }
+    private void createManagerServiceForUser(User user, Manager r) {
+        if (user != null && r != null){
+            ManagerService managerService = new ManagerService(this);
+            UserServices.get(user).add(managerService);
+        }
+    }
 
 
+    private void createRepresentitiveServiceForUser(User user, Representitive r) {
+        if (user != null && r != null){
+            RepresentativeService representativeService = new RepresentativeService(this);
+            UserServices.get(user).add(representativeService);
+        }
+    }
+
+
+    private void createOwnerServiceForUser(User user, Owner r) {
+        if (user != null && r != null){
+            OwnerService ownerService = new OwnerService(this);
+            UserServices.get(user).add(ownerService);
+        }
+    }
+
+    private void createRefereeServiceForUser(User user, Referee r) {
+        if (user != null && r != null){
+            RefereeService refereeService = new RefereeService(r);
+            UserServices.get(user).add(refereeService);
+        }
+    }
+
+    private void createPlayerServiceForUser(User user, Player r) {
+        if (user != null && r != null){
+            PlayerService playerService = new PlayerService(r, this);
+            UserServices.get(user).add(playerService);
+        }
+    }
+
+    private void createCoachServiceForUser(User user, Coach r) {
+        if (user != null && r != null){
+            CoachService coachService = new CoachService(r,this);
+            UserServices.get(user).add(coachService);
         }
     }
 }
