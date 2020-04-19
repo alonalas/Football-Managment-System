@@ -6,8 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Observable;
 
-public class Game implements Serializable {
+public class Game extends Observable implements Serializable {
 
     private Season season;
     private Team home;
@@ -120,8 +121,14 @@ public class Game implements Serializable {
         this.endTime = endTime;
     }
 
+    /**
+     *
+     * @param event
+     */
     public void addEventGame(GameEventCalender event){
         gameEventCalender.add(event);
+        setChanged();
+        notifyObservers(event);
     }
 
 

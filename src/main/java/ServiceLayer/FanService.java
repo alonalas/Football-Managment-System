@@ -1,12 +1,13 @@
 package ServiceLayer;
-import LogicLayer.Complaint;
-import LogicLayer.Fan;
-import LogicLayer.Guest;
-import LogicLayer.Page;
+import LogicLayer.*;
+
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Observable;
 
 public class FanService extends AUserService{
     Fan fan;
@@ -30,11 +31,26 @@ public class FanService extends AUserService{
 
     /**
      * USE CASE - 3.3
-     * add new complaint due to wrong information
-     * @param description
+     * add Games to the follow list of a Fan
+     * @param games
      */
-    public void reportD(String description){
-        fan.addComplaintToDataManager(description);
+    public void followOnGames(List<Observable> games){
+        games.forEach(game -> game.addObserver(this.fan));
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<Observable> getIncomingGames() throws Exception{
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        List<Observable> games;
+        games = (List<Observable>) DataComp.getInstance().getGameList().stream().filter(game -> {
+            try {
+                return today.compareTo(format.parse(game.getDate())) < 0;
+            } catch (ParseException e) {
+                return false;
+            }
+        });
+        return games;
     }
 
     /**

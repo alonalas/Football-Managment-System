@@ -3,19 +3,20 @@ package LogicLayer;
 import java.io.Serializable;
 import DataLayer.IDataManager;
 import ServiceLayer.Criteria;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-public class Fan extends Role implements Serializable {
+import java.util.*;
+
+public class Fan extends Role implements Serializable, Observer {
 
     private List<Page> pages;
+    private List<Observable> games;
     private String name;
 
     public Fan(User user, String name) {
         super(user);
         this.name = name;
         pages = new ArrayList<>();
+        games = new ArrayList<>();
     }
 
     public List<Page> getPages() {
@@ -87,5 +88,25 @@ public class Fan extends Role implements Serializable {
                 break;
         }
         return searchHistory;
+    }
+
+    /**
+     * update - observer
+     * @param game
+     * @param event
+     */
+    @Override
+    public void update(Observable game, Object event) {
+        if (this.games.contains(game)){
+            alertUser(event);
+        }
+    }
+
+    /**
+     * Alert user - in this version by printing to console
+     * @param event - Game Event
+     */
+    private void alertUser(Object event) {
+        ((GameEventCalender)event).displayEvents();
     }
 }
