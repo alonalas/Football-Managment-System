@@ -9,6 +9,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+
 import java.io.IOException;
 
 import java.util.List;
@@ -17,7 +18,6 @@ import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SeasonTest  {
-
 
     private IDataManager dm;
     private League league ;
@@ -31,6 +31,10 @@ public class SeasonTest  {
         league2 = new League(League.LeagueType.LEAGUE_A);
         season = null ;
     }
+
+    /**
+     * id: U@18
+     */
     @Test
     public void addSeason() {
 
@@ -53,13 +57,12 @@ public class SeasonTest  {
         }
     }
 
+    /**
+     * id: U@19
+     */
     @Test
     public void showAllSeasons() {
-
         List<Season> seasons = Season.ShowAllSeasons();
-        List<League> leagues = League.ShowAllLeagues();
-        assertEquals(2 , leagues.size());
         assertEquals(1 , seasons.size());
-
     }
 }

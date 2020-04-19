@@ -5,11 +5,12 @@ import DataLayer.dataManager;
 import ServiceLayer.IController;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class Season {
+public class Season implements Serializable {
 
     private IController system;
     private String start;
@@ -17,7 +18,10 @@ public class Season {
     private List<Game> gameList;
     private List<League> leagueList;
     private Map<League, Policy> Policies;
-    private static IDataManager data = DataComp.getInstance();
+
+    private static IDataManager data(){
+        return DataComp.getInstance();
+    }
 
     public Season(IController system, String start, String end, List<Game> gameList, List<League> leagueList, Map<League, Policy> policies) {
         this.system = system;
@@ -43,10 +47,10 @@ public class Season {
      * @throws IOException if season already exists
      */
     public static Season addSeason(String start ,String end,League league) throws IOException {
-        Season season =  data.SearchSeason(start,end);
+        Season season =  data().SearchSeason(start,end);
         if(season == null){
             season = new Season(start,end,league);
-            data.addSeason(season);
+            data().addSeason(season);
         }
         else if(season.getLeagueList().contains(league)){
             throw new IOException("Season already exist");
@@ -62,7 +66,7 @@ public class Season {
      * @return all system Seasons
      */
     public static List<Season> ShowAllSeasons(){
-        return data.getSeasonList();
+        return data().getSeasonList();
     }
     public IController getSystem() {
         return system;

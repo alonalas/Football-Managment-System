@@ -1,6 +1,8 @@
 package LogicLayer;
 
-public class Representitive extends Role {
+import java.io.Serializable;
+
+public class Representitive extends Role implements Serializable {
 
     private String name;
 

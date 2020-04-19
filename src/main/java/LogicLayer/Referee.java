@@ -6,21 +6,23 @@ import ServiceLayer.RefereeService;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+
+import java.io.Serializable;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
-public class Referee extends Role{
+
+public class Referee extends Role implements Serializable {
 
     private String qualification;
     private String name;
     private League league;
-    private static IDataManager data = DataComp.getInstance();
     private List<Game> main;
     private  List<Game> line;
+    private List<JudgmentApproval> judgmentApproval ;
     private static final Logger testLogger = Logger.getLogger(RefereeService.class);
 
     public Referee(User user, String qualification, String name, League league) {
@@ -30,9 +32,12 @@ public class Referee extends Role{
         this.league = league;
         this.main = new LinkedList<>();
         this.line = new LinkedList<>();
+        judgmentApproval = new LinkedList<>();
     }
 
-
+    private static IDataManager data(){
+        return DataComp.getInstance();
+    }
 
     public Referee(User user, String qualification, String name) {
         super(user);
@@ -40,6 +45,7 @@ public class Referee extends Role{
         this.name = name;
         this.main = new LinkedList<>();
         this.line = new LinkedList<>();
+        judgmentApproval = new LinkedList<>();
     }
 
     /**
@@ -53,7 +59,7 @@ public class Referee extends Role{
     public static boolean MakeUserReferee(User user, String qualification, String name){
            Referee referee = new Referee( user,  qualification,  name);
            boolean res =  user.addRole(referee);
-           if(res) res =data.addReferee(referee) ;
+           if(res) res = data().addReferee(referee) ;
            return res;
     }
 
@@ -65,9 +71,19 @@ public class Referee extends Role{
      */
     public static boolean RemoveUserReferee(Referee referee){
         if(referee.getUser().removeRole(referee)!=null) {
-            return data.removeReferee(referee);
+            return data().removeReferee(referee);
         }
         return false;
+    }
+
+    /**
+     * id: Referee@9
+     * get all referees
+     * @param
+     * @return all Referees in system
+     */
+    public static List<Referee> getReferees(){
+        return data().getRefereeList() ;
     }
 
     public String getQualification() {
@@ -119,6 +135,36 @@ public class Referee extends Role{
         return false;
     }
 
+    /**
+     * id: Referee@10
+     * add Approval to judge in specific Season of League
+     * @param approval
+     * @return false if already contains this approval , true if added.
+     */
+    public boolean addJudgmentApproval(JudgmentApproval approval){
+        if(judgmentApproval.contains(approval)) return false ;
+        judgmentApproval.add(approval);
+        return true ;
+    }
+    /**
+     * id: Referee@11
+     * remove Approval to judge in specific Season of League
+     * @param approval
+     * @return if been removed successfully.
+     */
+    public boolean removeJudgmentApproval(JudgmentApproval approval){
+        if( ! judgmentApproval.contains(approval)) return false;
+        judgmentApproval.remove(approval);
+        return true ;
+    }
+    /**
+     * id: Referee@12
+     * return all Judgment Approvals to judge in specific Season of League
+     * @return all approvals for league-season judgment
+     */
+    public List<JudgmentApproval> getJudgmentApproval(){
+        return judgmentApproval ;
+    }
 
     public boolean equals(Referee ref){
         if(this.getName().equals(ref.getName())&& this.getQualification().equals(ref.getQualification())){

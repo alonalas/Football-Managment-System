@@ -1,6 +1,8 @@
 package LogicLayer;
 
-public class GameEventCalender {
+import java.io.Serializable;
+
+public class GameEventCalender implements Serializable {
 
     private Game game;
     private String hour; // format (13:50)

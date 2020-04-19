@@ -15,19 +15,11 @@ public class RepresentativeService extends AUserService {
      * id: RepresentativeService@1
      * add new League
      * @param leagueType
-     * @return string of success/unsuccessful operation
+     * @return boolean of success/unsuccessful operation
      * @throws Exception if league type illigel
      */
-    public String setLeague(League.LeagueType leagueType) throws IOException{
-        if(leagueType==null){
-            throw new IOException("illigeal league type");
-        }
-        League league= League.checkIfLeagueExist(leagueType);
-        if(league != null){
-            return "League already Exist!";
-        }
-        new League(leagueType);
-        return "League been added successfully";
+    public boolean addLeague(League.LeagueType leagueType) throws IOException{
+        return League.addLeague(leagueType);
     }
 
     /**
@@ -55,8 +47,8 @@ public class RepresentativeService extends AUserService {
      * show all existing Seasons
      * @return all system Seasons
      */
-    public List<Season> ShowAllSeasons() throws IOException{
-       return Season.ShowAllSeasons();
+    public List<Season> showAllSeasons() throws IOException{
+        return Season.ShowAllSeasons();
     }
 
     /**
@@ -73,11 +65,41 @@ public class RepresentativeService extends AUserService {
      * add new referee from exist users
      * @return true if added successfully, else if already exists
      */
-    public boolean RemoveNewRefereeFromUsers(User user) throws IOException{
+    public boolean removeRefereeFromUsers(User user) throws IOException{
         Referee referee = user.ifUserRoleIncludeReferee();
         if(referee == null){
             return false;
         }
         return Referee.RemoveUserReferee(referee) ;
+    }
+
+
+    /**
+     * id: RepresentativeService@7
+     * show all system referees
+     * @return system referees
+     */
+    public List<Referee> showAllReferees() throws IOException{
+        return Referee.getReferees() ;
+    }
+
+    /**
+     * id: RepresentativeService@8
+     * show all system referees
+     * @return true if added successfully
+     */
+    public boolean addJudgmentApproval(Referee referee , League league, Season season ) throws IOException{
+        if(league == null || season == null || referee == null) return false;
+        return referee.addJudgmentApproval(new JudgmentApproval(league,season));
+    }
+
+    /**
+     * id: RepresentativeService@9
+     * show all system referees
+     * @return true if added successfully
+     */
+    public boolean removeJudgmentApproval(Referee referee , League league, Season season ) throws IOException{
+        if(league == null || season == null || referee == null) return false;
+        return referee.removeJudgmentApproval(new JudgmentApproval(league,season));
     }
 }

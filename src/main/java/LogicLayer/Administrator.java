@@ -1,26 +1,26 @@
 package LogicLayer;
 
+import DataLayer.IDataManager;
 import DataLayer.dataManager;
-import ServiceLayer.IController;
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import java.sql.Ref;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
 public class Administrator extends User {
-    private DataLayer.dataManager dataManager;
+
     private static final Logger systemLoger = Logger.getLogger(dataManager.class);
 
-    public Administrator(String email, String password, String userName, dataManager dataManager) {
+    public Administrator(String email, String password, String userName) {
         super(email, password, userName);
-        this.dataManager = dataManager;
     }
 
+    private static IDataManager dataManager(){
+        return DataComp.getInstance();
+    }
 
     /**
      * ID: Administrator@1
@@ -31,7 +31,7 @@ public class Administrator extends User {
      */
     public void closeTeam(Team team) {
         String date = LocalDate.now().toString();
-        for (Team allTeams : dataManager.getTeamList()) {
+        for (Team allTeams : dataManager().getTeamList()) {
             if (team.equals(allTeams)) {
                 team.finalCloseTeam();
                 System.out.println("team closed");
@@ -44,12 +44,12 @@ public class Administrator extends User {
         for (Owner owner : team.getOwnerList()) {
             Alert alert = new Alert(owner.getUser(), "The team: " + team.getName() + " is close for good", date);
             owner.addAlert(alert);
-            dataManager.addAlert(alert, owner.getUser());
+            dataManager().addAlert(alert, owner.getUser());
         }
         for (Manager manager : team.getManagerList()) {
             Alert alert = new Alert(manager.getUser(), "The team: " + team.getName() + " is close for good", date);
             manager.addAlert(alert);
-            dataManager.addAlert(alert, manager.getUser());
+            dataManager().addAlert(alert, manager.getUser());
         }
     }
 
@@ -60,7 +60,7 @@ public class Administrator extends User {
      * display all the complaints's details
      */
     public void showComplaints() {
-        Collection<List<Complaint>> complaints = dataManager.getComplaint().values();
+        Collection<List<Complaint>> complaints = dataManager().getComplaint().values();
         for (List<Complaint> list : complaints) {
             for (Complaint com : list) {
                 System.out.println(com.getFullComplaint());
@@ -79,13 +79,13 @@ public class Administrator extends User {
      * @param commend   the commend the admin wants to add
      */
     public void commentComplaint(Complaint complaint, String commend) {
-        for (List<Complaint> list : dataManager.getComplaint().values()) {
+        for (List<Complaint> list : dataManager().getComplaint().values()) {
             for (Complaint com : list) {
                 if (complaint.equals(com)) {
                     com.setCommentAdmin(commend);
                     Alert alert = new Alert(com.getUser(), "the admin commened your complaint", LocalDate.now().toString());
                     com.getUser().addAlerts(alert);
-                    dataManager.addAlert(alert, com.getUser());
+                    dataManager().addAlert(alert, com.getUser());
                     break;
                 }
             }
@@ -145,11 +145,10 @@ public class Administrator extends User {
 
         }
         if (!cantBeDelete) {
-            dataManager.deleteUser(user);
+            dataManager().deleteUser(user);
         }
 
 
     }
-
 
 }

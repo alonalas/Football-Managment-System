@@ -1,12 +1,13 @@
 package LogicLayer;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Game {
+public class Game implements Serializable {
 
     private Season season;
     private Team home;
@@ -19,8 +20,10 @@ public class Game {
     private String endTime;
     private GameReport gameReport;
 
+    public Game() {
+    }
 
-    public Game(Season season, Team home, Team away, Referee line, Referee main, List<GameEventCalender> gameEventCalender,String date, String start, String end) {
+    public Game(Season season, Team home, Team away, Referee line, Referee main, List<GameEventCalender> gameEventCalender, String date, String start, String end) {
         this.season = season;
         this.home = home;
         this.away = away;

@@ -1,6 +1,8 @@
 package LogicLayer;
 
-public class GameReport {
+import java.io.Serializable;
+
+public class GameReport implements Serializable {
     private Game game;
     private String description;
 

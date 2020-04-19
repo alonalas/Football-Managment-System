@@ -1,42 +1,33 @@
 package LogicLayer;
 
-import DataLayer.dataManager;
 import ServiceLayer.IController;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Complaint {
+public class Complaint implements Serializable {
 
     private User user;
-    private dataManager system;
     private String description;
     private String commentAdmin;
     private String date; // format: "2010-12-12"
     private boolean answered;
-    //Hour is missing
 
-    public Complaint(User user, dataManager system, String description, String date) {
+    public Complaint(User user,  String description, String date) {
         this.user = user;
-        this.system = system;
         this.description = description;
         this.date = date;
         this.answered=false;
     }
 
-//    public User getUser() {
-//        int i =2;
-//        return user;
-//    }
-
-
     public User getUser() {
+        int i =2;
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
     }
-
 
     public String getDescription() {
         return description;
@@ -46,7 +37,7 @@ public class Complaint {
         this.description = description;
     }
 
-    public String getDate() {
+    public String  getDate() {
         return date;
     }
 
@@ -54,10 +45,8 @@ public class Complaint {
         this.date = date;
     }
 
-    public void setCommentAdmin(String commentAdmin)
-    {
+    public void setCommentAdmin(String commentAdmin) {
         this.commentAdmin = commentAdmin;
-        this.answered=true;
     }
 
     public String getCommentAdmin()
@@ -86,8 +75,8 @@ public class Complaint {
      */
     public boolean equals(Complaint complaint){
         if(this.getUser().equals(complaint.getUser())&&
-        this.getDescription().equals(complaint.getDescription())&&
-        this.getDate().equals(complaint.getDate())){
+                this.getDescription().equals(complaint.getDescription())&&
+                this.getDate().equals(complaint.getDate())){
             return true;
         }
         else {

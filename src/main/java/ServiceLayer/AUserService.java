@@ -6,6 +6,7 @@ import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.List;
 
 public abstract class AUserService implements IUserService{
 
@@ -16,53 +17,135 @@ public abstract class AUserService implements IUserService{
         this.control = control;
     }
 
+    /**
+     * Id: AUserService@1
+     * @return system users
+     */
+    public List<User> getSystemUsers(){
+        return User.getAllUsers();
+    }
 
-
+    @Override
     public void addPage(Page newPage) throws IOException {
         throw new IOException("not possible");
     }
 
 
+    @Override
     public String showDetails() throws IOException {
         throw new IOException("No details to be shown");
     }
 
+    @Override
     public void changeDetails(String newName, String newCualif)throws IOException{
         throw new IOException("No details to be changed");
     }
 
+    @Override
     public String [] displayGames()throws IOException{
         throw new IOException("no games");
     }
 
+    @Override
     public void addGameEvent(Game game ,String description, String eventType) throws IOException{
         throw new IOException("no games");
     }
 
+    @Override
     public void addGameEventAfterGame(Game game,String description, String eventType) throws IOException {
         throw new IOException("no games");
     }
 
+    @Override
     public void createGameReport(Game game, String description)throws IOException {
         throw new IOException("no games");
     }
+
+    @Override
     public String setLeague(League.LeagueType leagueType) throws IOException{
         throw new IOException("Unsupported method");
     }
+
+    @Override
     public List<League> showAllLeagus() throws IOException{
         throw new IOException("Unsupported method");
     }
+
+    @Override
     public void addSeason(Date start , Date end , League league ) throws IOException{
         throw new IOException("Unsupported method");
     }
-    public List<Season> ShowAllSeasons() throws IOException{
+
+    @Override
+    public List<Season> showAllSeasons() throws IOException{
         throw new IOException("Unsupported method");
     }
-    boolean addNewRefereeFromUsers(User user , String qualification , String name) throws IOException{
+
+    @Override
+    public boolean removeRefereeFromUsers(User user , String qualification , String name) throws IOException{
         throw new IOException("Unsupported method");
     }
-    public boolean RemoveNewRefereeFromUsers(User user) throws IOException{
+
+    @Override
+    public boolean RemoveNewRefereeFromUsers(User user) throws IOException {
         throw new IOException("Unsupported method");
+    }
+
+    @Override
+    public void addPages(List<Page> newPages) throws IOException {
+        throw new IOException("not possible");
+    }
+
+    @Override
+    public void logOut() throws IOException {
+        throw new IOException("not possible");
+    }
+
+    @Override
+    public void showPersonalInformation() throws IOException {
+        throw new IOException("not possible");
+    }
+
+    @Override
+    public void editPersonalInformation(String firstName, String lastName, String email) throws IOException {
+        throw new IOException("not possible");
+    }
+
+    @Override
+    public void retrieveHistory(Criteria criteria) throws IOException {
+        throw new IOException("not possible");
+    }
+
+    @Override
+    public void searchInformation(Criteria criteria, String query) throws IOException {
+        throw new IOException("not possible");
+    }
+
+    @Override
+    public void report(String description) throws IOException {
+        throw new IOException("not possible");
+    }
+
+    @Override
+    public void addUpdate(String update) throws IOException {
+        throw new IOException("not possible");
+    }
+
+    @Override
+    public void closeTeam(Team team) throws IOException{
+        throw new IOException("Unsupported method");
+    }
+
+    @Override
+    public void showComplaints()throws IOException{
+        throw new IOException("Unsupported method");
+
+    }
+
+    @Override
+    public void commentComplaint(Complaint complaint,String comment)throws IOException{
+        throw new IOException("Unsupported method");
+
     }
 
     public void closeTeam(Team team) throws IOException{

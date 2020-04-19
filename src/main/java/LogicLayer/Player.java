@@ -1,11 +1,12 @@
 package LogicLayer;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.util.Objects;
 
-public class Player extends RoleHolder{
+public class Player extends RoleHolder implements Serializable {
 
     private String position;
-    private Team team;
     private String name;
     String birthDate;
     private Page page;
@@ -19,7 +20,33 @@ public class Player extends RoleHolder{
         this.page = page;
     }
 
+    public Player(User user, String position, Team team, String name, String birthDate) {
+        super(user);
+        this.position = position;
+        this.team = team;
+        this.name = name;
+        this.birthDate = birthDate;
+    }
+
     public Player() {}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Player player = (Player) o;
+        return Objects.equals(position, player.position) &&
+                Objects.equals(team, player.team) &&
+                Objects.equals(name, player.name) &&
+                Objects.equals(birthDate, player.birthDate) &&
+                Objects.equals(page, player.page);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), position, team, name, birthDate, page);
+    }
 
     public String getPosition() {
         return position;
@@ -59,5 +86,9 @@ public class Player extends RoleHolder{
 
     public void setPage(Page page) {
         this.page = page;
+    }
+
+    public void addUpdateToPage(String update) {
+        page.addUpdate(update);
     }
 }

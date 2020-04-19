@@ -1,14 +1,18 @@
 package LogicLayer;
 
-import DataLayer.dataManager;
-import ServiceLayer.IController;
-
+import DataLayer.IDataManager;
+import java.io.IOException;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Team {
+public class Team implements Serializable {
 
-    private final DataLayer.dataManager dataManager;
+    enum teamStatus{
+        activityClosed, activityOpened
+    }
+
     private String name;
     private String stadium;
     private Page page;
@@ -20,13 +24,26 @@ public class Team {
     private League league;
     private List<Coach> coachList;
     private List<RoleHolder> roleHolders;
+    private teamStatus status;
     private boolean finalClose; // true if the admin closed (cant be changed after true)
 
-    public Team(String name,String stadium, Page page, dataManager dataManager) {
+
+    private IDataManager data(){
+        return DataComp.getInstance();
+    }
+
+    public teamStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(teamStatus status) {
+        this.status = status;
+    }
+
+    public Team(String name, String stadium, Page page) {
         this.name=name;
         this.stadium = stadium;
         this.page = page;
-        this.dataManager = dataManager;
         managerList = new LinkedList<>();
         playerList = new LinkedList<>();
         ownerList = new LinkedList<>();
@@ -35,7 +52,6 @@ public class Team {
         coachList = new LinkedList<>();
         roleHolders = new LinkedList<>();
         finalClose=false;
-
     }
 
 
@@ -83,10 +99,34 @@ public class Team {
         this.playerList = playerList;
     }
 
-    public Manager getManager(Manager manager) {
-        for (Manager manager1 : managerList) {
-            if (manager1.equals(manager))
-                return manager1;
+    public Manager getManager(User user) {
+        for (Manager manager : managerList) {
+            if (manager.getUser().equals(user))
+                return manager;
+        }
+        return null;
+    }
+
+    public Player getPlayer(User user) {
+        for (Player player : playerList) {
+            if (player.getUser().equals(user))
+                return player;
+        }
+        return null;
+    }
+
+    public Coach getCoach(User user) {
+        for (Coach coach : coachList) {
+            if (coach.getUser().equals(user))
+                return coach;
+        }
+        return null;
+    }
+
+    public Owner getOwner(User user) {
+        for (Owner owner : ownerList) {
+            if (owner.getUser().equals(user))
+                return owner;
         }
         return null;
     }
@@ -101,6 +141,25 @@ public class Team {
     }
 
     /**
+     * id: Team@1
+     * returns a RoleHolder that belongs to the requiered team
+     * search is made by user name and email
+     * @param userName
+     * @param email
+     * @return
+     */
+    public RoleHolder getRoleHolder(String userName,String email) {
+
+        User user = data().getUserByMail(userName,email);
+        if (user!=null) {
+            for (RoleHolder roleHolder : this.roleHolders) {
+                if (roleHolder.getUser().equals(user))
+                    return roleHolder;
+            }
+        }
+        return null;
+    }
+    /**
      * ID: 1
      * returns a RoleHolder that belongs to the requiered team of the given owner
      * search is made by user name and email
@@ -111,7 +170,7 @@ public class Team {
      */
     public RoleHolder getRoleHolder(Owner owner, String userName,String email) {
 
-        User user = dataManager.getUserByMail(userName,email);
+        User user = data().getUserByMail(userName,email);
         if (this.ownerList.contains(owner)) {
             for (RoleHolder roleHolder : this.roleHolders) {
                 if (roleHolder.getUser().equals(user))
@@ -120,7 +179,6 @@ public class Team {
         }
         return null;
     }
-
     public List<RoleHolder> getRoleHolders() {
         return roleHolders;
     }
@@ -189,12 +247,36 @@ public class Team {
     public void setCoachList(List<Coach> coachList) {
         this.coachList = coachList;
     }
-
     public boolean isFinalClose() {
         return finalClose;
     }
 
     public void finalCloseTeam(){
         finalClose=true;
+    }
+
+    /**
+     * id: Team@2
+     * changes the status of the team to close if the owner is the real owner of the team
+     * @param owner
+     */
+    public void changeTeamActivity(Owner owner, teamStatus newStatus) throws IOException {
+        if (ownerList.contains(owner)) {
+            String date = LocalDate.now().toString();
+            Alert alert;
+            for(RoleHolder roleHolder: getRoleHolders()){
+                if (roleHolder instanceof Manager || roleHolder instanceof Owner) {
+                    if (newStatus == teamStatus.activityClosed)
+                        alert = new Alert(roleHolder.getUser(), "The team: " + this.getName() + " is closed temporarily",date);
+                    else // Opened
+                        alert = new Alert(roleHolder.getUser(), "The team: " + this.getName() + " is open", date);
+                    data().addAlert(roleHolder.getUser(),alert);
+                }
+            }
+            setStatus(newStatus);
+        }
+        else {
+            throw new IOException("This team can not be closed without official owner premission");
+        }
     }
 }

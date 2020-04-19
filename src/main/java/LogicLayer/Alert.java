@@ -2,22 +2,15 @@ package LogicLayer;
 
 import ServiceLayer.IController;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Alert {
+public class Alert implements Serializable {
 
     private User user;
-    private IController system;
     private String description;
-    private String date;
+    String date;
     // hour is missing
-
-    public Alert(User user, IController system, String description, String date) {
-        this.user = user;
-        this.system = system;
-        this.description = description;
-        this.date = date;
-    }
 
     public Alert(User user, String description, String date) {
         this.user = user;
@@ -33,14 +26,6 @@ public class Alert {
         this.user = user;
     }
 
-    public IController getSystem() {
-        return system;
-    }
-
-    public void setSystem(IController system) {
-        this.system = system;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -49,11 +34,11 @@ public class Alert {
         this.description = description;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public String getDate() {
         return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

@@ -18,6 +18,11 @@ public class RefereeTest  {
 
     private IDataManager dm;
     private User user;
+    private League league;
+    private League league2;
+    private Season season;
+    private Referee referee;
+
     private Game game1;
     private Game game2;
     private Referee refereeA;
@@ -25,30 +30,68 @@ public class RefereeTest  {
 
     @Before
     public void init(){
+        DataComp.setDataManager(new dataManager());
         dm =  new dataManager();
         user = new User("@","d","d");
         game1 = new Game(null,null,null,null,null,"2020-04-13","12:00","20:00");
         game2 = new Game(null,null,null,null,null,"2020-04-13","15:00","20:00");
         refereeA = new Referee(user,"main","yossi",null);
         refereeB = new Referee(user,"main","haim",null);
-
+        league = new League(League.LeagueType.LEAGUE_A);
+        league2 = new League(League.LeagueType.LEAGUE_B);
+        String start = "2020-02-01" ;
+        String end = "2020-02-03" ;
+        season = null;
+        try {
+            season = Season.addSeason(start, end, league);
+        }catch (Exception e) {
+        }
+        Referee.MakeUserReferee(user , "good","kobi");
+        referee = user.ifUserRoleIncludeReferee();
     }
-
+    /**
+     * id: U@13
+     */
     @Test
     public void makeUserReferee() {
-        assertTrue(Referee.MakeUserReferee(user , "good","kobi"));
         assertFalse(Referee.MakeUserReferee(user , "good","kobi"));
         assertTrue(user.getRoles().size()==1) ;
     }
-
+    /**
+     * id: U@14
+     */
     @Test
     public void removeUserReferee() {
-        Referee.MakeUserReferee(user , "good","kobi");
-        Referee referee =  user.ifUserRoleIncludeReferee() ;
         assertTrue(Referee.RemoveUserReferee(referee));
         assertTrue(user.getRoles().size()==0) ;
         assertFalse(Referee.RemoveUserReferee(referee));
         assertTrue(user.getRoles().size()==0) ;
+    }
+    /**
+     * id: U@15
+     */
+    @Test
+    public void addJudgmentApproval() {
+        assertTrue(referee.addJudgmentApproval(new JudgmentApproval(league,season)));
+        assertFalse(referee.addJudgmentApproval(new JudgmentApproval(league,season)));
+    }
+    /**
+     * id: U@16
+     */
+    @Test
+    public void removeJudgmentApproval() {
+        assertTrue(referee.addJudgmentApproval(new JudgmentApproval(league,season)));
+        assertTrue(referee.removeJudgmentApproval(new JudgmentApproval(league,season)));
+        assertFalse(referee.removeJudgmentApproval(new JudgmentApproval(league,season)));
+    }
+    /**
+     * id: U@17
+     */
+    @Test
+    public void getJudgmentApproval() {
+        referee.addJudgmentApproval(new JudgmentApproval(league2,season));
+        referee.addJudgmentApproval(new JudgmentApproval(league,season));
+        assertTrue(user.ifUserRoleIncludeReferee().getJudgmentApproval().size()==2);
     }
 
     // this two tests are for testing two mwthods that we need in the following tests

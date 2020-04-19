@@ -1,9 +1,15 @@
 package LogicLayer;
 
-public abstract class RoleHolder extends Role {
+import java.io.Serializable;
 
+public abstract class RoleHolder extends Role implements Serializable {
+    protected Team team;
     public RoleHolder(User user) {
         super(user);
+    }
+
+    public Team getTeam() {
+        return team;
     }
 
     public RoleHolder() {

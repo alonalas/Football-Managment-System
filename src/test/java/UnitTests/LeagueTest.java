@@ -18,29 +18,44 @@ import static org.junit.Assert.*;
 public class LeagueTest  {
 
 
-    private IDataManager dm;
     private League league ;
 
 
     @Before
     public void init(){
-        dm =  new dataManager();
-
+        DataComp.setDataManager(new dataManager());
+        league = new League(League.LeagueType.LEAGUE_B);
     }
-//    @Test
-//    public void checkIfLeagueExist() {
-//        assertNull( League.checkIfLeagueExist(League.LeagueType.LEAGUE_B)  );
-//        league = new League(League.LeagueType.LEAGUE_B);
-//        assertTrue( league.equals(League.checkIfLeagueExist(League.LeagueType.LEAGUE_B) ) );
-//        assertTrue(null == League.checkIfLeagueExist(League.LeagueType.LEAGUE_A) );
-//        showAllLeagues();
-//    }
-//
-//  //  @Test
-//    public void showAllLeagues() {
-//        List<League> leagues = League.ShowAllLeagues();
-//        assertEquals(1 , leagues.size());
-//        assertEquals(League.LeagueType.LEAGUE_B , leagues.get(0).getType());
-//    }
 
+    /**
+     * id : U@11
+     */
+    @Test
+    public void checkIfLeagueExist() {
+        assertNull( League.checkIfLeagueExist(League.LeagueType.LEAGUE_A)  );
+        assertTrue( league.equals(League.checkIfLeagueExist(League.LeagueType.LEAGUE_B) ) );
+        assertTrue(null == League.checkIfLeagueExist(League.LeagueType.LEAGUE_A) );
+    }
+
+    /**
+     * id : U@12
+     */
+   @Test
+    public void showAllLeagues() {
+        List<League> leagues = League.ShowAllLeagues();
+        assertEquals(1 , leagues.size());
+        assertEquals(League.LeagueType.LEAGUE_B , leagues.get(0).getType());
+    }
+    /**
+     * id : U@
+     */
+    @Test
+    public void addLeagues() {
+        try {
+            List<League> leagues = League.ShowAllLeagues();
+            assertEquals(1, leagues.size());
+            assertTrue(League.addLeague(League.LeagueType.MAJOR_LEAGUE));
+            assertEquals(2, leagues.size());
+        }catch (Exception e){}
+    }
 }

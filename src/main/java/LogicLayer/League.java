@@ -4,11 +4,38 @@ import DataLayer.IDataManager;
 import DataLayer.dataManager;
 import ServiceLayer.IController;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class League {
+public class League implements Serializable {
+
+    public enum LeagueType{
+        MAJOR_LEAGUE, SECOND_LEAGUE, LEAGUE_A,LEAGUE_B, LEAGUE_C
+    }
+
+    private LeagueType type;
+    private List<Referee> refereeList;
+    private List<Season> seasonList;
+    private Map<Season,Policy> policyList;
+    private String name;
+
+    public League( LeagueType type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
+        this.type = type;
+        this.refereeList = refereeList;
+        this.seasonList = seasonList;
+        this.policyList = policyList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -18,28 +45,15 @@ public class League {
         return false;
     }
 
-    public enum LeagueType{
-        MAJOR_LEAGUE, SECOND_LEAGUE, LEAGUE_A,LEAGUE_B, LEAGUE_C
-    }
-
-    private IController system;
-    private LeagueType type;
-    private List<Referee> refereeList;
-    private List<Season> seasonList;
-    private Map<Season,Policy> policyList;
-    private static IDataManager data = DataComp.getInstance();
-
-    public League( LeagueType type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
-        this.type = type;
-        this.refereeList = refereeList;
-        this.seasonList = seasonList;
-        this.policyList = policyList;
+    private static IDataManager data(){
+        return DataComp.getInstance();
     }
 
     public League(LeagueType leagueType){
         this.type = leagueType;
-        data.addLeague(this);
+        data().addLeague(this);
     }
+
     /**
      * id: League@1
      * check if League already exist
@@ -47,7 +61,7 @@ public class League {
      * @return League if existing , null if not
      */
     public static League checkIfLeagueExist(LeagueType leagueType){
-        return data.SearchLeagueByType(leagueType);
+        return data().SearchLeagueByType(leagueType);
     }
 
     /**
@@ -56,15 +70,27 @@ public class League {
      * @return all system leagues
      */
     public static List<League> ShowAllLeagues(){
-        return data.getLeagueList();
+        return data().getLeagueList();
     }
-//    public IController getSystem() {
-//        return system;
-//    }
-//
-//    public void setSystem(IController system) {
-//        this.system = system;
-//    }
+
+    /**
+     * id: League@3
+     * add new league
+     * @param leagueType
+     * @return if success/unsuccessful operation
+     * @throws Exception if league type illegal
+     */
+    public static boolean addLeague(League.LeagueType leagueType) throws IOException{
+        if(leagueType==null){
+            throw new IOException("illegal league type");
+        }
+        League league= League.checkIfLeagueExist(leagueType);
+        if(league != null){
+            return false ;
+        }
+        data().addLeague(new League(leagueType));
+        return true;
+    }
 
     public LeagueType getType() {
         return type;
