@@ -92,11 +92,11 @@ public class Fan extends Role implements Serializable, Observer {
 
     /**
      * update - observer
-     * @param game
-     * @param event
+     * @param game - Observable Game
+     * @param event - update
      */
     @Override
-    public void update(Observable game, Object event) {
+    public void update(Observable game, Object event) throws ClassCastException{
         if (this.games.contains(game)){
             alertUser(event);
         }
@@ -106,7 +106,15 @@ public class Fan extends Role implements Serializable, Observer {
      * Alert user - in this version by printing to console
      * @param event - Game Event
      */
-    private void alertUser(Object event) {
-        ((GameEventCalender)event).displayEvents();
+    private void alertUser(Object event) throws ClassCastException{
+        try {
+            ((GameEventCalender) event).displayEvents();
+        } catch (NullPointerException e){
+
+        }
+    }
+
+    public List<Observable> getGames() {
+        return games;
     }
 }
