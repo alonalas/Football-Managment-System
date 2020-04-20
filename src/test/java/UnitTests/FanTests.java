@@ -107,6 +107,7 @@ public class FanTests {
     @Test (expected = ClassCastException.class)
     public void updateNullTest() {
         Observable game = new Game();
+        fan.getGames().clear();
         fan.getGames().add(game);
         assertEquals(1, fan.getGames().size());
         fan.update(game, "String");
@@ -119,6 +120,7 @@ public class FanTests {
     @Test
     public void updateNotNullTest() {
         Game game = new Game();
+        fan.getGames().clear();
         fan.getGames().add(game);
         assertEquals(1, fan.getGames().size());
         Exception exception = null;
