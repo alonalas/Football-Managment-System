@@ -51,7 +51,7 @@ public class GuestService implements IGuestService{
         User newUser = guest.createNewUser(email,password,firstName,lastName);
         System.out.println("## Registered to system successfully ##");
         system.addUser(newUser);
-        system.createFanServiceForUser(newUser);
+        system.createFanServiceForUser(newUser, (Fan)newUser.getRoles().get(0));
         system.removeGuest(guest);
         return true;
     }
