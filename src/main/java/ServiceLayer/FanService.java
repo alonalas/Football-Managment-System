@@ -86,6 +86,5 @@ public class FanService extends AUserService{
             guestService.searchInformation(criteria,query);
             fan.addSearchHistory(criteria,query);
         }
-
     }
 }
