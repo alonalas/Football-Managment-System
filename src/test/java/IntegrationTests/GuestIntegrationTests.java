@@ -1,9 +1,7 @@
 package IntegrationTests;
 
 import DataLayer.dataManager;
-import LogicLayer.DataComp;
-import LogicLayer.Guest;
-import LogicLayer.User;
+import LogicLayer.*;
 import ServiceLayer.*;
 import UnitTests.GuestTests;
 import org.apache.log4j.Logger;
@@ -11,6 +9,8 @@ import org.apache.log4j.PropertyConfigurator;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import javax.xml.crypto.Data;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -85,6 +85,17 @@ public class GuestIntegrationTests {
         assertFalse(guestService.logIn("Eitab@gmail.com","12345678"));
         //check legal arguments log in
         assertTrue(guestService.logIn("Eitan@gmail.com","12345678"));
+        //check log in of user with multiple roles
+        User newUser = new User("Eitab@gmail.com","12345678","David","David");
+        Player player = new Player(user,null,null,null,null);
+        newUser.addRole(player);
+        Owner owner = new Owner(user, null);
+        newUser.addRole(owner);
+        DataComp.getInstance().addNewUser(newUser);
+        assertTrue(guestService.logIn("Eitab@gmail.com","12345678"));
+        assertTrue(system.getUserServices().get(newUser).size() == 3);
+        assertTrue(system.getUserServices().get(newUser).get(1) instanceof PlayerService);
+        assertTrue(system.getUserServices().get(newUser).get(2) instanceof OwnerService);
         testLogger.info("Ended: logInTest");
     }
 }

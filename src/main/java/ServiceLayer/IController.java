@@ -33,7 +33,7 @@ public interface IController {
 
     Administrator getAdministrator();
 
-    void createFanServiceForUser(User user);
+    void createFanServiceForUser(User user, Fan fan);
 
     void addServicesToUser(User userToSignIn);
 }
