@@ -54,10 +54,10 @@ public class ControllerTest {
     @Test
     public void removeUserTest() {
         systemTester.addUser(validUser);
-        assertEquals(1, systemTester.getUserList().size());
+        assertEquals(3, systemTester.getUserList().size());
         testLogger.info("System Tests : remove user - test 1 passed");
         systemTester.removeUser(validUser);
-        assertEquals(0, systemTester.getUserList().size());
+        assertEquals(2, systemTester.getUserList().size());
         testLogger.info("System Tests : remove user - test 2 passed");
     }
 
