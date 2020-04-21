@@ -175,8 +175,10 @@ public class Controller implements IController{
     }
     @Override
     public void updateServicesToUser(User user){
-        getUserServices().get(user).clear();
-        addServicesToUser( user) ;
+        if(user != null && getUserList().contains(user)) {
+            getUserServices().get(user).clear();
+            addServicesToUser(user);
+        }
     }
     @Override
     public void addServicesToUser(User user) {

@@ -8,20 +8,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.List;
 
-public abstract class AUserService implements IUserService{
+public abstract class AUserService implements IUserService {
 
     Controller control;
 
-    public AUserService(){}
+    public AUserService() {
+    }
+
     public AUserService(Controller control) {
         this.control = control;
     }
 
     /**
      * Id: AUserService@1
+     *
      * @return system users
      */
-    public List<User> getSystemUsers(){
+    public List<User> getSystemUsers() {
         return User.getAllUsers();
     }
 
@@ -37,52 +40,52 @@ public abstract class AUserService implements IUserService{
     }
 
     @Override
-    public void changeDetails(String newName, String newCualif)throws IOException{
+    public void changeDetails(String newName, String newCualif) throws IOException {
         throw new IOException("No details to be changed");
     }
 
     @Override
-    public String [] displayGames()throws IOException{
+    public String[] displayGames() throws IOException {
         throw new IOException("no games");
     }
 
     @Override
-    public void addGameEvent(Game game ,String description, String eventType) throws IOException{
+    public void addGameEvent(Game game, String description, String eventType) throws IOException {
         throw new IOException("no games");
     }
 
     @Override
-    public void addGameEventAfterGame(Game game,String description, String eventType) throws IOException {
+    public void addGameEventAfterGame(Game game, String description, String eventType) throws IOException {
         throw new IOException("no games");
     }
 
     @Override
-    public void createGameReport(Game game, String description)throws IOException {
+    public void createGameReport(Game game, String description) throws IOException {
         throw new IOException("no games");
     }
 
     @Override
-    public String setLeague(League.LeagueType leagueType) throws IOException{
+    public String setLeague(League.LeagueType leagueType) throws IOException {
         throw new IOException("Unsupported method");
     }
 
     @Override
-    public List<League> showAllLeagus() throws IOException{
+    public List<League> showAllLeagus() throws IOException {
         throw new IOException("Unsupported method");
     }
 
     @Override
-    public void addSeason(Date start , Date end , League league ) throws IOException{
+    public void addSeason(Date start, Date end, League league) throws IOException {
         throw new IOException("Unsupported method");
     }
 
     @Override
-    public List<Season> showAllSeasons() throws IOException{
+    public List<Season> showAllSeasons() throws IOException {
         throw new IOException("Unsupported method");
     }
 
     @Override
-    public boolean removeRefereeFromUsers(User user , String qualification , String name) throws IOException{
+    public boolean removeRefereeFromUsers(User user, String qualification, String name) throws IOException {
         throw new IOException("Unsupported method");
     }
 
@@ -132,30 +135,34 @@ public abstract class AUserService implements IUserService{
     }
 
     @Override
-    public void closeTeam(Team team) throws IOException{
+    public void closeTeam(Team team) throws IOException {
         throw new IOException("Unsupported method");
     }
 
     @Override
-    public void showComplaints()throws IOException{
-        throw new IOException("Unsupported method");
-
-    }
-
-    @Override
-    public void commentComplaint(Complaint complaint,String comment)throws IOException{
+    public void showComplaints() throws IOException {
         throw new IOException("Unsupported method");
 
     }
 
     @Override
-    public void deleteUser(User user) throws IOException{
+    public void commentComplaint(Complaint complaint, String comment) throws IOException {
+        throw new IOException("Unsupported method");
+
+    }
+
+    @Override
+    public void deleteUser(User user) throws IOException {
         throw new IOException("Unsupported method");
     }
 
     @Override
-    public void displayLog() throws IOException{
+    public void displayLog() throws IOException {
         throw new IOException("Unsupported method");
     }
 
+    @Override
+    public int scheduleGame(League league, int numberOfGamesPerTeam, Season season, List<String[]> allPossiableTimes) throws IOException {
+        throw new IOException("Unsupported method");
+    }
 }

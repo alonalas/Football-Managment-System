@@ -8,7 +8,8 @@ import java.util.List;
 public interface IUserService {
 
     void addPage(Page newPage) throws IOException;
-    List<User> getSystemUsers() ;
+
+    List<User> getSystemUsers();
 
     void addPages(List<Page> newPages) throws IOException;
 
@@ -26,15 +27,15 @@ public interface IUserService {
 
     void addUpdate(String update) throws IOException;
 
-    void addSeason(Date start , Date end , League league ) throws IOException;
+    void addSeason(Date start, Date end, League league) throws IOException;
 
-    void closeTeam(Team team) throws IOException ;
+    void closeTeam(Team team) throws IOException;
 
-    void showComplaints()throws IOException;
+    void showComplaints() throws IOException;
 
-    void commentComplaint(Complaint complaint,String comment)throws IOException ;
+    void commentComplaint(Complaint complaint, String comment) throws IOException;
 
-    boolean removeRefereeFromUsers(User user , String qualification , String name) throws IOException;
+    boolean removeRefereeFromUsers(User user, String qualification, String name) throws IOException;
 
     boolean RemoveNewRefereeFromUsers(User user) throws IOException;
 
@@ -44,18 +45,22 @@ public interface IUserService {
 
     List<Season> showAllSeasons() throws IOException;
 
-    void createGameReport(Game game, String description)throws IOException;
+    void createGameReport(Game game, String description) throws IOException;
 
-    void addGameEventAfterGame(Game game,String description, String eventType) throws IOException;
+    void addGameEventAfterGame(Game game, String description, String eventType) throws IOException;
 
-    void addGameEvent(Game game ,String description, String eventType) throws IOException;
+    void addGameEvent(Game game, String description, String eventType) throws IOException;
 
-    String [] displayGames()throws IOException;
+    String[] displayGames() throws IOException;
 
-    void changeDetails(String newName, String newCualif)throws IOException;
+    void changeDetails(String newName, String newCualif) throws IOException;
 
     String showDetails() throws IOException;
+
     void deleteUser(User user) throws IOException;
 
-    void displayLog() throws  IOException;
+    void displayLog() throws IOException;
+
+    int scheduleGame(League league, int numberOfGamesPerTeam, Season season, List<String[]> allPossiableTimes) throws IOException;
+
 }

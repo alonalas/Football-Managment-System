@@ -111,4 +111,20 @@ public class RepresentativeService extends AUserService {
         if(league == null || season == null || referee == null) return false;
         return referee.removeJudgmentApproval(new JudgmentApproval(league,season));
     }
+
+    /**
+     * schedule all games
+     * @param league
+     * @param numberOfGamesPerTeam number Of Games Per Team in season
+     * @param season
+     * @param allPossiableTimes of games
+     * @return number of Scheduled Games
+     */
+    public int scheduleGame(League league , int numberOfGamesPerTeam , Season season , List<String[]> allPossiableTimes) throws IOException{
+        int number_of_games =League.numberOfNeededDates( numberOfGamesPerTeam ,Team.getAllTeamsInLeague(league).size());
+        if( allPossiableTimes.size() < number_of_games ){
+            throw new IOException("number of needed dates:"+number_of_games +", You're provide only:"+allPossiableTimes.size()+" dates.");
+        }
+        return league.gamescheduling(numberOfGamesPerTeam , season , allPossiableTimes);
+    }
 }

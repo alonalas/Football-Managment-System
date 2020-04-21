@@ -28,10 +28,16 @@ public class Team implements Serializable {
     private boolean finalClose; // true if the admin closed (cant be changed after true)
 
 
-    private IDataManager data(){
+    private static IDataManager data(){
         return DataComp.getInstance();
     }
 
+    public void addHomeGame(Game game){
+        home.add(game);
+    }
+    public void addAwayGame(Game game){
+        away.add(game);
+    }
     public teamStatus getStatus() {
         return status;
     }
@@ -54,7 +60,19 @@ public class Team implements Serializable {
         finalClose=false;
     }
 
-
+    /***
+     * get all teams in some league
+     * @return league teams
+     */
+    public static List<Team> getAllTeamsInLeague(League league){
+        List<Team> teams = new LinkedList<>();
+        for(Team team : data().getTeamList()){
+            if(team.league.equals(league)){
+                teams.add(team);
+            }
+        }
+        return teams;
+    }
     public void addOwner(Owner owner) {
         if (!this.ownerList.contains(owner))
             ownerList.add(owner);

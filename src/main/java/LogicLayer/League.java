@@ -92,6 +92,61 @@ public class League implements Serializable {
         return true;
     }
 
+    /**
+     *  number of Dates correct - for pre-algorithm check
+     * @param numberOfGamesPerTeam
+     * @param numberOfTeam
+     * @return number of games
+     */
+    public static int numberOfNeededDates(int numberOfGamesPerTeam , int numberOfTeam){
+        int numberOfGames = 0 ;
+        for(int i=numberOfTeam-1 ; i > 0  ; i--){
+            numberOfGames = numberOfGames +i;
+        }
+        return numberOfGamesPerTeam*numberOfGames ;
+    }
+
+    /**
+     * schedule games in season
+     * @param numberOfGamesPerTeam
+     * @return number of schduled Games
+     */
+    public int gamescheduling(int numberOfGamesPerTeam , Season season , List<String[]> allPossiableTimes){
+        if (numberOfGamesPerTeam == 0 || season == null) return 0;
+        List<Team> teams = Team.getAllTeamsInLeague(this);
+        Team[] teamsArray = new Team[teams.size()];
+        if(allPossiableTimes.size()<numberOfNeededDates(numberOfGamesPerTeam , teams.size())) return 0;
+            teams.toArray(teamsArray);
+        List<Referee> referees = Referee.LegalReferees(this, season);
+        Referee[] refereesArray = new Referee[referees.size()];
+        referees.toArray(refereesArray);
+        int nextTime = 0;
+        int a = 0, b = 0;
+        int games_counter = 0;
+        int refereeSchecule = 0;
+        for (int interations = 0; interations < numberOfGamesPerTeam; interations++) {
+            for (int i = teams.size() - 1; i > 0; i--) {
+                for (int j = 0; j < i; j++) {
+                    if (i % 2 == 0) {
+                        a = i;
+                        b = j;
+                    } else {
+                        a = j;
+                        b = i;
+                    }
+                    Game game = new Game(season, teamsArray[a], teamsArray[b], null, refereesArray[refereeSchecule%(refereesArray.length-1)], null,
+                            allPossiableTimes.get(nextTime)[0], allPossiableTimes.get(nextTime)[1], allPossiableTimes.get(nextTime)[2]);
+                    nextTime++;
+                    refereeSchecule++;
+                    teamsArray[a].addHomeGame(game);
+                    teamsArray[b].addAwayGame(game);
+                    System.out.println(teamsArray[a].getName() + "-" + teamsArray[b].getName());
+                    games_counter++;
+                }
+            }
+        }
+        return games_counter;
+    }
     public LeagueType getType() {
         return type;
     }

@@ -86,6 +86,23 @@ public class Referee extends Role implements Serializable {
         return data().getRefereeList() ;
     }
 
+    /**
+     * get all legal referees with needed approval for judgment
+     * @param league of approval
+     * @param season of approval
+     * @return Referee list
+     */
+    public static List<Referee> LegalReferees(League league , Season season){
+        JudgmentApproval neededApproval  = new JudgmentApproval(league , season);
+        List<Referee> referees = new LinkedList<>();
+        for(Referee referee : data().getRefereeList()){
+            if(referee.judgmentApproval.contains(neededApproval)){
+                referees.add(referee);
+            }
+        }
+        return referees;
+    }
+
     public String getQualification() {
         return qualification;
     }
