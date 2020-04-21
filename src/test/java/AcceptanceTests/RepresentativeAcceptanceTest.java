@@ -4,7 +4,6 @@ import DataLayer.dataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
 import ServiceLayer.RepresentativeService;
-import org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,7 +33,7 @@ public class RepresentativeAcceptanceTest {
     @Before
     public void init(){
         DataComp.setDataManager(new dataManager());
-        List<User>  users = controller.getUserList();
+        List<User> users = controller.getUserList();
         representativeService = new RepresentativeService(null) ;
     }
 

@@ -1,5 +1,4 @@
 package IntegrationTests;
-
 import DataLayer.dataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
@@ -15,7 +14,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.assertTrue;
 
 public class FanIntegrationTests {
