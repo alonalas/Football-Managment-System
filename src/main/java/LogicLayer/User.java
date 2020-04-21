@@ -48,15 +48,24 @@ public class User implements Serializable {
         this.roles = new ArrayList<Role>();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return email.equals(user.email) &&
-                password.equals(user.password) &&
-                userName.equals(user.userName) ;
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        User user = (User) o;
+//        return email.equals(user.email) &&
+//                password.equals(user.password) &&
+//                userName.equals(user.userName) ;
+//    }
+@Override
+public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    User user = (User) o;
+    return email.equals(user.email) &&
+            password.equals(user.password) &&
+            firstName.equals(user.firstName) ;
+}
 
     @Override
     public int hashCode() {

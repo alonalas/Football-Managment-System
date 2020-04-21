@@ -8,10 +8,8 @@ import LogicLayer.Guest;
 import LogicLayer.Representitive;
 import LogicLayer.User;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import org.json.simple.*;
 import com.google.gson.*;
 import org.json.simple.parser.JSONParser;
@@ -50,8 +48,10 @@ public class Controller implements IController{
         GuestServices = new HashMap<Guest, IGuestService>();
         currentUserList = new ArrayList<User>();
         UserServices = new HashMap<User, List<IUserService>>();
+        addUser(representitive.getUser());
+        addUser(administrator);
         addServicesToUser(representitive.getUser());
-        saveData();
+      //  saveData();
     }
 
     private void initFromFile(FileReader configuration) {
@@ -169,7 +169,11 @@ public class Controller implements IController{
         removeUserService(userToRemove);
         this.currentUserList.remove(userToRemove);
     }
-
+    @Override
+    public void updateServicesToUser(User user){
+        getUserServices().get(user).clear();
+        addServicesToUser( user) ;
+    }
     @Override
     public void addServicesToUser(User user) {
         for (Role r: user.getRoles()){
@@ -245,7 +249,8 @@ public class Controller implements IController{
         }
     }
 
-    @Override
+
+ /*   @Override
     public boolean removeRole(User user, Role role){
         user.removeRole(role);
         List<IUserService> services = UserServices.getOrDefault(user, null);
@@ -265,5 +270,5 @@ public class Controller implements IController{
         services.clear();
         addServicesToUser(user);
         return true;
-    }
+    }*/
 }

@@ -57,10 +57,11 @@ public class RepresentativeService extends AUserService {
      * @return true if added successfully, else if already exists
      */
     public boolean addNewRefereeFromUsers(User user , String qualification , String name) throws IOException{
-        return Referee.MakeUserReferee( user,  qualification,  name) ;
-        /**
-         *  TO DO
-         */
+        if(Referee.MakeUserReferee( user,  qualification,  name)) {
+            control.updateServicesToUser(user);
+            return true;
+        }
+        return  false;
     }
 
     /**
@@ -69,11 +70,16 @@ public class RepresentativeService extends AUserService {
      * @return true if added successfully, else if already exists
      */
     public boolean removeRefereeFromUsers(User user) throws IOException{
+        control.updateServicesToUser(user);
         Referee referee = user.ifUserRoleIncludeReferee();
         if(referee == null){
             return false;
         }
-        return Referee.RemoveUserReferee(referee) ;
+        if(Referee.RemoveUserReferee(referee)){
+            control.updateServicesToUser(user);
+            return true;
+        }
+        return false ;
     }
 
 
