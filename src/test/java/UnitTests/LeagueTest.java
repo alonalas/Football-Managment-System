@@ -50,7 +50,7 @@ public class LeagueTest  {
         assertEquals(League.LeagueType.LEAGUE_B , leagues.get(0).getType());
     }
     /**
-     * id : U@
+     * id : U@26
      */
     @Test
     public void addLeagues() {
@@ -62,5 +62,11 @@ public class LeagueTest  {
         }catch (Exception e){}
     }
 
-
+    /**
+     *  id : U@39
+     */
+    @Test
+    public void numberOfNeededDates(){
+        assertTrue(League.numberOfNeededDates(2,4)==12);
+    }
 }

@@ -93,6 +93,7 @@ public class League implements Serializable {
     }
 
     /**
+     * id: League@5
      *  number of Dates correct - for pre-algorithm check
      * @param numberOfGamesPerTeam
      * @param numberOfTeam
@@ -107,6 +108,7 @@ public class League implements Serializable {
     }
 
     /**
+     * id: League@4
      * schedule games in season
      * @param numberOfGamesPerTeam
      * @return number of schduled Games
@@ -117,7 +119,7 @@ public class League implements Serializable {
         Team[] teamsArray = new Team[teams.size()];
         if(allPossiableTimes.size()<numberOfNeededDates(numberOfGamesPerTeam , teams.size())) return 0;
             teams.toArray(teamsArray);
-        List<Referee> referees = Referee.LegalReferees(this, season);
+        List<Referee> referees = Referee.legalRefereesForLeague(this, season);
         Referee[] refereesArray = new Referee[referees.size()];
         referees.toArray(refereesArray);
         int nextTime = 0;

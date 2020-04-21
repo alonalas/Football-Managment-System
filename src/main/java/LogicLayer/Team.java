@@ -61,6 +61,7 @@ public class Team implements Serializable {
     }
 
     /***
+     * id: Team@4
      * get all teams in some league
      * @return league teams
      */

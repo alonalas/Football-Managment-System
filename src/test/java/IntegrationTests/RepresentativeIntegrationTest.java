@@ -42,7 +42,7 @@ public class RepresentativeIntegrationTest {
     }
 
     /**
-     * id: A@1
+     * id: I@26
      * UC: 9.1
      */
     @Test
@@ -56,7 +56,7 @@ public class RepresentativeIntegrationTest {
     }
 
     /**
-     * id: A@2
+     * id: I@27
      * UC: 9.2
      */
     @Test
@@ -71,7 +71,7 @@ public class RepresentativeIntegrationTest {
     }
 
     /**
-     * id: A@3
+     * id: id: I@28
      * UC: 9.3.1
      */
     @Test
@@ -88,7 +88,7 @@ public class RepresentativeIntegrationTest {
     }
 
     /**
-     * id: A@4
+     * id: I@29
      * UC: 9.3.2
      */
     @Test
@@ -110,7 +110,7 @@ public class RepresentativeIntegrationTest {
     }
 
     /**
-     * id: A@5
+     * id: id: I@30
      * UC: 9.4
      * add first time  - Assert true
      * alreadyExist -> Assert False
@@ -132,7 +132,7 @@ public class RepresentativeIntegrationTest {
     }
 
     /**
-     * id: A@6
+     * id: I@31
      * UC: 9.4
      * add first time  - Assert true
      * alreadyExist -> Assert False
@@ -165,6 +165,10 @@ public class RepresentativeIntegrationTest {
         }
     }
 
+    /**
+     * id: I@32
+     * UC9.6 game schedule policy test
+     */
     @Test
     public void gameSchedule(){
         try {
