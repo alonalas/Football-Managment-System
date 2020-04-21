@@ -27,6 +27,7 @@ public class Controller implements IController{
     public static Controller controllerSingleTone ;
     private static String configurationPath = "configurations.json";
 
+
     public Controller() {
         try{
             currentGuestsList = new ArrayList<Guest>();
@@ -41,7 +42,7 @@ public class Controller implements IController{
         }
     }
 
-    // TEST
+    // first init
     public Controller(Representitive representitive, Administrator administrator) {
         this.representitive = representitive;
         this.administrator = administrator;
@@ -49,6 +50,7 @@ public class Controller implements IController{
         GuestServices = new HashMap<Guest, IGuestService>();
         currentUserList = new ArrayList<User>();
         UserServices = new HashMap<User, List<IUserService>>();
+        addServicesToUser(representitive.getUser());
         saveData();
     }
 
@@ -64,6 +66,10 @@ public class Controller implements IController{
         }catch (Exception E){
             E.printStackTrace();
         }
+    }
+
+    public Map<Guest, IGuestService> getGuestServices() {
+        return GuestServices;
     }
 
     private void saveData() {
@@ -151,9 +157,11 @@ public class Controller implements IController{
     public void addGuest(Guest newGuest) {
         if(newGuest == null) return;
         this.currentGuestsList.add(newGuest);
+        this.GuestServices.put(newGuest, new GuestService(newGuest, this));
     }
 
     public void removeGuest(Guest guestToRemove) {
+        this.GuestServices.remove(guestToRemove);
         this.currentGuestsList.remove(guestToRemove);
     }
 
@@ -235,5 +243,27 @@ public class Controller implements IController{
             CoachService coachService = new CoachService(r,this);
             UserServices.get(user).add(coachService);
         }
+    }
+
+    @Override
+    public boolean removeRole(User user, Role role){
+        user.removeRole(role);
+        List<IUserService> services = UserServices.getOrDefault(user, null);
+        if (services == null)
+            return false;
+        services.clear();
+        addServicesToUser(user);
+        return true;
+    }
+
+    @Override
+    public boolean addRole(User user, Role role){
+        user.setRole(role);
+        List<IUserService> services = UserServices.getOrDefault(user, null);
+        if (services == null)
+            return false;
+        services.clear();
+        addServicesToUser(user);
+        return true;
     }
 }

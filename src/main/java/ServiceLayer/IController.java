@@ -36,4 +36,10 @@ public interface IController {
     void createFanServiceForUser(User user, Fan fan);
 
     void addServicesToUser(User userToSignIn);
+
+    public boolean removeRole(User user, Role role);
+
+    public boolean addRole(User user, Role role);
+
+    public Map<Guest, IGuestService> getGuestServices();
 }

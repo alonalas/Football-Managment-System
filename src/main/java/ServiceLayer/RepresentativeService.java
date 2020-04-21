@@ -58,6 +58,9 @@ public class RepresentativeService extends AUserService {
      */
     public boolean addNewRefereeFromUsers(User user , String qualification , String name) throws IOException{
         return Referee.MakeUserReferee( user,  qualification,  name) ;
+        /**
+         *  TO DO
+         */
     }
 
     /**

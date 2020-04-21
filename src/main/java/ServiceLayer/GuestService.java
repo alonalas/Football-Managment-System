@@ -89,22 +89,27 @@ public class GuestService implements IGuestService{
      * @param password
      */
     public boolean logIn(String email, String password){
+        if(signIn(email,password) == null)
+            return false;
+        return true;
+    }
+
+    @Override
+    public User signIn(String email, String password) {
         boolean passwordIsOk = Authentication(password);
         if(passwordIsOk == false){
-            return false;
+            return null;
         }
         User userToSignIn = guest.signIn(email, password);
         if (userToSignIn == null){
             System.out.println("## Wrong email or password ##");
-            return false;
+            return null;
         }
         system.addUser(userToSignIn);
         system.addServicesToUser(userToSignIn);
         system.removeGuest(guest);
-        return true;
+        return userToSignIn;
     }
-
-
 
     /**
      * Use Case - 2.3
