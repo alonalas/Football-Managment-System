@@ -74,6 +74,11 @@ public class RepresentativeAcceptanceTest {
         }
         assertTrue(exist == check);
     }
+
+    /**
+     * Id: A@1
+     * UC: 9.1
+     */
     public void addLeague() {
         try {
             assertTrue(representativeService.addLeague(League.LeagueType.LEAGUE_C));
@@ -83,6 +88,10 @@ public class RepresentativeAcceptanceTest {
         }
     }
 
+    /**
+     * Id: A@2
+     * UC: 9.2
+     */
     public void addSeason(){
         try {
             League league = representativeService.showAllLeagus().get(0);
@@ -91,6 +100,10 @@ public class RepresentativeAcceptanceTest {
         }catch (Exception e){ }
     }
 
+    /**
+     * id : A@3
+     * UC 9.3.1
+     */
     public void addReferee(){
         try {
             //----- referee not exist test
@@ -102,6 +115,10 @@ public class RepresentativeAcceptanceTest {
         }catch (Exception e){ }
     }
 
+    /**
+     * id: A@4
+     * UC 9.3.2
+     */
     public void removeReferee() {
         try {
             //----- referee remove test
@@ -114,6 +131,10 @@ public class RepresentativeAcceptanceTest {
         }
     }
 
+    /**
+     * id : A@5
+     * UC 9.4
+     */
     public void addApprovalForReferee(){
         try {
             //  ------------------- add approval test begins here
@@ -128,6 +149,10 @@ public class RepresentativeAcceptanceTest {
         }
     }
 
+    /**
+     * id: A@6
+     * UC: 9.6
+     */
     public void gameSchedule(){
         try {
             User user = representativeService.getSystemUsers().get(1);
