@@ -19,7 +19,6 @@ public class UserService extends AUserService {
     @Override
     public void logOut() throws IOException {
         system.removeUser(user);
-        system.removeUserService(user);
     }
 
     /**
@@ -28,7 +27,7 @@ public class UserService extends AUserService {
      * @return
      * @throws IOException
      */
-     public void showPersonalInformation() throws IOException {
+     public List<String> showPersonalInformation() throws IOException {
         List<String> personalDetails = user.getPersonalDetails();
         String firstName = personalDetails.get(0);
         String lastName = personalDetails.get(1);
@@ -37,6 +36,7 @@ public class UserService extends AUserService {
         System.out.println("Last name: " + lastName);
         System.out.println("Email: " + email);
         System.out.println();
+        return personalDetails;
      }
 
 
@@ -49,8 +49,15 @@ public class UserService extends AUserService {
      * @throws IOException
      */
     @Override
-    public void editPersonalInformation(String firstName, String lastName, String email) throws IOException {
-        user.updatePersonalInformation(firstName,lastName,email);
+    public boolean editPersonalInformation(String firstName, String lastName, String email) throws IOException {
+        boolean isPersonalInfoLegal =  user.updatePersonalInformation(firstName,lastName,email);
+        if (!isPersonalInfoLegal){
+            System.out.println("## Personal info that have been entered is invalid ##");
+            return false;
+        }else{
+            return true;
+        }
+
     }
 
 

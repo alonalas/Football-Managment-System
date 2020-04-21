@@ -14,6 +14,14 @@ public class Guest implements Serializable {
 
     public Guest() { }
 
+    /**
+     *
+     * @param email
+     * @param password
+     * @param firstName
+     * @param lastName
+     * @return
+     */
     public User createNewUser(String email, String password, String firstName, String lastName){
         User newUser = new User(email, password, firstName, lastName);
         Fan fan = new Fan(newUser,firstName);
@@ -22,15 +30,31 @@ public class Guest implements Serializable {
         return newUser;
     }
 
+    /**
+     *
+     * @param email
+     * @param password
+     * @return
+     */
     public User signIn(String email, String password){
         User signedInUser = data().getUser(email, password);
         return signedInUser;
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     */
     public boolean checkIfEmailExists(String email) {
         return data().checkIfEmailExists(email);
     }
 
+    /**
+     *
+     * @param newUser
+     * @param isNewUser
+     */
     public void addNewUser(User newUser,boolean isNewUser) {
         if (isNewUser && newUser != null){
             data().addNewUser(newUser);

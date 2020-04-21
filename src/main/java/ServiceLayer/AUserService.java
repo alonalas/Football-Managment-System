@@ -85,17 +85,17 @@ public abstract class AUserService implements IUserService{
     }
 
     @Override
-    public void showPersonalInformation() throws IOException {
+    public List<String> showPersonalInformation() throws IOException {
         throw new IOException("not possible");
     }
 
     @Override
-    public void editPersonalInformation(String firstName, String lastName, String email) throws IOException {
+    public boolean editPersonalInformation(String firstName, String lastName, String email) throws IOException {
         throw new IOException("not possible");
     }
 
     @Override
-    public void retrieveHistory(Criteria criteria) throws IOException {
+    public List<String> retrieveHistory(Criteria criteria) throws IOException {
         throw new IOException("not possible");
     }
 

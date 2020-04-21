@@ -83,8 +83,9 @@ public class Controller implements IController{
     }
 
     public void removeUserService(User user) {
-        this.UserServices.remove(user);
-
+        if (user != null && UserServices.containsKey(user)){
+            this.UserServices.remove(user);
+        }
     }
 
     /**
@@ -158,8 +159,11 @@ public class Controller implements IController{
     }
 
     public void removeUser(User userToRemove) {
-        removeUserService(userToRemove);
-        this.currentUserList.remove(userToRemove);
+        if (userToRemove != null){
+            removeUserService(userToRemove);
+            if (currentUserList.contains(userToRemove))
+                this.currentUserList.remove(userToRemove);
+        }
     }
 
     @Override

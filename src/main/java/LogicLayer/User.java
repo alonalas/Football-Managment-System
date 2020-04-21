@@ -164,12 +164,15 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public void updatePersonalInformation(String firstName, String lastName, String email){
-        if (firstName !=null && lastName != null && email != null){
+    public boolean updatePersonalInformation(String firstName, String lastName, String email){
+        GuestService guestService = new GuestService(null,null);
+        if (firstName !=null && lastName != null && email != null && guestService.mailAuthentication(email)){
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
+            return true;
         }
+        return false;
     }
 
     public List<String> getPersonalDetails() {
