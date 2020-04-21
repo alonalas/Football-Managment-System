@@ -152,6 +152,8 @@ public class Controller implements IController{
     public void addGuest(Guest newGuest) {
         if(newGuest == null) return;
         this.currentGuestsList.add(newGuest);
+        GuestService guestService = new GuestService(newGuest,this);
+        GuestServices.put(newGuest,guestService);
     }
 
     public void removeGuest(Guest guestToRemove) {
