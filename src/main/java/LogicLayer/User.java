@@ -32,6 +32,14 @@ public class User implements Serializable {
         this.alerts = new LinkedList<>();
     }
 
+    public User(String email, String password, String firstName, String lastName) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.roles = new ArrayList<Role>();
+    }
+
 
     public User(String email, String password, String userName) {
         this.email = email;
@@ -48,24 +56,15 @@ public class User implements Serializable {
         this.roles = new ArrayList<Role>();
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        User user = (User) o;
-//        return email.equals(user.email) &&
-//                password.equals(user.password) &&
-//                userName.equals(user.userName) ;
-//    }
-@Override
-public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    User user = (User) o;
-    return email.equals(user.email) &&
-            password.equals(user.password) &&
-            firstName.equals(user.firstName) ;
-}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return email.equals(user.email) &&
+                password.equals(user.password) &&
+                firstName.equals(user.firstName) ;
+    }
 
     @Override
     public int hashCode() {
@@ -130,67 +129,134 @@ public boolean equals(Object o) {
     public static List<User> getAllUsers(){
         return data().getUserList();
     }
+
+    /**
+     * email getter
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * email setter
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * password getter
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * password setter
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * userName getter
+     * @return String
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * userName setter
+     * @param userName
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    /**
+     * returns all roles of user
+     * @return List<Role>
+     */
     public List<Role> getRoles() {
         return roles;
     }
 
+    /**
+     * role setter
+     * @param role
+     */
     public void setRole(Role role){
         //if (!roles.contains(role))
             this.roles.add(role);
     }
 
+    /**
+     * role setter
+     * @param roles
+     */
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
+    /**
+     * firstName getter
+     * @return String
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * lastName getter
+     * @return String
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * firstName setter
+     * @param firstName
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * lastName setter
+     * @param lastName
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public void updatePersonalInformation(String firstName, String lastName, String email){
-        if (firstName !=null && lastName != null && email != null){
+    /**
+     * change personal information with arguments given
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @return boolean
+     */
+    public boolean updatePersonalInformation(String firstName, String lastName, String email){
+        GuestService guestService = new GuestService(null,null);
+        if (firstName !=null && lastName != null && email != null && guestService.mailAuthentication(email)){
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
+            return true;
         }
+        return false;
     }
 
+    /**
+     * personal info getter
+     * @return List<String>
+     */
     public List<String> getPersonalDetails() {
         List<String> personalDetails = new ArrayList<>();
         personalDetails.add(firstName);

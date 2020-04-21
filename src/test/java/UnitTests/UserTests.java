@@ -18,13 +18,11 @@ import static org.junit.Assert.assertTrue;
 public class UserTests {
     private static final Logger testLogger = Logger.getLogger(UserTests.class);
     private static User user;
-    private static IDataManager data;
 
     @BeforeClass
     public static void init(){
         String propertiesPath = "log4j.properties";
         PropertyConfigurator.configure(propertiesPath);
-        data = new dataManager();
         user = new User("Eitan@gmail.com","1234","Eitan","David");
     }
 
@@ -60,7 +58,10 @@ public class UserTests {
         firstName = null;
         user.updatePersonalInformation(firstName,lastName, email);
         assertTrue(user.getFirstName().equals("David"));
+        //checks if details changed with illegal mail
+        assertFalse(user.updatePersonalInformation("Eitan","David","Eitan"));
         testLogger.info("Ended: updatePersonalDetailCheck");
+
     }
 
     /**

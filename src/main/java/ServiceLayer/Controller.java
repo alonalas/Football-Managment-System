@@ -89,8 +89,9 @@ public class Controller implements IController{
     }
 
     public void removeUserService(User user) {
-        this.UserServices.remove(user);
-
+        if (user != null && UserServices.containsKey(user)){
+            this.UserServices.remove(user);
+        }
     }
 
     /**
@@ -166,8 +167,11 @@ public class Controller implements IController{
     }
 
     public void removeUser(User userToRemove) {
-        removeUserService(userToRemove);
-        this.currentUserList.remove(userToRemove);
+        if (userToRemove != null){
+            removeUserService(userToRemove);
+            if (currentUserList.contains(userToRemove))
+                this.currentUserList.remove(userToRemove);
+        }
     }
     @Override
     public void updateServicesToUser(User user){
@@ -248,27 +252,4 @@ public class Controller implements IController{
             UserServices.get(user).add(coachService);
         }
     }
-
-
- /*   @Override
-    public boolean removeRole(User user, Role role){
-        user.removeRole(role);
-        List<IUserService> services = UserServices.getOrDefault(user, null);
-        if (services == null)
-            return false;
-        services.clear();
-        addServicesToUser(user);
-        return true;
-    }
-
-    @Override
-    public boolean addRole(User user, Role role){
-        user.setRole(role);
-        List<IUserService> services = UserServices.getOrDefault(user, null);
-        if (services == null)
-            return false;
-        services.clear();
-        addServicesToUser(user);
-        return true;
-    }*/
 }
