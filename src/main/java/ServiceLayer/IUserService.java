@@ -14,11 +14,11 @@ public interface IUserService {
 
     void logOut() throws IOException;
 
-    void showPersonalInformation() throws IOException;
+    List<String> showPersonalInformation() throws IOException;
 
-    void editPersonalInformation(String firstName, String lastName, String email) throws IOException;
+    boolean editPersonalInformation(String firstName, String lastName, String email) throws IOException;
 
-    void retrieveHistory(Criteria criteria) throws IOException;
+    List<String> retrieveHistory(Criteria criteria) throws IOException;
 
     void searchInformation(Criteria criteria, String query) throws IOException;
 

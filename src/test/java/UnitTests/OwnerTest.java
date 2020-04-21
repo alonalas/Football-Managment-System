@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OwnerTest {
 
-    Controller controller = new Controller(null,null);
+    Controller controller = new Controller();
 
     User ownerUser = new User("alonalas@post.bgu.ac.il","123","alona");
 

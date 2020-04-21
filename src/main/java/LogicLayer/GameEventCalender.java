@@ -11,7 +11,6 @@ public class GameEventCalender implements Serializable {
     private String description;
     private int minute;
 
-
     enum eventType{
         goal, offside,offense, redCard, yellowCard, injury,playerReplacement
     }
@@ -29,6 +28,35 @@ public class GameEventCalender implements Serializable {
 
     public GameEventCalender(Game game) {
         this.game = game;
+    }
+
+    /**
+     * ID: GameEventCalender@1
+     * displays the event's details
+     */
+    public void displayEvents(){
+        System.out.print("Game: " );
+        getGame().displayDetails();
+        System.out.println("Minute: " + getMinute());
+        System.out.println("Type: " + getType().name());
+        System.out.println("Description: " + getDescription());
+    }
+
+
+    /**
+     * ID: GameEventCalender@2
+     * checks if the String is a kind of a event type
+     * @param type String type
+     * @return true if the input is a kind of event
+     */
+    public boolean isAType(String type){
+        try{
+            eventType.valueOf(type);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
     }
 
     public Game getGame() {
@@ -77,35 +105,5 @@ public class GameEventCalender implements Serializable {
 
     public void setMinute(int minute) {
         this.minute = minute;
-    }
-
-
-    /**
-     * ID: GameEventCalender@1
-     * displays the event's details
-     */
-    public void displayEvents(){
-        System.out.print("Game: " );
-        getGame().displayDetails();
-        System.out.println("Minute: " + getMinute());
-        System.out.println("Type: " + getType().name());
-        System.out.println("Description: " + getDescription());
-    }
-
-
-    /**
-     * ID: GameEventCalender@2
-     * checks if the String is a kind of a event type
-     * @param type String type
-     * @return true if the input is a kind of event
-     */
-    public boolean isAType(String type){
-        try{
-            eventType.valueOf(type);
-            return true;
-        }catch (Exception e){
-            return false;
-        }
-
     }
 }

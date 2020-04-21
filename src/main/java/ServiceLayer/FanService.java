@@ -1,12 +1,13 @@
 package ServiceLayer;
-import LogicLayer.Complaint;
-import LogicLayer.Fan;
-import LogicLayer.Guest;
-import LogicLayer.Page;
+import LogicLayer.*;
+
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Observable;
 
 public class FanService extends AUserService{
     Fan fan;
@@ -25,32 +26,33 @@ public class FanService extends AUserService{
      */
     @Override
     public void addPages(List<Page> newPages) throws IOException {
-        fan.addPages(newPages);
+        if (newPages != null){
+            fan.addPages(newPages);
+        }
     }
 
     /**
-     * USE CASE - 3.5
-     * returns fan's search history
-     * @return
-     * @throws IOException
+     * USE CASE - 3.3
+     * add Games to the follow list of a Fan
+     * @param games
      */
-    @Override
-    public void retrieveHistory(Criteria criteria) throws IOException {
-        List<String>searchHistory = fan.retrieveSearchHistory(criteria);
-        for (String search: searchHistory){
-            System.out.println(search);
-        }
+    public void followOnGames(List<Observable> games){
+        games.forEach(game -> game.addObserver(this.fan));
     }
 
-    @Override
-    public void searchInformation(Criteria criteria, String query) throws IOException {
-        if (query!=null && criteria!=null){
-            Guest guest = new Guest();
-            GuestService guestService = new GuestService(guest,system);
-            guestService.searchInformation(criteria,query);
-            fan.addSearchHistory(criteria,query);
-        }
-
+    @SuppressWarnings("unchecked")
+    private List<Observable> getIncomingGames() throws Exception{
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        List<Observable> games;
+        games = (List<Observable>) DataComp.getInstance().getGameList().stream().filter(game -> {
+            try {
+                return today.compareTo(format.parse(game.getDate())) < 0;
+            } catch (ParseException e) {
+                return false;
+            }
+        });
+        return games;
     }
 
     /**
@@ -61,6 +63,46 @@ public class FanService extends AUserService{
      */
     @Override
     public void report(String description) throws IOException {
-        fan.addComplaintToDataManager(description);
+        if (description != null) {
+            fan.addComplaintToDataManager(description);
+        }else{
+            System.out.println("## there is no content is description ##");
+        }
+    }
+
+    /**
+     * USE CASE - 3.5
+     * returns fan's search history
+     * @return
+     * @throws IOException
+     */
+    @Override
+    public List<String> retrieveHistory(Criteria criteria) throws IOException {
+        List<String>searchHistory = fan.retrieveSearchHistory(criteria);
+        if (searchHistory == null){
+            System.out.println("## there is no search history ##");
+            return null;
+        }
+        for (String search: searchHistory){
+            System.out.println(search);
+        }
+        return searchHistory;
+    }
+
+    /**
+     * returns all data from DB related to query
+     * uses guest class to search information, this function added due to use case 3.5
+     * @param criteria
+     * @param query
+     * @throws IOException
+     */
+    @Override
+    public void searchInformation(Criteria criteria, String query) throws IOException {
+        if (query != null && criteria != null){
+            Guest guest = new Guest();
+            GuestService guestService = new GuestService(guest,system);
+            guestService.searchInformation(criteria,query);
+            fan.addSearchHistory(criteria,query);
+        }
     }
 }
