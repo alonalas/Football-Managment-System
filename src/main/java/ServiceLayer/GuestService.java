@@ -18,6 +18,10 @@ public class GuestService implements IGuestService{
         this.lastSearchResults = new ArrayList<>();
     }
 
+    public GuestService(Controller control) {
+        super();
+    }
+
     public List<Object> getLastSearchResults() {
         return lastSearchResults;
     }
@@ -34,19 +38,20 @@ public class GuestService implements IGuestService{
         if(passwordIsOk == false){
             return false;
         }
-        boolean isExists = guest.checkIfEmailExists(email);
-        if (isExists == true){
-            System.out.println("## user with this email exists in system. ##");
-            return false;
-        }
         boolean mailIsOk = mailAuthentication(email);
         if (mailIsOk == false){
             System.out.println("## email isn't in the right format ##");
             return false;
         }
+        boolean isExists = guest.checkIfEmailExists(email);
+        if (isExists == true){
+            System.out.println("## user with this email exists in system. ##");
+            return false;
+        }
         User newUser = guest.createNewUser(email,password,firstName,lastName);
         System.out.println("## Registered to system successfully ##");
         system.addUser(newUser);
+        system.createFanServiceForUser(newUser, (Fan)newUser.getRoles().get(0));
         system.removeGuest(guest);
         return true;
     }
@@ -65,18 +70,16 @@ public class GuestService implements IGuestService{
         return true;
     }
 
-    public GuestService(Controller control) {
-        super();
-    }
 
     public boolean mailAuthentication(String email){
-        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
-        Matcher mat = pattern.matcher(email);
-        if(mat.matches()){
-            return true;
-        }else{
-            return false;
+        if (email != null) {
+            Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+            Matcher mat = pattern.matcher(email);
+            if (mat.matches()) {
+                return true;
+            }
         }
+        return false;
     }
 
     /**
@@ -86,21 +89,27 @@ public class GuestService implements IGuestService{
      * @param password
      */
     public boolean logIn(String email, String password){
+        if(signIn(email,password) == null)
+            return false;
+        return true;
+    }
+
+    @Override
+    public User signIn(String email, String password) {
         boolean passwordIsOk = Authentication(password);
         if(passwordIsOk == false){
-            return false;
+            return null;
         }
         User userToSignIn = guest.signIn(email, password);
         if (userToSignIn == null){
             System.out.println("## Wrong email or password ##");
-            return false;
+            return null;
         }
         system.addUser(userToSignIn);
+        system.addServicesToUser(userToSignIn);
         system.removeGuest(guest);
-        return true;
+        return userToSignIn;
     }
-
-
 
     /**
      * Use Case - 2.3

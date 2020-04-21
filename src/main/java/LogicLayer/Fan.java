@@ -3,22 +3,23 @@ package LogicLayer;
 import java.io.Serializable;
 import DataLayer.IDataManager;
 import ServiceLayer.Criteria;
-import ServiceLayer.IController;
 
+import java.util.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class Fan extends Role implements Serializable {
+public class Fan extends Role implements Serializable, Observer {
 
     private List<Page> pages;
+    private List<Observable> games;
     private String name;
 
     public Fan(User user, String name) {
         super(user);
         this.name = name;
         pages = new ArrayList<>();
+        games = new ArrayList<>();
     }
 
     public List<Page> getPages() {
@@ -44,16 +45,18 @@ public class Fan extends Role implements Serializable {
     }
 
     public void addSearchHistory(Criteria criteria ,String query) {
-        switch (criteria){
-            case Name:
-                getDataManager().addNameHistory(this,query);
-                break;
-            case KeyWord:
-                getDataManager().addKeyWordHistory(this,query);
-                break;
-            case Category:
-                getDataManager().addCategoryHistory(this,query);
-                break;
+        if (query!=null){
+            switch (criteria){
+                case Name:
+                    getDataManager().addNameHistory(this,query);
+                    break;
+                case KeyWord:
+                    getDataManager().addKeyWordHistory(this,query);
+                    break;
+                case Category:
+                    getDataManager().addCategoryHistory(this,query);
+                    break;
+            }
         }
     }
 
@@ -72,5 +75,49 @@ public class Fan extends Role implements Serializable {
 
     public List<String> getNameSearchHistory() {
         return getDataManager().getNameSearchHistory(this);
+    }
+
+    public List<String> retrieveSearchHistory(Criteria criteria) {
+        List<String>searchHistory = new ArrayList<>();
+        switch (criteria) {
+            case Category:
+                searchHistory = getCategorySearchHistory();
+                break;
+            case KeyWord:
+                searchHistory = getKeyWordSearchHistory();
+                break;
+            case Name:
+                searchHistory = getNameSearchHistory();
+                break;
+        }
+        return searchHistory;
+    }
+
+    /**
+     * update - observer
+     * @param game - Observable Game
+     * @param event - update
+     */
+    @Override
+    public void update(Observable game, Object event) throws ClassCastException{
+        if (this.games.contains(game)){
+            alertUser(event);
+        }
+    }
+
+    /**
+     * Alert user - in this version by printing to console
+     * @param event - Game Event
+     */
+    private void alertUser(Object event) throws ClassCastException{
+        try {
+            ((GameEventCalender) event).displayEvents();
+        } catch (NullPointerException e){
+
+        }
+    }
+
+    public List<Observable> getGames() {
+        return games;
     }
 }

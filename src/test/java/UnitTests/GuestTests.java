@@ -43,8 +43,6 @@ public class GuestTests {
         assertEquals(toCheck.getPassword(),"1234");
         //checks if Role is added
         assertTrue(toCheck.getRoles().get(0) instanceof Fan);
-        //checks if user added to DB
-        assertTrue(DataComp.getInstance().getUserList().size() == 1);
         testLogger.info("Ended: checkCreatingNewUser");
     }
 

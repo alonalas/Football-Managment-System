@@ -24,7 +24,9 @@ public class Controller implements IController{
     private Map<User,List<IUserService>> UserServices;
     private Representitive representitive;
     private Administrator administrator;
+    public static Controller controllerSingleTone ;
     private static String configurationPath = "configurations.json";
+
 
     public Controller() {
         try{
@@ -40,9 +42,7 @@ public class Controller implements IController{
         }
     }
 
-    public static Controller controllerSingleTone ;
-
-    // TEST
+    // first init
     public Controller(Representitive representitive, Administrator administrator) {
         this.representitive = representitive;
         this.administrator = administrator;
@@ -50,6 +50,7 @@ public class Controller implements IController{
         GuestServices = new HashMap<Guest, IGuestService>();
         currentUserList = new ArrayList<User>();
         UserServices = new HashMap<User, List<IUserService>>();
+        addServicesToUser(representitive.getUser());
         saveData();
     }
 
@@ -65,6 +66,10 @@ public class Controller implements IController{
         }catch (Exception E){
             E.printStackTrace();
         }
+    }
+
+    public Map<Guest, IGuestService> getGuestServices() {
+        return GuestServices;
     }
 
     private void saveData() {
@@ -85,6 +90,7 @@ public class Controller implements IController{
 
     public void removeUserService(User user) {
         this.UserServices.remove(user);
+
     }
 
     /**
@@ -120,8 +126,16 @@ public class Controller implements IController{
         this.currentUserList = userList;
     }
 
-    public void addUser(User user) {
-        this.currentUserList.add(user);
+    public boolean addUser(User user) {
+        if (user != null){
+            this.currentUserList.add(user);
+            UserService userService = new UserService(user,this);
+            List<IUserService>services = new ArrayList<>();
+            services.add(userService);
+            this.UserServices.put(user,services);
+            return true;
+        }
+        return false;
     }
 
     public Map<User, List<IUserService>> getUserServices() {
@@ -131,6 +145,7 @@ public class Controller implements IController{
     public void setUserServices(Map<User, List<IUserService>> userServices) {
         UserServices = userServices;
     }
+
     public Representitive getRepresentitive() {
         return representitive;
     }
@@ -140,14 +155,115 @@ public class Controller implements IController{
     }
 
     public void addGuest(Guest newGuest) {
+        if(newGuest == null) return;
         this.currentGuestsList.add(newGuest);
+        this.GuestServices.put(newGuest, new GuestService(newGuest, this));
     }
 
     public void removeGuest(Guest guestToRemove) {
+        this.GuestServices.remove(guestToRemove);
         this.currentGuestsList.remove(guestToRemove);
     }
 
     public void removeUser(User userToRemove) {
+        removeUserService(userToRemove);
         this.currentUserList.remove(userToRemove);
+    }
+
+    @Override
+    public void addServicesToUser(User user) {
+        for (Role r: user.getRoles()){
+            if (r instanceof Fan){
+               createFanServiceForUser(user,(Fan)r);
+            }else if(r instanceof Player){
+                createPlayerServiceForUser(user,(Player)r);
+            }else if (r instanceof Coach){
+                createCoachServiceForUser(user,(Coach)r);
+            }else if (r instanceof Referee){
+                createRefereeServiceForUser(user,(Referee)r);
+            }else if(r instanceof Owner){
+                createOwnerServiceForUser(user,(Owner)r);
+            }else if(r instanceof Representitive){
+                createRepresentitiveServiceForUser(user,(Representitive)r);
+            }else if(r instanceof Manager){
+                createManagerServiceForUser(user,(Manager)r);
+            }else{
+                continue;
+            }
+        }
+    }
+
+    @Override
+    public void createFanServiceForUser(User user, Fan fan) {
+        if (user != null && fan != null){
+            FanService fanService = new FanService(fan, this);
+            UserServices.get(user).add(fanService);
+        }
+    }
+
+    private void createManagerServiceForUser(User user, Manager r) {
+        if (user != null && r != null){
+            ManagerService managerService = new ManagerService(this);
+            UserServices.get(user).add(managerService);
+        }
+    }
+
+
+    private void createRepresentitiveServiceForUser(User user, Representitive r) {
+        if (user != null && r != null){
+            RepresentativeService representativeService = new RepresentativeService(this);
+            UserServices.get(user).add(representativeService);
+        }
+    }
+
+
+    private void createOwnerServiceForUser(User user, Owner r) {
+        if (user != null && r != null){
+            OwnerService ownerService = new OwnerService(this);
+            UserServices.get(user).add(ownerService);
+        }
+    }
+
+    private void createRefereeServiceForUser(User user, Referee r) {
+        if (user != null && r != null){
+            RefereeService refereeService = new RefereeService(r);
+            UserServices.get(user).add(refereeService);
+        }
+    }
+
+    private void createPlayerServiceForUser(User user, Player r) {
+        if (user != null && r != null){
+            PlayerService playerService = new PlayerService(r, this);
+            UserServices.get(user).add(playerService);
+        }
+    }
+
+    private void createCoachServiceForUser(User user, Coach r) {
+        if (user != null && r != null){
+            CoachService coachService = new CoachService(r,this);
+            UserServices.get(user).add(coachService);
+        }
+    }
+
+    @Override
+    public boolean removeRole(User user, Role role){
+        user.removeRole(role);
+        List<IUserService> services = UserServices.getOrDefault(user, null);
+        if (services == null)
+            return false;
+        services.clear();
+        addServicesToUser(user);
+        return true;
+    }
+
+    @Override
+    public boolean addRole(User user, Role role){
+        user.setRole(role);
+        List<IUserService> services = UserServices.getOrDefault(user, null);
+        if (services == null)
+            return false;
+        services.clear();
+        addServicesToUser(user);
+        return true;
     }
 }
