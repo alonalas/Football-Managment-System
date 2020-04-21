@@ -66,7 +66,7 @@ public class FanService extends AUserService{
         if (description != null) {
             fan.addComplaintToDataManager(description);
         }else{
-            System.out.println("## there is no content is description ##");
+            System.out.println("## there is no content in description ##");
         }
     }
 

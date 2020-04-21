@@ -386,9 +386,17 @@ public class dataManager implements IDataManager, Serializable {
     public List<User> searchUserByName(String name) {
         List<User> retrievedUsers = new ArrayList<>();
         String[] splitted = name.split(" ");
-        for (User user : userList) {
-            if (user.getFirstName().equals(splitted[0]) && user.getLastName().equals(splitted[1])) {
-                retrievedUsers.add(user);
+        if (splitted.length == 1){
+            for (User user : userList) {
+                if (user.getFirstName().equals(splitted[0])) {
+                    retrievedUsers.add(user);
+                }
+            }
+        }else{
+            for (User user : userList) {
+                if (user.getFirstName().equals(splitted[0]) && user.getLastName().equals(splitted[1])) {
+                    retrievedUsers.add(user);
+                }
             }
         }
         return retrievedUsers;

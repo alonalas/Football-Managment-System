@@ -4,7 +4,7 @@ import LogicLayer.User;
 
 public interface IGuestService {
 
-    boolean register(String firstName, String lastName, String email, String password);
+    User register(String firstName, String lastName, String email, String password);
 
     boolean logIn(String email, String password);
 
