@@ -71,7 +71,6 @@ public class dataManager implements IDataManager, Serializable {
         return null;
     }
 
-
     public User getUserByPassword(String userName, String password) {
         for (User user : userList) {
             if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
@@ -183,8 +182,7 @@ public class dataManager implements IDataManager, Serializable {
      * @return Season if found, else null
      */
     public Season SearchSeason(String start, String End) {
-        for (Season season :
-                seasonList) {
+        for (Season season : seasonList) {
             if (season.getEnd().equals(End) && season.getStart().equals(start)) {
                 return season;
             }
