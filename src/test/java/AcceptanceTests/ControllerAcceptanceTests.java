@@ -1,5 +1,4 @@
 package AcceptanceTests;
-
 import LogicLayer.Administrator;
 import LogicLayer.Representitive;
 import ServiceLayer.Controller;

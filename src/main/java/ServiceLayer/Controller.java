@@ -25,7 +25,9 @@ public class Controller implements IController{
     public static Controller controllerSingleTone ;
     private static String configurationPath = "configurations.json";
 
-
+    /**
+     * initialise system from configuration file
+     */
     public Controller() {
         try{
             currentGuestsList = new ArrayList<Guest>();
@@ -40,6 +42,11 @@ public class Controller implements IController{
         }
     }
 
+    /**
+     * initialise system with arguments
+     * @param representitive
+     * @param administrator
+     */
     // first init
     public Controller(Representitive representitive, Administrator administrator) {
         this.representitive = representitive;
@@ -55,6 +62,10 @@ public class Controller implements IController{
       //  saveData();
     }
 
+    /**
+     * initialise all configurations of system from file
+     * @param configuration
+     */
     private void initFromFile(FileReader configuration) {
         try{
             Object testObject = new JSONParser().parse(new FileReader("configurations.json"));
@@ -73,10 +84,17 @@ public class Controller implements IController{
         }
     }
 
+    /**
+     * GuestServices getter
+     * @return Map<Guest, IGuestService>
+     */
     public Map<Guest, IGuestService> getGuestServices() {
         return GuestServices;
     }
 
+    /**
+     * save to file current configurations of system
+     */
     private void saveData() {
         Gson objects = new Gson();
         String adminJSON = objects.toJson(administrator);
@@ -93,6 +111,10 @@ public class Controller implements IController{
         }
     }
 
+    /**
+     * removes user services from system
+     * @param user
+     */
     public void removeUserService(User user) {
         if (user != null && UserServices.containsKey(user)){
             this.UserServices.remove(user);
@@ -115,23 +137,43 @@ public class Controller implements IController{
         }
     }
 
-
+    /**
+     * GuestList getter
+     * @return List<Guest>
+     */
     public List<Guest> getGuestsList() {
         return currentGuestsList;
     }
 
+    /**
+     * GuestList setter
+     * @param guestsList
+     */
     public void setGuestsList(List<Guest> guestsList) {
         this.currentGuestsList = guestsList;
     }
 
+    /**
+     * UserList getter
+     * @return List<User>
+     */
     public List<User> getUserList() {
         return currentUserList;
     }
 
+    /**
+     * userList setter
+     * @param userList
+     */
     public void setUserList(List<User> userList) {
         this.currentUserList = userList;
     }
 
+    /**
+     * add user to system, also creates UserService for it
+     * @param user
+     * @return boolean
+     */
     public boolean addUser(User user) {
         if (user != null){
             this.currentUserList.add(user);
@@ -144,33 +186,61 @@ public class Controller implements IController{
         return false;
     }
 
+    /**
+     * UserServices getter
+     * @return Map<User, List<IUserService>>
+     */
     public Map<User, List<IUserService>> getUserServices() {
         return UserServices;
     }
 
+    /**
+     * UserServices getter
+     * @param userServices
+     */
     public void setUserServices(Map<User, List<IUserService>> userServices) {
         UserServices = userServices;
     }
 
+    /**
+     * representative getter
+     * @return Representitive
+     */
     public Representitive getRepresentitive() {
         return representitive;
     }
 
+    /**
+     * administrator getter
+     * @return Administrator
+     */
     public Administrator getAdministrator() {
         return administrator;
     }
 
+    /**
+     * add new guest to system
+     * @param newGuest
+     */
     public void addGuest(Guest newGuest) {
         if(newGuest == null) return;
         this.currentGuestsList.add(newGuest);
         this.GuestServices.put(newGuest, new GuestService(newGuest, this));
     }
 
+    /**
+     * Removes Guest from system
+     * @param guestToRemove
+     */
     public void removeGuest(Guest guestToRemove) {
         this.GuestServices.remove(guestToRemove);
         this.currentGuestsList.remove(guestToRemove);
     }
 
+    /**
+     * removes user from system
+     * @param userToRemove
+     */
     public void removeUser(User userToRemove) {
         if (userToRemove != null){
             removeUserService(userToRemove);
@@ -178,11 +248,21 @@ public class Controller implements IController{
                 this.currentUserList.remove(userToRemove);
         }
     }
+
+    /**
+     * clear all services for user and then calls again to addServicesToUser func
+     * @param user
+     */
     @Override
     public void updateServicesToUser(User user){
         getUserServices().get(user).clear();
         addServicesToUser( user) ;
     }
+
+    /**
+     * add services to user according to its roles
+     * @param user
+     */
     @Override
     public void addServicesToUser(User user) {
         for (Role r: user.getRoles()){
@@ -205,6 +285,7 @@ public class Controller implements IController{
             }
         }
     }
+
 
     @Override
     public void createFanServiceForUser(User user, Fan fan) {
