@@ -1,7 +1,6 @@
 package ServiceLayer;
 
 import LogicLayer.*;
-
 import java.lang.reflect.Field;
 import LogicLayer.Administrator;
 import LogicLayer.Guest;
@@ -9,13 +8,11 @@ import LogicLayer.Representitive;
 import LogicLayer.User;
 import java.io.*;
 import java.util.*;
-
 import org.json.simple.*;
 import com.google.gson.*;
 import org.json.simple.parser.JSONParser;
 
 public class Controller implements IController{
-
     private List<Guest> currentGuestsList;
     private Map<Guest,IGuestService> GuestServices;
     private List<User> currentUserList;
