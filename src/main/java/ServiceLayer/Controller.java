@@ -50,6 +50,7 @@ public class Controller implements IController{
         UserServices = new HashMap<User, List<IUserService>>();
         addUser(representitive.getUser());
         addUser(administrator);
+        this.representitive.getUser().addRole(representitive);
         addServicesToUser(representitive.getUser());
       //  saveData();
     }
@@ -63,6 +64,10 @@ public class Controller implements IController{
             Gson objects = new Gson();
             this.administrator = objects.fromJson(admin, Administrator.class);
             this.representitive = objects.fromJson(rep, Representitive.class);
+            addUser(representitive.getUser());
+            addUser(administrator);
+            representitive.getUser().addRole(representitive);
+            addServicesToUser(representitive.getUser());
         }catch (Exception E){
             E.printStackTrace();
         }
