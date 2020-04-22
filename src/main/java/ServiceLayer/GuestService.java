@@ -37,27 +37,27 @@ public class GuestService implements IGuestService{
      * @param email
      * @param password
      */
-    public boolean register(String firstName, String lastName, String email, String password){
+    public User register(String firstName, String lastName, String email, String password){
         boolean passwordIsOk = Authentication(password);
         if(passwordIsOk == false){
-            return false;
+            return null;
         }
         boolean mailIsOk = mailAuthentication(email);
         if (mailIsOk == false){
             System.out.println("## email isn't in the right format ##");
-            return false;
+            return null;
         }
         boolean isExists = guest.checkIfEmailExists(email);
         if (isExists == true){
             System.out.println("## user with this email exists in system. ##");
-            return false;
+            return null;
         }
         User newUser = guest.createNewUser(email,password,firstName,lastName);
         System.out.println("## Registered to system successfully ##");
         system.addUser(newUser);
         system.createFanServiceForUser(newUser, (Fan)newUser.getRoles().get(0));
         system.removeGuest(guest);
-        return true;
+        return newUser;
     }
 
     /**

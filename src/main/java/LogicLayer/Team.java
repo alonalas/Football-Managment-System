@@ -279,4 +279,12 @@ public class Team implements Serializable {
             throw new IOException("This team can not be closed without official owner premission");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "name='" + name + '\'' +
+                ", stadium='" + stadium + '\'' +
+                '}';
+    }
 }

@@ -12,8 +12,7 @@ import org.junit.Test;
 
 import javax.xml.crypto.Data;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class GuestIntegrationTests {
     private static final Logger testLogger = Logger.getLogger(GuestTests.class);
@@ -50,14 +49,14 @@ public class GuestIntegrationTests {
         String lastName = "David";
         String Email = "Eitan@gmail.com";
         String password = "12345687";
-        assertFalse(guestService.register(firstName,lastName,Email,password));
+        assertNull(guestService.register(firstName,lastName,Email,password));
         //checks register func with illegal password
         password = "1234";
         Email = "walla@walla.com";
-        assertFalse(guestService.register(firstName,lastName,Email,password));
+        assertNull(guestService.register(firstName,lastName,Email,password));
         //checks register func with legal arguments
         password = "13245678";
-        assertTrue(guestService.register(firstName,lastName,Email,password));
+        assertNotNull(guestService.register(firstName,lastName,Email,password));
         assertTrue(system.getUserList().size() == 1);
         user.setPassword("13245678");
         user.setFirstName("Eitan");
