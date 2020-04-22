@@ -57,12 +57,12 @@ public class GuestIntegrationTests {
         //checks register func with legal arguments
         password = "13245678";
         assertNotNull(guestService.register(firstName,lastName,Email,password));
-        assertTrue(system.getUserList().size() == 1);
+        assertTrue(system.getUserList().size() == 3);
         user.setPassword("13245678");
         user.setFirstName("Eitan");
         user.setEmail("walla@walla.com");
         //checks if user added to controller
-        assertTrue(system.getUserList().get(0).equals(user));
+        assertTrue(system.getUserList().get(2).equals(user));
         //checks if userService and fanService added to user
         assertTrue(system.getUserServices().get(user).size() == 2);
         assertTrue(system.getUserServices().get(user).get(0) instanceof UserService);
