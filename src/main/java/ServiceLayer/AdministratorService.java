@@ -6,6 +6,9 @@ import LogicLayer.Team;
 import LogicLayer.User;
 import org.apache.log4j.Logger;
 
+import java.util.Collection;
+import java.util.List;
+
 public class AdministratorService extends AUserService {
     private Administrator administrator;
     private static final Logger testLogger = Logger.getLogger(RefereeService.class);
@@ -39,8 +42,8 @@ public class AdministratorService extends AUserService {
      * displays all the complains in the system
      */
     @Override
-    public void showComplaints(){
-        administrator.showComplaints();
+    public Collection<List<Complaint>> showComplaints(){
+        return administrator.showComplaints();
     }
 
     /**

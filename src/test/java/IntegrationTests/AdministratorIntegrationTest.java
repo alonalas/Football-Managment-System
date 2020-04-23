@@ -9,6 +9,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AdministratorIntegrationTest {
 
@@ -67,11 +70,13 @@ public class AdministratorIntegrationTest {
      */
     @Test
     public void showComplaints() {
+        assertTrue(adminService.showComplaints().size()==0);
         Complaint complaint1 = new Complaint(user1, "bad", "2012-12-12");
         Complaint complaint2 = new Complaint(user2, "good", "2018-12-13");
         DataComp.getInstance().addComplaint(complaint1, user1);
         DataComp.getInstance().addComplaint(complaint2, user2);
         adminService.showComplaints();
+        assertTrue(adminService.showComplaints().size()==2);
     }
 
 
@@ -88,6 +93,7 @@ public class AdministratorIntegrationTest {
         adminService.showComplaints();
         System.out.println();
         adminService.commentComplaint(complaint2, "boringgggg");
+        adminService.commentComplaint(complaint2, "fff");
         adminService.showComplaints();
 
 

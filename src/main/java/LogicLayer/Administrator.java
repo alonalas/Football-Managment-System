@@ -7,6 +7,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -61,12 +62,19 @@ public class Administrator extends User {
      * UC: 8.3.1
      * display all the complaints's details
      */
-    public void showComplaints() {
+    public Collection<List<Complaint>> showComplaints() {
         Collection<List<Complaint>> complaints = dataManager().getComplaint().values();
-        for (List<Complaint> list : complaints) {
-            for (Complaint com : list) {
-                System.out.println(com.getFullComplaint());
+        if(complaints==null || complaints.size()==0){
+            System.out.println("no complaints in the system");
+            Collection<List<Complaint>> ans = new ArrayList<>();
+            return  ans;
+        }else {
+            for (List<Complaint> list : complaints) {
+                for (Complaint com : list) {
+                    System.out.println(com.getFullComplaint());
+                }
             }
+            return complaints;
         }
 
     }
@@ -81,14 +89,20 @@ public class Administrator extends User {
      * @param commend   the commend the admin wants to add
      */
     public void commentComplaint(Complaint complaint, String commend) {
-        for (List<Complaint> list : dataManager().getComplaint().values()) {
-            for (Complaint com : list) {
-                if (complaint.equals(com)) {
-                    com.setCommentAdmin(commend);
-                    Alert alert = new Alert(com.getUser(), "the admin commened your complaint", LocalDate.now().toString());
-                    com.getUser().addAlerts(alert);
-                    dataManager().addAlert(alert, com.getUser());
-                    break;
+        if (complaint.isAnswered()) {
+            System.out.println("You already responded to this complaint");
+        } else {
+            for (List<Complaint> list : dataManager().getComplaint().values()) {
+                for (Complaint com : list) {
+                    if (complaint.equals(com)) {
+                        com.setCommentAdmin(commend);
+                        com.setAnswered(true);
+                        complaint.setAnswered(true);
+                        Alert alert = new Alert(com.getUser(), "the admin commened your complaint", LocalDate.now().toString());
+                        com.getUser().addAlerts(alert);
+                        dataManager().addAlert(alert, com.getUser());
+                        break;
+                    }
                 }
             }
         }

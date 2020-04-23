@@ -13,6 +13,7 @@ public class Complaint implements Serializable {
     private String date; // format: "2010-12-12"
     private boolean answered;
 
+
     public Complaint(User user,  String description, String date) {
         this.user = user;
         this.description = description;
@@ -23,6 +24,14 @@ public class Complaint implements Serializable {
     public User getUser() {
         int i =2;
         return user;
+    }
+
+    public boolean isAnswered() {
+        return answered;
+    }
+
+    public void setAnswered(boolean answered) {
+        this.answered = answered;
     }
 
     public void setUser(User user) {

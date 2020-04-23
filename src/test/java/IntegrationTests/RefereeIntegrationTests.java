@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RefereeIntegrationTests {
@@ -29,11 +29,12 @@ public class RefereeIntegrationTests {
 
     @Before
     public void init(){
+        League league = new League("MAJOR_LEAGUE",null,null,null);
         user = new User("@","d","d");
         game1 = new Game(null,null,null,null,null,"2020-04-13","12:00","10:00");
         game2 = new Game(null,null,null,null,null,"2020-04-13","15:00","20:00");
-        refereeA = new Referee(user,"main","yossi",null);
-        refereeB = new Referee(user,"main","haim",null);
+        refereeA = new Referee(user,"main","yossi",league);
+        refereeB = new Referee(user,"main","haim",league);
         refereeService1= new RefereeService(refereeA);
         refereeService2=new RefereeService(refereeB);
     }
@@ -54,8 +55,10 @@ public class RefereeIntegrationTests {
     public void changeDetails(){
         try {
             refereeService1.showDetails();
-            refereeService1.changeDetails("chen","aa");
+            refereeService1.changeDetails("d4d","ss");// prints error
+            refereeService1.changeDetails("yossi","pp");
             refereeService1.showDetails();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

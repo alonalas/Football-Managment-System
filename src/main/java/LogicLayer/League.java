@@ -28,6 +28,17 @@ public class League implements Serializable {
         this.seasonList = seasonList;
         this.policyList = policyList;
     }
+    public League( String type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
+        if(isAType(type)){
+            this.refereeList = refereeList;
+            this.seasonList = seasonList;
+            this.policyList = policyList;
+            this.type=LeagueType.valueOf(type);
+        }
+
+    }
+
+
 
     public String getName() {
         return name;
@@ -153,6 +164,10 @@ public class League implements Serializable {
         return type;
     }
 
+    public String getTypeString(){
+        return type.name();
+    }
+
     public void setType(LeagueType type) {
         this.type = type;
     }
@@ -179,5 +194,23 @@ public class League implements Serializable {
 
     public void setPolicyList(Map<Season, Policy> policyList) {
         this.policyList = policyList;
+    }
+
+
+    /**
+     * ID: Leauge@6
+     * return true if the string type is an actual league type
+     * @param type the type
+     * @return true if the type is an actual type
+     */
+    public boolean isAType(String type){
+        try{
+            LeagueType.valueOf(type);
+            return true;
+        }catch (Exception e){
+            System.out.println(" The input is not a valid league type");
+            return false;
+        }
+
     }
 }

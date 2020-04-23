@@ -270,6 +270,18 @@ public class Team implements Serializable {
         return finalClose;
     }
 
+    public boolean setFinalClose(boolean finalClose) {
+        if(this.isFinalClose()){
+            System.out.println("this close is permanently close");
+            return false;
+        }
+        else{
+            this.finalClose=finalClose;
+            return true;
+
+        }
+    }
+
     public void finalCloseTeam(){
         finalClose=true;
     }

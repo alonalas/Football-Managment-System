@@ -2,10 +2,9 @@ package ServiceLayer;
 
 import LogicLayer.*;
 
-import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import java.util.List;
 
 public abstract class AUserService implements IUserService {
@@ -140,7 +139,7 @@ public abstract class AUserService implements IUserService {
     }
 
     @Override
-    public void showComplaints() throws IOException {
+    public Collection<List<Complaint>> showComplaints() throws IOException {
         throw new IOException("Unsupported method");
 
     }

@@ -1,16 +1,10 @@
 package ServiceLayer;
 
 import LogicLayer.Game;
-import LogicLayer.GameEventCalender;
-import LogicLayer.GameReport;
 import LogicLayer.Referee;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Date;
 
 public class RefereeService extends AUserService {
     private Referee referee;
@@ -18,6 +12,10 @@ public class RefereeService extends AUserService {
 
 
     public RefereeService(Referee referee) {
+        this.referee = referee;
+    }
+
+    public void setReferee(Referee referee) {
         this.referee = referee;
     }
 
@@ -45,13 +43,15 @@ public class RefereeService extends AUserService {
      * ID: @RefereeService2
      * change the details of the referee
      * @param newName - the new name we want to save for the referee
-     * @param newCualif - the new qualification for the referee
+     * @param qualification - the new qualification for the referee
      * @throws IOException
      */
     @Override
-    public void changeDetails(String newName, String newCualif) throws IOException {
-        referee.setName(newName);
-        referee.setQualification(newCualif);
+    public void changeDetails(String newName, String qualification) throws IOException {
+        if(referee.setName(newName)){
+            referee.setQualification(qualification);
+        }
+
     }
 
 

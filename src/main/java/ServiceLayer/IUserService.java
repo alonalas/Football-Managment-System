@@ -2,6 +2,7 @@ package ServiceLayer;
 import LogicLayer.*;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public interface IUserService {
 
     void closeTeam(Team team) throws IOException;
 
-    void showComplaints() throws IOException;
+    Collection<List<Complaint>> showComplaints() throws IOException;
 
     void commentComplaint(Complaint complaint, String comment) throws IOException;
 
