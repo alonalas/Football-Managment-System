@@ -71,7 +71,7 @@ public class Complaint implements Serializable {
      * @return the full complaint details
      */
     public String getFullComplaint(){
-        String com = "user: " + getUser().getUserName() + "\ndescription: " + getDescription()
+        String com = "user: " + getUser().getFirstName()+ " " + getUser().getLastName() + "\ndescription: " + getDescription()
                 + "\ndate: " + getDate() + "\ncomments: " + getCommentAdmin();
         return com;
     }

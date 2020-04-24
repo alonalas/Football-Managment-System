@@ -139,6 +139,8 @@ public class Administrator extends User {
 //                        if (!cantBeDelete) {
 //                            iterator.remove();
 //                        }
+                    }else {
+                        System.out.println("You cant remove this user");
                     }
                     iterator.remove();
                 } else if (role instanceof Coach) {
@@ -175,10 +177,10 @@ public class Administrator extends User {
      */
     public void displayLog(){
         String propertiesPath = "log4j.properties";
-        String path = "logs.out";
+        String path = "logs.txt";
         PropertyConfigurator.configure(propertiesPath);
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("logs.out"));
+            BufferedReader reader = new BufferedReader(new FileReader("logs.txt"));
             String line = reader.readLine();
             while (line != null) {
                 System.out.println(line);

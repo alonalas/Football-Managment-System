@@ -83,7 +83,7 @@ public class dataManager implements IDataManager, Serializable {
 
     public User getUserByMail(String userName, String email) {
         for (User user : userList) {
-            if (user.getUserName().equals(userName) && user.getEmail().equals(email)) {
+            if (user.getEmail().equals(email)) {
                 return user;
             }
         }

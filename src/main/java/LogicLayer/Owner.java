@@ -51,7 +51,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @param email
      * @throws IOException if the user or the team are not exist
      */
-    public void insertNewManager(String teamName, String managerName, String userName,
+    public Manager insertNewManager(String teamName, String managerName, String userName,
                                  String email, Map<Manager.Permission, Boolean> permissionBooleanMap) throws IOException { // tested
 
            if (validateExistingAssetType(teamName,email,userName)) {
@@ -66,11 +66,16 @@ public class Owner extends RoleHolder implements Serializable {
                     user.setRole(manager);
                     team.getRoleHolders().add(manager);
                     assignManagerPremissions(manager, permissionBooleanMap);
+                    return manager;
                 } else
                     throw new IOException("The selected user is allready nominated as the owner in the team");
+
             } else
+
                 throw new IOException("The selected user is allready nominated as manager in this team");
+
         }
+        return null;
     }
 
     /**
@@ -113,7 +118,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @param email
      * @throws IOException if the team or the user are not exist
      */
-    public void insertNewPlayer(String teamName, String name, String position, int day ,
+    public Player insertNewPlayer(String teamName, String name, String position, int day ,
                                 int month, int year , String userName,String email) throws IOException { //tested
 
         if (validateExistingAssetType(teamName,email,userName)) {
@@ -128,7 +133,9 @@ public class Owner extends RoleHolder implements Serializable {
             team.setPlayer(player);
             user.setRole(player);
             team.getRoleHolders().add(player);
+            return player;
         }
+        return null;
     }
 
     /**
@@ -621,5 +628,9 @@ public class Owner extends RoleHolder implements Serializable {
     public void addAlert(Alert alert){
         getAlerts().add(alert);
     }
+
+
+
+
 }
 

@@ -38,6 +38,8 @@ public class User implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.roles = new ArrayList<Role>();
+        this.userName = firstName+"@"+getLastName();
+
     }
 
 
@@ -115,7 +117,13 @@ public class User implements Serializable {
      * @param alert the new alwert we want to add
      */
     public void addAlerts(Alert alert) {
-        this.alerts.add(alert);
+        if(alerts==null){
+            alerts = new LinkedList<>();
+            alerts.add(alert);
+        }else{
+            this.alerts.add(alert);
+        }
+
     }
 
 
