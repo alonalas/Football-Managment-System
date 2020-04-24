@@ -191,7 +191,7 @@ public class RefereeAcceptanceTest {
      * A@12
      * UC: 10.4.2
      */
-    @Test
+//    @Test
     public void createGameReport(){
         Game game1 = new Game(null,null,null,null,null,"2020-04-23","12:00","20:00");
         // not the main judge
