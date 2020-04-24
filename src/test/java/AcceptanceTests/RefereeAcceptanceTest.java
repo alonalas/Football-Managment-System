@@ -66,11 +66,22 @@ public class RefereeAcceptanceTest {
     }
 
 
+
+    @Test
+    public void test() throws IOException {
+        UpdateDetails();
+        displayGamesFail();
+        displayGames();
+        addEventDuringGame();
+        addEventAfterGame();
+        createGameReport();
+
+    }
     /**
      * A@7
      * UC: 10.1
      */
-    @Test
+//    @Test
     public void UpdateDetails(){
         testRefereeService.showDetails();
         try {
@@ -89,7 +100,7 @@ public class RefereeAcceptanceTest {
      * A@8
      * UC: 10.2 - SUCCESSFUL
      */
-    @Test
+//    @Test
     public void displayGames(){
         Game game1 = new Game(null,null,null,null,null,"2020-04-13","12:00","10:00");
         Game game2 = new Game(null,null,null,null,null,"2020-04-13","15:00","20:00");
@@ -106,7 +117,7 @@ public class RefereeAcceptanceTest {
      * A@9
      * UC: 10.2 - FAIL
      */
-    @Test
+
     public void displayGamesFail(){
         try {
             assertTrue(testRefereeService.displayGames().length==1);
@@ -127,7 +138,7 @@ public class RefereeAcceptanceTest {
      * UC: 10.3
      * @throws IOException
      */
-    @Test
+//    @Test
     public void addEventDuringGame() throws IOException {
         Game game1 = new Game(null,null,null,null,null,"2020-04-23","12:00","23:00");/// happens now
         Game game2 = new Game(null,null,null,null,null,"2020-04-23","15:00","20:00");// not happens now
@@ -148,7 +159,7 @@ public class RefereeAcceptanceTest {
      * A@11
      * UC: 10.4.1
      */
-    @Test
+//    @Test
     public void addEventAfterGame(){
         // ended less then 5 hours ago
         Game game1 = new Game(null,null,null,null,null,"2020-04-23","12:00","20:00");
