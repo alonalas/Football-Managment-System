@@ -303,32 +303,76 @@ public class OwnerAcceptance {
         assertEquals(team.getStatus(), Team.teamStatus.activityOpened);
     }
 
+    /**
+     * A@18
+     * @param team1
+     * @throws IOException
+     */
     private void openTeam(Team team1) throws IOException {
         ownerService.renewTeamActivity(owner,team1);
     }
 
+    /**
+     * A@19
+     * @param team1
+     * @throws IOException
+     */
     private void closeTeam(Team team1) throws IOException {
         ownerService.closeTeamActivity(owner,team1);
     }
 
+    /**
+     * A@20
+     * @param ownerNominate
+     * @throws IOException
+     */
     private void cancelOwnership(Owner ownerNominate) throws IOException {
         ownerService.removeOwnership(owner,ownerNominate,team.getName());
     }
 
+    /**
+     * A@21
+     * @param user
+     * @throws IOException
+     */
     private void nominateOwner(User user) throws IOException {
         ownerService.nominateNewOwner(owner,team.getName(),user,"Snape");
     }
 
+    /**
+     * A@22
+     * @param roleHolder
+     * @throws IOException
+     */
     private void deleteAsset(RoleHolder roleHolder) throws IOException {
         ownerService.deleteRoleHolder(owner,team.getName(),roleHolder.getUser().getUserName(),roleHolder.getUser().getEmail(),roleHolder);
     }
 
+    /**
+     * A@23
+     * @param roleHolder
+     * @param attribute
+     * @param desciption
+     * @throws IOException
+     */
     private void updateRoleHolder(RoleHolder roleHolder, String attribute, String desciption) throws IOException {
         Map<String, String> attributes = new HashMap<>();
         attributes.put(attribute,desciption);
         ownerService.updateRoleHolder(owner,team.getName(),roleHolder,attributes);
     }
 
+    /**
+     * A24
+     * @param managerName
+     * @param userName
+     * @param email
+     * @param insertPlayer
+     * @param insertCoach
+     * @param deletePlayer
+     * @param deleteCoach
+     * @return
+     * @throws IOException
+     */
     private Manager insertManager(String managerName,String userName, String email
         ,boolean insertPlayer, boolean insertCoach, boolean deletePlayer, boolean deleteCoach) throws IOException {
         Map<Manager.Permission,Boolean> permissionBooleanMap = new HashMap<>();
@@ -340,11 +384,33 @@ public class OwnerAcceptance {
         return m;
     }
 
+    /**
+     * A@25
+     * @param coachName
+     * @param qualification
+     * @param job
+     * @param userName
+     * @param email
+     * @return
+     * @throws IOException
+     */
     private Coach insertCoach(String coachName,String qualification, String job, String userName, String email) throws IOException {
         Coach c = ownerService.insertNewCoach(owner,team.getName(),coachName,qualification,job,userName,email);
         return c;
     }
 
+    /**
+     * A@26
+     * @param name
+     * @param position
+     * @param day
+     * @param month
+     * @param year
+     * @param userName
+     * @param email
+     * @return
+     * @throws IOException
+     */
     private Player insertPlayer(String name, String position, int day, int month, int year, String userName, String email) throws IOException {
         Player p = ownerService.insertNewPlayer(owner,team.getName(),name,position,day,month,year,userName,email);
         return p;
