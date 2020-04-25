@@ -13,6 +13,7 @@ public class UserService extends AUserService {
     }
 
     /**
+     * id: UserService@1
      * USE CASE - 3.1
      * logOut from system
      */
@@ -22,6 +23,7 @@ public class UserService extends AUserService {
     }
 
     /**
+     * id: UserService@2
      * USE CASE - 3.6
      * show personal details
      * @return
@@ -41,6 +43,7 @@ public class UserService extends AUserService {
 
 
     /**
+     * id: UserService@3
      * USE CASE - 3.7
      * edit personal details
      * @param firstName

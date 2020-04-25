@@ -72,6 +72,7 @@ public class FanAcceptanceTests {
     }
 
     /**
+     * id: A@34
      * acceptance test 3.1.1 - use case 3.1
      * checks successful log out of system
      */
@@ -87,6 +88,7 @@ public class FanAcceptanceTests {
     }
 
     /**
+     * id: A@35
      * acceptance test 3.2.1 - use case 3.2
      * checks successful adding pages to follow
      */
@@ -105,6 +107,7 @@ public class FanAcceptanceTests {
     }
 
     /**
+     * id: A@36
      * acceptance test 3.4.1 - use case 3.4
      * checks successful adding complaint
      */
@@ -120,6 +123,7 @@ public class FanAcceptanceTests {
     }
 
     /**
+     * id: A@37
      * acceptance test 3.4.2 - use case 3.4
      * checks successful adding complaint
      */
@@ -134,6 +138,7 @@ public class FanAcceptanceTests {
     }
 
     /**
+     * id: A@38
      * acceptance test 3.5.1 - use case 3.5
      * checks successful retrieve history
      */
@@ -168,6 +173,7 @@ public class FanAcceptanceTests {
     }
 
     /**
+     * id: A@39
      * acceptance test 3.6.1 - use case 3.6
      * checks show personal information
      */
@@ -186,6 +192,7 @@ public class FanAcceptanceTests {
     }
 
     /**
+     * id: A@40
      * acceptance test 3.7.1 - use case 3.7
      * checks edit personal information
      */
@@ -204,6 +211,7 @@ public class FanAcceptanceTests {
     }
 
     /**
+     * id: A@41
      * acceptance test 3.7.2 - use case 3.7
      * checks edit personal information with invalid arguments
      */

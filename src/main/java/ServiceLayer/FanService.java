@@ -19,6 +19,7 @@ public class FanService extends AUserService{
     }
 
     /**
+     * id: FanService@1
      * USE CASE - 3.2
      * add new pages to follow
      * @param newPages
@@ -32,6 +33,7 @@ public class FanService extends AUserService{
     }
 
     /**
+     * id: FanService@2
      * USE CASE - 3.3
      * add Games to the follow list of a Fan
      * @param games
@@ -40,7 +42,12 @@ public class FanService extends AUserService{
         games.forEach(game -> game.addObserver(this.fan));
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * id: FanService@3
+     * incoming games getter
+     * @return
+     * @throws Exception
+     */
     private List<Observable> getIncomingGames() throws Exception{
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date today = new Date();
@@ -56,6 +63,7 @@ public class FanService extends AUserService{
     }
 
     /**
+     * id: FanService@4
      * USE CASE - 3.4
      * add new complaint due to wrong information
      * @param description
@@ -71,6 +79,7 @@ public class FanService extends AUserService{
     }
 
     /**
+     * id: FanService@5
      * USE CASE - 3.5
      * returns fan's search history
      * @return
@@ -90,6 +99,7 @@ public class FanService extends AUserService{
     }
 
     /**
+     * id: FanService@6
      * returns all data from DB related to query
      * uses guest class to search information, this function added due to use case 3.5
      * @param criteria

@@ -30,8 +30,10 @@ public class GuestService implements IGuestService{
         return lastSearchResults;
     }
 
-    /**Use Case - 2.1
+    /**
+     * Use Case - 2.1
      * Register to the System
+     * id: GuestService@1
      * @param firstName
      * @param lastName
      * @param email
@@ -61,6 +63,7 @@ public class GuestService implements IGuestService{
     }
 
     /**
+     * id: GuestService@2
      * checks if password entered is valid
      * @param password
      * @return
@@ -80,6 +83,7 @@ public class GuestService implements IGuestService{
     }
 
     /**
+     * id: GuestService@3
      * checks if mail entered is in correct form
      * @param email
      * @return
@@ -96,6 +100,7 @@ public class GuestService implements IGuestService{
     }
 
     /**
+     * id: GuestService@4
      * Use Case - 2.2
      * User Login
      * @param email
@@ -107,6 +112,13 @@ public class GuestService implements IGuestService{
         return true;
     }
 
+    /**
+     * id: GuestService@5
+     * sign in func for guest
+     * @param email
+     * @param password
+     * @return
+     */
     @Override
     public User signIn(String email, String password) {
         boolean passwordIsOk = Authentication(password);
@@ -125,6 +137,7 @@ public class GuestService implements IGuestService{
     }
 
     /**
+     * id: GuestService@6
      * Use Case - 2.3
      * Show public information
      * @param interestIn
@@ -192,6 +205,7 @@ public class GuestService implements IGuestService{
     }
 
     /**
+     * id: GuestService@7
      * USE CASE - 2.4
      * Search Information
      * @param criteria
@@ -214,6 +228,7 @@ public class GuestService implements IGuestService{
     }
 
     /**
+     * id: GuestService@8
      * receives String name as argument and returns all users with the same first name
      * related to use case 2.4
      * @param name
@@ -230,11 +245,16 @@ public class GuestService implements IGuestService{
         }
     }
 
+    /**
+     * id: GuestService@9
+     * @param interested
+     */
     private void searchInformationByCategory(Interest interested){
         showInformationByCategory(interested);
     }
 
     /**
+     * id: GuestService@10
      * receives category as string and call to searchInformationByKeyWord func with its argument
      * shows all related information due to query
      * related to use case 2.4
@@ -245,6 +265,7 @@ public class GuestService implements IGuestService{
     }
 
     /**
+     * id: GuestService@11
      * receives query and search in DB for all related data
      * related to use case 2.4
      * @param query
@@ -286,6 +307,7 @@ public class GuestService implements IGuestService{
     }
 
     /**
+     * id: GuestService@12
      * receives league name and returns leagues with equal league type
      * related to use case 2.4
      * @param leagueName
@@ -303,6 +325,7 @@ public class GuestService implements IGuestService{
     }
 
     /**
+     * id: GuestService@13
      *  receives team name and returns teams with equal team name
      *  related to use case 2.4
      * @param teamName
@@ -320,6 +343,7 @@ public class GuestService implements IGuestService{
     }
 
     /**
+     * id: GuestService@14
      * USE CASE - 2.5
      * Filter Search Results
      * @param filter
@@ -341,6 +365,7 @@ public class GuestService implements IGuestService{
     }
 
     /**
+     * id: GuestService@15
      * filters search results by league
      * related to use case 2.5
      * @param query
@@ -365,6 +390,7 @@ public class GuestService implements IGuestService{
     }
 
     /**
+     * id: GuestService@16
      * filter search results by team
      * related to use case 2.5
      * @param query
@@ -381,6 +407,7 @@ public class GuestService implements IGuestService{
     }
 
     /**
+     * id: GuestService@17
      * filter search results by Role(coach, player and etc..)
      * related to use case 2.5
      * @param query

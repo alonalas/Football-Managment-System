@@ -39,6 +39,7 @@ public class GuestServiceTests {
     }
 
     /**
+     * id: U@57
      * checks Authentication func
      */
     @Test
@@ -58,6 +59,7 @@ public class GuestServiceTests {
     }
 
     /**
+     * id: U@58
      * checks mailAuthentication func
      */
     @Test
@@ -75,6 +77,7 @@ public class GuestServiceTests {
     }
 
     /**
+     * id: U@59
      * checks show information by category func
      */
     @Test
@@ -91,6 +94,7 @@ public class GuestServiceTests {
     }
 
     /**
+     * id: U@60
      * checks search information func
      */
     @Test
@@ -112,6 +116,7 @@ public class GuestServiceTests {
     }
 
     /**
+     * id: U@61
      * checks filter search results func
      */
     @Test

@@ -27,6 +27,7 @@ public class UserTests {
     }
 
     /**
+     * id:U@40
      * checks getPersonalDetails func
      */
     @Test
@@ -41,6 +42,7 @@ public class UserTests {
     }
 
     /**
+     * id:U@41
      * checks updatePersonalDetails func
      */
     @Test
@@ -65,6 +67,7 @@ public class UserTests {
     }
 
     /**
+     * id:U@42
      * checks equals func
      */
     @Test
@@ -87,6 +90,7 @@ public class UserTests {
     }
 
     /**
+     * id:U@43
      * checks addRole func
      */
     @Test
@@ -101,7 +105,7 @@ public class UserTests {
         assertFalse(user.addRole(fan));
     }
 
-    /**
+    /**id:U@44
      * checks RemoveRole func
      */
     @Test
@@ -118,6 +122,7 @@ public class UserTests {
     }
 
     /**
+     * id:U@45
      * checks ifUserRoleIncludeReferee func
      */
     @Test

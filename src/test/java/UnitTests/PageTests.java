@@ -23,6 +23,7 @@ public class PageTests {
     }
 
     /**
+     * id: U@62
      * test addUpdate func
      */
     @Test

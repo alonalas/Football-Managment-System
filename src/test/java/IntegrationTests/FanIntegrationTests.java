@@ -40,6 +40,7 @@ public class FanIntegrationTests {
     }
 
     /**
+     * id: I@35
      * checks retrieveHistory func
      */
     @Test
@@ -88,6 +89,7 @@ public class FanIntegrationTests {
     }
 
     /**
+     * id: I@36
      * checks report func
      */
     @Test
@@ -111,6 +113,7 @@ public class FanIntegrationTests {
     }
 
     /**
+     * id: I@37
      * checks addPages func
      */
     @Test

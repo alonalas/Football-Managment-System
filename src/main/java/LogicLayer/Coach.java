@@ -60,6 +60,11 @@ public class Coach extends RoleHolder implements Serializable {
         this.team = team;
     }
 
+    /**
+     * id: coach@1
+     * add update To Page
+     * @param update
+     */
     public void addUpdateToPage(String update) {
         page.addUpdate(update);
     }

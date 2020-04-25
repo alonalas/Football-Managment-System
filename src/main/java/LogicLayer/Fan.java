@@ -55,6 +55,7 @@ public class Fan extends Role implements Serializable, Observer {
     }
 
     /**
+     * id: fan@1
      * add new pages to follow by fan
      * @param newPages
      */
@@ -65,6 +66,7 @@ public class Fan extends Role implements Serializable, Observer {
     }
 
     /**
+     * id: fan@2
      * adds new search history by fan by 3 criterias
      * @param criteria
      * @param query
@@ -86,6 +88,7 @@ public class Fan extends Role implements Serializable, Observer {
     }
 
     /**
+     * id: fan@3
      * add new complaint to user in DB
      * @param description
      */
@@ -95,6 +98,7 @@ public class Fan extends Role implements Serializable, Observer {
     }
 
     /**
+     * id: fan@4
      * category search history getter
      * @return List<String>
      */
@@ -103,6 +107,7 @@ public class Fan extends Role implements Serializable, Observer {
     }
 
     /**
+     * id: fan@5
      * keyWord search history getter
      * @return List<String>
      */
@@ -111,6 +116,7 @@ public class Fan extends Role implements Serializable, Observer {
     }
 
     /**
+     * id: fan@6
      * search by name history getter
      * @return List<String>
      */
@@ -119,6 +125,7 @@ public class Fan extends Role implements Serializable, Observer {
     }
 
     /**
+     * id: fan@7
      * retrieves search history made by fan
      * @param criteria
      * @return List<String>
@@ -140,6 +147,7 @@ public class Fan extends Role implements Serializable, Observer {
     }
 
     /**
+     * id: fan@8
      * update - observer
      * @param game - Observable Game
      * @param event - update
@@ -152,6 +160,7 @@ public class Fan extends Role implements Serializable, Observer {
     }
 
     /**
+     * id: fan@9
      * Alert user - in this version by printing to console
      * @param event - Game Event
      */
@@ -163,6 +172,11 @@ public class Fan extends Role implements Serializable, Observer {
         }
     }
 
+    /**
+     * id: fan@10
+     * games followed by fan getter
+     * @return
+     */
     public List<Observable> getGames() {
         return games;
     }

@@ -60,6 +60,7 @@ public class Controller implements IController{
     }
 
     /**
+     * id: Controller@1
      * initialise all configurations of system from file
      * @param configuration
      */
@@ -90,6 +91,7 @@ public class Controller implements IController{
     }
 
     /**
+     * id: Controller@2
      * save to file current configurations of system
      */
     private void saveData() {
@@ -109,6 +111,7 @@ public class Controller implements IController{
     }
 
     /**
+     * id: Controller@3
      * removes user services from system
      * @param user
      */
@@ -119,7 +122,7 @@ public class Controller implements IController{
     }
 
     /**
-     * ID: 1
+     * id: Controller@4
      * displays the team's asset's details to the screen
      * @param roleHolder
      */
@@ -167,6 +170,7 @@ public class Controller implements IController{
     }
 
     /**
+     * id: Controller@5
      * add user to system, also creates UserService for it
      * @param user
      * @return boolean
@@ -216,6 +220,7 @@ public class Controller implements IController{
     }
 
     /**
+     * id: Controller@6
      * add new guest to system
      * @param newGuest
      */
@@ -226,6 +231,7 @@ public class Controller implements IController{
     }
 
     /**
+     * id: Controller@7
      * Removes Guest from system
      * @param guestToRemove
      */
@@ -235,6 +241,7 @@ public class Controller implements IController{
     }
 
     /**
+     * id: Controller@8
      * removes user from system
      * @param userToRemove
      */
@@ -247,6 +254,7 @@ public class Controller implements IController{
     }
 
     /**
+     * id: Controller@9
      * clear all services for user and then calls again to addServicesToUser func
      * @param user
      */
@@ -259,6 +267,7 @@ public class Controller implements IController{
     }
 
     /**
+     * id: Controller@10
      * add services to user according to its roles
      * @param user
      */
