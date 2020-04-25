@@ -31,6 +31,17 @@ public class League implements Serializable {
         this.policyList = policyList;
         this.rankPolicyList = new HashMap<>();
     }
+    public League( String type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
+        if(isAType(type)){
+            this.refereeList = refereeList;
+            this.seasonList = seasonList;
+            this.policyList = policyList;
+            this.type=LeagueType.valueOf(type);
+        }
+
+    }
+
+
 
     public String getName() {
         return name;
@@ -95,8 +106,69 @@ public class League implements Serializable {
         return true;
     }
 
+    /**
+     * id: League@5
+     *  number of Dates correct - for pre-algorithm check
+     * @param numberOfGamesPerTeam
+     * @param numberOfTeam
+     * @return number of games
+     */
+    public static int numberOfNeededDates(int numberOfGamesPerTeam , int numberOfTeam){
+        int numberOfGames = 0 ;
+        for(int i=numberOfTeam-1 ; i > 0  ; i--){
+            numberOfGames = numberOfGames +i;
+        }
+        return numberOfGamesPerTeam*numberOfGames ;
+    }
+
+    /**
+     * id: League@4
+     * schedule games in season
+     * @param numberOfGamesPerTeam
+     * @return number of schduled Games
+     */
+    public int gamescheduling(int numberOfGamesPerTeam , Season season , List<String[]> allPossiableTimes){
+        if (numberOfGamesPerTeam == 0 || season == null) return 0;
+        List<Team> teams = Team.getAllTeamsInLeague(this);
+        Team[] teamsArray = new Team[teams.size()];
+        if(allPossiableTimes.size()<numberOfNeededDates(numberOfGamesPerTeam , teams.size())) return 0;
+            teams.toArray(teamsArray);
+        List<Referee> referees = Referee.legalRefereesForLeague(this, season);
+        Referee[] refereesArray = new Referee[referees.size()];
+        referees.toArray(refereesArray);
+        int nextTime = 0;
+        int a = 0, b = 0;
+        int games_counter = 0;
+        int refereeSchecule = 0;
+        for (int interations = 0; interations < numberOfGamesPerTeam; interations++) {
+            for (int i = teams.size() - 1; i > 0; i--) {
+                for (int j = 0; j < i; j++) {
+                    if (i % 2 == 0) {
+                        a = i;
+                        b = j;
+                    } else {
+                        a = j;
+                        b = i;
+                    }
+                    Game game = new Game(season, teamsArray[a], teamsArray[b], null, refereesArray[refereeSchecule%(refereesArray.length-1)], null,
+                            allPossiableTimes.get(nextTime)[0], allPossiableTimes.get(nextTime)[1], allPossiableTimes.get(nextTime)[2]);
+                    nextTime++;
+                    refereeSchecule++;
+                    teamsArray[a].addHomeGame(game);
+                    teamsArray[b].addAwayGame(game);
+                    System.out.println(teamsArray[a].getName() + "-" + teamsArray[b].getName());
+                    games_counter++;
+                }
+            }
+        }
+        return games_counter;
+    }
     public LeagueType getType() {
         return type;
+    }
+
+    public String getTypeString(){
+        return type.name();
     }
 
     public void setType(LeagueType type) {
@@ -125,5 +197,23 @@ public class League implements Serializable {
 
     public void setPolicyList(Map<Season, Policy> policyList) {
         this.policyList = policyList;
+    }
+
+
+    /**
+     * ID: Leauge@6
+     * return true if the string type is an actual league type
+     * @param type the type
+     * @return true if the type is an actual type
+     */
+    public boolean isAType(String type){
+        try{
+            LeagueType.valueOf(type);
+            return true;
+        }catch (Exception e){
+            System.out.println(" The input is not a valid league type");
+            return false;
+        }
+
     }
 }

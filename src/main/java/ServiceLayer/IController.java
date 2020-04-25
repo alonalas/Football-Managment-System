@@ -37,9 +37,10 @@ public interface IController {
 
     void addServicesToUser(User userToSignIn);
 
-    public boolean removeRole(User user, Role role);
+//    public boolean removeRole(User user, Role role);
+//
+//    public boolean addRole(User user, Role role);
+    void updateServicesToUser(User user);
 
-    public boolean addRole(User user, Role role);
-
-    public Map<Guest, IGuestService> getGuestServices();
+     Map<Guest, IGuestService> getGuestServices();
 }

@@ -95,6 +95,10 @@ public class RefereeTest  {
     }
 
     // this two tests are for testing two mwthods that we need in the following tests
+
+    /**
+     * ID: U@20
+     */
     @Test
     public void addAGameMain(){
         refereeA.addAGameMain(game1);
@@ -103,6 +107,9 @@ public class RefereeTest  {
         assertFalse(refereeA.getLine().size()>0);
     }
 
+    /**
+     * ID: U@21
+     */
     @Test
     public void addGameLine(){
         refereeA.addAGameLine(game1);
@@ -112,6 +119,9 @@ public class RefereeTest  {
     }
 
     // for UC 10.2
+    /**
+     * ID: U@22
+     */
     @Test
     public void displayGames(){
         refereeA.addAGameLine(game1);
@@ -126,6 +136,9 @@ public class RefereeTest  {
     //// for the next two tests you have to set the correct date and time of the games to test it correctly
 
     //Uc 10.3
+    /**
+     * ID: U@23
+     */
     @Test
     public void addGameEvent(){
         refereeA.addAGameLine(game1);
@@ -146,6 +159,9 @@ public class RefereeTest  {
 
 
     // UC 10.4
+    /**
+     * ID: U@24
+     */
     @Test
     public void addEventAfterGame(){
         refereeA.addAGameMain(game2);
@@ -162,6 +178,9 @@ public class RefereeTest  {
         refereeB.addEventAfterGame(game1,"aa","offside"); // not the main referee
     }
 
+    /**
+     * ID: U@25
+     */
     @Test
     public void createGameReport(){
         game1.setLine(refereeB);

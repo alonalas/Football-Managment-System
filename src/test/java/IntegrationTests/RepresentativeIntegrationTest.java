@@ -1,87 +1,51 @@
-package AcceptanceTests;
+package IntegrationTests;
 
 import DataLayer.dataManager;
 import LogicLayer.*;
-import ServiceLayer.*;
-import junit.framework.Assert;
-import org.junit.After;
+import ServiceLayer.Controller;
+import ServiceLayer.RepresentativeService;
+import org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.sql.DatabaseMetaData;
 import java.util.LinkedList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class RepresentativeAcceptanceTest {
 
-    private static IController system;
-    private static  User user ;
-    private static Representitive representative ;
-    public static Guest guest ;
-    private static  User newUser ;
+public class RepresentativeIntegrationTest {
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void SystemInit(){
         DataComp.setDataManager(new dataManager());
-        Administrator administrator = new Administrator("A","B","C");
-        user = new User("AA","BB","CC");
-        representative = new Representitive(user, "lama name");
-        user.addRole(representative);
-        system = new Controller(representative, administrator);
-        guest = new Guest();
-        system.addGuest(guest);
-        IGuestService guestService = system.getGuestServices().get(guest);
-        guestService.register("David","Fadida","Eitan@gmail.com","password");
-        guestService.register("fff","Fadida","fftan@gmail.com","password");
-        newUser = guestService.signIn("Eitan@gmail.com","password");
+        Representitive representative = new Representitive(new User("l@gmail.com","1234","gabi"),"bingo")  ;
+        Controller controller = new Controller(representative,null);
+        controller.controllerSingleTone = controller ;
+        controller.addUser(new User ("f@f.f","12","fadi"));
     }
 
-    private RepresentativeService representativeService;
+    private Representitive representative ;
+    private RepresentativeService representativeService ;
+    private Controller controller = Controller.controllerSingleTone ;
+    private List<User> users ;
+
     @Before
     public void init(){
-        for(IUserService iUserService : system.getUserServices().get(user)){
-            if(iUserService instanceof  RepresentativeService){
-                representativeService  = (RepresentativeService) iUserService ;
-            }
-        }
-        if(representativeService == null) assertTrue(false);
-    }
-
-
-
-    @Test
-    public void  testSystem(){
-        addLeague();
-        addSeason();
-        addReferee();
-        checkSystemStatus(true);
-        removeReferee();
-        checkSystemStatus(false);
-        addReferee();
-        checkSystemStatus(true);
-        addApprovalForReferee();
-        gameSchedule();
-    }
-
-    public void checkSystemStatus(boolean exist){
-        boolean check = false ;
-        if(system.getUserServices().get(newUser) == null ) assertTrue(false);
-        for(IUserService iUserService : system.getUserServices().get(newUser)){
-            if(iUserService instanceof  RefereeService){
-                check = true ;
-            }
-        }
-        assertTrue(exist == check);
+        DataComp.setDataManager(new dataManager());
+      //  List<User>  users = controller.getUserList();
+        representativeService = new RepresentativeService(new Controller()) ;
+        DataComp.getInstance().addUser(new User("fudi@gamil.com","12","fadi"));
+        DataComp.getInstance().addUser(new User("david@gamil.com","12","Adi"));
     }
 
     /**
-     * Id: A@1
+     * id: I@26
      * UC: 9.1
      */
+    @Test
     public void addLeague() {
         try {
             assertTrue(representativeService.addLeague(League.LeagueType.LEAGUE_C));
@@ -92,55 +56,70 @@ public class RepresentativeAcceptanceTest {
     }
 
     /**
-     * Id: A@2
+     * id: I@27
      * UC: 9.2
      */
+    @Test
     public void addSeason(){
         try {
-            League league = representativeService.showAllLeagus().get(0);
-            representativeService.addSeason("2020-02-01","2020-02-03" , league);
-            assertTrue(representativeService.showAllSeasons().size()==1);
+           representativeService.addLeague(League.LeagueType.LEAGUE_C);
+           //------ test begins here
+           League league = representativeService.showAllLeagus().get(0);
+           representativeService.addSeason("2020-02-01","2020-02-03" , league);
+           assertTrue(representativeService.showAllSeasons().size()==1);
         }catch (Exception e){ }
     }
 
     /**
-     * id : A@3
-     * UC 9.3.1
+     * id: id: I@28
+     * UC: 9.3.1
      */
+    @Test
     public void addReferee(){
         try {
             //----- referee not exist test
-            representativeService.addNewRefereeFromUsers(newUser , "good","gabi");
+            User user = representativeService.getSystemUsers().get(0);
+            representativeService.addNewRefereeFromUsers(user , "good","gabi");
             assertTrue(representativeService.showAllReferees().size() == 1);
             //----- referee exist test
-            assertFalse(representativeService.addNewRefereeFromUsers(newUser , "good","gabi"));
+            assertFalse(representativeService.addNewRefereeFromUsers(user , "good","gabi"));
             assertTrue(representativeService.showAllReferees().size() == 1);
         }catch (Exception e){ }
     }
 
     /**
-     * id: A@4
-     * UC 9.3.2
+     * id: I@29
+     * UC: 9.3.2
      */
+    @Test
     public void removeReferee() {
         try {
             //----- referee remove test
-            assertTrue(representativeService.removeRefereeFromUsers(newUser));
+            User user = representativeService.getSystemUsers().get(0);
+            assertTrue(representativeService.addNewRefereeFromUsers(user, "good", "gabi"));
+            assertTrue(representativeService.showAllReferees().size() == 1);
+            assertTrue(representativeService.removeRefereeFromUsers(user));
             assertTrue(representativeService.showAllReferees().size() == 0);
             //----- referee already removed test
-            assertFalse(representativeService.removeRefereeFromUsers(newUser));
+            assertFalse(representativeService.removeRefereeFromUsers(user));
             assertTrue(representativeService.showAllReferees().size() == 0);
         } catch (Exception e) {
+            e.printStackTrace();
+            assertTrue(false);
         }
     }
 
     /**
-     * id : A@5
-     * UC 9.4
+     * id: id: I@30
+     * UC: 9.4
+     * add first time  - Assert true
+     * alreadyExist -> Assert False
      */
+    @Test
     public void addApprovalForReferee(){
         try {
-            //  ------------------- add approval test begins here
+            addDataToSystem();
+          //  ------------------- add approval test begins here
             Referee referee = representativeService.showAllReferees().get(0);
             League league = representativeService.showAllLeagus().get(0);
             Season season = representativeService.showAllSeasons().get(0);
@@ -153,14 +132,50 @@ public class RepresentativeAcceptanceTest {
     }
 
     /**
-     * id: A@6
-     * UC: 9.6
+     * id: I@31
+     * UC: 9.4
+     * add first time  - Assert true
+     * alreadyExist -> Assert False
      */
+    @Test
+    public void removeApprovalForReferee(){
+        try {
+            addApprovalForReferee();
+            //  ----- test begins here
+            Referee referee = representativeService.showAllReferees().get(0);
+            League league = representativeService.showAllLeagus().get(0);
+            Season season = representativeService.showAllSeasons().get(0);
+            assertTrue(representativeService.removeJudgmentApproval(referee , league ,season)) ;
+            //-------- test if approval already removed
+            assertFalse(representativeService.removeJudgmentApproval(referee , league ,season)); ;
+        }catch (Exception e){
+            assertTrue(false);
+        }
+    }
+    /**
+     * init data for UC9.4 testing
+     */
+    public void addDataToSystem(){
+        try {
+            User user = representativeService.getSystemUsers().get(0);
+            representativeService.addNewRefereeFromUsers(user, "good", "gabi");
+            addSeason();
+        }catch (Exception e){
+
+        }
+    }
+
+    /**
+     * id: I@32
+     * UC9.6 game schedule policy test
+     */
+    @Test
     public void gameSchedule(){
         try {
+            addApprovalForReferee();
             User user = representativeService.getSystemUsers().get(1);
             representativeService.addNewRefereeFromUsers(user , "good","gabi");
-            // Referee referee = representativeService.showAllReferees().get(0);
+           // Referee referee = representativeService.showAllReferees().get(0);
             League league = representativeService.showAllLeagus().get(0);
             Season season = representativeService.showAllSeasons().get(0);
             Referee referee = representativeService.showAllReferees().get(1);
@@ -197,7 +212,7 @@ public class RepresentativeAcceptanceTest {
             DataComp.getInstance().addTeam(t4);
             System.out.println("----------new schedule ----------");
             assertTrue(representativeService.scheduleGame(league,1,season,dates)==6);
-            //  System.out.println(t4.getHome().get(0).getMain());
+          //  System.out.println(t4.getHome().get(0).getMain());
         }catch (Exception e){
             e.fillInStackTrace();
             assertTrue(false);

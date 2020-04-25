@@ -10,6 +10,8 @@ public class OwnerService extends AUserService{
         super(control);
     }
 
+
+
     /**
      * id: OwnerService@2
      * owner adds a new manager to a requested team
@@ -19,9 +21,10 @@ public class OwnerService extends AUserService{
      * @param userName
      * @param email
      */
-    public void insertNewManager(Owner owner, String teamName, String managerName, String userName,
+    public Manager insertNewManager(Owner owner, String teamName, String managerName, String userName,
                                  String email, Map<Manager.Permission, Boolean> permissionBooleanMap) throws IOException {
-        owner.insertNewManager(teamName,managerName,userName,email, permissionBooleanMap);
+       Manager m = owner.insertNewManager(teamName,managerName,userName,email, permissionBooleanMap);
+       return m;
     }
 
     /**
@@ -35,9 +38,10 @@ public class OwnerService extends AUserService{
      * @param userName
      * @param email
      */
-    public void insertNewCoach(Owner owner, String teamName, String name, String qualification, String job,String userName,
-                               String email) throws IOException {
-        owner.insertNewCoach(teamName,name,qualification,job,userName,email);
+    public Coach insertNewCoach(Owner owner, String teamName, String name, String qualification, String job, String userName,
+                                String email) throws IOException {
+        Coach c = owner.insertNewCoach(teamName,name,qualification,job,userName,email);
+        return c;
     }
 
     /**
@@ -54,9 +58,10 @@ public class OwnerService extends AUserService{
      * @param email
      * @throws IOException
      */
-    public void insertNewPlayer(Owner owner, String teamName, String name, String position, int day ,
+    public Player insertNewPlayer(Owner owner, String teamName, String name, String position, int day ,
                                 int month, int year , String userName, String email) throws IOException {
-        owner.insertNewPlayer(teamName,name,position,day,month,year,userName,email);
+        Player p = owner.insertNewPlayer(teamName,name,position,day,month,year,userName,email);
+        return p;
     }
 
     /**

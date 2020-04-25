@@ -1,23 +1,18 @@
 package ServiceLayer;
 
 import LogicLayer.*;
-
 import java.lang.reflect.Field;
 import LogicLayer.Administrator;
 import LogicLayer.Guest;
 import LogicLayer.Representitive;
 import LogicLayer.User;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import org.json.simple.*;
 import com.google.gson.*;
 import org.json.simple.parser.JSONParser;
 
 public class Controller implements IController{
-
     private List<Guest> currentGuestsList;
     private Map<Guest,IGuestService> GuestServices;
     private List<User> currentUserList;
@@ -27,7 +22,9 @@ public class Controller implements IController{
     public static Controller controllerSingleTone ;
     private static String configurationPath = "configurations.json";
 
-
+    /**
+     * initialise system from configuration file
+     */
     public Controller() {
         try{
             currentGuestsList = new ArrayList<Guest>();
@@ -42,6 +39,11 @@ public class Controller implements IController{
         }
     }
 
+    /**
+     * initialise system with arguments
+     * @param representitive
+     * @param administrator
+     */
     // first init
     public Controller(Representitive representitive, Administrator administrator) {
         this.representitive = representitive;
@@ -50,10 +52,17 @@ public class Controller implements IController{
         GuestServices = new HashMap<Guest, IGuestService>();
         currentUserList = new ArrayList<User>();
         UserServices = new HashMap<User, List<IUserService>>();
+        addUser(representitive.getUser());
+        addUser(administrator);
+        this.representitive.getUser().addRole(representitive);
         addServicesToUser(representitive.getUser());
-        saveData();
+      //  saveData();
     }
 
+    /**
+     * initialise all configurations of system from file
+     * @param configuration
+     */
     private void initFromFile(FileReader configuration) {
         try{
             Object testObject = new JSONParser().parse(new FileReader("configurations.json"));
@@ -63,15 +72,26 @@ public class Controller implements IController{
             Gson objects = new Gson();
             this.administrator = objects.fromJson(admin, Administrator.class);
             this.representitive = objects.fromJson(rep, Representitive.class);
+            addUser(representitive.getUser());
+            addUser(administrator);
+            representitive.getUser().addRole(representitive);
+            addServicesToUser(representitive.getUser());
         }catch (Exception E){
             E.printStackTrace();
         }
     }
 
+    /**
+     * GuestServices getter
+     * @return Map<Guest, IGuestService>
+     */
     public Map<Guest, IGuestService> getGuestServices() {
         return GuestServices;
     }
 
+    /**
+     * save to file current configurations of system
+     */
     private void saveData() {
         Gson objects = new Gson();
         String adminJSON = objects.toJson(administrator);
@@ -88,9 +108,14 @@ public class Controller implements IController{
         }
     }
 
+    /**
+     * removes user services from system
+     * @param user
+     */
     public void removeUserService(User user) {
-        this.UserServices.remove(user);
-
+        if (user != null && UserServices.containsKey(user)){
+            this.UserServices.remove(user);
+        }
     }
 
     /**
@@ -109,23 +134,43 @@ public class Controller implements IController{
         }
     }
 
-
+    /**
+     * GuestList getter
+     * @return List<Guest>
+     */
     public List<Guest> getGuestsList() {
         return currentGuestsList;
     }
 
+    /**
+     * GuestList setter
+     * @param guestsList
+     */
     public void setGuestsList(List<Guest> guestsList) {
         this.currentGuestsList = guestsList;
     }
 
+    /**
+     * UserList getter
+     * @return List<User>
+     */
     public List<User> getUserList() {
         return currentUserList;
     }
 
+    /**
+     * userList setter
+     * @param userList
+     */
     public void setUserList(List<User> userList) {
         this.currentUserList = userList;
     }
 
+    /**
+     * add user to system, also creates UserService for it
+     * @param user
+     * @return boolean
+     */
     public boolean addUser(User user) {
         if (user != null){
             this.currentUserList.add(user);
@@ -138,38 +183,85 @@ public class Controller implements IController{
         return false;
     }
 
+    /**
+     * UserServices getter
+     * @return Map<User, List<IUserService>>
+     */
     public Map<User, List<IUserService>> getUserServices() {
         return UserServices;
     }
 
+    /**
+     * UserServices getter
+     * @param userServices
+     */
     public void setUserServices(Map<User, List<IUserService>> userServices) {
         UserServices = userServices;
     }
 
+    /**
+     * representative getter
+     * @return Representitive
+     */
     public Representitive getRepresentitive() {
         return representitive;
     }
 
+    /**
+     * administrator getter
+     * @return Administrator
+     */
     public Administrator getAdministrator() {
         return administrator;
     }
 
+    /**
+     * add new guest to system
+     * @param newGuest
+     */
     public void addGuest(Guest newGuest) {
         if(newGuest == null) return;
         this.currentGuestsList.add(newGuest);
         this.GuestServices.put(newGuest, new GuestService(newGuest, this));
     }
 
+    /**
+     * Removes Guest from system
+     * @param guestToRemove
+     */
     public void removeGuest(Guest guestToRemove) {
         this.GuestServices.remove(guestToRemove);
         this.currentGuestsList.remove(guestToRemove);
     }
 
+    /**
+     * removes user from system
+     * @param userToRemove
+     */
     public void removeUser(User userToRemove) {
-        removeUserService(userToRemove);
-        this.currentUserList.remove(userToRemove);
+        if (userToRemove != null){
+            removeUserService(userToRemove);
+            if (currentUserList.contains(userToRemove))
+                this.currentUserList.remove(userToRemove);
+        }
     }
 
+    /**
+     * clear all services for user and then calls again to addServicesToUser func
+     * @param user
+     */
+    @Override
+    public void updateServicesToUser(User user){
+        if(user != null && getUserList().contains(user)) {
+            getUserServices().get(user).clear();
+            addServicesToUser(user);
+        }
+    }
+
+    /**
+     * add services to user according to its roles
+     * @param user
+     */
     @Override
     public void addServicesToUser(User user) {
         for (Role r: user.getRoles()){
@@ -192,6 +284,7 @@ public class Controller implements IController{
             }
         }
     }
+
 
     @Override
     public void createFanServiceForUser(User user, Fan fan) {
@@ -243,27 +336,5 @@ public class Controller implements IController{
             CoachService coachService = new CoachService(r,this);
             UserServices.get(user).add(coachService);
         }
-    }
-
-    @Override
-    public boolean removeRole(User user, Role role){
-        user.removeRole(role);
-        List<IUserService> services = UserServices.getOrDefault(user, null);
-        if (services == null)
-            return false;
-        services.clear();
-        addServicesToUser(user);
-        return true;
-    }
-
-    @Override
-    public boolean addRole(User user, Role role){
-        user.setRole(role);
-        List<IUserService> services = UserServices.getOrDefault(user, null);
-        if (services == null)
-            return false;
-        services.clear();
-        addServicesToUser(user);
-        return true;
     }
 }

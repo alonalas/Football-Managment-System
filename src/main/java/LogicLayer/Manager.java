@@ -4,9 +4,7 @@ import DataLayer.IDataManager;
 import DataLayer.dataManager;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.io.Serializable;
 
 public class Manager extends RoleHolder implements Serializable {
@@ -19,6 +17,7 @@ public class Manager extends RoleHolder implements Serializable {
     private Team team;
     private Owner nominatedBy;
     private Map<Permission, Boolean> permissionBooleanMap;
+    private List<Alert> alerts;
 
     private IDataManager data(){
         return DataComp.getInstance();
@@ -30,6 +29,7 @@ public class Manager extends RoleHolder implements Serializable {
         this.name = name;
         this.team = team;
         this.permissionBooleanMap = new HashMap<>();
+        this.alerts = new LinkedList<>();
     }
 
     @Override
@@ -40,6 +40,22 @@ public class Manager extends RoleHolder implements Serializable {
         Manager manager = (Manager) o;
         return Objects.equals(name, manager.name) &&
                 Objects.equals(team, manager.team);
+    }
+
+    public List<Alert> getAlerts() {
+        return alerts;
+    }
+
+    public void setAlerts(List<Alert> alerts) {
+        this.alerts = alerts;
+    }
+    /**
+     * ID: Manager@1
+     * add a new alert to thr alert list
+     * @param alert the new alert
+     */
+    public void addAlert(Alert alert){
+        getAlerts().add(alert);
     }
 
     /**
@@ -70,7 +86,7 @@ public class Manager extends RoleHolder implements Serializable {
      * @throws IOException if the manager is not permitted to execute this function
      */
     public void insertNewCoach(String teamName, String name, String qualification, String job, String userName,
-                               String email) throws IOException {
+                               String email) throws IOException { //tested
         if ( this.permissionBooleanMap.get(Permission.coachAddition).booleanValue() == true ) {
             this.nominatedBy.insertNewCoach(teamName,name,qualification,job,userName,email);
         }
@@ -93,7 +109,7 @@ public class Manager extends RoleHolder implements Serializable {
      * @throws IOException if the manager is not permitted to execute this function
      */
     public void insertNewPlayer(String teamName, String name, String position, int day ,
-                                int month, int year , String userName,String email) throws IOException {
+                                int month, int year , String userName,String email) throws IOException { //tested
         if ( this.permissionBooleanMap.get(Permission.playerAddition).booleanValue() == true ) {
             this.nominatedBy.insertNewPlayer(teamName,name,position,day,month,year,userName,email);
         }
@@ -110,7 +126,7 @@ public class Manager extends RoleHolder implements Serializable {
      * @param email
      * @throws IOException if the manager is not permitted to execute this function
      */
-    public void deletePlayer(String teamName,String userName,String email) throws IOException {
+    public void deletePlayer(String teamName,String userName,String email) throws IOException { //tested
         if ( this.permissionBooleanMap.get(Permission.playerDeletion).booleanValue() == true ) {
             this.nominatedBy.deletePlayer(teamName,userName,email);
         }
@@ -126,7 +142,7 @@ public class Manager extends RoleHolder implements Serializable {
      * @param email
      * @throws IOException if the manager is not permitted to execute this function
      */
-    public void deleteCoach(String teamName,String userName,String email) throws IOException {
+    public void deleteCoach(String teamName,String userName,String email) throws IOException { //tested
 
         if ( this.permissionBooleanMap.get(Permission.coachDeletion).booleanValue() == true ) {
             this.nominatedBy.deleteCoach(teamName,userName,email);

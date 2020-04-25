@@ -48,6 +48,8 @@ public class Referee extends Role implements Serializable {
         judgmentApproval = new LinkedList<>();
     }
 
+
+
     /**
      * id: Referee@1
      * make a user a referee
@@ -86,6 +88,24 @@ public class Referee extends Role implements Serializable {
         return data().getRefereeList() ;
     }
 
+    /**
+     * id: Referee@13
+     * get all legal referees with needed approval for judgment
+     * @param league of approval
+     * @param season of approval
+     * @return Referee list
+     */
+    public static List<Referee> legalRefereesForLeague(League league , Season season){
+        JudgmentApproval neededApproval  = new JudgmentApproval(league , season);
+        List<Referee> referees = new LinkedList<>();
+        for(Referee referee : data().getRefereeList()){
+            if(referee.judgmentApproval.contains(neededApproval)){
+                referees.add(referee);
+            }
+        }
+        return referees;
+    }
+
     public String getQualification() {
         return qualification;
     }
@@ -98,8 +118,16 @@ public class Referee extends Role implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public boolean setName(String name) {
+        if(name.matches("[a-zA-Z]+")){
+            this.name=name;
+            return true;
+        }
+        else{
+            System.out.println("the name must contain only letters");
+            return false;
+        }
+
     }
 
     public League getLeague() {
@@ -202,27 +230,35 @@ public class Referee extends Role implements Serializable {
      * @return an array of strings that contains all the games of the referee
      */
     public String[] displayGames(){
-        String [] display= new String[2+getMain().size()+getLine().size()];
-        System.out.println("main games:");
-        display[0]="main Games";
-        int i=1;
-        for(Game game :getMain()){
-            System.out.println("Game number " + i);
-            game.displayDetails();
-            display[i]="Game number: " +i;
-            i++;
+        if(main.size()==0 && line.size()==0){
+            System.out.println("No games");
+            String [] display = new String[1];
+            display[0] = "no games";
+            return display;
         }
-        display[i]="side Games:";
-        int index= i+1;
-        i=1;
-        System.out.println("line games: ");
-        for(Game game : getLine()){
-            System.out.println("Game number " + i);
-            game.displayDetails();
-            display[index]="Game number: " + i;
-            i++;
+        else {
+            String[] display = new String[2 + getMain().size() + getLine().size()];
+            System.out.println("main games:");
+            display[0] = "main Games";
+            int i = 1;
+            for (Game game : getMain()) {
+                System.out.println("Game number " + i);
+                game.displayDetails();
+                display[i] = "Game number: " + i;
+                i++;
+            }
+            display[i] = "side Games:";
+            int index = i + 1;
+            i = 1;
+            System.out.println("line games: ");
+            for (Game game : getLine()) {
+                System.out.println("Game number " + i);
+                game.displayDetails();
+                display[index] = "Game number: " + i;
+                i++;
+            }
+            return display;
         }
-        return display;
     }
 
 
@@ -319,4 +355,10 @@ public class Referee extends Role implements Serializable {
         }
     }
 
+
+
+
+    public String getLeagueString(){
+        return league.getTypeString();
+    }
 }

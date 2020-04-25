@@ -22,6 +22,10 @@ public class GuestService implements IGuestService{
         super();
     }
 
+    /**
+     * returns last search results searched by guest
+     * @return
+     */
     public List<Object> getLastSearchResults() {
         return lastSearchResults;
     }
@@ -33,29 +37,34 @@ public class GuestService implements IGuestService{
      * @param email
      * @param password
      */
-    public boolean register(String firstName, String lastName, String email, String password){
+    public User register(String firstName, String lastName, String email, String password){
         boolean passwordIsOk = Authentication(password);
         if(passwordIsOk == false){
-            return false;
+            return null;
         }
         boolean mailIsOk = mailAuthentication(email);
         if (mailIsOk == false){
             System.out.println("## email isn't in the right format ##");
-            return false;
+            return null;
         }
         boolean isExists = guest.checkIfEmailExists(email);
         if (isExists == true){
             System.out.println("## user with this email exists in system. ##");
-            return false;
+            return null;
         }
         User newUser = guest.createNewUser(email,password,firstName,lastName);
         System.out.println("## Registered to system successfully ##");
         system.addUser(newUser);
         system.createFanServiceForUser(newUser, (Fan)newUser.getRoles().get(0));
         system.removeGuest(guest);
-        return true;
+        return newUser;
     }
 
+    /**
+     * checks if password entered is valid
+     * @param password
+     * @return
+     */
     public boolean Authentication(String password){
         for (char c : password.toCharArray()){
             if (!((c>='A' && c<='z')||(c>='0' && c<='9'))){
@@ -70,7 +79,11 @@ public class GuestService implements IGuestService{
         return true;
     }
 
-
+    /**
+     * checks if mail entered is in correct form
+     * @param email
+     * @return
+     */
     public boolean mailAuthentication(String email){
         if (email != null) {
             Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
@@ -200,6 +213,11 @@ public class GuestService implements IGuestService{
         }
     }
 
+    /**
+     * receives String name as argument and returns all users with the same first name
+     * related to use case 2.4
+     * @param name
+     */
     private void searchInformation(String name){
         List<User> retrievedUser =  guest.SearchUserByName(name);
         if(retrievedUser.size() == 0){
@@ -216,10 +234,21 @@ public class GuestService implements IGuestService{
         showInformationByCategory(interested);
     }
 
+    /**
+     * receives category as string and call to searchInformationByKeyWord func with its argument
+     * shows all related information due to query
+     * related to use case 2.4
+     * @param interested
+     */
     private void searchInformationByCategory(String interested){
         searchInformationByKeyWord(interested);
     }
 
+    /**
+     * receives query and search in DB for all related data
+     * related to use case 2.4
+     * @param query
+     */
     private void searchInformationByKeyWord(String query){
         switch (query.toLowerCase()){
             case "coaches":
@@ -256,6 +285,11 @@ public class GuestService implements IGuestService{
         }
     }
 
+    /**
+     * receives league name and returns leagues with equal league type
+     * related to use case 2.4
+     * @param leagueName
+     */
     private void searchLeagues(String leagueName) {
         List<League> retrievedLeague =  guest.SearchLeagueByName(leagueName);
         if(retrievedLeague == null){
@@ -268,6 +302,11 @@ public class GuestService implements IGuestService{
         }
     }
 
+    /**
+     *  receives team name and returns teams with equal team name
+     *  related to use case 2.4
+     * @param teamName
+     */
     private void searchTeams(String teamName) {
         List<Team> retrievedTeam =  guest.SearchTeamByName(teamName);
         if(retrievedTeam == null){
@@ -301,6 +340,11 @@ public class GuestService implements IGuestService{
         }
     }
 
+    /**
+     * filters search results by league
+     * related to use case 2.5
+     * @param query
+     */
     private void filterByLeague(String query) {
         List<Object> filtered = new ArrayList<>();
         for (Object obj : lastSearchResults){
@@ -320,6 +364,11 @@ public class GuestService implements IGuestService{
         filtered.forEach(obj -> System.out.println(obj.toString()));
     }
 
+    /**
+     * filter search results by team
+     * related to use case 2.5
+     * @param query
+     */
     private void filterByTeam(String query) {
         List<Object> filtered = new ArrayList<>();
         for (Object obj : lastSearchResults){
@@ -331,6 +380,11 @@ public class GuestService implements IGuestService{
         filtered.forEach(obj -> System.out.println(obj.toString()));
     }
 
+    /**
+     * filter search results by Role(coach, player and etc..)
+     * related to use case 2.5
+     * @param query
+     */
     private void filterByRole(String query) {
         List<Object> filtered = new ArrayList<>();
         switch (query.toLowerCase()) {
