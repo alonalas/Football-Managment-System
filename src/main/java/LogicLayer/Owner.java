@@ -90,8 +90,8 @@ public class Owner extends RoleHolder implements Serializable {
      * @param email
      * @throws IOException if the user or the team are not exist
      */
-    public void insertNewCoach(String teamName, String name, String qualification, String job, String userName,
-                               String email) throws IOException { // tested
+    public Coach insertNewCoach(String teamName, String name, String qualification, String job, String userName,
+                                String email) throws IOException { // tested
         if (validateExistingAssetType(teamName,email,userName)) {
             User user = this.getAssetUser(userName, email);
             Team team = getTeam(teamName);
@@ -101,7 +101,9 @@ public class Owner extends RoleHolder implements Serializable {
             team.setCoach(coach);
             user.setRole(coach);
             team.getRoleHolders().add(coach);
+            return coach;
         }
+        return null;
     }
 
     /**
@@ -245,7 +247,7 @@ public class Owner extends RoleHolder implements Serializable {
                         if (role instanceof Manager) {
                             Manager manager = (Manager) role;
                             if (manager.getTeam().equals(team)) {
-                                if (manager.getNominatedBy().equals(this)) {
+                                if (manager.getNominatedBy()!=null &&manager.getNominatedBy().equals(this)) {
                                     team.getManagerList().remove(manager);
                                     team.getRoleHolders().remove(manager);
                                     user.removeRole(role);
@@ -352,6 +354,7 @@ public class Owner extends RoleHolder implements Serializable {
      * @return
      * @throws IOException
      */
+
     private boolean checkNewOwnerValidity(User user, String teamName) throws IOException {
         if (data().getUserList().contains(user)) {
             Team team = getTeam(teamName);
@@ -368,6 +371,7 @@ public class Owner extends RoleHolder implements Serializable {
             throw new IOException("User does not exist in the data base");
         }
     }
+
 
     /**
      * id: Owner@16
@@ -403,6 +407,7 @@ public class Owner extends RoleHolder implements Serializable {
 
     ////////////////////////////////////// 6.1.3 uc
 
+
     /**
      * id: Owner@17
      * checks whether the new owner has a valid account
@@ -412,12 +417,13 @@ public class Owner extends RoleHolder implements Serializable {
      * @return
      * @throws IOException
      */
-    private boolean checkMembership(User user, String teamName) throws IOException {
+
+    private boolean checkOwnerMembership(User user, String teamName) throws IOException {
         if (data().getUserList().contains(user)) {
             Team team = getTeam(teamName);
             if( team != null ) {
-                RoleHolder roleHolder = team.getRoleHolder(user.getUserName(),user.getEmail());
-                if (roleHolder != null ) {
+                Owner owner = team.getOwner(user);
+                if (owner != null ) {
                     return true;
                 }
                 else
@@ -431,6 +437,8 @@ public class Owner extends RoleHolder implements Serializable {
         }
     }
 
+
+
     /**
      * id: Owner@18
      * update a set of attributes which selected by the owner, in term that the selected team member
@@ -443,7 +451,7 @@ public class Owner extends RoleHolder implements Serializable {
     public void updateAssetAttributes(String teamName, RoleHolder roleHolder,
                                       Map<String, String> attributes) throws IOException { //tested
 
-        if (checkMembership(roleHolder.getUser(),teamName)) {
+        if (validateExistingAssetType(teamName,roleHolder.getUser().getEmail(),roleHolder.getUser().getUserName())) {
             for ( String attribute : attributes.keySet() ) {
                 switch (roleHolder.getClass().getSimpleName().toLowerCase()) {
                     case "player":
@@ -499,10 +507,10 @@ public class Owner extends RoleHolder implements Serializable {
      */
     public void removeOwnership(Owner nominated, String teamName) throws IOException { //tested
 
-        checkMembership(nominated.getUser(),teamName);
+        checkOwnerMembership(nominated.getUser(),teamName);
         Team team = getTeam(teamName);
         if (team.getOwner(nominated.getUser()) != null) {
-            if (nominated.getNominatedBy().equals(this)) {
+            if (nominated.getNominatedBy() != null && nominated.getNominatedBy().equals(this)) {
                  for ( Role role : nominated.getUser().getRoles() ) {
                      if (role instanceof Player)
                          deletePlayer(teamName,nominated.getUser().getUserName(),nominated.getUser().getEmail());

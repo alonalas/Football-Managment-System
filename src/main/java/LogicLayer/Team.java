@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Team implements Serializable {
 
-    enum teamStatus{
+    public enum teamStatus{
         activityClosed, activityOpened
     }
 
