@@ -1,14 +1,11 @@
 package UnitTests;
 
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AdministratorTest {
@@ -26,7 +23,7 @@ public class AdministratorTest {
 
     @Before
     public void init(){
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
         team1=new Team("hapoel","blumfield",null);
         team2=new Team("macabi","stadium",null);
         DataComp.getInstance().addTeam(team1);

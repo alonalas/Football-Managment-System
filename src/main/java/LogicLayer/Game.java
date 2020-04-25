@@ -40,7 +40,15 @@ public class Game extends Observable implements Serializable {
         this.gameReport=new GameReport(this);
     }
 
-    public Game(Season season, Team home, Team away, Referee line, Referee main,String date, String start, String end) {
+    public Pair<Integer, Integer> getResult() {
+        return result;
+    }
+
+    public void setResult(Pair<Integer, Integer> result) {
+        this.result = result;
+    }
+
+    public Game(Season season, Team home, Team away, Referee line, Referee main, String date, String start, String end) {
         this.season = season;
         this.home = home;
         this.away = away;

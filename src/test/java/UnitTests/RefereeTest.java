@@ -1,14 +1,12 @@
 package UnitTests;
 
 import DataLayer.IDataManager;
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -30,8 +28,8 @@ public class RefereeTest  {
 
     @Before
     public void init(){
-        DataComp.setDataManager(new dataManager());
-        dm =  new dataManager();
+        DataComp.setDataManager(new DataManager());
+        dm =  new DataManager();
         user = new User("@","d","d");
         game1 = new Game(null,null,null,null,null,"2020-04-13","12:00","20:00");
         game2 = new Game(null,null,null,null,null,"2020-04-13","15:00","20:00");

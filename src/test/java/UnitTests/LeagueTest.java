@@ -1,18 +1,13 @@
 package UnitTests;
 
-import DataLayer.IDataManager;
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.DataComp;
 import LogicLayer.League;
-import LogicLayer.Page;
-import LogicLayer.Team;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -26,7 +21,7 @@ public class LeagueTest  {
 
     @Before
     public void init(){
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
         league = new League(League.LeagueType.LEAGUE_B);
     }
 

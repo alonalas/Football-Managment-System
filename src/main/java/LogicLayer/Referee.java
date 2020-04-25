@@ -1,14 +1,12 @@
 package LogicLayer;
 
 import DataLayer.IDataManager;
-import DataLayer.dataManager;
 import ServiceLayer.RefereeService;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 
 import java.io.Serializable;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.LinkedList;

@@ -1,7 +1,6 @@
 package UnitTests;
 
-import DataLayer.IDataManager;
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import ServiceLayer.Criteria;
 import org.apache.log4j.Logger;
@@ -9,8 +8,6 @@ import org.apache.log4j.PropertyConfigurator;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import javax.xml.crypto.Data;
 
 import static org.junit.Assert.*;
 import java.util.ArrayList;
@@ -33,7 +30,7 @@ public class FanTests {
 
     @Before
     public void setUp() throws Exception {
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
     }
 
 

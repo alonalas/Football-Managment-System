@@ -4,17 +4,15 @@ import LogicLayer.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-//import com.sun.org.apache.xml.internal.security.encryption.ReferenceList;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
 import java.util.Map;
 
-public class dataManager implements IDataManager, Serializable {
+public class DataManager implements IDataManager, Serializable {
 
     private HashMap<Fan,List<String>>fanSearchNameHistory;
     private HashMap<Fan,List<String>>fanSearchCategoryHistory;
@@ -30,9 +28,9 @@ public class dataManager implements IDataManager, Serializable {
     private List<Game> gameList;
     private LinkedList<Referee> RefereeList;
     private List<Administrator> administrators;
-    private static final Logger systemLogger = Logger.getLogger(dataManager.class);
+    private static final Logger systemLogger = Logger.getLogger(DataManager.class);
 
-    public dataManager() {
+    public DataManager() {
         guestsList = new ArrayList<>();
         userList = new ArrayList<>();
         alerts = new HashMap<>();

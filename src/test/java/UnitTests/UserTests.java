@@ -1,7 +1,5 @@
 package UnitTests;
 
-import DataLayer.IDataManager;
-import DataLayer.dataManager;
 import LogicLayer.Fan;
 import LogicLayer.Referee;
 import LogicLayer.User;

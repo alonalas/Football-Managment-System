@@ -18,6 +18,14 @@ public class Season implements Serializable {
     private List<League> leagueList;
     private Map<League, Table> leagueTables;
 
+    public Table getTable(League league){
+        return getLeagueTables().get(league);
+    }
+
+    public Map<League, Table> getLeagueTables() {
+        return leagueTables;
+    }
+
     private static IDataManager data(){
         return DataComp.getInstance();
     }

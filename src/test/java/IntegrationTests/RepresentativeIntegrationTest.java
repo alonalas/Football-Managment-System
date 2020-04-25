@@ -1,10 +1,9 @@
 package IntegrationTests;
 
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
 import ServiceLayer.RepresentativeService;
-import org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,7 +19,7 @@ public class RepresentativeIntegrationTest {
 
     @BeforeClass
     public static void SystemInit(){
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
         Representitive representative = new Representitive(new User("l@gmail.com","1234","gabi"),"bingo")  ;
         Controller controller = new Controller(representative,null);
         controller.controllerSingleTone = controller ;
@@ -34,7 +33,7 @@ public class RepresentativeIntegrationTest {
 
     @Before
     public void init(){
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
       //  List<User>  users = controller.getUserList();
         representativeService = new RepresentativeService(new Controller()) ;
         DataComp.getInstance().addUser(new User("fudi@gamil.com","12","fadi"));

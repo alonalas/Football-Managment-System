@@ -1,20 +1,11 @@
 package IntegrationTests;
 
-import DataLayer.dataManager;
 import LogicLayer.*;
 import ServiceLayer.RefereeService;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RefereeIntegrationTests {

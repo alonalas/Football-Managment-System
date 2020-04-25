@@ -1,6 +1,5 @@
 package LogicLayer;
 
-import java.util.Comparator;
 
 public class RankPolicy extends Policy{
     private final int WIN;
@@ -41,7 +40,12 @@ public class RankPolicy extends Policy{
         super.setSeason(season);
     }
 
+    /**
+     * update league table
+     * @param game -
+     */
     public void updatePoints(Game game){
-        getLeague()
+        Table leagueTable = getSeason().getTable(getLeague());
+        leagueTable.updateTable(game,WIN,DRAW,LOSE);
     }
 }
