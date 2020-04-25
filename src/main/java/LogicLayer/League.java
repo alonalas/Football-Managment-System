@@ -6,6 +6,7 @@ import ServiceLayer.IController;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class League implements Serializable {
     private List<Referee> refereeList;
     private List<Season> seasonList;
     private Map<Season,Policy> policyList;
+    private Map<Season,RankPolicy> rankPolicyList;
     private String name;
 
     public League( LeagueType type, List<Referee> refereeList, List<Season> seasonList, Map<Season, Policy> policyList) {
@@ -27,6 +29,7 @@ public class League implements Serializable {
         this.refereeList = refereeList;
         this.seasonList = seasonList;
         this.policyList = policyList;
+        this.rankPolicyList = new HashMap<>();
     }
 
     public String getName() {
