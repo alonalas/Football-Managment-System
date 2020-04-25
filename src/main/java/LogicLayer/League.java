@@ -140,7 +140,7 @@ public class League implements Serializable {
         for (int interations = 0; interations < numberOfGamesPerTeam; interations++) {
             for (int i = teams.size() - 1; i > 0; i--) {
                 for (int j = 0; j < i; j++) {
-                    if (i % 2 == 0) {
+                    if (interations % 2 == 0) {
                         a = i;
                         b = j;
                     } else {
