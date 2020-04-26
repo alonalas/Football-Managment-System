@@ -129,18 +129,7 @@ public class Game extends Observable implements Serializable {
     }
 
     /**
-     *
-     * @param event
-     */
-    public void addEventGame(GameEventCalender event){
-        gameEventCalender.add(event);
-        setChanged();
-        notifyObservers(event);
-    }
-
-
-    /**
-     * function number: 1
+     * id: Game@1
      * prints the game's details
      */
     public void displayDetails(){
@@ -159,7 +148,7 @@ public class Game extends Observable implements Serializable {
 
 
     /**
-     * function number: @Game2
+     * id: Game@2
      * compare two games
      * @param game2 game we wanyt to compare
      * @return return true if the two games are equal
@@ -172,5 +161,15 @@ public class Game extends Observable implements Serializable {
         else{
             return false;
         }
+    }
+
+    /**
+     * id: Game@3
+     * @param event - event to add
+     */
+    public void addEventGame(GameEventCalender event){
+        gameEventCalender.add(event);
+        setChanged();
+        notifyObservers(event);
     }
 }

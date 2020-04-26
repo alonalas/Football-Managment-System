@@ -25,6 +25,7 @@ public class Table {
     }
 
     /**
+     * id: Table@1
      * init table
      * @param teams - list of teams
      */
@@ -35,6 +36,7 @@ public class Table {
     }
 
     /**
+     * id: Table@2
      * update table according to game
      * @param game - game
      * @param win - points
@@ -65,6 +67,7 @@ public class Table {
     }
 
     /**
+     * id: Table@3
      * Table Sorting
      * @return Table sorted by Policy Comparator
      */
@@ -75,6 +78,7 @@ public class Table {
     }
 
     /**
+     * id: Table@4
      * get team stats
      * @param teamName - team name
      * @return entry of team's stats
@@ -86,6 +90,7 @@ public class Table {
     }
 
     /**
+     * id: Table@5
      * PRINT TABLE
      */
     public void printTable() {

@@ -15,6 +15,12 @@ public class LeagueTableEntry {
         this.team = team;
     }
 
+    /**
+     * id: LeagueTableEntry@1
+     * @param points - points
+     * @param GA - against
+     * @param GF - for
+     */
     public void update(int points, int GA, int GF){
         totalPlayed++;
         this.GA += GA;

@@ -41,8 +41,9 @@ public class RankPolicy extends Policy{
     }
 
     /**
+     * id: RankPolicy@1
      * update league table
-     * @param game -
+     * @param game - game
      */
     public void updatePoints(Game game){
         Table leagueTable = getSeason().getTable(getLeague());

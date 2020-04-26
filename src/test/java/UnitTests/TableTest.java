@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class tableTest {
+public class TableTest {
     Table testTable = new Table(null);
     Team A = new Team("FCB", "A", null);
     Team B = new Team("RMCF", "B", null);
@@ -29,12 +29,18 @@ public class tableTest {
         testTable.init(teamList);
     }
 
+    /**
+     * id: U@70
+     */
     @Test
     public void printTable() {
         assertTrue(testTable.getLeagueTableEntries().size()==4);
         testTable.printTable();
     }
 
+    /**
+     * id: U@70
+     */
     @Test
     public void updateTable() {
         Game game = new Game();
