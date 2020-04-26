@@ -1,9 +1,9 @@
 package UnitTests;
 
 import LogicLayer.Game;
+import LogicLayer.Result;
 import LogicLayer.Table;
 import LogicLayer.Team;
-import javafx.util.Pair;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,14 +40,14 @@ public class tableTest {
         Game game = new Game();
         game.setAway(A);
         game.setHome(B);
-        game.setResult(new Pair<>(3,0));
+        game.setResult(new Result(3,0));
         testTable.updateTable(game,3,1,0);
         assertEquals(4, testTable.getLeagueTableEntries().size());
         assertSame(testTable.getLeagueTableEntries().get(0).getTeam(), B);
         testTable.printTable();
         game.setAway(C);
         game.setHome(D);
-        game.setResult(new Pair<>(2,2));
+        game.setResult(new Result(2,2));
         testTable.updateTable(game,3,1,0);
         testTable.printTable();
     }

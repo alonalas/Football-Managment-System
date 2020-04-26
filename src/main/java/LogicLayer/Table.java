@@ -44,8 +44,8 @@ public class Table {
     public void updateTable(Game game, int win, int draw, int lose) {
         Team home = game.getHome();
         Team away = game.getAway();
-        int homeGoals = game.getResult().getKey();
-        int awayGoals = game.getResult().getValue();
+        int homeGoals = game.getResult().getHome();
+        int awayGoals = game.getResult().getAway();
         if (homeGoals == awayGoals) {
             leagueTableEntries.get(home).update(draw, awayGoals, homeGoals);
             leagueTableEntries.get(away).update(draw, homeGoals, awayGoals);
