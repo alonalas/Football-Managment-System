@@ -1,15 +1,12 @@
 package AcceptanceTests;
 
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import ServiceLayer.*;
-import junit.framework.Assert;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.sql.DatabaseMetaData;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,7 +23,7 @@ public class RepresentativeAcceptanceTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
         Administrator administrator = new Administrator("A","B","C");
         user = new User("AA","BB","CC");
         representative = new Representitive(user, "lama name");

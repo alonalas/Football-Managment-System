@@ -1,8 +1,5 @@
 package UnitTests;
 
-import DataLayer.IDataManager;
-import DataLayer.dataManager;
-import LogicLayer.Guest;
 import LogicLayer.Page;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;

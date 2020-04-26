@@ -1,7 +1,7 @@
 package LogicLayer;
 
 import DataLayer.IDataManager;
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -11,11 +11,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.FileHandler;
 
 public class Administrator extends User {
 
-    private static final Logger systemLoger = Logger.getLogger(dataManager.class);
+    private static final Logger systemLoger = Logger.getLogger(DataManager.class);
 
     public Administrator(String email, String password, String userName) {
         super(email, password, userName);

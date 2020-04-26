@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Team implements Serializable {
 
-    public enum teamStatus{
+    public enum TeamStatus {
         activityClosed, activityOpened
     }
 
@@ -24,25 +24,24 @@ public class Team implements Serializable {
     private League league;
     private List<Coach> coachList;
     private List<RoleHolder> roleHolders;
-    private teamStatus status;
+    private TeamStatus status;
     private boolean finalClose; // true if the admin closed (cant be changed after true)
-
 
     private static IDataManager data(){
         return DataComp.getInstance();
     }
 
+    public TeamStatus getStatus() {
+        return status;
+    }
     public void addHomeGame(Game game){
         home.add(game);
     }
     public void addAwayGame(Game game){
         away.add(game);
     }
-    public teamStatus getStatus() {
-        return status;
-    }
 
-    public void setStatus(teamStatus status) {
+    public void setStatus(TeamStatus status) {
         this.status = status;
     }
 
@@ -57,7 +56,7 @@ public class Team implements Serializable {
         home = new LinkedList<>();
         coachList = new LinkedList<>();
         roleHolders = new LinkedList<>();
-        finalClose=false;
+        finalClose = false;
     }
 
     /***
@@ -84,7 +83,6 @@ public class Team implements Serializable {
             managerList.add(manager);
         }
     }
-
 
     public String getName() {
         return name;
@@ -291,13 +289,13 @@ public class Team implements Serializable {
      * changes the status of the team to close if the owner is the real owner of the team
      * @param owner
      */
-    public void changeTeamActivity(Owner owner, teamStatus newStatus) throws IOException {
+    public void changeTeamActivity(Owner owner, TeamStatus newStatus) throws IOException {
         if (ownerList.contains(owner)) {
             String date = LocalDate.now().toString();
             Alert alert;
             for(RoleHolder roleHolder: getRoleHolders()){
                 if (roleHolder instanceof Manager || roleHolder instanceof Owner) {
-                    if (newStatus == teamStatus.activityClosed)
+                    if (newStatus == TeamStatus.activityClosed)
                         alert = new Alert(roleHolder.getUser(), "The team: " + this.getName() + " is closed temporarily",date);
                     else // Opened
                         alert = new Alert(roleHolder.getUser(), "The team: " + this.getName() + " is open", date);

@@ -1,6 +1,6 @@
 package AcceptanceTests;
 
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import ServiceLayer.*;
 import org.junit.Before;
@@ -27,7 +27,7 @@ public class FanAcceptanceTests {
      */
     @Before
     public void before() throws Exception {
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
         Administrator administrator = new Administrator("A","B","C");
         user = new User("AA","BB","CC");
         representative = new Representitive(user, "lama name");

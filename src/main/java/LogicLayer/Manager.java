@@ -1,7 +1,6 @@
 package LogicLayer;
 
 import DataLayer.IDataManager;
-import DataLayer.dataManager;
 
 import java.io.IOException;
 import java.util.*;

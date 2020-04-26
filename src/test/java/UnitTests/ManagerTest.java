@@ -1,10 +1,8 @@
 package UnitTests;
 
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
-import ServiceLayer.ManagerService;
-import ServiceLayer.OwnerService;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -39,7 +37,7 @@ public class ManagerTest {
 
     @Before
     public void initializeSystem() {
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
         controller.addUser(ownerUser);
         DataComp.getInstance().addUser(ownerUser);
         DataComp.getInstance().addUser(u4);
@@ -54,7 +52,7 @@ public class ManagerTest {
 
     @Before
     public void reset() {
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
     }
 
     @Test

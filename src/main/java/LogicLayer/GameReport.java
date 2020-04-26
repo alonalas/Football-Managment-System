@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class GameReport implements Serializable {
     private Game game;
     private String description;
+    private int homeScore;
+    private int awayScore;
 
     public GameReport(Game game,String description) {
         this.game = game;

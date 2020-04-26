@@ -1,7 +1,6 @@
 package UnitTests;
 
-import DataLayer.IDataManager;
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.DataComp;
 import LogicLayer.Guest;
 import LogicLayer.Player;
@@ -9,7 +8,6 @@ import LogicLayer.User;
 import ServiceLayer.*;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,7 +22,7 @@ public class GuestServiceTests {
 
     @Before
     public void setUp() throws Exception {
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
     }
 
 

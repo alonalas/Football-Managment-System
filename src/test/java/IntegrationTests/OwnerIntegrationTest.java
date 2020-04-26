@@ -1,12 +1,9 @@
 package IntegrationTests;
 
-import DataLayer.IDataManager;
-
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
 import ServiceLayer.OwnerService;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -476,7 +473,7 @@ public class OwnerIntegrationTest {
 
     @Before
     public void reset() {
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
     }
 
 }

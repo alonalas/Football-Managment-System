@@ -1,5 +1,5 @@
 package IntegrationTests;
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
 import ServiceLayer.Criteria;
@@ -36,7 +36,7 @@ public class FanIntegrationTests {
 
     @Before
     public void setUp() throws Exception {
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
     }
 
     /**

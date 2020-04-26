@@ -1,5 +1,5 @@
 package AcceptanceTests;
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import ServiceLayer.*;
 import org.junit.Assert;
@@ -8,12 +8,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.*;
 
 
 public class AdministratorAcceptanceTest {
@@ -41,7 +38,7 @@ public class AdministratorAcceptanceTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
         Administrator administrator = new Administrator("A", "B", "C");
         user = new User("AA", "BB", "CC");
         representative = new Representitive(user, "lama name");

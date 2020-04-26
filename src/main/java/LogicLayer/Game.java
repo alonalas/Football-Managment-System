@@ -1,9 +1,6 @@
 package LogicLayer;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
@@ -19,6 +16,7 @@ public class Game extends Observable implements Serializable {
     private String date; // format "2019-04-09"
     private String startTime; // format "13:50"
     private String endTime;
+    private Result result;
     private GameReport gameReport;
 
     public Game() {
@@ -36,7 +34,16 @@ public class Game extends Observable implements Serializable {
         this.endTime=end;
         this.gameReport=new GameReport(this);
     }
-    public Game(Season season, Team home, Team away, Referee line, Referee main,String date, String start, String end) {
+
+    public Result getResult() {
+        return result;
+    }
+
+    public void setResult(Result result) {
+        this.result = result;
+    }
+
+    public Game(Season season, Team home, Team away, Referee line, Referee main, String date, String start, String end) {
         this.season = season;
         this.home = home;
         this.away = away;

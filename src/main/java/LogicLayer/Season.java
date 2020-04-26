@@ -1,7 +1,6 @@
 package LogicLayer;
 
 import DataLayer.IDataManager;
-import DataLayer.dataManager;
 import ServiceLayer.IController;
 
 import java.io.IOException;
@@ -17,7 +16,15 @@ public class Season implements Serializable {
     private String end;
     private List<Game> gameList;
     private List<League> leagueList;
-    private Map<League, Policy> Policies;
+    private Map<League, Table> leagueTables;
+
+    public Table getTable(League league){
+        return getLeagueTables().get(league);
+    }
+
+    public Map<League, Table> getLeagueTables() {
+        return leagueTables;
+    }
 
     private static IDataManager data(){
         return DataComp.getInstance();
@@ -29,7 +36,6 @@ public class Season implements Serializable {
         this.end = end;
         this.gameList = gameList;
         this.leagueList = leagueList;
-        Policies = policies;
     }
 
     public Season(String start, String end, League league){
@@ -106,14 +112,6 @@ public class Season implements Serializable {
 
     public void setLeagueList(List<League> leagueList) {
         this.leagueList = leagueList;
-    }
-
-    public Map<League, Policy> getPolicies() {
-        return Policies;
-    }
-
-    public void setPolicies(Map<League, Policy> policies) {
-        Policies = policies;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package AcceptanceTests;
 
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import ServiceLayer.*;
 import org.junit.Before;
@@ -41,7 +41,7 @@ public class OwnerAcceptance {
     @BeforeClass
     public static void beforeClass() {
 
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
         Administrator administrator = new Administrator("A", "B", "C");
         representitiveUser = new User("alonaLas@post.bgu.ac.il", "12345678", "alonalas");
         representative = new Representitive(representitiveUser, "lama name");
@@ -290,7 +290,7 @@ public class OwnerAcceptance {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        assertEquals(team.getStatus(), Team.teamStatus.activityClosed);
+        assertEquals(team.getStatus(), Team.TeamStatus.activityClosed);
 
         ///////////////////// uc 6.6.2 successfull
 
@@ -300,7 +300,7 @@ public class OwnerAcceptance {
             System.out.println(e.getMessage());
         }
 
-        assertEquals(team.getStatus(), Team.teamStatus.activityOpened);
+        assertEquals(team.getStatus(), Team.TeamStatus.activityOpened);
     }
 
     /**

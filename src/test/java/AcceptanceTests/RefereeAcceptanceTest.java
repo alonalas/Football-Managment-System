@@ -1,6 +1,6 @@
 package AcceptanceTests;
 
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import ServiceLayer.*;
 import org.junit.Before;
@@ -28,7 +28,7 @@ public class RefereeAcceptanceTest {
     @BeforeClass
     public static void beforeClass() throws Exception {
         League league = new League("MAJOR_LEAGUE",null,null,null);
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
         Administrator administrator = new Administrator("A","B","C");
         user = new User("AA","BB","CC");
         representative = new Representitive(user, "lama name");

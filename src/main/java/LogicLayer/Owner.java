@@ -560,7 +560,7 @@ public class Owner extends RoleHolder implements Serializable {
     public void closeTeamActivity(Team team) throws IOException { //tested
         if (!getTeamList().contains(team))
             throw new IOException("Selected team is not owned by the owner");
-        team.changeTeamActivity(this, Team.teamStatus.activityClosed);
+        team.changeTeamActivity(this, Team.TeamStatus.activityClosed);
     }
 
     /**
@@ -572,7 +572,7 @@ public class Owner extends RoleHolder implements Serializable {
     public void openTeamActivity(Team team) throws IOException {//tested
         if (!getTeamList().contains(team))
             throw new IOException("Selected team is not owned by the owner");
-        team.changeTeamActivity(this, Team.teamStatus.activityOpened);
+        team.changeTeamActivity(this, Team.TeamStatus.activityOpened);
     }
 
     /**

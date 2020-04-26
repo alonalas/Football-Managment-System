@@ -1,7 +1,7 @@
 package IntegrationTests;
 
 
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import ServiceLayer.AdministratorService;
 import org.junit.Before;
@@ -29,7 +29,7 @@ public class AdministratorIntegrationTest {
 
     @Before
     public void init() {
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
         team1 = new Team("hapoel", "blumfield", null);
         team2 = new Team("macabi", "stadium", null);
         DataComp.getInstance().addTeam(team1);

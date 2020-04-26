@@ -1,11 +1,10 @@
 package IntegrationTests;
 
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
 import ServiceLayer.ManagerService;
 import ServiceLayer.OwnerService;
-import org.junit.Before;
 import org.junit.Test;
 
 
@@ -85,7 +84,7 @@ public class ManagerIntegrationTest {
     }
 
     public void initializeSystem() {
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
         controller.addUser(ownerUser);
         DataComp.getInstance().addUser(ownerUser);
         DataComp.getInstance().addUser(u4);

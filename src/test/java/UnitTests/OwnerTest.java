@@ -1,6 +1,6 @@
 package UnitTests;
 
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.*;
 import ServiceLayer.Controller;
 import org.junit.Before;
@@ -54,7 +54,7 @@ public class OwnerTest {
 
     @Before
     public void reset() {
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
     }
 
     /**

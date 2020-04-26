@@ -1,7 +1,6 @@
 package UnitTests;
 
-import DataLayer.IDataManager;
-import DataLayer.dataManager;
+import DataLayer.DataManager;
 import LogicLayer.DataComp;
 import LogicLayer.Fan;
 import LogicLayer.Guest;
@@ -26,7 +25,7 @@ public class GuestTests {
 
     @Before
     public void setUp() throws Exception {
-        DataComp.setDataManager(new dataManager());
+        DataComp.setDataManager(new DataManager());
     }
 
     /**
