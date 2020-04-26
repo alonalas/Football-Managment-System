@@ -1,8 +1,8 @@
 package ServiceLayer;
 
-import LogicLayer.Coach;
+        import LogicLayer.Coach;
 
-import java.io.IOException;
+        import java.io.IOException;
 
 public class CoachService extends AUserService {
     private Coach coach;
@@ -14,6 +14,7 @@ public class CoachService extends AUserService {
     }
 
     /**
+     * id: CoachService@1
      * USE CASE - 5.2
      * Add content to page
      * @param update

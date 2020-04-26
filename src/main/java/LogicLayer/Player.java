@@ -30,6 +30,12 @@ public class Player extends RoleHolder implements Serializable {
 
     public Player() {}
 
+    /**
+     * id: player@1
+     * equals implemented for player
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,6 +94,11 @@ public class Player extends RoleHolder implements Serializable {
         this.page = page;
     }
 
+    /**
+     * id: player@2
+     * adds update to page
+     * @param update
+     */
     public void addUpdateToPage(String update) {
         page.addUpdate(update);
     }

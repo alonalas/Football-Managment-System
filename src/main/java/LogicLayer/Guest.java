@@ -12,7 +12,8 @@ public class Guest implements Serializable {
     public Guest() { }
 
     /**
-     *  creates new user and add its roles a fan
+     * id: guest@1
+     * creates new user and add its roles a fan
      * @param email
      * @param password
      * @param firstName
@@ -28,6 +29,7 @@ public class Guest implements Serializable {
     }
 
     /**
+     * id: guest@2
      * returns user from DB according to arguments
      * @param email
      * @param password
@@ -39,6 +41,7 @@ public class Guest implements Serializable {
     }
 
     /**
+     * id: guest@3
      * returns true or false due to if email exists
      * @param email
      * @return boolean
@@ -48,6 +51,7 @@ public class Guest implements Serializable {
     }
 
     /**
+     * id: guest@4
      *  add new user to DB
      * @param newUser
      * @param isNewUser

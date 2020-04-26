@@ -38,6 +38,7 @@ public class ControllerTest {
     }
 
     /**
+     * id: U@63
      *  checks add user func
      */
     @Test
@@ -49,6 +50,7 @@ public class ControllerTest {
     }
 
     /**
+     * id: U@64
      *  checks remove user func
      */
     @Test
@@ -62,6 +64,7 @@ public class ControllerTest {
     }
 
     /**
+     * id: U@65
      *  checks add guest func
      */
     @Test
@@ -75,6 +78,7 @@ public class ControllerTest {
     }
 
     /**
+     * id: U@66
      *  checks remove guest func
      */
     @Test
@@ -88,6 +92,7 @@ public class ControllerTest {
     }
 
     /**
+     * id: U@67
      *  checks remove user services func
      */
     @Test
@@ -103,6 +108,7 @@ public class ControllerTest {
     }
 
     /**
+     * id: U@68
      *  checks create fan service func
      */
     @Test
@@ -120,6 +126,7 @@ public class ControllerTest {
     }
 
     /**
+     * id: U@69
      * checks add services func
      */
     @Test
@@ -136,6 +143,7 @@ public class ControllerTest {
     }
 
     /**
+     *
      * closing tests
      */
     @AfterClass

@@ -38,6 +38,7 @@ public class FanTests {
 
 
     /**
+     * id: U@49
      * checks addPages func
      */
     @Test
@@ -56,6 +57,7 @@ public class FanTests {
     }
 
     /**
+     * id: U@50
      * checks addSearchHistoryFunc
      */
     @Test
@@ -76,6 +78,7 @@ public class FanTests {
     }
 
     /**
+     * id: U@51
      * checks getSearchHistory func
      */
     @Test
@@ -90,6 +93,7 @@ public class FanTests {
     }
 
     /**
+     * id: U@52
      * checks addComplaintToDataManager func
      */
     @Test
@@ -101,6 +105,7 @@ public class FanTests {
     }
 
     /**
+     * id: U@53
      * checks update func
      * with String
      */
@@ -114,6 +119,7 @@ public class FanTests {
     }
 
     /**
+     * id: U@54
      * checks update func
      * with GameEventCalender
      */

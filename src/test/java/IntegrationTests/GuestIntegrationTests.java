@@ -37,6 +37,7 @@ public class GuestIntegrationTests {
     }
 
     /**
+     * id: I@33
      * checks register func
      */
     @Test
@@ -71,6 +72,7 @@ public class GuestIntegrationTests {
     }
 
     /**
+     * id: I@34
      * checks log in func
      */
     @Test

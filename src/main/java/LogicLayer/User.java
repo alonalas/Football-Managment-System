@@ -51,6 +51,12 @@ public class User implements Serializable {
         this.alerts = new LinkedList<>();
     }
 
+    /**
+     * id: User@1
+     * equals implementation for user
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -237,6 +243,7 @@ public class User implements Serializable {
     }
 
     /**
+     * id: User@6
      * change personal information with arguments given
      * @param firstName
      * @param lastName
@@ -255,6 +262,7 @@ public class User implements Serializable {
     }
 
     /**
+     * id: User@7
      * personal info getter
      * @return List<String>
      */

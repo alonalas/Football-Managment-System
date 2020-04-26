@@ -52,6 +52,7 @@ public class guestAcceptanceTest {
     }
 
     /**
+     * id: A@27
     * acceptance test 2.1.1 - use case 2.1
      * checks valid valid register to system
     */
@@ -69,6 +70,7 @@ public class guestAcceptanceTest {
     }
 
     /**
+     * id: A@28
      * acceptance test 2.1.3 - use case 2.1
      * checks valid input of arguments but already user with same email exists
      */
@@ -86,6 +88,7 @@ public class guestAcceptanceTest {
     }
 
     /**
+     * id: A@29
      * acceptance test 2.1.4 - use case 2.1
      * checks invalid input of arguments
      */
@@ -99,6 +102,7 @@ public class guestAcceptanceTest {
     }
 
     /**
+     * id: A@30
      * acceptance test 2.2.1 - use case 2.2
      */
     @Test
@@ -110,6 +114,7 @@ public class guestAcceptanceTest {
     }
 
     /**
+     * id: A@31
      * acceptance test 2.2.2 - use case 2.2
      * checks sign in with wrong arguments as input
      */
@@ -125,6 +130,7 @@ public class guestAcceptanceTest {
     }
 
     /**
+     * id: A@32
      * acceptance test 2.3.1 - use case 2.3
      * checks successful show information
      */
@@ -135,6 +141,7 @@ public class guestAcceptanceTest {
     }
 
     /**
+     * id: A@33
      * acceptance test 2.4.1 - use case 2.4
      * checks successful show information
      */
@@ -144,14 +151,6 @@ public class guestAcceptanceTest {
         testGuestService.searchInformation(Criteria.Category, "teams");
     }
 
-    /**
-     * acceptance test 2.5.1 - use case 2.5
-     * checks filter search results
-     */
-    @Test
-    public void successfulFilterSearchResults(){
-
-    }
 
 
 

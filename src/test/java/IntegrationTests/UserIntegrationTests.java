@@ -29,6 +29,7 @@ public class UserIntegrationTests {
     }
 
     /**
+     * id:I@38
      * checks logOut func
      */
     @Test
@@ -45,6 +46,7 @@ public class UserIntegrationTests {
     }
 
     /**
+     * id:I@39
      * checks showPersonalDetails func
      */
     @Test
@@ -65,6 +67,7 @@ public class UserIntegrationTests {
     }
 
     /**
+     * id:I@40
      * checks editPersonalInformation func
      */
     @Test

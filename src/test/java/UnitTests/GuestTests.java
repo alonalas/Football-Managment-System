@@ -30,6 +30,7 @@ public class GuestTests {
     }
 
     /**
+     * id:U@46
      * checks create new user func
      */
     @Test
@@ -47,6 +48,7 @@ public class GuestTests {
     }
 
     /**
+     * id:U@47
      * checks signIn func
      */
     @Test
@@ -67,6 +69,7 @@ public class GuestTests {
     }
 
     /**
+     * id:U@48
      * checks addNewUser func
      */
     @Test
